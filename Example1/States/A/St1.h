@@ -8,7 +8,7 @@
 #include "anonys/Utils.h"
 
 namespace anonys_1_1 {
-	uint16_t getSize() {
+	uint16_t getMembersSize() {
 		return anonys::getAlignedSize<Me>();
 	}
 

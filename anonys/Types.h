@@ -13,7 +13,7 @@ namespace anonys
 		uint16_t stateId;
 		uint16_t stateMachineId;
 		const StateDef* pSuperState;
-		uint16_t(*pGetSize)();
+		uint16_t(*pGetMembersSize)();
 		void (*pLiveCycle)(bool create, void* pTerminals, void* pMembers);
 		void (*pHandleEvent)(void* pMembers, Event& event);
 	};

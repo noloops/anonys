@@ -5,7 +5,7 @@
 
 namespace States {
 	struct A {
-		static constexpr anonys::StateDef St1 = { 1, 1, nullptr, anonys_1_1::getSize, anonys_1_1::liveCycle, anonys_1_1::handleEvent };
+		static constexpr anonys::StateDef St1 = { 1, 1, nullptr, anonys_1_1::getMembersSize, anonys_1_1::liveCycle, anonys_1_1::handleEvent };
 	};
 }
 

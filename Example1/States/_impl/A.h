@@ -18,7 +18,7 @@ namespace anonys_1 {
 }
 
 namespace anonys_1_1 {
-	uint16_t getSize();
+	uint16_t getMembersSize();
 	void liveCycle(bool create, void* pTerminals, void* pMembers);
 	void handleEvent(void* pMembers, anonys::Event& event);
 }

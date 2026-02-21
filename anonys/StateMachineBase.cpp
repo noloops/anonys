@@ -100,7 +100,7 @@ namespace anonys
 		ANONYS_ASSERT(m_inner >= -1);
 		ANONYS_ASSERT(m_inner < MaxNestedStates);
 		ANONYS_ASSERT(pState->pLiveCycle != nullptr);
-		uint8_t* const pMembersNext{ m_pMembersNext + pState->pGetSize() };
+		uint8_t* const pMembersNext{ m_pMembersNext + pState->pGetMembersSize() };
 		ANONYS_ASSERT(pMembersNext <= m_pMembersEnd);
 		El& el{ m_stack[++m_inner] };
 		el.pState = pState;
