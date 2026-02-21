@@ -4,11 +4,17 @@
 #include "AnonysConfig.h"
 #include "States/A.h"
 #include "StateMachines/StateMachineId.h"
+#include "Terminals/Terminals.h"
 
 int main()
 {
+	terminals::EventSender eventSender{};
+	terminals::TimerMngr timerMngr{};
+	terminals::Log log{"A:"};
+	terminals::Std stdTerminal{ eventSender, timerMngr, log };
+
 	auto const id{ StateMachines::StateMachineId::A };
-	anonys_1::Terminals terminals{};
+	anonys_1::Terminals terminals{ &stdTerminal };
 	constexpr size_t bufferSize{ 512 };
     std::aligned_storage_t<bufferSize, anonys::StdAlign> buffer;
 	uint8_t* pBuffer{ std::launder(reinterpret_cast<uint8_t*>(&buffer)) };
