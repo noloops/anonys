@@ -1,19 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="dev">
-      <UniqueIdentifier>{7d95af71-45c6-4c2e-868e-fb5e935cc628}</UniqueIdentifier>
-    </Filter>
     <Filter Include="anonys">
       <UniqueIdentifier>{0d9e6204-129e-4c20-9be1-e066a05b46fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="example1">
+    <Filter Include="Dev">
+      <UniqueIdentifier>{7d95af71-45c6-4c2e-868e-fb5e935cc628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1">
       <UniqueIdentifier>{5e2540f6-1c23-4f20-ae42-e1b1708cf6ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\States">
+      <UniqueIdentifier>{b8f983b5-7244-40c7-a02e-c456d4231017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\StateMachines">
+      <UniqueIdentifier>{bb84a452-bc6f-42ef-bfbf-c5b2b6bdef92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\States\A">
+      <UniqueIdentifier>{6565f026-4a57-48ed-a0b2-ac59f72e0e20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\Terminals">
+      <UniqueIdentifier>{a125c75b-e743-4714-872a-e32ec48e6b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\Config">
+      <UniqueIdentifier>{8ad0c72c-11db-404b-bf42-9f8b532adf82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>dev</Filter>
+      <Filter>Dev</Filter>
     </ClCompile>
+    <ClCompile Include="..\Example1\States\A\St1.cpp">
+      <Filter>Example1\States\A</Filter>
+    </ClCompile>
+    <ClCompile Include="..\anonys\StateMachineBase.cpp">
+      <Filter>anonys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Example1\Terminals\Log.cpp">
+      <Filter>Example1\Terminals</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Example1\States\StateHandlers.h">
+      <Filter>Example1\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\States\States.h">
+      <Filter>Example1\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\States\A\St1.h">
+      <Filter>Example1\States\A</Filter>
+    </ClInclude>
+    <ClInclude Include="..\anonys\StateMachineBase.h">
+      <Filter>anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\anonys\Types.h">
+      <Filter>anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\anonys\Utils.h">
+      <Filter>anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Terminals\Log.h">
+      <Filter>Example1\Terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Terminals\Timers.h">
+      <Filter>Example1\Terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Terminals\CustomTerminals.h">
+      <Filter>Example1\Terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Terminals\Terminals.h">
+      <Filter>Example1\Terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Terminals\Std.h">
+      <Filter>Example1\Terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Terminals\EventSender.h">
+      <Filter>Example1\Terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Config\AnonysConfig.h">
+      <Filter>Example1\Config</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

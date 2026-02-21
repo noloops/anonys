@@ -18,6 +18,27 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\anonys\StateMachineBase.cpp" />
+    <ClCompile Include="..\Example1\States\A\St1.cpp" />
+    <ClCompile Include="..\Example1\Terminals\Log.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\anonys\StateMachineBase.h" />
+    <ClInclude Include="..\anonys\Types.h" />
+    <ClInclude Include="..\anonys\Utils.h" />
+    <ClInclude Include="..\Example1\Config\AnonysConfig.h" />
+    <ClInclude Include="..\Example1\States\A\St1.h" />
+    <ClInclude Include="..\Example1\States\StateHandlers.h" />
+    <ClInclude Include="..\Example1\States\States.h" />
+    <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
+    <ClInclude Include="..\Example1\Terminals\EventSender.h" />
+    <ClInclude Include="..\Example1\Terminals\Log.h" />
+    <ClInclude Include="..\Example1\Terminals\Std.h" />
+    <ClInclude Include="..\Example1\Terminals\Terminals.h" />
+    <ClInclude Include="..\Example1\Terminals\Timers.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -102,6 +123,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../;../example1;../example1/Config</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,15 +139,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>../;../example1;../example1/Config</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
