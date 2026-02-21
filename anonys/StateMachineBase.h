@@ -8,7 +8,7 @@ namespace anonys
 {
 	class StateMachineBase {
 	public:
-		StateMachineBase(void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
+		StateMachineBase(uint16_t stateMachineId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
 
 		~StateMachineBase();
 
@@ -34,6 +34,8 @@ namespace anonys
 
 		void pop();
 
+		uint16_t const m_stateMachineId;
+
 		void* const m_pTerminals;
 
 		El m_stack[MaxNestedStates]{ };
@@ -46,4 +48,3 @@ namespace anonys
 }
 
 #endif // ANONYS_STATEMACHINEBASE_H
-

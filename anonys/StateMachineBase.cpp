@@ -3,7 +3,8 @@
 
 namespace anonys
 {
-	StateMachineBase::StateMachineBase(void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize) :
+	StateMachineBase::StateMachineBase(uint16_t stateMachineId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize) :
+		m_stateMachineId{ stateMachineId },
 		m_pTerminals{ pTerminals },
 		m_pMembersBegin{ pAlignedBuffer },
 		m_pMembersEnd{ pAlignedBuffer + bufferSize },
@@ -24,6 +25,8 @@ namespace anonys
 
 	void StateMachineBase::executeTransition(const StateDef* pState)
 	{
+		ANONYS_ASSERT((m_inner >= -1) && (m_inner < MaxNestedStates));
+		ANONYS_ASSERT((pState == nullptr) || (pState->stateMachineId == m_stateMachineId));
 		if (pState == nullptr) {
 			popAll();
 		}
