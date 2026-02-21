@@ -1,5 +1,5 @@
-#ifndef STATES_STATEHANDLERS_H
-#define STATES_STATEHANDLERS_H
+#ifndef A_STATES_IMPL_H
+#define A_STATES_IMPL_H
 
 #include "anonys/Types.h"
 
@@ -23,4 +23,4 @@ namespace anonys_1_1 {
 	void handleEvent(void* pMembers, anonys::Event& event);
 }
 
-#endif // STATES_STATEHANDLERS_H
+#endif // A_STATES_IMPL_H

@@ -30,8 +30,8 @@
     <ClInclude Include="..\anonys\Utils.h" />
     <ClInclude Include="..\Example1\Config\AnonysConfig.h" />
     <ClInclude Include="..\Example1\States\A\St1.h" />
-    <ClInclude Include="..\Example1\States\StateHandlers.h" />
-    <ClInclude Include="..\Example1\States\States.h" />
+    <ClInclude Include="..\Example1\States\AStatesImpl.h" />
+    <ClInclude Include="..\Example1\States\AStates.h" />
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
     <ClInclude Include="..\Example1\Terminals\EventSender.h" />
     <ClInclude Include="..\Example1\Terminals\Log.h" />
