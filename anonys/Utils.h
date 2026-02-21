@@ -5,6 +5,8 @@
 
 #include "AnonysConfig.h"
 
+#define ANONYS_ASSERT(ok) do { if (!(ok)) { throw false; }} while (false)
+
 namespace anonys
 {
 	template <class T>
