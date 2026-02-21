@@ -13,7 +13,7 @@ namespace anonys_1_1 {
 	}
 
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
-		auto& terminals{ *reinterpret_cast<anonys_1::Terminals*>(pTerminals) };
+		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
 		if (create) {
 			Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
 			terminals.pT1 = &me.t1;
