@@ -1,7 +1,7 @@
-#ifndef STATES_STATES_H
-#define STATES_STATES_H
+#ifndef STATES_A_H
+#define STATES_A_H
 
-#include "AStatesImpl.h"
+#include "_impl/A.h"
 
 namespace States {
 	struct A {
@@ -9,4 +9,4 @@ namespace States {
 	};
 }
 
-#endif // STATES_STATES_H
+#endif // STATES_A_H
