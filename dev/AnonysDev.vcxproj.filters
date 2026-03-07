@@ -25,6 +25,9 @@
     <Filter Include="Example1\Config">
       <UniqueIdentifier>{8ad0c72c-11db-404b-bf42-9f8b532adf82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Example1\States\_impl">
+      <UniqueIdentifier>{ec7f94ac-c2fc-454f-9f4f-51e3d0fe9e43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,12 +44,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Example1\States\StateHandlers.h">
-      <Filter>Example1\States</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\States\States.h">
-      <Filter>Example1\States</Filter>
-    </ClInclude>
     <ClInclude Include="..\Example1\States\A\St1.h">
       <Filter>Example1\States\A</Filter>
     </ClInclude>
@@ -79,6 +76,15 @@
     </ClInclude>
     <ClInclude Include="..\Example1\Config\AnonysConfig.h">
       <Filter>Example1\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\States\A.h">
+      <Filter>Example1\States</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\States\_impl\A.h">
+      <Filter>Example1\States\_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\StateMachines\StateMachineId.h">
+      <Filter>Example1\StateMachines</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
