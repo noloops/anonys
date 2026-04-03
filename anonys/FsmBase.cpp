@@ -10,8 +10,8 @@ namespace anonys
 		m_pMembersEnd{ pAlignedBuffer + bufferSize },
 		m_pMembersNext{ pAlignedBuffer }
 	{
-		ANONYS_ASSERT(pTerminals != nullptr);
-		ANONYS_ASSERT(pAlignedBuffer != nullptr);
+		ANONYS_ASSERT(m_pTerminals != nullptr);
+		ANONYS_ASSERT(m_pMembersBegin != nullptr);
 		ANONYS_ASSERT(bufferSize > 0);
 	}
 
@@ -51,7 +51,9 @@ namespace anonys
 			StateDef const* const pShared{ findSharedSuperState(pState) };
 			if (pShared != nullptr) {
 				popToState(*pShared);
-				pushToState(pState);
+				if (pShared->stateId != pState->stateId) {
+					pushToState(pState);
+				}
 			}
 			else {
 				popAll();
@@ -98,9 +100,11 @@ namespace anonys
 
 	void FsmBase::pushToState(const StateDef* pState)
 	{
+		uint16_t const innerStateId{ (m_inner < 0) ? 0U : m_stack[m_inner].pState->stateId};
+
 		const StateDef* states[MaxNestedStates]{};
 		int32_t count{ 0 };
-		while (pState != nullptr) {
+		while ((pState != nullptr) && ((m_inner < 0) || (pState->stateId != innerStateId))) {
 			ANONYS_ASSERT(count < MaxNestedStates);
 			states[count++] = pState;
 			pState = pState->pSuperState;
