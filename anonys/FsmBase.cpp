@@ -21,6 +21,16 @@ namespace anonys
 
 	void FsmBase::handleEvent(Event& event)
 	{
+		for (int16_t i = m_inner; i >= 0; --i) {
+			StateDef const* const pState{ m_stack[i].pState };
+			if (pState->pHandleEvent != nullptr) {
+				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[i].pMembers, event) };
+				if (pNewState != nullptr) {
+					executeTransition(pNewState);
+					return;
+				}
+			}
+		}
 	}
 
 	void FsmBase::executeTransition(const StateDef* pState)
@@ -59,14 +69,14 @@ namespace anonys
 				if (stateId == pNext->stateId) {
 					return pNext;
 				}
-				pNext = pState->pSuperState;
+				pNext = pNext->pSuperState;
 			}
 		}
 		return nullptr;
 	}
 	void FsmBase::popAll()
 	{
-		for (; m_inner >= 0; --m_inner) {
+		while (m_inner >= 0) {
 			pop();
 		}
 	}

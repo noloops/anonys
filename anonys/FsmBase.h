@@ -17,6 +17,16 @@ namespace anonys
 
 		void executeTransition(const StateDef* pState);
 
+		int16_t getDepth() const { return m_inner; }
+
+		uint16_t getCurrentStateId() const { return (m_inner >= 0) ? m_stack[m_inner].pState->stateId : 0; }
+
+	private:
+		struct El {
+			StateDef const* pState{nullptr};
+			uint8_t* pMembers{nullptr};
+		};
+
 		const StateDef* findSharedSuperState(const StateDef* pState);
 
 		void popAll();
@@ -24,12 +34,6 @@ namespace anonys
 		void popToState(const StateDef& state);
 
 		void pushToState(const StateDef* pState);
-
-	private:
-		struct El {
-			StateDef const* pState{nullptr};
-			uint8_t* pMembers{nullptr};
-		};
 
 		void push(const StateDef* pState);
 
