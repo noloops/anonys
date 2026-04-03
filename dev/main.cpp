@@ -1,9 +1,8 @@
 #include <iostream>
 #include <type_traits>
 #include "anonys/FsmBase.h"
-#include "AnonysConfig.h"
 #include "Fsm/A.h"
-#include "AnonysFsmId.h"
+#include "anonys/FsmId.h"
 #include "Terminals/Terminals.h"
 
 int main()

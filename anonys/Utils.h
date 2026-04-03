@@ -4,7 +4,7 @@
 #include <limits>
 #include <new>
 
-#include "AnonysConfig.h"
+#include "anonys/ManualConfig.h"
 
 #define ANONYS_ASSERT(ok) do { if (!(ok)) { throw false; }} while (false)
 

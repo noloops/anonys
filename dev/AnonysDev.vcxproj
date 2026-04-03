@@ -28,9 +28,10 @@
     <ClInclude Include="..\anonys\FsmBase.h" />
     <ClInclude Include="..\anonys\Types.h" />
     <ClInclude Include="..\anonys\Utils.h" />
-    <ClInclude Include="..\Example1\Config\AnonysConfig.h" />
-    <ClInclude Include="..\Example1\Config\AnonysEventId.h" />
-    <ClInclude Include="..\Example1\Config\AnonysFsmId.h" />
+    <ClInclude Include="..\Example1\anonys\EventId.h" />
+    <ClInclude Include="..\Example1\anonys\FsmId.h" />
+    <ClInclude Include="..\Example1\anonys\GeneratedConfig.h" />
+    <ClInclude Include="..\Example1\anonys\ManualConfig.h" />
     <ClInclude Include="..\Example1\Fsm\A.h" />
     <ClInclude Include="..\Example1\Fsm\_impl\A_impl.h" />
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />

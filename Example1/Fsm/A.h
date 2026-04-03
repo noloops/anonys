@@ -2,7 +2,7 @@
 #define EXAMPLE1_FSM_A_H
 
 #include "_impl/A_impl.h"
-#include "AnonysFsmId.h"
+#include "anonys/FsmId.h"
 
 namespace fsm {
 	struct A {

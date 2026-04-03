@@ -2,8 +2,9 @@
 #define ANONYS_FSMBASE_H
 
 #include "Types.h"
-#include "AnonysConfig.h"
-#include "AnonysFsmId.h"
+#include "anonys/ManualConfig.h"
+#include "anonys/GeneratedConfig.h"
+#include "anonys/FsmId.h"
 
 namespace anonys
 {

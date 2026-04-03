@@ -2,8 +2,8 @@
 #define ANONYS_TYPES_H
 
 #include <cstdint>
-#include "AnonysFsmId.h"
-#include "AnonysEventId.h"
+#include "anonys/FsmId.h"
+#include "anonys/EventId.h"
 
 namespace anonys
 {
