@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EXAMPLE1_CONFIG_ANONYSCONFIG_H
+#define EXAMPLE1_CONFIG_ANONYSCONFIG_H
 
 namespace anonys
 {
@@ -6,4 +7,4 @@ namespace anonys
 	constexpr size_t StdAlign{ 8 };
 }
 
-
+#endif // EXAMPLE1_CONFIG_ANONYSCONFIG_H

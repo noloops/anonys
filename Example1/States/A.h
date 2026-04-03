@@ -1,7 +1,13 @@
-#ifndef STATES_A_H
-#define STATES_A_H
+#ifndef EXAMPLE1_STATES_A_H
+#define EXAMPLE1_STATES_A_H
 
 #include "_impl/A.h"
+#include "anonys/Types.h"
+#include "StateMachines/StateMachineId.h"
+
+#ifdef ANONYS_STATE_MACHINE_HEADER_GUARD
+#error Only one state machine header can be included in a translation unit
+#endif
 
 namespace States {
 	struct A {
@@ -9,4 +15,4 @@ namespace States {
 	};
 }
 
-#endif // STATES_A_H
+#endif // EXAMPLE1_STATES_A_H

@@ -1,7 +1,8 @@
-#ifndef STATES_IMPL_A_H
-#define STATES_IMPL_A_H
+#ifndef EXAMPLE1_STATES_IMPL_A_H
+#define EXAMPLE1_STATES_IMPL_A_H
 
 #include "anonys/Types.h"
+#include "anonys/Utils.h"
 
 namespace terminals {
 	struct Std;
@@ -23,4 +24,4 @@ namespace anonys_1_1 {
 	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
 }
 
-#endif // STATES_IMPL_A_H
+#endif // EXAMPLE1_STATES_IMPL_A_H
