@@ -10,17 +10,16 @@ namespace anonys
 {
 	class FsmBase {
 	public:
-		FsmBase(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
-
-		~FsmBase();
+		void initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
 
 		void handleEvent(Event& event);
 
 		void executeTransition(const StateDef* pState);
 
-		int16_t getDepth() const { return m_inner; }
+		inline int16_t getDepth() const { return m_inner; }
 
-		uint16_t getCurrentStateId() const { return (m_inner >= 0) ? m_stack[m_inner].pState->stateId : 0; }
+		// TODO Decide if 0 should be made invalid state id.
+		inline uint16_t getCurrentStateId() const { return (m_inner >= 0) ? m_stack[m_inner].pState->stateId : 0; }
 
 	private:
 		struct El {
@@ -40,16 +39,16 @@ namespace anonys
 
 		void pop();
 
-		FsmId const m_fsmId;
+		FsmId m_fsmId{};
 
-		void* const m_pTerminals;
+		void* m_pTerminals{nullptr};
 
 		El m_stack[MaxNestedStates]{ };
 		int16_t m_inner{ -1 };
 
-		uint8_t* const m_pMembersBegin;
-		uint8_t* const m_pMembersEnd;
-		uint8_t* m_pMembersNext;
+		uint8_t* m_pMembersBegin{ nullptr };
+		uint8_t* m_pMembersEnd{ nullptr };
+		uint8_t* m_pMembersNext{ nullptr };
 	};
 }
 

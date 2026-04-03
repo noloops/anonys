@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\anonys\FsmBase.cpp" />
+    <ClCompile Include="..\Example1\anonys\Fsm.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St2.cpp" />
@@ -31,12 +32,14 @@
     <ClInclude Include="..\anonys\Types.h" />
     <ClInclude Include="..\anonys\Utils.h" />
     <ClInclude Include="..\Example1\anonys\EventId.h" />
+    <ClInclude Include="..\Example1\anonys\Fsm.h" />
     <ClInclude Include="..\Example1\anonys\FsmId.h" />
     <ClInclude Include="..\Example1\anonys\GeneratedConfig.h" />
+    <ClInclude Include="..\Example1\anonys\impl\handlersA.h" />
+    <ClInclude Include="..\Example1\anonys\impl\terminalsA.h" />
     <ClInclude Include="..\Example1\anonys\ManualConfig.h" />
     <ClInclude Include="..\Example1\Events\Events.h" />
     <ClInclude Include="..\Example1\Fsm\A.h" />
-    <ClInclude Include="..\Example1\Fsm\_impl\A_impl.h" />
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
     <ClInclude Include="..\Example1\Terminals\EventSender.h" />
     <ClInclude Include="..\Example1\Terminals\Log.h" />

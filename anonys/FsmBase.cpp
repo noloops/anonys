@@ -3,24 +3,23 @@
 
 namespace anonys
 {
-	FsmBase::FsmBase(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize) :
-		m_fsmId{ fsmId },
-		m_pTerminals{ pTerminals },
-		m_pMembersBegin{ pAlignedBuffer },
-		m_pMembersEnd{ pAlignedBuffer + bufferSize },
-		m_pMembersNext{ pAlignedBuffer }
+	void FsmBase::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize)
 	{
-		ANONYS_ASSERT(m_pTerminals != nullptr);
-		ANONYS_ASSERT(m_pMembersBegin != nullptr);
+		ANONYS_ASSERT(m_pTerminals == nullptr);
+		ANONYS_ASSERT(pTerminals != nullptr);
+		ANONYS_ASSERT(pAlignedBuffer != nullptr);
 		ANONYS_ASSERT(bufferSize > 0);
-	}
 
-	FsmBase::~FsmBase()
-	{
+		m_fsmId = fsmId;
+		m_pTerminals = pTerminals;
+		m_pMembersBegin = pAlignedBuffer;
+		m_pMembersEnd = pAlignedBuffer + bufferSize;
+		m_pMembersNext = pAlignedBuffer;
 	}
 
 	void FsmBase::handleEvent(Event& event)
 	{
+		ANONYS_ASSERT(m_pTerminals != nullptr);
 		for (int16_t i = m_inner; i >= 0; --i) {
 			StateDef const* const pState{ m_stack[i].pState };
 			if (pState->pHandleEvent != nullptr) {
@@ -38,6 +37,7 @@ namespace anonys
 
 	void FsmBase::executeTransition(const StateDef* pState)
 	{
+		ANONYS_ASSERT(m_pTerminals != nullptr);
 		ANONYS_ASSERT((m_inner >= -1) && (m_inner < MaxNestedStates));
 		ANONYS_ASSERT((pState == nullptr) || (pState->fsmId == m_fsmId));
 		if (pState == nullptr) {

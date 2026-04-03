@@ -16,9 +16,6 @@
     <Filter Include="Example1\Fsm">
       <UniqueIdentifier>{bb84a452-bc6f-42ef-bfbf-c5b2b6bdef92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\Fsm\_impl">
-      <UniqueIdentifier>{a6e593f8-d9bb-446f-9dbe-9352f5861889}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Example1\Fsm\A">
       <UniqueIdentifier>{8a8263d9-d460-491e-80d0-42973e77de5d}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,9 @@
     </Filter>
     <Filter Include="Example1\Fsm\A\St1">
       <UniqueIdentifier>{5b2efb3e-9c3f-42ab-a2a9-3d72f7f8daae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\anonys\impl">
+      <UniqueIdentifier>{e0dc4d4c-98f4-4b0a-a2c9-274514d7fecf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp">
       <Filter>Example1\Fsm\A\St1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Example1\anonys\Fsm.cpp">
+      <Filter>Example1\anonys</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +83,6 @@
     <ClInclude Include="..\anonys\FsmBase.h">
       <Filter>anonys</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\Fsm\_impl\A_impl.h">
-      <Filter>Example1\Fsm\_impl</Filter>
-    </ClInclude>
     <ClInclude Include="..\Example1\Fsm\A.h">
       <Filter>Example1\Fsm</Filter>
     </ClInclude>
@@ -100,6 +100,15 @@
     </ClInclude>
     <ClInclude Include="..\Example1\Events\Events.h">
       <Filter>Example1\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\anonys\Fsm.h">
+      <Filter>Example1\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\anonys\impl\handlersA.h">
+      <Filter>Example1\anonys\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\anonys\impl\terminalsA.h">
+      <Filter>Example1\anonys\impl</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

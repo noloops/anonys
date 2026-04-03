@@ -9,8 +9,7 @@ namespace anonys
 {
 	enum class FsmId : uint16_t {
 		A = 0,
-		B = 1,
-		Count_ = 2
+		Count_ = 1
 	};
 }
 
