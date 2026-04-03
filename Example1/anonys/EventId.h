@@ -1,7 +1,6 @@
+// Generated file, do not edit!
 #ifndef EXAMPLE1_ANONYSEVENTID_H
 #define EXAMPLE1_ANONYSEVENTID_H
-
-// Generated file, do not edit!
 
 #include <cstdint>
 

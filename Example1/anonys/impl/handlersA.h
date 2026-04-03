@@ -1,7 +1,6 @@
+// Generated file, do not edit!
 #ifndef EXAMPLE1_ANONYS_HANDLERS_A_H
 #define EXAMPLE1_ANONYS_HANDLERS_A_H
-
-// Generated file, do not edit!
 
 #include "anonys/Types.h"
 #include "anonys/Utils.h"

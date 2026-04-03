@@ -1,7 +1,6 @@
+// Generated file, do not edit!
 #ifndef EXAMPLE1_ANONYS_TERMINALS_A_H
 #define EXAMPLE1_ANONYS_TERMINALS_A_H
-
-// Generated file, do not edit!
 
 namespace terminals {
 	struct Std;

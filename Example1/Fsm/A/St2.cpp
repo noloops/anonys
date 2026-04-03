@@ -1,9 +1,9 @@
-#include "Fsm/A.h"
+#include "anonys/fsm/A.h"
 #include "Terminals/Terminals.h"
 #include "Events/Events.h"
 
 namespace {
-	using Fsm = fsm::A;
+	using Fsm = anonys::fsm::A;
 
 	struct Me {
 		terminals::Std& std;
@@ -36,8 +36,7 @@ namespace {
 	}
 }
 
-// Generated code - do not edit
-
+// Generated code, do not edit:
 namespace anonys_1_3 {
 	uint16_t getMembersSize() {
 		return anonys::getAlignedSize<Me>();

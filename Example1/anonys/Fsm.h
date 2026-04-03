@@ -2,7 +2,6 @@
 #define EXAMPLE1_FSM_H
 
 // Generated file, do not edit!
-
 #include <type_traits>
 
 #include "anonys/FsmBase.h"
@@ -11,7 +10,7 @@
 
 namespace anonys
 {
-	class Fsm { // TODO rename
+	class Fsm { // TODO rename to FsmPool
 	public:
 		static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
 		using TerminalsA = anonys_1::Terminals;

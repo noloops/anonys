@@ -34,6 +34,9 @@
     <Filter Include="Example1\Config">
       <UniqueIdentifier>{8f79cf71-101d-4345-95bb-59f85833a8e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Example1\anonys\fsm">
+      <UniqueIdentifier>{c8f64428-5ac4-4d33-a51b-da6bd48edf9d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -86,9 +89,6 @@
     <ClInclude Include="..\anonys\FsmBase.h">
       <Filter>anonys</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\Fsm\A.h">
-      <Filter>Example1\Fsm</Filter>
-    </ClInclude>
     <ClInclude Include="..\Example1\anonys\EventId.h">
       <Filter>Example1\anonys</Filter>
     </ClInclude>
@@ -112,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="..\Example1\Config\AnonysManualConfig.h">
       <Filter>Example1\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\anonys\fsm\A.h">
+      <Filter>Example1\anonys\fsm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

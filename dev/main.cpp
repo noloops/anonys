@@ -1,7 +1,6 @@
 #include <iostream>
 #include <type_traits>
 #include "anonys/Fsm.h"
-#include "Fsm/A.h"
 #include "Terminals/Terminals.h"
 
 int main()

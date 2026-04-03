@@ -1,7 +1,6 @@
+// Generated file, do not edit!
 #ifndef EXAMPLE1_ANONYS_GENERATEDCONFIG_H
 #define EXAMPLE1_ANONYS_GENERATEDCONFIG_H
-
-// Generated file, do not edit!
 
 #include <cstdint>
 

@@ -34,12 +34,12 @@
     <ClInclude Include="..\Example1\anonys\EventId.h" />
     <ClInclude Include="..\Example1\anonys\Fsm.h" />
     <ClInclude Include="..\Example1\anonys\FsmId.h" />
+    <ClInclude Include="..\Example1\anonys\fsm\A.h" />
     <ClInclude Include="..\Example1\anonys\GeneratedConfig.h" />
     <ClInclude Include="..\Example1\anonys\impl\handlersA.h" />
     <ClInclude Include="..\Example1\anonys\impl\terminalsA.h" />
     <ClInclude Include="..\Example1\Config\AnonysManualConfig.h" />
     <ClInclude Include="..\Example1\Events\Events.h" />
-    <ClInclude Include="..\Example1\Fsm\A.h" />
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
     <ClInclude Include="..\Example1\Terminals\EventSender.h" />
     <ClInclude Include="..\Example1\Terminals\Log.h" />
