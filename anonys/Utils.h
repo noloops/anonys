@@ -2,6 +2,7 @@
 #define UTILS_H
 
 #include <limits>
+#include <new>
 
 #include "AnonysConfig.h"
 

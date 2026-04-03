@@ -44,9 +44,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Example1\States\A\St1.h">
-      <Filter>Example1\States\A</Filter>
-    </ClInclude>
     <ClInclude Include="..\anonys\StateMachineBase.h">
       <Filter>anonys</Filter>
     </ClInclude>

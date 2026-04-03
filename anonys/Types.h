@@ -15,7 +15,7 @@ namespace anonys
 		const StateDef* pSuperState;
 		uint16_t(*pGetMembersSize)();
 		void (*pLiveCycle)(bool create, void* pTerminals, void* pMembers);
-		void (*pHandleEvent)(void* pMembers, Event& event);
+		const StateDef* (*pHandleEvent)(void* pMembers, Event& event);
 	};
 }
 
