@@ -2,13 +2,13 @@
 #define ANONYS_FSMBASE_H
 
 #include "Types.h"
-#include "anonys/ManualConfig.h"
+#include "AnonysManualConfig.h"
 #include "anonys/GeneratedConfig.h"
 #include "anonys/FsmId.h"
 
 namespace anonys
 {
-	class FsmBase {
+	class FsmBase { // TODO rename
 	public:
 		void initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
 

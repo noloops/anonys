@@ -11,7 +11,7 @@
 
 namespace anonys
 {
-	class Fsm {
+	class Fsm { // TODO rename
 	public:
 		static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
 		using TerminalsA = anonys_1::Terminals;
