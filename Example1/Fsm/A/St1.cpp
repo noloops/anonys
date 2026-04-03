@@ -21,12 +21,12 @@ namespace {
 
 	anonys::State* handle(Me& me, events::Event1& event) {
 		me.std.log.write("Handle Event1 in St1");
-		return &Fsm::St2;
+		return &Fsm::St1a;
 	}
 
 	anonys::State* handle(Me& me, events::Event4& event) {
 		me.std.log.write("Handle Event4 in St1");
-		return &Fsm::St1a;
+		return &Fsm::St2;
 	}
 
 	anonys::State* handle(Me& me, events::Event5& event) {
