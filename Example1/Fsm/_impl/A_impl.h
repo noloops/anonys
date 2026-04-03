@@ -28,4 +28,16 @@ namespace anonys_1_1 {
 	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
 }
 
+namespace anonys_1_2 {
+	uint16_t getMembersSize();
+	void liveCycle(bool create, void* pTerminals, void* pMembers);
+	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
+}
+
+namespace anonys_1_3 {
+	uint16_t getMembersSize();
+	void liveCycle(bool create, void* pTerminals, void* pMembers);
+	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
+}
+
 #endif // EXAMPLE1_FSM_A_IMPL_H

@@ -25,6 +25,9 @@
     <Filter Include="Example1\anonys">
       <UniqueIdentifier>{8ad0c72c-11db-404b-bf42-9f8b532adf82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Example1\Events">
+      <UniqueIdentifier>{e633ef7f-9eae-4f68-bb79-8e1d1b1fcf78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -37,6 +40,12 @@
       <Filter>anonys</Filter>
     </ClCompile>
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
+      <Filter>Example1\Fsm\A</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Example1\Fsm\A\St1a.cpp">
+      <Filter>Example1\Fsm\A</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Example1\Fsm\A\St2.cpp">
       <Filter>Example1\Fsm\A</Filter>
     </ClCompile>
   </ItemGroup>
@@ -85,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="..\Example1\anonys\ManualConfig.h">
       <Filter>Example1\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Example1\Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
