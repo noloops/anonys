@@ -1,10 +1,10 @@
-#include "StateMachineBase.h"
+#include "FsmBase.h"
 #include "Utils.h"
 
 namespace anonys
 {
-	StateMachineBase::StateMachineBase(uint16_t stateMachineId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize) :
-		m_stateMachineId{ stateMachineId },
+	FsmBase::FsmBase(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize) :
+		m_fsmId{ fsmId },
 		m_pTerminals{ pTerminals },
 		m_pMembersBegin{ pAlignedBuffer },
 		m_pMembersEnd{ pAlignedBuffer + bufferSize },
@@ -15,18 +15,18 @@ namespace anonys
 		ANONYS_ASSERT(bufferSize > 0);
 	}
 
-	StateMachineBase::~StateMachineBase()
+	FsmBase::~FsmBase()
 	{
 	}
 
-	void StateMachineBase::handleEvent(Event& event)
+	void FsmBase::handleEvent(Event& event)
 	{
 	}
 
-	void StateMachineBase::executeTransition(const StateDef* pState)
+	void FsmBase::executeTransition(const StateDef* pState)
 	{
 		ANONYS_ASSERT((m_inner >= -1) && (m_inner < MaxNestedStates));
-		ANONYS_ASSERT((pState == nullptr) || (pState->stateMachineId == m_stateMachineId));
+		ANONYS_ASSERT((pState == nullptr) || (pState->fsmId == m_fsmId));
 		if (pState == nullptr) {
 			popAll();
 		}
@@ -47,7 +47,7 @@ namespace anonys
 		}
 	}
 
-	const StateDef* StateMachineBase::findSharedSuperState(const StateDef* pState)
+	const StateDef* FsmBase::findSharedSuperState(const StateDef* pState)
 	{
 		if ((pState == nullptr) || (m_inner < 0)) {
 			return nullptr;
@@ -64,14 +64,14 @@ namespace anonys
 		}
 		return nullptr;
 	}
-	void StateMachineBase::popAll()
+	void FsmBase::popAll()
 	{
 		for (; m_inner >= 0; --m_inner) {
 			pop();
 		}
 	}
 
-	void StateMachineBase::popToState(const StateDef& state)
+	void FsmBase::popToState(const StateDef& state)
 	{
 		uint16_t const stateId{ state.stateId };
 		while (m_inner >= 0) {
@@ -83,7 +83,7 @@ namespace anonys
 		ANONYS_ASSERT(false);
 	}
 
-	void StateMachineBase::pushToState(const StateDef* pState)
+	void FsmBase::pushToState(const StateDef* pState)
 	{
 		const StateDef* states[MaxNestedStates]{};
 		int32_t count{ 0 };
@@ -97,7 +97,7 @@ namespace anonys
 		}
 	}
 
-	void StateMachineBase::push(const StateDef* pState)
+	void FsmBase::push(const StateDef* pState)
 	{
 		ANONYS_ASSERT(pState != nullptr);
 		ANONYS_ASSERT(m_inner >= -1);
@@ -112,7 +112,7 @@ namespace anonys
 		el.pState->pLiveCycle(true, m_pTerminals, el.pMembers);
 	}
 
-	void StateMachineBase::pop()
+	void FsmBase::pop()
 	{
 		ANONYS_ASSERT(m_inner >= 0);
 		El& el{ m_stack[m_inner] };

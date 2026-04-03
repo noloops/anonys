@@ -36,17 +36,12 @@
     <ClCompile Include="..\Example1\States\A\St1.cpp">
       <Filter>Example1\States\A</Filter>
     </ClCompile>
-    <ClCompile Include="..\anonys\StateMachineBase.cpp">
-      <Filter>anonys</Filter>
-    </ClCompile>
     <ClCompile Include="..\Example1\Terminals\Log.cpp">
       <Filter>Example1\Terminals</Filter>
     </ClCompile>
+    <ClCompile Include="..\anonys\FsmBase.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\anonys\StateMachineBase.h">
-      <Filter>anonys</Filter>
-    </ClInclude>
     <ClInclude Include="..\anonys\Types.h">
       <Filter>anonys</Filter>
     </ClInclude>
@@ -77,11 +72,15 @@
     <ClInclude Include="..\Example1\States\A.h">
       <Filter>Example1\States</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\States\_impl\A.h">
+    <ClInclude Include="..\Example1\States\_impl\A_impl.h">
       <Filter>Example1\States\_impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\StateMachines\StateMachineId.h">
-      <Filter>Example1\StateMachines</Filter>
+    <ClInclude Include="..\anonys\FsmBase.h" />
+    <ClInclude Include="..\Example1\Config\AnonysEventId.h">
+      <Filter>anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Config\AnonysFsmId.h">
+      <Filter>anonys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

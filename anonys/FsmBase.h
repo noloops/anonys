@@ -1,16 +1,17 @@
-#ifndef ANONYS_STATEMACHINEBASE_H
-#define ANONYS_STATEMACHINEBASE_H
+#ifndef ANONYS_FSMBASE_H
+#define ANONYS_FSMBASE_H
 
 #include "Types.h"
 #include "AnonysConfig.h"
+#include "AnonysFsmId.h"
 
 namespace anonys
 {
-	class StateMachineBase {
+	class FsmBase {
 	public:
-		StateMachineBase(uint16_t stateMachineId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
+		FsmBase(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
 
-		~StateMachineBase();
+		~FsmBase();
 
 		void handleEvent(Event& event);
 
@@ -34,7 +35,7 @@ namespace anonys
 
 		void pop();
 
-		uint16_t const m_stateMachineId;
+		FsmId const m_fsmId;
 
 		void* const m_pTerminals;
 
@@ -47,4 +48,4 @@ namespace anonys
 	};
 }
 
-#endif // ANONYS_STATEMACHINEBASE_H
+#endif // ANONYS_FSMBASE_H

@@ -2,6 +2,8 @@
 #include "Terminals/Terminals.h"
 
 namespace {
+	using Fsm = States::A;
+
 	struct Me {
 		terminals::Std& std;
 		terminals::T1 t1{};

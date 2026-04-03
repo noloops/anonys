@@ -1,8 +1,12 @@
-#ifndef EXAMPLE1_STATES_IMPL_A_H
-#define EXAMPLE1_STATES_IMPL_A_H
+#ifndef EXAMPLE1_STATES_A_IMPL_H
+#define EXAMPLE1_STATES_A_IMPL_H
 
 #include "anonys/Types.h"
 #include "anonys/Utils.h"
+
+#ifdef ANONYS_STATE_MACHINE_HEADER_GUARD
+#error Only one state machine header can be included in a translation unit
+#endif
 
 namespace terminals {
 	struct Std;
@@ -24,4 +28,4 @@ namespace anonys_1_1 {
 	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
 }
 
-#endif // EXAMPLE1_STATES_IMPL_A_H
+#endif // EXAMPLE1_STATES_A_IMPL_H
