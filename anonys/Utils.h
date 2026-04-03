@@ -1,5 +1,5 @@
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef ANONYS_UTILS_H
+#define ANONYS_UTILS_H
 
 #include <limits>
 #include <new>
@@ -21,4 +21,4 @@ namespace anonys
 	}
 }
 
-#endif // UTILS_H
+#endif // ANONYS_UTILS_H

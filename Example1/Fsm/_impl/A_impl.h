@@ -1,5 +1,5 @@
-#ifndef EXAMPLE1_STATES_A_IMPL_H
-#define EXAMPLE1_STATES_A_IMPL_H
+#ifndef EXAMPLE1_FSM_A_IMPL_H
+#define EXAMPLE1_FSM_A_IMPL_H
 
 #include "anonys/Types.h"
 #include "anonys/Utils.h"
@@ -28,4 +28,4 @@ namespace anonys_1_1 {
 	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
 }
 
-#endif // EXAMPLE1_STATES_A_IMPL_H
+#endif // EXAMPLE1_FSM_A_IMPL_H

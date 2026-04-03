@@ -10,36 +10,35 @@
     <Filter Include="Example1">
       <UniqueIdentifier>{5e2540f6-1c23-4f20-ae42-e1b1708cf6ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\States">
-      <UniqueIdentifier>{b8f983b5-7244-40c7-a02e-c456d4231017}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Example1\StateMachines">
-      <UniqueIdentifier>{bb84a452-bc6f-42ef-bfbf-c5b2b6bdef92}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Example1\States\A">
-      <UniqueIdentifier>{6565f026-4a57-48ed-a0b2-ac59f72e0e20}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Example1\Terminals">
       <UniqueIdentifier>{a125c75b-e743-4714-872a-e32ec48e6b43}</UniqueIdentifier>
     </Filter>
     <Filter Include="Example1\Config">
       <UniqueIdentifier>{8ad0c72c-11db-404b-bf42-9f8b532adf82}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\States\_impl">
-      <UniqueIdentifier>{ec7f94ac-c2fc-454f-9f4f-51e3d0fe9e43}</UniqueIdentifier>
+    <Filter Include="Example1\Fsm">
+      <UniqueIdentifier>{bb84a452-bc6f-42ef-bfbf-c5b2b6bdef92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\Fsm\_impl">
+      <UniqueIdentifier>{a6e593f8-d9bb-446f-9dbe-9352f5861889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Example1\Fsm\A">
+      <UniqueIdentifier>{8a8263d9-d460-491e-80d0-42973e77de5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Dev</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\States\A\St1.cpp">
-      <Filter>Example1\States\A</Filter>
-    </ClCompile>
     <ClCompile Include="..\Example1\Terminals\Log.cpp">
       <Filter>Example1\Terminals</Filter>
     </ClCompile>
-    <ClCompile Include="..\anonys\FsmBase.cpp" />
+    <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
+      <Filter>Example1\Fsm</Filter>
+    </ClCompile>
+    <ClCompile Include="..\anonys\FsmBase.cpp">
+      <Filter>anonys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\anonys\Types.h">
@@ -69,18 +68,20 @@
     <ClInclude Include="..\Example1\Config\AnonysConfig.h">
       <Filter>Example1\Config</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\States\A.h">
-      <Filter>Example1\States</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\States\_impl\A_impl.h">
-      <Filter>Example1\States\_impl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\anonys\FsmBase.h" />
-    <ClInclude Include="..\Example1\Config\AnonysEventId.h">
-      <Filter>anonys</Filter>
-    </ClInclude>
     <ClInclude Include="..\Example1\Config\AnonysFsmId.h">
+      <Filter>Example1\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Config\AnonysEventId.h">
+      <Filter>Example1\Config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\anonys\FsmBase.h">
       <Filter>anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Fsm\_impl\A_impl.h">
+      <Filter>Example1\Fsm\_impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Fsm\A.h">
+      <Filter>Example1\Fsm\A</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

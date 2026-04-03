@@ -1,6 +1,8 @@
 #ifndef EXAMPLE1_ANONYSFSMID_H
 #define EXAMPLE1_ANONYSFSMID_H
 
+// Generated file, do not edit!
+
 #include <cstdint>
 
 namespace anonys

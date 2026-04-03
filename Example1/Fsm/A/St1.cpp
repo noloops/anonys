@@ -1,8 +1,8 @@
-#include "States/A.h"
+#include "Fsm/A.h"
 #include "Terminals/Terminals.h"
 
 namespace {
-	using Fsm = States::A;
+	using Fsm = fsm::A;
 
 	struct Me {
 		terminals::Std& std;

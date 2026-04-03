@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\anonys\FsmBase.cpp" />
-    <ClCompile Include="..\Example1\States\A\St1.cpp" />
+    <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
     <ClCompile Include="..\Example1\Terminals\Log.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -31,8 +31,8 @@
     <ClInclude Include="..\Example1\Config\AnonysConfig.h" />
     <ClInclude Include="..\Example1\Config\AnonysEventId.h" />
     <ClInclude Include="..\Example1\Config\AnonysFsmId.h" />
-    <ClInclude Include="..\Example1\States\A.h" />
-    <ClInclude Include="..\Example1\States\_impl\A_impl.h" />
+    <ClInclude Include="..\Example1\Fsm\A.h" />
+    <ClInclude Include="..\Example1\Fsm\_impl\A_impl.h" />
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
     <ClInclude Include="..\Example1\Terminals\EventSender.h" />
     <ClInclude Include="..\Example1\Terminals\Log.h" />
