@@ -25,10 +25,13 @@ namespace anonys
 			StateDef const* const pState{ m_stack[i].pState };
 			if (pState->pHandleEvent != nullptr) {
 				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[i].pMembers, event) };
-				if (pNewState != nullptr) {
-					executeTransition(pNewState);
-					return;
+				if (pNewState == &Internal::DummyStateUnhandled) {
+					continue;
 				}
+				else if (pNewState != nullptr) {
+					executeTransition(pNewState);
+				}
+				return;
 			}
 		}
 	}

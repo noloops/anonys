@@ -33,11 +33,11 @@
     <ClCompile Include="..\Example1\Terminals\Log.cpp">
       <Filter>Example1\Terminals</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
-      <Filter>Example1\Fsm</Filter>
-    </ClCompile>
     <ClCompile Include="..\anonys\FsmBase.cpp">
       <Filter>anonys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
+      <Filter>Example1\Fsm\A</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,7 +81,7 @@
       <Filter>Example1\Fsm\_impl</Filter>
     </ClInclude>
     <ClInclude Include="..\Example1\Fsm\A.h">
-      <Filter>Example1\Fsm\A</Filter>
+      <Filter>Example1\Fsm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

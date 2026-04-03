@@ -42,6 +42,6 @@ namespace anonys_1_1 {
 	}
 
 	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event) {
-		return nullptr;
+		return &anonys::Internal::DummyStateUnhandled;
 	}
 }
