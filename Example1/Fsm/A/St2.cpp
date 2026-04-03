@@ -1,13 +1,15 @@
 #include "Fsm/A.h"
 #include "Terminals/Terminals.h"
+#include "Events/Events.h"
 
 namespace {
 	using Fsm = fsm::A;
 
 	struct Me {
 		terminals::Std& std;
-		terminals::T1 t1{};
-		terminals::Timer timer{ std.timerMngr };
+		terminals::T2 t2{};
+		terminals::Timer timer1{ std.timerMngr };
+		terminals::Timer timer2{ std.timerMngr };
 	};
 
 	void enter(Me& me) {
@@ -16,6 +18,21 @@ namespace {
 
 	void exit(Me& me) {
 		me.std.log.write("Exit St2");
+	}
+
+	anonys::State* handle(Me& me, events::Event2& event) {
+		me.std.log.write("Handle Event0 in St1a");
+		return &Fsm::St2;
+	}
+
+	anonys::State* handle(Me& me, events::Event7& event) {
+		me.std.log.write("Handle Event3 in St1a");
+		return &Fsm::St1a;
+	}
+
+	anonys::State* handle(Me& me, events::Event8& event) {
+		me.std.log.write("Handle Event5 in St1a");
+		return nullptr;
 	}
 }
 
@@ -30,18 +47,29 @@ namespace anonys_1_3 {
 		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
 		if (create) {
 			Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
-			terminals.pT1 = &me.t1;
+			terminals.pT2 = &me.t2;
 			enter(me);
 		}
 		else {
 			Me& me{ *static_cast<Me*>(pMembers) };
 			exit(me);
 			me.~Me();
-			terminals.pT1 = nullptr;
+			terminals.pT2 = nullptr;
 		}
 	}
 
-	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event) {
-		return &anonys::Internal::DummyStateUnhandled;
+	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+		Me& me{ *static_cast<Me*>(pMembers) };
+		switch (event.eventId) {
+		case anonys::getEventId<events::Event2>():
+			return handle(me, *static_cast<events::Event2*>(event.pData));
+		case anonys::getEventId<events::Event7>():
+			return handle(me, *static_cast<events::Event7*>(event.pData));
+		case anonys::getEventId<events::Event8>():
+			return handle(me, *static_cast<events::Event8*>(event.pData));
+		default:
+			return &anonys::DummyStates::Unhandled;
+		}
 	}
+
 }

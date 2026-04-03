@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\anonys\FsmBase.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
-    <ClCompile Include="..\Example1\Fsm\A\St1a.cpp" />
+    <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St2.cpp" />
     <ClCompile Include="..\Example1\Terminals\Log.cpp" />
     <ClCompile Include="main.cpp" />
@@ -34,6 +34,7 @@
     <ClInclude Include="..\Example1\anonys\FsmId.h" />
     <ClInclude Include="..\Example1\anonys\GeneratedConfig.h" />
     <ClInclude Include="..\Example1\anonys\ManualConfig.h" />
+    <ClInclude Include="..\Example1\Events\Events.h" />
     <ClInclude Include="..\Example1\Fsm\A.h" />
     <ClInclude Include="..\Example1\Fsm\_impl\A_impl.h" />
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
@@ -42,7 +43,6 @@
     <ClInclude Include="..\Example1\Terminals\Std.h" />
     <ClInclude Include="..\Example1\Terminals\Terminals.h" />
     <ClInclude Include="..\Example1\Terminals\Timers.h" />
-    <ClInclude Include="Events.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -21,9 +21,11 @@ namespace anonys
 		const StateDef* (*pHandleEvent)(void* pMembers, Event& event);
 	};
 
-	struct Internal {
-		static constexpr anonys::StateDef DummyStateUnhandled = { 0, anonys::FsmId::Count_, nullptr, nullptr, nullptr, nullptr };
+	struct DummyStates {
+		static constexpr anonys::StateDef Unhandled = { 0, anonys::FsmId::Count_, nullptr, nullptr, nullptr, nullptr };
 	};
+
+	using State = const StateDef;
 }
 
 #endif // ANONYS_TYPES_H

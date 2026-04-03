@@ -28,6 +28,9 @@
     <Filter Include="Example1\Events">
       <UniqueIdentifier>{e633ef7f-9eae-4f68-bb79-8e1d1b1fcf78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Example1\Fsm\A\St1">
+      <UniqueIdentifier>{5b2efb3e-9c3f-42ab-a2a9-3d72f7f8daae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,11 +45,11 @@
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
       <Filter>Example1\Fsm\A</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\Fsm\A\St1a.cpp">
-      <Filter>Example1\Fsm\A</Filter>
-    </ClCompile>
     <ClCompile Include="..\Example1\Fsm\A\St2.cpp">
       <Filter>Example1\Fsm\A</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp">
+      <Filter>Example1\Fsm\A\St1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +98,7 @@
     <ClInclude Include="..\Example1\anonys\ManualConfig.h">
       <Filter>Example1\anonys</Filter>
     </ClInclude>
-    <ClInclude Include="Events.h">
+    <ClInclude Include="..\Example1\Events\Events.h">
       <Filter>Example1\Events</Filter>
     </ClInclude>
   </ItemGroup>
