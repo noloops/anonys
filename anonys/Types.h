@@ -6,8 +6,11 @@
 
 namespace anonys
 {
-	// TODO make EventId a tag class.
-	using EventId = uint16_t;
+	struct EventId {
+		constexpr EventId(uint16_t id) : id{ id } {}
+		uint16_t const id;
+	};
+	static_assert(sizeof(EventId) == sizeof(uint16_t));
 
 	static constexpr EventId MinTimoutEventId{ 60'001 };
 
@@ -28,9 +31,8 @@ namespace anonys
 		const StateDef* (*pHandleEvent)(void* pMembers, Event& event);
 	};
 
-	static constexpr uint16_t InvalidStateId{ 0 };
-
 	struct DummyStates {
+		static constexpr uint16_t InvalidStateId{ 0 };
 		static constexpr anonys::StateDef Unhandled = { InvalidStateId, anonys::FsmId::Count_, nullptr, nullptr, nullptr, nullptr };
 	};
 

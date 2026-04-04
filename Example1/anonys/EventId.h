@@ -4,8 +4,6 @@
 
 #include "anonys/Types.h"
 
-// TODO add special timeout event id, e.g. 0xFFFF, and make sure it is handled correctly in FsmCore.cpp
-
 namespace events {
 	struct Event0;
 	struct Event1;
@@ -37,7 +35,7 @@ namespace anonys
 	template <>	constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }
 	template <>	constexpr EventId getTimeoutEventId<Timeout2>() { return 60002; }
 	template <>	constexpr EventId getTimeoutEventId<Timeout3>() { return 60003; }
-	static_assert(getTimeoutEventId<Timeout1>() == MinTimoutEventId);
+	static_assert(getTimeoutEventId<Timeout1>().id == MinTimoutEventId.id);
 }
 
 #endif // EXAMPLE1_ANONYS_EVENTID_H

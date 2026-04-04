@@ -54,16 +54,16 @@ namespace {
 namespace anonys_0_2 {
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
-		switch (event.eventId) {
-		case anonys::getEventId<events::Event0>():
+		switch (event.eventId.id) {
+		case anonys::getEventId<events::Event0>().id:
 			return handle(me, *static_cast<events::Event0*>(event.pData));
-		case anonys::getEventId<events::Event3>():
+		case anonys::getEventId<events::Event3>().id:
 			return handle(me, *static_cast<events::Event3*>(event.pData));
-		case anonys::getEventId<events::Event5>():
+		case anonys::getEventId<events::Event5>().id:
 			return handle(me, *static_cast<events::Event5*>(event.pData));
-		case anonys::getTimeoutEventId<anonys::Timeout1>():
+		case anonys::getTimeoutEventId<anonys::Timeout1>().id:
 			return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
-		case anonys::getTimeoutEventId<anonys::Timeout2>():
+		case anonys::getTimeoutEventId<anonys::Timeout2>().id:
 			return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;

@@ -32,8 +32,7 @@ namespace anonys
 				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[i].pMembers, event) };
 				m_curDepth = -1;
 				if (pNewState != nullptr) {
-					// Check DummyStates::Unhandled state
-					if (pNewState->stateId != InvalidStateId) {
+					if (pNewState->stateId != DummyStates::Unhandled.stateId) {
 						continue;
 					}
 					executeTransition(pNewState);
@@ -52,8 +51,7 @@ namespace anonys
 				m_curDepth = depth;
 				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[depth].pMembers, event) };
 				m_curDepth = -1;
-				// Check for null and DummyStates::Unhandled state
-				if ((pNewState != nullptr) && (pNewState->stateId != InvalidStateId)) {
+				if ((pNewState != nullptr) && (pNewState->stateId != DummyStates::Unhandled.stateId)) {
 					executeTransition(pNewState);
 				}
 			}
@@ -125,7 +123,7 @@ namespace anonys
 
 	void FsmCore::pushToState(const StateDef* pState)
 	{
-		uint16_t const innerStateId{ (m_depth < 0) ? InvalidStateId : m_stack[m_depth].pState->stateId};
+		uint16_t const innerStateId{ (m_depth < 0) ? DummyStates::InvalidStateId : m_stack[m_depth].pState->stateId};
 
 		const StateDef* states[MaxNestedStates]{};
 		int32_t count{ 0 };
@@ -145,7 +143,7 @@ namespace anonys
 		ANONYS_ASSERT(m_depth >= -1);
 		ANONYS_ASSERT(m_depth < MaxNestedStates);
 		ANONYS_ASSERT(pState->pLiveCycle != nullptr);
-		ANONYS_ASSERT(pState->stateId > InvalidStateId);
+		ANONYS_ASSERT(pState->stateId > DummyStates::InvalidStateId);
 
 		uint8_t* const pMembersNext{ m_pMembersNext + pState->pGetMembersSize() };
 		ANONYS_ASSERT(pMembersNext <= m_pMembersEnd);
