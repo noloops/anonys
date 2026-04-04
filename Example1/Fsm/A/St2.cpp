@@ -16,6 +16,8 @@ namespace {
 
 	void enter(Me& me) {
 		me.std.log.write("Enter St2");
+		me.timer.start<TimeoutA>(150);
+		me.timer.start<TimeoutC>(500);
 	}
 
 	void exit(Me& me) {
@@ -39,12 +41,14 @@ namespace {
 
 	anonys::State* handle(Me& me, TimeoutA& event) {
 		me.std.log.write("Handle TimeoutA in St2");
-		return &Fsm::St2;
+		me.timer.start<TimeoutB>(50);
+		me.timer.start<TimeoutA>(200);
+		return nullptr;
 	}
 
 	anonys::State* handle(Me& me, TimeoutB& event) {
 		me.std.log.write("Handle TimeoutB in St2");
-		return &Fsm::St1a;
+		return nullptr;
 	}
 
 	anonys::State* handle(Me& me, TimeoutC& event) {
@@ -55,25 +59,6 @@ namespace {
 
 // Generated code, do not edit:
 namespace anonys_1_3 {
-	uint16_t getMembersSize() {
-		return anonys::getAlignedSize<Me>();
-	}
-
-	void liveCycle(bool create, void* pTerminals, void* pMembers) {
-		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
-		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pStd } };
-			terminals.pT2 = &me.t2;
-			enter(me);
-		}
-		else {
-			Me& me{ *static_cast<Me*>(pMembers) };
-			exit(me);
-			me.~Me();
-			terminals.pT2 = nullptr;
-		}
-	}
-
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
 		switch (event.eventId) {
@@ -94,4 +79,22 @@ namespace anonys_1_3 {
 		}
 	}
 
+	uint16_t getMembersSize() {
+		return anonys::getAlignedSize<Me>();
+	}
+
+	void liveCycle(bool create, void* pTerminals, void* pMembers) {
+		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
+		if (create) {
+			Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pStd } };
+			terminals.pT2 = &me.t2;
+			enter(me);
+		}
+		else {
+			Me& me{ *static_cast<Me*>(pMembers) };
+			exit(me);
+			me.~Me();
+			terminals.pT2 = nullptr;
+		}
+	}
 }

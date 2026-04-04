@@ -52,6 +52,24 @@ namespace {
 
 // Generated code, do not edit:
 namespace anonys_1_2 {
+	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+		Me& me{ *static_cast<Me*>(pMembers) };
+		switch (event.eventId) {
+		case anonys::getEventId<events::Event0>():
+			return handle(me, *static_cast<events::Event0*>(event.pData));
+		case anonys::getEventId<events::Event3>():
+			return handle(me, *static_cast<events::Event3*>(event.pData));
+		case anonys::getEventId<events::Event5>():
+			return handle(me, *static_cast<events::Event5*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout1>():
+			return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout2>():
+			return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
+		default:
+			return &anonys::DummyStates::Unhandled;
+		}
+	}
+
 	uint16_t getMembersSize() {
 		return anonys::getAlignedSize<Me>();
 	}
@@ -68,24 +86,6 @@ namespace anonys_1_2 {
 			exit(me);
 			me.~Me();
 			terminals.pT2 = nullptr;
-		}
-	}
-
-	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
-		Me& me{ *static_cast<Me*>(pMembers) };
-		switch (event.eventId) {
-		case anonys::getEventId<events::Event0>():
-			return handle(me, *static_cast<events::Event0*>(event.pData));
-		case anonys::getEventId<events::Event3>():
-			return handle(me, *static_cast<events::Event3*>(event.pData));
-		case anonys::getEventId<events::Event5>():
-			return handle(me, *static_cast<events::Event5*>(event.pData));
-		case anonys::getTimeoutEventId<anonys::Timeout1>():
-			return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
-		case anonys::getTimeoutEventId<anonys::Timeout2>():
-			return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
-		default:
-			return &anonys::DummyStates::Unhandled;
 		}
 	}
 }
