@@ -13,7 +13,7 @@ namespace anonys
 	class FsmPool {
 	public:
 		static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
-		using TerminalsA = anonys_1::Terminals;
+		using TerminalsA = anonys_0::Terminals;
 
 		void handleEvent(FsmId fsmId, Event& event);
 

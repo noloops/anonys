@@ -10,7 +10,7 @@ namespace terminals {
 	class T2;
 }
 
-namespace anonys_1 {
+namespace anonys_0 {
 	struct Terminals {
 		anonys::TimerCore* pTimer;
 		terminals::Std* pStd;

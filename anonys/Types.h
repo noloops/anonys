@@ -28,8 +28,10 @@ namespace anonys
 		const StateDef* (*pHandleEvent)(void* pMembers, Event& event);
 	};
 
+	static constexpr uint16_t InvalidStateId{ 0 };
+
 	struct DummyStates {
-		static constexpr anonys::StateDef Unhandled = { 0, anonys::FsmId::Count_, nullptr, nullptr, nullptr, nullptr };
+		static constexpr anonys::StateDef Unhandled = { InvalidStateId, anonys::FsmId::Count_, nullptr, nullptr, nullptr, nullptr };
 	};
 
 	using State = const StateDef;

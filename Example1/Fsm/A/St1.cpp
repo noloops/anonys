@@ -43,7 +43,7 @@ namespace {
 }
 
 // Generated code, do not edit:
-namespace anonys_1_1 {
+namespace anonys_0_1 {
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
 		switch (event.eventId) {
@@ -65,7 +65,7 @@ namespace anonys_1_1 {
 	}
 
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
-		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
+		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
 		if (create) {
 			Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pStd } };
 			terminals.pT1 = &me.t1;
