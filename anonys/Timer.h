@@ -20,6 +20,7 @@ namespace anonys
 				m_pTimerService->startTimer(m_fsmId, m_curDepth, eventId, timeoutMs);
 			}
 		}
+
 		inline void stopTimers() {
 			if (m_pTimerService != nullptr) {
 				m_pTimerService->stopTimers(m_fsmId, m_curDepth);
@@ -36,9 +37,9 @@ namespace anonys
 
 	class Timer {
 	public:
-		Timer(TimerCore& timerCore) : m_timerCore{ timerCore } {}
+		inline Timer(TimerCore& timerCore) : m_timerCore{ timerCore } {}
 
-		~Timer() {
+		inline ~Timer() {
 			if (m_active) {
 				m_timerCore.stopTimers();
 			}
