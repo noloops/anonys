@@ -14,9 +14,6 @@ namespace anonys
 
 	static constexpr EventId MinTimoutEventId{ 60'001 };
 
-	template <typename T> constexpr EventId getEventId() = delete;
-	template <typename T> constexpr EventId getTimeoutEventId() = delete;
-
 	struct Event {
 		EventId eventId;
 		void* pData;
