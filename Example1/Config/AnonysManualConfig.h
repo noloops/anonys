@@ -3,6 +3,8 @@
 
 #include <cstdint>
 
+#define ANONYS_ASSERT(ok) do { if (!(ok)) { throw false; }} while (false)
+
 namespace anonys
 {
 	constexpr size_t StdAlign{ 8 };

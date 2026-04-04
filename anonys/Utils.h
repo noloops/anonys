@@ -6,7 +6,9 @@
 
 #include "AnonysManualConfig.h"
 
-#define ANONYS_ASSERT(ok) do { if (!(ok)) { throw false; }} while (false)
+#ifndef ANONYS_ASSERT
+#define ANONYS_ASSERT(ok)
+#endif // ANONYS_ASSERT
 
 namespace anonys
 {

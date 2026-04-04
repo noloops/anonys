@@ -1,6 +1,10 @@
 #include "FsmCore.h"
 #include "Utils.h"
 
+namespace {
+	class TimeoutDummy {};
+}
+
 namespace anonys
 {
 	void FsmCore::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize, TimerService* pTimerService)
@@ -34,6 +38,22 @@ namespace anonys
 					executeTransition(pNewState);
 				}
 				return;
+			}
+		}
+	}
+
+	void FsmCore::handleTimeoutEvent(int16_t depth, EventId eventId) {
+		if ((depth >= 0) && (depth <= m_depth)) {
+			StateDef const* const pState{ m_stack[depth].pState };
+			if (pState->pHandleEvent != nullptr) {
+				TimeoutDummy timeoutDummy{};
+				Event event{ eventId, &timeoutDummy };
+				m_curDepth = depth;
+				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[depth].pMembers, event) };
+				m_curDepth = -1;
+				if ((pNewState != nullptr) && (pNewState != &DummyStates::Unhandled)) {
+					executeTransition(pNewState);
+				}
 			}
 		}
 	}

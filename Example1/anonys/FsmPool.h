@@ -17,6 +17,8 @@ namespace anonys
 
 		void handleEvent(FsmId fsmId, Event& event);
 
+		void handleTimeoutEvent(FsmId fsmId, int16_t depth, EventId eventId);
+
 		void start();
 
 		void initializeA(TimerService& timerService, terminals::Std& std);

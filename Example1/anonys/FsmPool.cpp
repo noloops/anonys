@@ -12,11 +12,18 @@ namespace anonys
 		}
 	}
 
+	void FsmPool::handleTimeoutEvent(FsmId fsmId, int16_t depth, EventId eventId) {
+		if (fsmId < FsmId::Count_) {
+			m_fsm[static_cast<uint16_t>(fsmId)].handleTimeoutEvent(depth, eventId);
+		}
+	}
+
 	void FsmPool::start() {
 		ANONYS_ASSERT(!m_started);
 		m_started = true;
 		m_fsm[static_cast<uint16_t>(FsmId::A)].executeTransition(&fsm::A::St1);
 	}
+
 	void FsmPool::initializeA(TimerService& timerService, terminals::Std& std) {
 		ANONYS_ASSERT(m_terminalsA.pTimer == nullptr);
 		FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::A)] };

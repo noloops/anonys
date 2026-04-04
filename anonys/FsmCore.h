@@ -15,6 +15,8 @@ namespace anonys
 
 		void handleEvent(Event& event);
 
+		void handleTimeoutEvent(int16_t depth, EventId eventId);
+
 		void executeTransition(const StateDef* pState);
 
 		inline TimerCore& getTimerCore() { return *this; }
