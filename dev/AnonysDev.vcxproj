@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\anonys\FsmBase.cpp" />
+    <ClCompile Include="..\anonys\FsmCore.cpp" />
     <ClCompile Include="..\Example1\anonys\Fsm.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp" />
@@ -28,7 +28,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\anonys\FsmBase.h" />
+    <ClInclude Include="..\anonys\FsmCore.h" />
     <ClInclude Include="..\anonys\Types.h" />
     <ClInclude Include="..\anonys\Utils.h" />
     <ClInclude Include="..\Example1\anonys\EventId.h" />

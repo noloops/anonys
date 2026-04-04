@@ -4,6 +4,8 @@
 
 #include <cstdint>
 
+// TODO add special timeout event id, e.g. 0xFFFF, and make sure it is handled correctly in FsmCore.cpp
+
 namespace events {
 	struct Event0;
 	struct Event1;

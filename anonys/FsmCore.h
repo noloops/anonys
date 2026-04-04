@@ -8,7 +8,7 @@
 
 namespace anonys
 {
-	class FsmBase { // TODO rename to FsmCore
+	class FsmCore {
 	public:
 		void initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize);
 

@@ -1,16 +1,16 @@
+// Generated file, do not edit!
 #ifndef EXAMPLE1_FSM_H
 #define EXAMPLE1_FSM_H
 
-// Generated file, do not edit!
 #include <type_traits>
 
-#include "anonys/FsmBase.h"
+#include "anonys/FsmCore.h"
 
 #include "impl/terminalsA.h"
 
 namespace anonys
 {
-	class Fsm { // TODO rename to FsmPool
+	class FsmPool {
 	public:
 		static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
 		using TerminalsA = anonys_1::Terminals;
@@ -21,7 +21,7 @@ namespace anonys
 
 		void initializeA(terminals::Std& std);
 	private:
-		FsmBase m_fsm[Count]{};
+		FsmCore m_fsm[Count]{};
 
 		std::aligned_storage_t<BufferSize::A, anonys::StdAlign> m_bufferA{};
 

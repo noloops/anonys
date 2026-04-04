@@ -6,18 +6,18 @@
 
 namespace anonys
 {
-	void Fsm::handleEvent(FsmId fsmId, Event& event) {
+	void FsmPool::handleEvent(FsmId fsmId, Event& event) {
 		if (fsmId < FsmId::Count_) {
 			m_fsm[static_cast<uint16_t>(fsmId)].handleEvent(event);
 		}
 	}
 
-	void Fsm::start() {
+	void FsmPool::start() {
 		ANONYS_ASSERT(!m_started);
 		m_started = true;
 		m_fsm[static_cast<uint16_t>(FsmId::A)].executeTransition(&fsm::A::St1);
 	}
-	void Fsm::initializeA(terminals::Std& std) {
+	void FsmPool::initializeA(terminals::Std& std) {
 		ANONYS_ASSERT(m_terminalsA.pStd == nullptr);
 		m_terminalsA.pStd = &std;
 

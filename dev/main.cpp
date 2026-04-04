@@ -10,7 +10,7 @@ int main()
 	static terminals::Log log{"A:"};
 	static terminals::Std stdTerminal{ eventSender, timerMngr, log };
 
-	static anonys::Fsm fsm{};
+	static anonys::FsmPool fsm{};
 	fsm.initializeA(stdTerminal);
 	fsm.start();
 

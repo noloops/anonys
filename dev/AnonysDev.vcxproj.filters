@@ -45,7 +45,7 @@
     <ClCompile Include="..\Example1\Terminals\Log.cpp">
       <Filter>Example1\Terminals</Filter>
     </ClCompile>
-    <ClCompile Include="..\anonys\FsmBase.cpp">
+    <ClCompile Include="..\anonys\FsmCore.cpp">
       <Filter>anonys</Filter>
     </ClCompile>
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
@@ -86,7 +86,7 @@
     <ClInclude Include="..\Example1\Terminals\EventSender.h">
       <Filter>Example1\Terminals</Filter>
     </ClInclude>
-    <ClInclude Include="..\anonys\FsmBase.h">
+    <ClInclude Include="..\anonys\FsmCore.h">
       <Filter>anonys</Filter>
     </ClInclude>
     <ClInclude Include="..\Example1\anonys\EventId.h">

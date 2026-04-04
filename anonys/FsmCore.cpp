@@ -1,9 +1,9 @@
-#include "FsmBase.h"
+#include "FsmCore.h"
 #include "Utils.h"
 
 namespace anonys
 {
-	void FsmBase::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize)
+	void FsmCore::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize)
 	{
 		ANONYS_ASSERT(m_pTerminals == nullptr);
 		ANONYS_ASSERT(pTerminals != nullptr);
@@ -17,7 +17,7 @@ namespace anonys
 		m_pMembersNext = pAlignedBuffer;
 	}
 
-	void FsmBase::handleEvent(Event& event)
+	void FsmCore::handleEvent(Event& event)
 	{
 		ANONYS_ASSERT(m_pTerminals != nullptr);
 		for (int16_t i = m_inner; i >= 0; --i) {
@@ -35,7 +35,7 @@ namespace anonys
 		}
 	}
 
-	void FsmBase::executeTransition(const StateDef* pState)
+	void FsmCore::executeTransition(const StateDef* pState)
 	{
 		ANONYS_ASSERT(m_pTerminals != nullptr);
 		ANONYS_ASSERT((m_inner >= -1) && (m_inner < MaxNestedStates));
@@ -62,7 +62,7 @@ namespace anonys
 		}
 	}
 
-	const StateDef* FsmBase::findSharedSuperState(const StateDef* pState)
+	const StateDef* FsmCore::findSharedSuperState(const StateDef* pState)
 	{
 		if ((pState == nullptr) || (m_inner < 0)) {
 			return nullptr;
@@ -79,14 +79,14 @@ namespace anonys
 		}
 		return nullptr;
 	}
-	void FsmBase::popAll()
+	void FsmCore::popAll()
 	{
 		while (m_inner >= 0) {
 			pop();
 		}
 	}
 
-	void FsmBase::popToState(const StateDef& state)
+	void FsmCore::popToState(const StateDef& state)
 	{
 		uint16_t const stateId{ state.stateId };
 		while (m_inner >= 0) {
@@ -98,7 +98,7 @@ namespace anonys
 		ANONYS_ASSERT(false);
 	}
 
-	void FsmBase::pushToState(const StateDef* pState)
+	void FsmCore::pushToState(const StateDef* pState)
 	{
 		uint16_t const innerStateId{ (m_inner < 0) ? 0U : m_stack[m_inner].pState->stateId};
 
@@ -114,7 +114,7 @@ namespace anonys
 		}
 	}
 
-	void FsmBase::push(const StateDef* pState)
+	void FsmCore::push(const StateDef* pState)
 	{
 		ANONYS_ASSERT(pState != nullptr);
 		ANONYS_ASSERT(m_inner >= -1);
@@ -129,7 +129,7 @@ namespace anonys
 		el.pState->pLiveCycle(true, m_pTerminals, el.pMembers);
 	}
 
-	void FsmBase::pop()
+	void FsmCore::pop()
 	{
 		ANONYS_ASSERT(m_inner >= 0);
 		El& el{ m_stack[m_inner] };
