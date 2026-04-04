@@ -1,8 +1,8 @@
 // Generated file, do not edit!
-#ifndef EXAMPLE1_ANONYSEVENTID_H
-#define EXAMPLE1_ANONYSEVENTID_H
+#ifndef EXAMPLE1_ANONYS_EVENTID_H
+#define EXAMPLE1_ANONYS_EVENTID_H
 
-#include <cstdint>
+#include "anonys/Types.h"
 
 // TODO add special timeout event id, e.g. 0xFFFF, and make sure it is handled correctly in FsmCore.cpp
 
@@ -20,10 +20,6 @@ namespace events {
 
 namespace anonys
 {
-	using EventId = uint16_t;
-
-	template <typename T> constexpr EventId getEventId() = delete;
-
 	template <>	constexpr EventId getEventId<events::Event0>() { return 0; }
 	template <>	constexpr EventId getEventId<events::Event1>() { return 1; }
 	template <>	constexpr EventId getEventId<events::Event2>() { return 2; }
@@ -35,4 +31,4 @@ namespace anonys
 	template <>	constexpr EventId getEventId<events::Event8>() { return 8; }
 }
 
-#endif // EXAMPLE1_ANONYSEVENTID_H
+#endif // EXAMPLE1_ANONYS_EVENTID_H

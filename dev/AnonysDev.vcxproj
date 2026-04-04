@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\anonys\FsmCore.cpp" />
-    <ClCompile Include="..\Example1\anonys\Fsm.cpp" />
+    <ClCompile Include="..\Example1\anonys\FsmPool.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St2.cpp" />
@@ -29,10 +29,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\anonys\FsmCore.h" />
+    <ClInclude Include="..\anonys\Timer.h" />
     <ClInclude Include="..\anonys\Types.h" />
     <ClInclude Include="..\anonys\Utils.h" />
     <ClInclude Include="..\Example1\anonys\EventId.h" />
-    <ClInclude Include="..\Example1\anonys\Fsm.h" />
+    <ClInclude Include="..\Example1\anonys\FsmPool.h" />
     <ClInclude Include="..\Example1\anonys\FsmId.h" />
     <ClInclude Include="..\Example1\anonys\fsm\A.h" />
     <ClInclude Include="..\Example1\anonys\GeneratedConfig.h" />

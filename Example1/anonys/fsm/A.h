@@ -3,6 +3,7 @@
 #define EXAMPLE1_FSM_A_H
 
 #include "anonys/impl/handlersA.h"
+#include "anonys/EventId.h"
 #include "anonys/FsmId.h"
 
 namespace anonys::fsm {

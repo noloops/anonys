@@ -3,10 +3,14 @@
 
 #include <cstdint>
 #include "anonys/FsmId.h"
-#include "anonys/EventId.h"
 
 namespace anonys
 {
+	// TODO make EventId a tag class.
+	using EventId = uint16_t;
+
+	template <typename T> constexpr EventId getEventId() = delete;
+
 	struct Event {
 		EventId eventId;
 		void* pData;

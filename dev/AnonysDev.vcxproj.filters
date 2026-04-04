@@ -57,7 +57,7 @@
     <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp">
       <Filter>Example1\Fsm\A\St1</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\anonys\Fsm.cpp">
+    <ClCompile Include="..\Example1\anonys\FsmPool.cpp">
       <Filter>Example1\anonys</Filter>
     </ClCompile>
   </ItemGroup>
@@ -101,7 +101,7 @@
     <ClInclude Include="..\Example1\Events\Events.h">
       <Filter>Example1\Events</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\anonys\Fsm.h">
+    <ClInclude Include="..\Example1\anonys\FsmPool.h">
       <Filter>Example1\anonys</Filter>
     </ClInclude>
     <ClInclude Include="..\Example1\anonys\impl\handlersA.h">
@@ -115,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="..\Example1\anonys\fsm\A.h">
       <Filter>Example1\anonys\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\anonys\Timer.h">
+      <Filter>anonys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

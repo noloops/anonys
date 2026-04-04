@@ -1,6 +1,6 @@
 #include <iostream>
 #include <type_traits>
-#include "anonys/Fsm.h"
+#include "anonys/FsmPool.h"
 #include "Terminals/Terminals.h"
 
 int main()

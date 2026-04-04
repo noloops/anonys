@@ -3,7 +3,7 @@
 
 namespace anonys
 {
-	void FsmCore::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize)
+	void FsmCore::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize, TimerService* pTimerService)
 	{
 		ANONYS_ASSERT(m_pTerminals == nullptr);
 		ANONYS_ASSERT(pTerminals != nullptr);
@@ -15,15 +15,18 @@ namespace anonys
 		m_pMembersBegin = pAlignedBuffer;
 		m_pMembersEnd = pAlignedBuffer + bufferSize;
 		m_pMembersNext = pAlignedBuffer;
+		m_pTimerService = pTimerService;
 	}
 
 	void FsmCore::handleEvent(Event& event)
 	{
 		ANONYS_ASSERT(m_pTerminals != nullptr);
-		for (int16_t i = m_inner; i >= 0; --i) {
+		for (int16_t i = m_depth; i >= 0; --i) {
 			StateDef const* const pState{ m_stack[i].pState };
 			if (pState->pHandleEvent != nullptr) {
+				m_curDepth = i;
 				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[i].pMembers, event) };
+				m_curDepth = -1;
 				if (pNewState == &DummyStates::Unhandled) {
 					continue;
 				}
@@ -38,12 +41,12 @@ namespace anonys
 	void FsmCore::executeTransition(const StateDef* pState)
 	{
 		ANONYS_ASSERT(m_pTerminals != nullptr);
-		ANONYS_ASSERT((m_inner >= -1) && (m_inner < MaxNestedStates));
+		ANONYS_ASSERT((m_depth >= -1) && (m_depth < MaxNestedStates));
 		ANONYS_ASSERT((pState == nullptr) || (pState->fsmId == m_fsmId));
 		if (pState == nullptr) {
 			popAll();
 		}
-		else if ((m_inner >= 0) && (pState->stateId == m_stack[m_inner].pState->stateId)) {
+		else if ((m_depth >= 0) && (pState->stateId == m_stack[m_depth].pState->stateId)) {
 			pop();
 			push(pState);
 		}
@@ -64,10 +67,10 @@ namespace anonys
 
 	const StateDef* FsmCore::findSharedSuperState(const StateDef* pState)
 	{
-		if ((pState == nullptr) || (m_inner < 0)) {
+		if ((pState == nullptr) || (m_depth < 0)) {
 			return nullptr;
 		}
-		for (int16_t i{ m_inner }; i >= 0; --i) {
+		for (int16_t i{ m_depth }; i >= 0; --i) {
 			uint16_t const stateId{ m_stack[i].pState->stateId };
 			const StateDef* pNext{ pState->pSuperState };
 			while (pNext != nullptr) {
@@ -81,7 +84,7 @@ namespace anonys
 	}
 	void FsmCore::popAll()
 	{
-		while (m_inner >= 0) {
+		while (m_depth >= 0) {
 			pop();
 		}
 	}
@@ -89,8 +92,8 @@ namespace anonys
 	void FsmCore::popToState(const StateDef& state)
 	{
 		uint16_t const stateId{ state.stateId };
-		while (m_inner >= 0) {
-			if (m_stack[m_inner].pState->stateId == stateId) {
+		while (m_depth >= 0) {
+			if (m_stack[m_depth].pState->stateId == stateId) {
 				return;
 			}
 			pop();
@@ -100,11 +103,11 @@ namespace anonys
 
 	void FsmCore::pushToState(const StateDef* pState)
 	{
-		uint16_t const innerStateId{ (m_inner < 0) ? 0U : m_stack[m_inner].pState->stateId};
+		uint16_t const innerStateId{ (m_depth < 0) ? 0U : m_stack[m_depth].pState->stateId};
 
 		const StateDef* states[MaxNestedStates]{};
 		int32_t count{ 0 };
-		while ((pState != nullptr) && ((m_inner < 0) || (pState->stateId != innerStateId))) {
+		while ((pState != nullptr) && ((m_depth < 0) || (pState->stateId != innerStateId))) {
 			ANONYS_ASSERT(count < MaxNestedStates);
 			states[count++] = pState;
 			pState = pState->pSuperState;
@@ -117,27 +120,31 @@ namespace anonys
 	void FsmCore::push(const StateDef* pState)
 	{
 		ANONYS_ASSERT(pState != nullptr);
-		ANONYS_ASSERT(m_inner >= -1);
-		ANONYS_ASSERT(m_inner < MaxNestedStates);
+		ANONYS_ASSERT(m_depth >= -1);
+		ANONYS_ASSERT(m_depth < MaxNestedStates);
 		ANONYS_ASSERT(pState->pLiveCycle != nullptr);
 		uint8_t* const pMembersNext{ m_pMembersNext + pState->pGetMembersSize() };
 		ANONYS_ASSERT(pMembersNext <= m_pMembersEnd);
-		El& el{ m_stack[++m_inner] };
+		El& el{ m_stack[++m_depth] };
 		el.pState = pState;
 		el.pMembers = m_pMembersNext;
 		m_pMembersNext = pMembersNext;
+		m_curDepth = m_depth;
 		el.pState->pLiveCycle(true, m_pTerminals, el.pMembers);
+		m_curDepth = -1;
 	}
 
 	void FsmCore::pop()
 	{
-		ANONYS_ASSERT(m_inner >= 0);
-		El& el{ m_stack[m_inner] };
+		ANONYS_ASSERT(m_depth >= 0);
+		El& el{ m_stack[m_depth] };
+		m_curDepth = m_depth;
 		el.pState->pLiveCycle(false, m_pTerminals, el.pMembers);
+		m_curDepth = -1;
 		ANONYS_ASSERT(el.pMembers >= m_pMembersBegin);
 		ANONYS_ASSERT(el.pMembers < m_pMembersEnd);
 		m_pMembersNext = el.pMembers;
 		el = { };
-		--m_inner;
+		--m_depth;
 	}
 }

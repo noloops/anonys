@@ -1,5 +1,5 @@
 // Generated file, do not edit!
-#include "Fsm.h"
+#include "FsmPool.h"
 #include "anonys/Utils.h"
 
 #include "Fsm/A.h"
@@ -17,11 +17,13 @@ namespace anonys
 		m_started = true;
 		m_fsm[static_cast<uint16_t>(FsmId::A)].executeTransition(&fsm::A::St1);
 	}
-	void FsmPool::initializeA(terminals::Std& std) {
-		ANONYS_ASSERT(m_terminalsA.pStd == nullptr);
+	void FsmPool::initializeA(terminals::Std& std, TimerService* pTimerService) {
+		ANONYS_ASSERT(m_terminalsA.pTimer == nullptr);
+		FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::A)] };
+		m_terminalsA.pTimer = &(fsm.getTimerCore());
 		m_terminalsA.pStd = &std;
 
 		uint8_t* const pBuffer{ std::launder(reinterpret_cast<uint8_t*>(&m_bufferA)) };
-		m_fsm[static_cast<uint16_t>(FsmId::A)].initialize(FsmId::A, &m_terminalsA, pBuffer, sizeof(m_bufferA));
+		fsm.initialize(FsmId::A, &m_terminalsA, pBuffer, sizeof(m_bufferA), pTimerService);
 	}
 }
