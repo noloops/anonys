@@ -46,7 +46,6 @@
     <ClInclude Include="..\Example1\Terminals\Log.h" />
     <ClInclude Include="..\Example1\Terminals\Std.h" />
     <ClInclude Include="..\Example1\Terminals\Terminals.h" />
-    <ClInclude Include="..\Example1\Terminals\Timers.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

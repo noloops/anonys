@@ -17,13 +17,13 @@ namespace anonys
 		m_started = true;
 		m_fsm[static_cast<uint16_t>(FsmId::A)].executeTransition(&fsm::A::St1);
 	}
-	void FsmPool::initializeA(terminals::Std& std, TimerService* pTimerService) {
+	void FsmPool::initializeA(TimerService& timerService, terminals::Std& std) {
 		ANONYS_ASSERT(m_terminalsA.pTimer == nullptr);
 		FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::A)] };
 		m_terminalsA.pTimer = &(fsm.getTimerCore());
 		m_terminalsA.pStd = &std;
 
 		uint8_t* const pBuffer{ std::launder(reinterpret_cast<uint8_t*>(&m_bufferA)) };
-		fsm.initialize(FsmId::A, &m_terminalsA, pBuffer, sizeof(m_bufferA), pTimerService);
+		fsm.initialize(FsmId::A, &m_terminalsA, pBuffer, sizeof(m_bufferA), &timerService);
 	}
 }

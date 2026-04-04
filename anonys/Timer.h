@@ -1,6 +1,7 @@
 #ifndef ANONYS_TIMER_H
 #define ANONYS_TIMER_H
 
+#include "anonys/EventId.h"
 #include "anonys/FsmId.h"
 
 namespace anonys
@@ -31,6 +32,28 @@ namespace anonys
 		TimerService* m_pTimerService{ nullptr };
 		FsmId m_fsmId{};
 		int16_t m_curDepth{ -1 };
+	};
+
+	class Timer {
+	public:
+		Timer(TimerCore& timerCore) : m_timerCore{ timerCore } {}
+
+		~Timer() {
+			if (m_active) {
+				m_timerCore.stopTimers();
+			}
+		}
+
+		template <typename T>
+		inline void start(uint32_t timeoutMs) {
+			constexpr EventId eventId{ getTimeoutEventId<T>() };
+			m_active = true;
+			m_timerCore.startTimer(eventId, timeoutMs);
+		}
+
+	private:
+		TimerCore& m_timerCore;
+		bool m_active{ false };
 	};
 }
 

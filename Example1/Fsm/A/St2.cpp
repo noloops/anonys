@@ -4,12 +4,14 @@
 
 namespace {
 	using Fsm = anonys::fsm::A;
+	using TimeoutA = anonys::Timeout1;
+	using TimeoutB = anonys::Timeout2;
+	using TimeoutC = anonys::Timeout3;
 
 	struct Me {
+		anonys::Timer timer;
 		terminals::Std& std;
 		terminals::T2 t2{};
-		terminals::Timer timer1{ std.timerMngr };
-		terminals::Timer timer2{ std.timerMngr };
 	};
 
 	void enter(Me& me) {
@@ -34,6 +36,21 @@ namespace {
 		me.std.log.write("Handle Event8 in St2");
 		return &Fsm::St1a;
 	}
+
+	anonys::State* handle(Me& me, TimeoutA& event) {
+		me.std.log.write("Handle TimeoutA in St2");
+		return &Fsm::St2;
+	}
+
+	anonys::State* handle(Me& me, TimeoutB& event) {
+		me.std.log.write("Handle TimeoutB in St2");
+		return &Fsm::St1a;
+	}
+
+	anonys::State* handle(Me& me, TimeoutC& event) {
+		me.std.log.write("Handle TimeoutC in St2");
+		return &Fsm::St1a;
+	}
 }
 
 // Generated code, do not edit:
@@ -45,7 +62,7 @@ namespace anonys_1_3 {
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
 		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
+			Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pStd } };
 			terminals.pT2 = &me.t2;
 			enter(me);
 		}
@@ -66,6 +83,12 @@ namespace anonys_1_3 {
 			return handle(me, *static_cast<events::Event7*>(event.pData));
 		case anonys::getEventId<events::Event8>():
 			return handle(me, *static_cast<events::Event8*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout1>():
+			return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout2>():
+			return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout3>():
+			return handle(me, *static_cast<anonys::Timeout3*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}

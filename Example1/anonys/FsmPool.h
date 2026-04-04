@@ -19,7 +19,7 @@ namespace anonys
 
 		void start();
 
-		void initializeA(terminals::Std& std, TimerService* pTimerService = nullptr);
+		void initializeA(TimerService& timerService, terminals::Std& std);
 	private:
 		FsmCore m_fsm[Count]{};
 

@@ -9,7 +9,10 @@ namespace anonys
 	// TODO make EventId a tag class.
 	using EventId = uint16_t;
 
+	static constexpr EventId MinTimoutEventId{ 60'001 };
+
 	template <typename T> constexpr EventId getEventId() = delete;
+	template <typename T> constexpr EventId getTimeoutEventId() = delete;
 
 	struct Event {
 		EventId eventId;

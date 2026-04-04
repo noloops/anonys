@@ -4,11 +4,12 @@
 
 namespace {
 	using Fsm = anonys::fsm::A;
+	using UserTimeout = anonys::Timeout1;
 
 	struct Me {
+		anonys::Timer timer;
 		terminals::Std& std;
 		terminals::T1 t1{};
-		terminals::Timer timer{ std.timerMngr };
 	};
 
 	void enter(Me& me) {
@@ -33,6 +34,11 @@ namespace {
 		me.std.log.write("Handle Event5 in St1");
 		return nullptr;
 	}
+
+	anonys::State* handle(Me& me, UserTimeout& event) {
+		me.std.log.write("Handle UserTimeout in St1");
+		return &Fsm::St1;
+	}
 }
 
 // Generated code, do not edit:
@@ -44,7 +50,7 @@ namespace anonys_1_1 {
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
 		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
+			Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pStd } };
 			terminals.pT1 = &me.t1;
 			enter(me);
 		}
@@ -65,6 +71,8 @@ namespace anonys_1_1 {
 			return handle(me, *static_cast<events::Event4*>(event.pData));
 		case anonys::getEventId<events::Event5>():
 			return handle(me, *static_cast<events::Event5*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout1>():
+			return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}

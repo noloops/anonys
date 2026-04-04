@@ -71,9 +71,6 @@
     <ClInclude Include="..\Example1\Terminals\Log.h">
       <Filter>Example1\Terminals</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\Terminals\Timers.h">
-      <Filter>Example1\Terminals</Filter>
-    </ClInclude>
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h">
       <Filter>Example1\Terminals</Filter>
     </ClInclude>
