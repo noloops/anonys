@@ -70,10 +70,6 @@ namespace anonys_0_2 {
 		}
 	}
 
-	uint16_t getMembersSize() {
-		return anonys::getAlignedSize<Me>();
-	}
-
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
 		if (create) {
@@ -87,5 +83,9 @@ namespace anonys_0_2 {
 			me.~Me();
 			terminals.pT2 = nullptr;
 		}
+	}
+
+	uint16_t getMembersSize() {
+		return anonys::getAlignedSize<Me>();
 	}
 }
