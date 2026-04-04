@@ -25,11 +25,6 @@ namespace anonys
 
 		inline TimerCore& getTimerCore() { return *this; }
 
-		inline int16_t getDepth() const { return m_depth; }
-
-		// TODO Decide if 0 should be made invalid state id.
-		inline uint16_t getCurrentStateId() const { return (m_depth >= 0) ? m_stack[m_depth].pState->stateId : 0; }
-
 	private:
 		struct El {
 			StateDef const* pState{nullptr};
