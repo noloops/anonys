@@ -6,12 +6,16 @@
 #include "anonys/GeneratedConfig.h"
 #include "anonys/FsmId.h"
 #include "anonys/Timer.h"
+#include "anonys/TracingService.h"
 
 namespace anonys
 {
 	class FsmCore : private TimerCore {
 	public:
-		void initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize, TimerService* pTimerService = nullptr);
+		void initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize,
+			TimerService* pTimerService = nullptr);
+
+		void setTracingService(TracingService* pTracingService = nullptr);
 
 		void handleEvent(Event& event);
 
@@ -52,6 +56,8 @@ namespace anonys
 		uint8_t* m_pMembersBegin{ nullptr };
 		uint8_t* m_pMembersEnd{ nullptr };
 		uint8_t* m_pMembersNext{ nullptr };
+
+		TracingService* m_pTracingService{ nullptr };
 	};
 }
 

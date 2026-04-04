@@ -19,9 +19,14 @@ namespace anonys
 
 		void handleTimeoutEvent(FsmId fsmId, int16_t depth, EventId eventId);
 
-		void start();
+		void setTracingService(TracingService* pTracingService = nullptr);
+
+		void setTracingService(FsmId fsmId, TracingService* pTracingService = nullptr);
 
 		void initializeA(TimerService& timerService, terminals::Std& std);
+
+		void start();
+
 	private:
 		FsmCore m_fsm[Count]{};
 

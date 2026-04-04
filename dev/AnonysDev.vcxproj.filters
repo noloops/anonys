@@ -116,5 +116,8 @@
     <ClInclude Include="..\anonys\Timer.h">
       <Filter>anonys</Filter>
     </ClInclude>
+    <ClInclude Include="..\anonys\TracingService.h">
+      <Filter>anonys</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

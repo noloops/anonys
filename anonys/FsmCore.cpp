@@ -7,7 +7,8 @@ namespace {
 
 namespace anonys
 {
-	void FsmCore::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize, TimerService* pTimerService)
+	void FsmCore::initialize(FsmId fsmId, void* pTerminals, uint8_t* pAlignedBuffer, size_t bufferSize,
+		TimerService* pTimerService)
 	{
 		ANONYS_ASSERT(m_pTerminals == nullptr);
 		ANONYS_ASSERT(pTerminals != nullptr);
@@ -22,6 +23,10 @@ namespace anonys
 		m_pTimerService = pTimerService;
 	}
 
+	void FsmCore::setTracingService(TracingService* pTracingService) {
+		m_pTracingService = pTracingService;
+	}
+
 	void FsmCore::handleEvent(Event& event)
 	{
 		ANONYS_ASSERT(m_pTerminals != nullptr);
@@ -31,30 +36,48 @@ namespace anonys
 				m_curDepth = i;
 				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[i].pMembers, event) };
 				m_curDepth = -1;
+				if ((pNewState != nullptr) && (pNewState->stateId == DummyStates::Unhandled.stateId)) {
+					continue;
+				}
+				if (m_pTracingService != nullptr) {
+					m_pTracingService->traceHandledEvent(m_fsmId, pState->stateId, event.eventId);
+				}
 				if (pNewState != nullptr) {
-					if (pNewState->stateId != DummyStates::Unhandled.stateId) {
-						continue;
-					}
 					executeTransition(pNewState);
 				}
 				return;
 			}
+		}
+		if (m_pTracingService != nullptr) {
+			m_pTracingService->traceUnhandledEvent(m_fsmId, DummyStates::InvalidStateId, event.eventId);
 		}
 	}
 
 	void FsmCore::handleTimeoutEvent(int16_t depth, EventId eventId) {
 		if ((depth >= 0) && (depth <= m_depth)) {
 			StateDef const* const pState{ m_stack[depth].pState };
-			if (pState->pHandleEvent != nullptr) {
-				TimeoutDummy timeoutDummy{};
-				Event event{ eventId, &timeoutDummy };
-				m_curDepth = depth;
-				StateDef const* const pNewState{ pState->pHandleEvent(m_stack[depth].pMembers, event) };
-				m_curDepth = -1;
-				if ((pNewState != nullptr) && (pNewState->stateId != DummyStates::Unhandled.stateId)) {
+			ANONYS_ASSERT(pState->pHandleEvent != nullptr);
+			TimeoutDummy timeoutDummy{};
+			Event event{ eventId, &timeoutDummy };
+			m_curDepth = depth;
+			StateDef const* const pNewState{ pState->pHandleEvent(m_stack[depth].pMembers, event) };
+			m_curDepth = -1;
+			if ((pNewState != nullptr) && (pNewState->stateId == DummyStates::Unhandled.stateId)) {
+				if (m_pTracingService != nullptr) {
+					m_pTracingService->traceUnhandledEvent(m_fsmId, pState->stateId, eventId);
+				}
+			}
+			else {
+				if (m_pTracingService != nullptr) {
+					m_pTracingService->traceHandledEvent(m_fsmId, pState->stateId, eventId);
+				}
+				if (pNewState != nullptr) {
 					executeTransition(pNewState);
 				}
 			}
+		}
+		else if (m_pTracingService != nullptr) {
+			m_pTracingService->traceUnhandledEvent(m_fsmId, DummyStates::InvalidStateId, eventId);
 		}
 	}
 
@@ -151,6 +174,9 @@ namespace anonys
 		el.pState = pState;
 		el.pMembers = m_pMembersNext;
 		m_pMembersNext = pMembersNext;
+		if (m_pTracingService != nullptr) {
+			m_pTracingService->traceEnterState(m_fsmId, pState->stateId);
+		}
 		m_curDepth = m_depth;
 		el.pState->pLiveCycle(true, m_pTerminals, el.pMembers);
 		m_curDepth = -1;
@@ -160,6 +186,9 @@ namespace anonys
 	{
 		ANONYS_ASSERT(m_depth >= 0);
 		El& el{ m_stack[m_depth] };
+		if (m_pTracingService != nullptr) {
+			m_pTracingService->traceExitState(m_fsmId, el.pState->stateId);
+		}
 		m_curDepth = m_depth;
 		el.pState->pLiveCycle(false, m_pTerminals, el.pMembers);
 		m_curDepth = -1;

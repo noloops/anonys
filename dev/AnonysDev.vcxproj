@@ -30,6 +30,7 @@
   <ItemGroup>
     <ClInclude Include="..\anonys\FsmCore.h" />
     <ClInclude Include="..\anonys\Timer.h" />
+    <ClInclude Include="..\anonys\TracingService.h" />
     <ClInclude Include="..\anonys\Types.h" />
     <ClInclude Include="..\anonys\Utils.h" />
     <ClInclude Include="..\Example1\anonys\EventId.h" />
