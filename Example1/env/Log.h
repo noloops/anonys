@@ -1,7 +1,9 @@
 #pragma once
 
-namespace terminals {
-	class Log {
+#include "Terminals/LogService.h"
+
+namespace env {
+	class Log : public terminals::LogService {
 	public:
 		Log(const char* pHeader) : m_pHeader{ pHeader } {}
 

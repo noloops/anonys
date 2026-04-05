@@ -20,10 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Example1\anonys\FsmPool.cpp" />
+    <ClCompile Include="..\Example1\env\Log.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St2.cpp" />
-    <ClCompile Include="..\Example1\Terminals\Log.cpp" />
     <ClCompile Include="..\ext\anonys\FsmCore.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -36,10 +36,13 @@
     <ClInclude Include="..\Example1\anonys\impl\handlersA.h" />
     <ClInclude Include="..\Example1\anonys\impl\terminalsA.h" />
     <ClInclude Include="..\Example1\Config\AnonysManualConfig.h" />
+    <ClInclude Include="..\Example1\env\DummyTimerService.h" />
+    <ClInclude Include="..\Example1\env\DummyTracingService.h" />
+    <ClInclude Include="..\Example1\env\Log.h" />
     <ClInclude Include="..\Example1\Events\Events.h" />
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
     <ClInclude Include="..\Example1\Terminals\EventSender.h" />
-    <ClInclude Include="..\Example1\Terminals\Log.h" />
+    <ClInclude Include="..\Example1\Terminals\LogService.h" />
     <ClInclude Include="..\Example1\Terminals\Std.h" />
     <ClInclude Include="..\Example1\Terminals\Terminals.h" />
     <ClInclude Include="..\ext\anonys\FsmCore.h" />

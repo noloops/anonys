@@ -40,13 +40,13 @@
     <Filter Include="ext\anonys">
       <UniqueIdentifier>{0d9e6204-129e-4c20-9be1-e066a05b46fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Example1\env">
+      <UniqueIdentifier>{7e76a9ad-c993-4983-916a-6512fa00e4ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Dev</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Example1\Terminals\Log.cpp">
-      <Filter>Example1\Terminals</Filter>
     </ClCompile>
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
       <Filter>Example1\Fsm\A</Filter>
@@ -63,11 +63,11 @@
     <ClCompile Include="..\ext\anonys\FsmCore.cpp">
       <Filter>ext\anonys</Filter>
     </ClCompile>
+    <ClCompile Include="..\Example1\env\Log.cpp">
+      <Filter>Example1\env</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Example1\Terminals\Log.h">
-      <Filter>Example1\Terminals</Filter>
-    </ClInclude>
     <ClInclude Include="..\Example1\Terminals\CustomTerminals.h">
       <Filter>Example1\Terminals</Filter>
     </ClInclude>
@@ -121,6 +121,18 @@
     </ClInclude>
     <ClInclude Include="..\ext\anonys\FsmCore.h">
       <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\Terminals\LogService.h">
+      <Filter>Example1\Terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\env\Log.h">
+      <Filter>Example1\env</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\env\DummyTimerService.h">
+      <Filter>Example1\env</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Example1\env\DummyTracingService.h">
+      <Filter>Example1\env</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
