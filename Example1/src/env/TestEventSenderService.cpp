@@ -3,33 +3,22 @@
 
 namespace env {
 	void TestEventSenderService::doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) {
-		if (m_count >= MaxQueued) {
-			return;
-		}
-		int const tail{(m_head + m_count) % MaxQueued};
-		Entry& entry{m_queue[tail]};
-		entry.active = true;
-		entry.fsmId = fsmId;
-		entry.eventIdValue = eventId.id;
-		entry.size = size;
+		Entry entry{{eventId, nullptr}, {}};
 		if (size > 0 && pData != nullptr) {
-			std::memcpy(entry.data, pData, size);
+			std::memcpy(&entry.buffer, pData, size);
 		}
-		++m_count;
+		entry.event.pData = &entry.buffer;
+		m_events.push_back(entry);
 	}
 
 	TestEventSenderService::Result TestEventSenderService::getEvent(Buffer& buffer) {
-		if (m_count == 0) {
+		if (m_events.empty()) {
 			return {false, {anonys::EventId{0}, nullptr}};
 		}
-		Entry& entry{m_queue[m_head]};
-		void* const pBuffer{&buffer};
-		if (entry.size > 0) {
-			std::memcpy(pBuffer, entry.data, entry.size);
-		}
-		anonys::Event const event{anonys::EventId{entry.eventIdValue}, pBuffer};
-		m_head = (m_head + 1) % MaxQueued;
-		--m_count;
+		Entry const& entry{m_events.front()};
+		std::memcpy(&buffer, &entry.buffer, sizeof(Buffer));
+		anonys::Event const event{entry.event.eventId, &buffer};
+		m_events.pop_front();
 		return {true, event};
 	}
 }

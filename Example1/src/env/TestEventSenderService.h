@@ -2,6 +2,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <list>
 #include <type_traits>
 #include "anonys/Utils.h"
 #include "Terminals/EventSenderService.h"
@@ -22,18 +23,11 @@ namespace env {
 		void doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) override;
 
 	private:
-		static constexpr int MaxQueued = 32;
-
 		struct Entry {
-			bool active;
-			anonys::FsmId fsmId;
-			uint16_t eventIdValue;
-			uint16_t size;
-			uint8_t data[64];
+			anonys::Event event;
+			Buffer buffer;
 		};
 
-		Entry m_queue[MaxQueued]{};
-		int m_head{ 0 };
-		int m_count{ 0 };
+		std::list<Entry> m_events;
 	};
 }
