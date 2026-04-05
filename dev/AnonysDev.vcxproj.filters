@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Dev">
-      <UniqueIdentifier>{7d95af71-45c6-4c2e-868e-fb5e935cc628}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Example1">
       <UniqueIdentifier>{5e2540f6-1c23-4f20-ae42-e1b1708cf6ee}</UniqueIdentifier>
     </Filter>
@@ -25,11 +22,17 @@
     <Filter Include="ext\anonys">
       <UniqueIdentifier>{0d9e6204-129e-4c20-9be1-e066a05b46fb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="winVs">
+      <UniqueIdentifier>{f94d055f-640b-4aae-87df-5ff3077557cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="winVs\src">
+      <UniqueIdentifier>{817e3f9f-2599-4b1a-9161-c11f59be5e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="winVs\config">
+      <UniqueIdentifier>{1db700c9-5ac4-46fc-9c64-745eda61ca38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Dev</Filter>
-    </ClCompile>
     <ClCompile Include="..\Example1\src\Fsm\A\St1.cpp">
       <Filter>Example1\src\Fsm\A</Filter>
     </ClCompile>
@@ -44,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="..\Example1\src\anonys\FsmPool.cpp" />
     <ClCompile Include="..\Example1\src\env\Log.cpp" />
+    <ClCompile Include="..\Example1\platform\winVs\src\main.cpp">
+      <Filter>winVs\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Example1\src\anonys\impl\handlersA.h">
@@ -74,7 +80,6 @@
     <ClInclude Include="..\Example1\src\anonys\FsmPool.h" />
     <ClInclude Include="..\Example1\src\anonys\FsmId.h" />
     <ClInclude Include="..\Example1\src\anonys\GeneratedConfig.h" />
-    <ClInclude Include="..\Example1\src\Config\AnonysManualConfig.h" />
     <ClInclude Include="..\Example1\src\env\DummyTimerService.h" />
     <ClInclude Include="..\Example1\src\env\DummyTracingService.h" />
     <ClInclude Include="..\Example1\src\env\Log.h" />
@@ -84,5 +89,8 @@
     <ClInclude Include="..\Example1\src\Terminals\LogService.h" />
     <ClInclude Include="..\Example1\src\Terminals\Std.h" />
     <ClInclude Include="..\Example1\src\Terminals\Terminals.h" />
+    <ClInclude Include="..\Example1\platform\winVs\config\AnonysManualConfig.h">
+      <Filter>winVs\config</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
