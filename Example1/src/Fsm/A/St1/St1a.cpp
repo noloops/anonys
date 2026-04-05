@@ -15,37 +15,37 @@ namespace {
 	};
 
 	void enter(Me& me) {
-		me.std.log.write("Enter St1a");
+		me.std.log.write(terminals::Message::EnterSt1a);
 		me.timer.start<SystemTimeout>(1000);
 	}
 
 	void exit(Me& me) {
-		me.std.log.write("Exit St1a");
+		me.std.log.write(terminals::Message::ExitSt1a);
 	}
 
 	anonys::State* handle(Me& me, events::Event0& event) {
-		me.std.log.write("Handle Event0 in St1a");
+		me.std.log.write(terminals::Message::Event0InSt1a);
 		return &Fsm::St1;
 	}
 
 	anonys::State* handle(Me& me, events::Event3& event) {
-		me.std.log.write("Handle Event3 in St1a");
+		me.std.log.write(terminals::Message::Event3InSt1a);
 		return &Fsm::St1a;
 	}
 
 	anonys::State* handle(Me& me, events::Event5& event) {
-		me.std.log.write("Handle Event5 in St1a");
+		me.std.log.write(terminals::Message::Event5InSt1a);
 		me.timer.start<UserTimeout>(100);
 		return nullptr;
 	}
 
 	anonys::State* handle(Me& me, UserTimeout& event) {
-		me.std.log.write("Handle UserTimeout in St1a");
+		me.std.log.write(terminals::Message::UserTimeoutInSt1a);
 		return &Fsm::St2;
 	}
 
 	anonys::State* handle(Me& me, SystemTimeout& event) {
-		me.std.log.write("Handle SystemTimeout in St1a");
+		me.std.log.write(terminals::Message::SystemTimeoutInSt1a);
 		return &Fsm::St1a;
 	}
 }

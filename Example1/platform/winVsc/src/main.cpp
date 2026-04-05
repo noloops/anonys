@@ -2,14 +2,14 @@
 #include <type_traits>
 #include "env/DummyTimerService.h"
 #include "env/DummyTracingService.h"
-#include "env/Log.h"
+#include "env/TestLog.h"
 #include "Terminals/Terminals.h"
 #include "anonys/FsmPool.h"
 
 int main()
 {
 	static terminals::EventSender eventSender{};
-	static env::Log log{"A:"};
+	static env::TestLog log{"A:"};
 	static terminals::Std stdTerminal{ eventSender, log };
 	static env::DummyTimerService timerService{};
 	static env::DummyTracingService tracingService{};

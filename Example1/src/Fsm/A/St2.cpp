@@ -15,44 +15,44 @@ namespace {
 	};
 
 	void enter(Me& me) {
-		me.std.log.write("Enter St2");
+		me.std.log.write(terminals::Message::EnterSt2);
 		me.timer.start<TimeoutA>(150);
 		me.timer.start<TimeoutC>(500);
 	}
 
 	void exit(Me& me) {
-		me.std.log.write("Exit St2");
+		me.std.log.write(terminals::Message::ExitSt2);
 	}
 
 	anonys::State* handle(Me& me, events::Event2& event) {
-		me.std.log.write("Handle Event2 in St2");
+		me.std.log.write(terminals::Message::Event2InSt2);
 		return &Fsm::St2;
 	}
 
 	anonys::State* handle(Me& me, events::Event7& event) {
-		me.std.log.write("Handle Event7 in St2");
+		me.std.log.write(terminals::Message::Event7InSt2);
 		return &Fsm::St1;
 	}
 
 	anonys::State* handle(Me& me, events::Event8& event) {
-		me.std.log.write("Handle Event8 in St2");
+		me.std.log.write(terminals::Message::Event8InSt2);
 		return &Fsm::St1a;
 	}
 
 	anonys::State* handle(Me& me, TimeoutA& event) {
-		me.std.log.write("Handle TimeoutA in St2");
+		me.std.log.write(terminals::Message::TimeoutAInSt2);
 		me.timer.start<TimeoutB>(50);
 		me.timer.start<TimeoutA>(200);
 		return nullptr;
 	}
 
 	anonys::State* handle(Me& me, TimeoutB& event) {
-		me.std.log.write("Handle TimeoutB in St2");
+		me.std.log.write(terminals::Message::TimeoutBInSt2);
 		return nullptr;
 	}
 
 	anonys::State* handle(Me& me, TimeoutC& event) {
-		me.std.log.write("Handle TimeoutC in St2");
+		me.std.log.write(terminals::Message::TimeoutCInSt2);
 		return &Fsm::St1a;
 	}
 }

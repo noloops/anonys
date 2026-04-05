@@ -13,31 +13,31 @@ namespace {
 	};
 
 	void enter(Me& me) {
-		me.std.log.write("Enter St1");
+		me.std.log.write(terminals::Message::EnterSt1);
 	}
 
 	void exit(Me& me) {
-		me.std.log.write("Exit St1");
+		me.std.log.write(terminals::Message::ExitSt1);
 	}
 
 	anonys::State* handle(Me& me, events::Event1& event) {
-		me.std.log.write("Handle Event1 in St1");
+		me.std.log.write(terminals::Message::Event1InSt1);
 		return &Fsm::St1a;
 	}
 
 	anonys::State* handle(Me& me, events::Event4& event) {
-		me.std.log.write("Handle Event4 in St1");
+		me.std.log.write(terminals::Message::Event4InSt1);
 		return &Fsm::St2;
 	}
 
 	anonys::State* handle(Me& me, events::Event5& event) {
-		me.std.log.write("Handle Event5 in St1");
+		me.std.log.write(terminals::Message::Event5InSt1);
 		me.timer.start<UserTimeout>(500);
 		return nullptr;
 	}
 
 	anonys::State* handle(Me& me, UserTimeout& event) {
-		me.std.log.write("Handle UserTimeout in St1");
+		me.std.log.write(terminals::Message::UserTimeoutInSt1);
 		return &Fsm::St1;
 	}
 }
