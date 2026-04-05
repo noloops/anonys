@@ -72,7 +72,6 @@ namespace env {
 		static Entry getTracingTraceExitState(anonys::FsmId fsmId, uint16_t stateId);
 
 		static void printEntry(bool expected, Entry const& entry);
-		static void printEmpty();
 
 		static bool check(Entry const& actual);
 

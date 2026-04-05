@@ -81,10 +81,6 @@ namespace env {
 
 	// Print helpers
 
-	void Expected::printEmpty() {
-		std::cout << "EXPECTED: <empty>" << std::endl;
-	}
-
 	void Expected::printEntry(bool expected, Entry const& entry) {
 		char const* const prefix{expected ? "EXPECTED: " : "ACTUAL: "};
 		switch (entry.kind) {
@@ -134,10 +130,12 @@ namespace env {
 
 	bool Expected::check(Entry const& actual) {
 		if (!m_enabled) {
-			return true;
+			std::cout << "EXPECTED: <disabled>" << std::endl;
+			printEntry(false, actual);
+			return false;
 		}
 		if (m_entries.empty()) {
-			printEmpty();
+			std::cout << "EXPECTED: <empty>" << std::endl;
 			printEntry(false, actual);
 			return false;
 		}
