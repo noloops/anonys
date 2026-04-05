@@ -6,6 +6,8 @@
 
 namespace anonys
 {
+	static_assert(BufferSize::Jukebox % anonys::StdAlign == 0, "Buffer size must be a multiple of alignment");
+
 	void FsmPool::handleEvent(FsmId fsmId, Event& event) {
 		if (fsmId < FsmId::Count_) {
 			m_fsm[static_cast<uint16_t>(fsmId)].handleEvent(event);
