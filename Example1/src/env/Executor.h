@@ -2,7 +2,7 @@
 
 #include "Terminals/EventSenderService.h"
 
-namespace anonys { class FsmPool; }
+namespace anonys { class FsmPool; struct Event; }
 
 namespace env {
 	class TestEventSenderService;
@@ -20,6 +20,8 @@ namespace env {
 		void doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) override;
 
 	private:
+		static void printEvent(char const* pPrefix, anonys::Event const& event);
+
 		anonys::FsmPool& m_fsmPool;
 		TestEventSenderService& m_testEventSender;
 		TestTimerService& m_testTimerService;

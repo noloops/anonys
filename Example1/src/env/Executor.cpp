@@ -12,11 +12,24 @@ namespace env {
 		, m_testTimerService{testTimerService}
 	{}
 
+	void Executor::printEvent(char const* pPrefix, anonys::Event const& event) {
+		std::cout << pPrefix << Helper::getEventName(event.eventId);
+		switch (event.eventId.id) {
+		case 9:
+		case 10:
+		case 11:
+			std::cout << "(" << *static_cast<int32_t const*>(event.pData) << ")";
+			break;
+		}
+		std::cout << std::endl;
+	}
+
 	void Executor::doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) {
 		if (!m_testEventSender.isEmpty()) {
 			std::cout << "WARNING: TestEventSenderService is not empty" << std::endl;
 		}
 		anonys::Event event{eventId, const_cast<void*>(pData)};
+		printEvent(">>>> EVENT: ", event);
 		m_fsmPool.handleEvent(fsmId, event);
 	}
 
@@ -26,7 +39,7 @@ namespace env {
 		if (!result.valid) {
 			return false;
 		}
-		std::cout << "TEST EVENT: " << Helper::getEventName(result.event.eventId) << " -> " << Helper::getFsmName(result.fsmId) << std::endl;
+		printEvent(">> EVENT: ", result.event);
 		m_fsmPool.handleEvent(result.fsmId, result.event);
 		return true;
 	}
@@ -36,7 +49,7 @@ namespace env {
 		if (!result.valid) {
 			return false;
 		}
-		std::cout << "TEST TIMEOUT: " << Helper::getEventName(result.timeout.eventId) << " -> " << Helper::getFsmName(result.timeout.fsmId) << " @" << result.systemTimeMs << "ms" << std::endl;
+		std::cout << ">> TIMEOUT: " << Helper::getEventName(result.timeout.eventId) << " -> " << Helper::getFsmName(result.timeout.fsmId) << " @" << result.systemTimeMs << "ms" << std::endl;
 		m_fsmPool.handleTimeoutEvent(result.timeout.fsmId, result.timeout.depth, result.timeout.eventId);
 		return true;
 	}

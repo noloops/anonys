@@ -32,6 +32,9 @@ namespace env {
 		case 6: return "Event6";
 		case 7: return "Event7";
 		case 8: return "Event8";
+		case 9: return "EventInt0";
+		case 10: return "EventInt1";
+		case 11: return "EventInt2";
 		case 60001: return "Timeout1";
 		case 60002: return "Timeout2";
 		case 60003: return "Timeout3";

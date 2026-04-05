@@ -14,6 +14,9 @@ namespace events {
 	struct Event6;
 	struct Event7;
 	struct Event8;
+	struct EventInt0;
+	struct EventInt1;
+	struct EventInt2;
 }
 
 namespace anonys
@@ -32,6 +35,9 @@ namespace anonys
 	template <>	constexpr EventId getEventId<events::Event6>() { return 6; }
 	template <>	constexpr EventId getEventId<events::Event7>() { return 7; }
 	template <>	constexpr EventId getEventId<events::Event8>() { return 8; }
+	template <>	constexpr EventId getEventId<events::EventInt0>() { return 9; }
+	template <>	constexpr EventId getEventId<events::EventInt1>() { return 10; }
+	template <>	constexpr EventId getEventId<events::EventInt2>() { return 11; }
 
 	template <typename T> constexpr EventId getTimeoutEventId() = delete;
 	template <>	constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }
