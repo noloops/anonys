@@ -1,4 +1,5 @@
 #include "env/Tester.h"
+#include "env/Demo.h"
 
 int main()
 {
@@ -15,5 +16,8 @@ int main()
 	if (!env::Tester::testConfigureAndCancelAutoPause()) { ok = false; }
 	if (!env::Tester::testMalfunctionStoppedInIdle()) { ok = false; }
 	if (!env::Tester::testPauseUnhandledInPaused()) { ok = false; }
+	if (ok) {
+		env::Demo::run();
+	}
 	return ok ? 0 : 1;
 }

@@ -22,6 +22,10 @@ namespace env {
 	}
 
 	bool Expected::check() {
+		if (!m_enabled) {
+			std::cout << "EXPECTED: check() called while disabled" << std::endl;
+			return false;
+		}
 		bool ok{true};
 		if (m_hasErrors) {
 			ok = false;
@@ -155,9 +159,6 @@ namespace env {
 
 	void Expected::checkEntry(Entry const& actual) {
 		if (!m_enabled) {
-			std::cout << "EXPECTED: <disabled>" << std::endl;
-			printEntry(false, actual);
-			m_hasErrors = true;
 			return;
 		}
 		if (m_entries.empty()) {
