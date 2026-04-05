@@ -18,6 +18,7 @@ namespace env {
 			case 4: return "Normal";
 			case 5: return "Paused";
 			case 6: return "Error";
+			case 7: return "AutoPause";
 			default: return "?";
 			}
 		default: return "?";
@@ -36,9 +37,12 @@ namespace env {
 		case 7: return "Diagnostic";
 		case 8: return "Malfunction";
 		case 9: return "Reset";
+		case 10: return "AutoPause";
+		case 11: return "ConfigureAutoPause";
 		case 60001: return "TrackTimer";
 		case 60002: return "SleepTimer";
 		case 60003: return "RecoveryTimer";
+		case 60004: return "PauseCountdownTimer";
 		default: return "?";
 		}
 	}
@@ -71,6 +75,13 @@ namespace env {
 		case terminals::Message::ExitError:               return "Exit Error";
 		case terminals::Message::ResetInError:            return "Reset in Error";
 		case terminals::Message::RecoveryTimeoutInError:  return "RecoveryTimeout in Error";
+		case terminals::Message::AutoPauseInPlaying:       return "AutoPause in Playing";
+		case terminals::Message::ConfigureAutoPauseInPaused: return "ConfigureAutoPause in Paused";
+		case terminals::Message::PauseInPaused:            return "Pause in Paused";
+		case terminals::Message::EnterAutoPause:           return "Enter AutoPause";
+		case terminals::Message::ExitAutoPause:            return "Exit AutoPause";
+		case terminals::Message::CountdownTimerInAutoPause: return "CountdownTimer in AutoPause";
+		case terminals::Message::CountdownReachedZero:     return "Countdown reached zero";
 		default:                                          return "Unknown";
 		}
 	}

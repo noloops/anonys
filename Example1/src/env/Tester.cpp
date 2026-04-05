@@ -37,8 +37,8 @@ namespace env {
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
 		exec.send<events::PowerOn>(F, events::PowerOn{});
-		if (!Expected::check()) return false;
-		if (exec.sendNextEvent()) return false;
+		if (!Expected::check()) { return false; }
+		if (exec.sendNextEvent()) { return false; }
 		return true;
 	}
 
@@ -54,8 +54,59 @@ namespace env {
 		Expected::logWrite(M::EnterNormal, count);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
 		exec.send<events::InsertCoin>(F, events::InsertCoin{});
-		if (!Expected::check()) return false;
-		if (exec.sendNextEvent()) return false;
+		if (!Expected::check()) { return false; }
+		if (exec.sendNextEvent()) { return false; }
+		return true;
+	}
+
+	static bool goToAutoPause(Executor& exec) {
+		Expected::logWrite(M::AutoPauseInPlaying);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{10});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceEnterState(F, 5);
+		Expected::logWrite(M::EnterPaused, 0);
+		Expected::tracingTraceEnterState(F, 7);
+		Expected::logWrite(M::EnterAutoPause);
+		Expected::timerStartTimer(F, 2, anonys::EventId{60004}, 1000);
+		exec.send<events::AutoPause>(F, events::AutoPause{});
+		if (!Expected::check()) { return false; }
+		if (exec.sendNextEvent()) { return false; }
+		return true;
+	}
+
+	static bool fireCountdownTimer(Executor& exec, bool expectZero) {
+		Expected::logWrite(M::CountdownTimerInAutoPause);
+		if (expectZero) {
+			Expected::logWrite(M::CountdownReachedZero);
+			Expected::eventSenderDoSend(F, anonys::EventId{3}, nullptr, sizeof(events::Play));
+		}
+		Expected::tracingTraceHandledEvent(F, 7, anonys::EventId{60004});
+		Expected::tracingTraceExitState(F, 7);
+		Expected::logWrite(M::ExitAutoPause);
+		Expected::timerStopTimers(F, 2);
+		Expected::tracingTraceEnterState(F, 7);
+		Expected::logWrite(M::EnterAutoPause);
+		Expected::timerStartTimer(F, 2, anonys::EventId{60004}, 1000);
+		if (!exec.sendNextTimeout()) { return false; }
+		if (!Expected::check()) { return false; }
+		return true;
+	}
+
+	static bool processAutoPlay(Executor& exec, int32_t normalCount) {
+		Expected::logWrite(M::PlayInPaused);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{3});
+		Expected::tracingTraceExitState(F, 7);
+		Expected::logWrite(M::ExitAutoPause);
+		Expected::timerStopTimers(F, 2);
+		Expected::tracingTraceExitState(F, 5);
+		Expected::logWrite(M::ExitPaused);
+		Expected::tracingTraceEnterState(F, 4);
+		Expected::logWrite(M::EnterNormal, normalCount);
+		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
+		if (!exec.sendNextEvent()) { return false; }
+		if (!Expected::check()) { return false; }
 		return true;
 	}
 
@@ -67,8 +118,8 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
-		if (!powerOn(executor)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
 
 		// PowerOff in Idle -> Off
 		Expected::logWrite(M::PowerOffInIdle);
@@ -79,13 +130,13 @@ namespace env {
 		Expected::tracingTraceEnterState(F, 1);
 		Expected::logWrite(M::EnterOff);
 		executor.send<events::PowerOff>(F, events::PowerOff{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
 		// PowerOn again -> Idle (verify re-entry works)
-		if (!powerOn(executor)) return failed();
+		if (!powerOn(executor)) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 
@@ -95,8 +146,8 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
-		if (!powerOn(executor)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
 
 		// Diagnostic in Idle -> Idle (root self-transition: pop + push)
 		Expected::logWrite(M::DiagnosticInIdle);
@@ -108,10 +159,10 @@ namespace env {
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
 		executor.send<events::Diagnostic>(F, events::Diagnostic{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
-		if (!insertCoin(executor, 1)) return failed();
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		// Skip in Normal -> Normal (child self-transition: pop + push, parent survives)
 		Expected::logWrite(M::SkipInNormal);
@@ -123,10 +174,10 @@ namespace env {
 		Expected::logWrite(M::EnterNormal, 2);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
 		executor.send<events::Skip>(F, events::Skip{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 
@@ -136,9 +187,9 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
-		if (!powerOn(executor)) return failed();
-		if (!insertCoin(executor, 1)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		// Pause in Normal -> Paused (sibling: shared parent Playing stays)
 		Expected::logWrite(M::PauseInNormal);
@@ -149,8 +200,8 @@ namespace env {
 		Expected::tracingTraceEnterState(F, 5);
 		Expected::logWrite(M::EnterPaused, 0);
 		executor.send<events::Pause>(F, events::Pause{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
 		// Play in Paused -> Normal (sibling back, counter persists: 1 -> 2)
 		Expected::logWrite(M::PlayInPaused);
@@ -161,8 +212,8 @@ namespace env {
 		Expected::logWrite(M::EnterNormal, 2);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
 		executor.send<events::Play>(F, events::Play{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
 		// Skip -> Normal (self, counter continues: 3)
 		Expected::logWrite(M::SkipInNormal);
@@ -174,10 +225,10 @@ namespace env {
 		Expected::logWrite(M::EnterNormal, 3);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
 		executor.send<events::Skip>(F, events::Skip{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 
@@ -187,9 +238,9 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
-		if (!powerOn(executor)) return failed();
-		if (!insertCoin(executor, 1)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		// Eject in Normal -> bubbles to Playing -> Idle
 		Expected::logWrite(M::EjectInPlaying);
@@ -203,11 +254,11 @@ namespace env {
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
 		executor.send<events::Eject>(F, events::Eject{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
 		// InsertCoin -> Normal again (fresh Playing, counter resets to 1)
-		if (!insertCoin(executor, 1)) return failed();
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		// PowerOff in Normal -> bubbles to Playing -> Off
 		Expected::logWrite(M::PowerOffInPlaying);
@@ -220,10 +271,10 @@ namespace env {
 		Expected::tracingTraceEnterState(F, 1);
 		Expected::logWrite(M::EnterOff);
 		executor.send<events::PowerOff>(F, events::PowerOff{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 
@@ -233,9 +284,9 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
-		if (!powerOn(executor)) return failed();
-		if (!insertCoin(executor, 1)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		// TrackTimer fires at depth 1 -> Normal handles -> Idle
 		Expected::logWrite(M::TrackEndInNormal);
@@ -248,10 +299,10 @@ namespace env {
 		Expected::tracingTraceEnterState(F, 2);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
-		if (!executor.sendNextTimeout()) return failed();
-		if (!Expected::check()) return failed();
+		if (!executor.sendNextTimeout()) { return failed(); }
+		if (!Expected::check()) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 
@@ -261,8 +312,8 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
-		if (!powerOn(executor)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
 
 		// SleepTimer fires at depth 0 -> Idle handles -> Off
 		Expected::logWrite(M::SleepTimeoutInIdle);
@@ -272,10 +323,10 @@ namespace env {
 		Expected::timerStopTimers(F, 0);
 		Expected::tracingTraceEnterState(F, 1);
 		Expected::logWrite(M::EnterOff);
-		if (!executor.sendNextTimeout()) return failed();
-		if (!Expected::check()) return failed();
+		if (!executor.sendNextTimeout()) { return failed(); }
+		if (!Expected::check()) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 
@@ -285,9 +336,9 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
-		if (!powerOn(executor)) return failed();
-		if (!insertCoin(executor, 1)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		// Malfunction in Normal -> bubbles to Playing -> Error
 		Expected::logWrite(M::MalfunctionInPlaying);
@@ -301,8 +352,8 @@ namespace env {
 		Expected::logWrite(M::EnterError);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60003}, 10000);
 		executor.send<events::Malfunction>(F, events::Malfunction{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
 		// Reset in Error -> Idle
 		Expected::logWrite(M::ResetInError);
@@ -314,11 +365,11 @@ namespace env {
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
 		executor.send<events::Reset>(F, events::Reset{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
 		// Now test auto-recovery path: go to Normal -> Error again
-		if (!insertCoin(executor, 1)) return failed();
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		Expected::logWrite(M::MalfunctionInPlaying);
 		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{8});
@@ -331,8 +382,8 @@ namespace env {
 		Expected::logWrite(M::EnterError);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60003}, 10000);
 		executor.send<events::Malfunction>(F, events::Malfunction{});
-		if (!Expected::check()) return failed();
-		if (executor.sendNextEvent()) return failed();
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
 
 		// RecoveryTimer fires -> Idle
 		Expected::logWrite(M::RecoveryTimeoutInError);
@@ -343,10 +394,10 @@ namespace env {
 		Expected::tracingTraceEnterState(F, 2);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
-		if (!executor.sendNextTimeout()) return failed();
-		if (!Expected::check()) return failed();
+		if (!executor.sendNextTimeout()) { return failed(); }
+		if (!Expected::check()) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 
@@ -356,23 +407,106 @@ namespace env {
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!startJukebox(setup)) return failed();
+		if (!startJukebox(setup)) { return failed(); }
 
 		// Send Play to Off -> nobody handles it
 		Expected::tracingTraceUnhandledEvent(F, 0, anonys::EventId{3});
 		executor.send<events::Play>(F, events::Play{});
-		if (!Expected::check()) return failed();
+		if (!Expected::check()) { return failed(); }
 
 		// Go to Normal to test deep unhandled event
-		if (!powerOn(executor)) return failed();
-		if (!insertCoin(executor, 1)) return failed();
+		if (!powerOn(executor)) { return failed(); }
+		if (!insertCoin(executor, 1)) { return failed(); }
 
 		// Send Reset in Normal -> Normal doesn't handle, Playing doesn't handle
 		Expected::tracingTraceUnhandledEvent(F, 0, anonys::EventId{9});
 		executor.send<events::Reset>(F, events::Reset{});
-		if (!Expected::check()) return failed();
+		if (!Expected::check()) { return failed(); }
 
-		if (executor.hasWarnings()) return failed();
+		if (executor.hasWarnings()) { return failed(); }
+		return success();
+	}
+
+	bool Tester::testAutoPauseCountdown() {
+		std::cout << "=== testAutoPauseCountdown ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
+
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
+		if (!insertCoin(executor, 1)) { return failed(); }
+
+		// AutoPause event in Normal -> bubbles to Playing -> exits Normal, enters Paused, enters AutoPause
+		if (!goToAutoPause(executor)) { return failed(); }
+
+		// Fire timeout 1: countdown 3->2
+		if (!fireCountdownTimer(executor, false)) { return failed(); }
+
+		// Fire timeout 2: countdown 2->1
+		if (!fireCountdownTimer(executor, false)) { return failed(); }
+
+		// Fire timeout 3: countdown 1->0, sends Play
+		if (!fireCountdownTimer(executor, true)) { return failed(); }
+
+		// Process queued Play event: exits AutoPause+Paused, enters Normal (count 2)
+		if (!processAutoPlay(executor, 2)) { return failed(); }
+
+		if (executor.hasWarnings()) { return failed(); }
+		return success();
+	}
+
+	bool Tester::testConfigureAndCancelAutoPause() {
+		std::cout << "=== testConfigureAndCancelAutoPause ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
+
+		if (!startJukebox(setup)) { return failed(); }
+		if (!powerOn(executor)) { return failed(); }
+		if (!insertCoin(executor, 1)) { return failed(); }
+
+		// AutoPause event -> Paused/AutoPause (countdown 3)
+		if (!goToAutoPause(executor)) { return failed(); }
+
+		// Fire timeout 1: countdown 3->2
+		if (!fireCountdownTimer(executor, false)) { return failed(); }
+
+		// Pause event in AutoPause -> bubbles to Paused -> self-transition
+		// exits AutoPause, exits Paused, enters Paused (mixer: 0 adjusted by -80 = -80)
+		Expected::logWrite(M::PauseInPaused);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{4});
+		Expected::tracingTraceExitState(F, 7);
+		Expected::logWrite(M::ExitAutoPause);
+		Expected::timerStopTimers(F, 2);
+		Expected::tracingTraceExitState(F, 5);
+		Expected::logWrite(M::ExitPaused);
+		Expected::tracingTraceEnterState(F, 5);
+		Expected::logWrite(M::EnterPaused, -80);
+		executor.send<events::Pause>(F, events::Pause{});
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
+
+		// ConfigureAutoPause(2) in Paused -> sets countdown to 2, enters AutoPause
+		Expected::logWrite(M::ConfigureAutoPauseInPaused, 2);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{11});
+		Expected::tracingTraceEnterState(F, 7);
+		Expected::logWrite(M::EnterAutoPause);
+		Expected::timerStartTimer(F, 2, anonys::EventId{60004}, 1000);
+		executor.send<events::ConfigureAutoPause>(F, events::ConfigureAutoPause{2});
+		if (!Expected::check()) { return failed(); }
+		if (executor.sendNextEvent()) { return failed(); }
+
+		// Fire timeout 1: countdown 2->1
+		if (!fireCountdownTimer(executor, false)) { return failed(); }
+
+		// Fire timeout 2: countdown 1->0, sends Play
+		if (!fireCountdownTimer(executor, true)) { return failed(); }
+
+		// Process queued Play: exits AutoPause+Paused, enters Normal (count 2)
+		if (!processAutoPlay(executor, 2)) { return failed(); }
+
+		if (executor.hasWarnings()) { return failed(); }
 		return success();
 	}
 }

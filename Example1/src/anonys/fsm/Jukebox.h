@@ -15,6 +15,7 @@ namespace anonys::fsm {
 		static constexpr anonys::StateDef Normal = { 4, anonys::FsmId::Jukebox, &Playing, anonys_0_4::getMembersSize, anonys_0_4::liveCycle, anonys_0_4::handleEvent };
 		static constexpr anonys::StateDef Paused = { 5, anonys::FsmId::Jukebox, &Playing, anonys_0_5::getMembersSize, anonys_0_5::liveCycle, anonys_0_5::handleEvent };
 		static constexpr anonys::StateDef Error = { 6, anonys::FsmId::Jukebox, nullptr, anonys_0_6::getMembersSize, anonys_0_6::liveCycle, anonys_0_6::handleEvent };
+		static constexpr anonys::StateDef AutoPause = { 7, anonys::FsmId::Jukebox, &Paused, anonys_0_7::getMembersSize, anonys_0_7::liveCycle, anonys_0_7::handleEvent };
 	};
 }
 

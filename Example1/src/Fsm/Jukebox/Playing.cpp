@@ -6,7 +6,6 @@ namespace {
 	using Fsm = anonys::fsm::Jukebox;
 
 	struct Me {
-		anonys::Timer timer;
 		terminals::Std& std;
 		terminals::Counter counter{};
 		terminals::Mixer mixer{};
@@ -34,6 +33,11 @@ namespace {
 		me.std.log.write(terminals::Message::MalfunctionInPlaying);
 		return &Fsm::Error;
 	}
+
+	anonys::State* handle(Me& me, events::AutoPause& event) {
+		me.std.log.write(terminals::Message::AutoPauseInPlaying);
+		return &Fsm::AutoPause;
+	}
 }
 
 // Generated code, do not edit:
@@ -47,6 +51,8 @@ namespace anonys_0_3 {
 			return handle(me, *static_cast<events::PowerOff*>(event.pData));
 		case anonys::getEventId<events::Malfunction>().id:
 			return handle(me, *static_cast<events::Malfunction*>(event.pData));
+		case anonys::getEventId<events::AutoPause>().id:
+			return handle(me, *static_cast<events::AutoPause*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}
@@ -55,7 +61,7 @@ namespace anonys_0_3 {
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
 		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pStd } };
+			Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
 			terminals.pCounter = &me.counter;
 			terminals.pMixer = &me.mixer;
 			enter(me);

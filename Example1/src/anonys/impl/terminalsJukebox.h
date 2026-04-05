@@ -8,6 +8,7 @@ namespace terminals {
 	struct Std;
 	class Counter;
 	class Mixer;
+	class Countdown;
 }
 
 namespace anonys_0 {
@@ -16,6 +17,7 @@ namespace anonys_0 {
 		terminals::Std* pStd;
 		terminals::Counter* pCounter;
 		terminals::Mixer* pMixer;
+		terminals::Countdown* pCountdown;
 	};
 }
 

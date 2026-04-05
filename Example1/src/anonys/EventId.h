@@ -15,6 +15,8 @@ namespace events {
 	struct Diagnostic;
 	struct Malfunction;
 	struct Reset;
+	struct AutoPause;
+	class ConfigureAutoPause;
 }
 
 namespace anonys
@@ -22,6 +24,7 @@ namespace anonys
 	class Timeout1 {};
 	class Timeout2 {};
 	class Timeout3 {};
+	class Timeout4 {};
 
 	template <typename T> constexpr EventId getEventId() = delete;
 	template <>	constexpr EventId getEventId<events::PowerOn>() { return 0; }
@@ -34,11 +37,14 @@ namespace anonys
 	template <>	constexpr EventId getEventId<events::Diagnostic>() { return 7; }
 	template <>	constexpr EventId getEventId<events::Malfunction>() { return 8; }
 	template <>	constexpr EventId getEventId<events::Reset>() { return 9; }
+	template <>	constexpr EventId getEventId<events::AutoPause>() { return 10; }
+	template <>	constexpr EventId getEventId<events::ConfigureAutoPause>() { return 11; }
 
 	template <typename T> constexpr EventId getTimeoutEventId() = delete;
 	template <>	constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }
 	template <>	constexpr EventId getTimeoutEventId<Timeout2>() { return 60002; }
 	template <>	constexpr EventId getTimeoutEventId<Timeout3>() { return 60003; }
+	template <>	constexpr EventId getTimeoutEventId<Timeout4>() { return 60004; }
 	static_assert(getTimeoutEventId<Timeout1>().id == MinTimoutEventId.id);
 }
 

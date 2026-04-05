@@ -38,5 +38,6 @@ add_executable(Example1
     "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Playing.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Playing/Normal.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Playing/Paused.cpp"
+    "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Playing/Paused/AutoPause.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Error.cpp"
 )

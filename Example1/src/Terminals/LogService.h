@@ -30,6 +30,13 @@ namespace terminals {
 		ExitError,
 		ResetInError,
 		RecoveryTimeoutInError,
+		AutoPauseInPlaying,
+		ConfigureAutoPauseInPaused,
+		PauseInPaused,
+		EnterAutoPause,
+		ExitAutoPause,
+		CountdownTimerInAutoPause,
+		CountdownReachedZero,
 	};
 
 	class LogService {

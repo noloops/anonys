@@ -4,32 +4,39 @@
 
 namespace {
 	using Fsm = anonys::fsm::Jukebox;
+	using PauseCountdownTimer = anonys::Timeout4;
 
 	struct Me {
+		anonys::Timer timer;
 		terminals::Std& std;
+		terminals::Countdown& countdown;
 	};
 
 	void enter(Me& me) {
-		me.std.log.write(terminals::Message::EnterOff);
+		me.std.log.write(terminals::Message::EnterAutoPause);
+		me.timer.start<PauseCountdownTimer>(1000);
 	}
 
 	void exit(Me& me) {
-		me.std.log.write(terminals::Message::ExitOff);
+		me.std.log.write(terminals::Message::ExitAutoPause);
 	}
 
-	anonys::State* handle(Me& me, events::PowerOn& event) {
-		me.std.log.write(terminals::Message::PowerOnInOff);
-		return &Fsm::Idle;
+	anonys::State* handle(Me& me, PauseCountdownTimer& event) {
+		me.std.log.write(terminals::Message::CountdownTimerInAutoPause);
+		if (me.countdown.decrement()) {
+			me.std.sender.send<events::Play>(Fsm::Id, events::Play{});
+		}
+		return &Fsm::AutoPause;
 	}
 }
 
 // Generated code, do not edit:
-namespace anonys_0_1 {
+namespace anonys_0_7 {
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
 		switch (event.eventId.id) {
-		case anonys::getEventId<events::PowerOn>().id:
-			return handle(me, *static_cast<events::PowerOn*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout4>().id:
+			return handle(me, *static_cast<PauseCountdownTimer*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}
@@ -38,7 +45,7 @@ namespace anonys_0_1 {
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
 		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
+			Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pStd, *terminals.pCountdown } };
 			enter(me);
 		}
 		else {
