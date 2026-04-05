@@ -1,5 +1,6 @@
 #pragma once
 
+#include <list>
 #include "anonys/Timer.h"
 
 namespace env {
@@ -18,25 +19,13 @@ namespace env {
 			TimeoutDef timeout;
 		};
 
-		Result triggerTimeout();
+		Result getNextTimeout();
 
 		void startTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs) final;
 		void stopTimers(anonys::FsmId fsmId, int16_t depth) final;
 
 	private:
-		static constexpr int MaxTimers = 32;
-
-		struct Entry {
-			bool active;
-			anonys::FsmId fsmId;
-			int16_t depth;
-			uint16_t eventIdValue;
-			uint32_t triggerTimeMs;
-			int sequence;
-		};
-
-		Entry m_timers[MaxTimers]{};
+		std::list<Result> m_timeouts;
 		uint32_t m_systemTimeMs{ 0 };
-		int m_nextSequence{ 0 };
 	};
 }
