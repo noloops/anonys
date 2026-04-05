@@ -2,12 +2,12 @@
 
 namespace env {
 	void TestTimerService::startTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs) {
-		uint32_t triggerTime = m_systemTimeMs + timeoutMs;
-		Result entry{ triggerTime, true, { fsmId, depth, eventId, timeoutMs } };
+		uint32_t const triggerTime{m_systemTimeMs + timeoutMs};
+		Result const entry{triggerTime, true, {fsmId, depth, eventId, timeoutMs}};
 
-		auto it = m_timeouts.end();
+		auto it{m_timeouts.end()};
 		while (it != m_timeouts.begin()) {
-			auto prev = std::prev(it);
+			auto const prev{std::prev(it)};
 			if (prev->systemTimeMs <= triggerTime) {
 				break;
 			}
@@ -17,7 +17,7 @@ namespace env {
 	}
 
 	void TestTimerService::stopTimers(anonys::FsmId fsmId, int16_t depth) {
-		for (auto it = m_timeouts.begin(); it != m_timeouts.end(); ) {
+		for (auto it{m_timeouts.begin()}; it != m_timeouts.end(); ) {
 			if (it->timeout.fsmId == fsmId && it->timeout.depth == depth) {
 				it = m_timeouts.erase(it);
 			} else {
@@ -28,10 +28,10 @@ namespace env {
 
 	TestTimerService::Result TestTimerService::getNextTimeout() {
 		if (m_timeouts.empty()) {
-			return { m_systemTimeMs, false, { anonys::FsmId::A, 0, anonys::EventId{0}, 0 } };
+			return {m_systemTimeMs, false, {anonys::FsmId::A, 0, anonys::EventId{0}, 0}};
 		}
 
-		Result result = m_timeouts.front();
+		Result const result{m_timeouts.front()};
 		m_timeouts.pop_front();
 		if (result.systemTimeMs > m_systemTimeMs) {
 			m_systemTimeMs = result.systemTimeMs;

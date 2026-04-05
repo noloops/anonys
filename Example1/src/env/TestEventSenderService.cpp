@@ -6,8 +6,8 @@ namespace env {
 		if (m_count >= MaxQueued) {
 			return;
 		}
-		int tail = (m_head + m_count) % MaxQueued;
-		Entry& entry = m_queue[tail];
+		int const tail{(m_head + m_count) % MaxQueued};
+		Entry& entry{m_queue[tail]};
 		entry.active = true;
 		entry.fsmId = fsmId;
 		entry.eventIdValue = eventId.id;
@@ -20,16 +20,16 @@ namespace env {
 
 	TestEventSenderService::Result TestEventSenderService::getEvent(Buffer& buffer) {
 		if (m_count == 0) {
-			return { false, { anonys::EventId{0}, nullptr } };
+			return {false, {anonys::EventId{0}, nullptr}};
 		}
-		Entry& entry = m_queue[m_head];
-		void* pBuffer = &buffer;
+		Entry& entry{m_queue[m_head]};
+		void* const pBuffer{&buffer};
 		if (entry.size > 0) {
 			std::memcpy(pBuffer, entry.data, entry.size);
 		}
-		anonys::Event event{ anonys::EventId{entry.eventIdValue}, pBuffer };
+		anonys::Event const event{anonys::EventId{entry.eventIdValue}, pBuffer};
 		m_head = (m_head + 1) % MaxQueued;
 		--m_count;
-		return { true, event };
+		return {true, event};
 	}
 }
