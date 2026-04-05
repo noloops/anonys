@@ -49,4 +49,10 @@ namespace anonys_0_7 {
 	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
 }
 
+namespace anonys_0_8 {
+	uint16_t getMembersSize();
+	void liveCycle(bool create, void* pTerminals, void* pMembers);
+	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
+}
+
 #endif // EXAMPLE1_ANONYS_HANDLERS_JUKEBOX_H

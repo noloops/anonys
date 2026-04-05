@@ -19,6 +19,7 @@ namespace env {
 			case 5: return "Paused";
 			case 6: return "Error";
 			case 7: return "AutoPause";
+			case 8: return "On";
 			default: return "?";
 			}
 		default: return "?";
@@ -52,17 +53,20 @@ namespace env {
 		case terminals::Message::EnterOff:                return "Enter Off";
 		case terminals::Message::ExitOff:                 return "Exit Off";
 		case terminals::Message::PowerOnInOff:            return "PowerOn in Off";
+		case terminals::Message::EnterOn:                 return "Enter On";
+		case terminals::Message::ExitOn:                  return "Exit On";
+		case terminals::Message::PowerOffInOn:            return "PowerOff in On";
+		case terminals::Message::MalfunctionInOn:         return "Malfunction in On";
 		case terminals::Message::EnterIdle:               return "Enter Idle";
 		case terminals::Message::ExitIdle:                return "Exit Idle";
 		case terminals::Message::InsertCoinInIdle:        return "InsertCoin in Idle";
-		case terminals::Message::PowerOffInIdle:          return "PowerOff in Idle";
 		case terminals::Message::DiagnosticInIdle:        return "Diagnostic in Idle";
 		case terminals::Message::SleepTimeoutInIdle:      return "SleepTimeout in Idle";
+		case terminals::Message::MalfunctionStoppedInIdle: return "Malfunction stopped in Idle";
 		case terminals::Message::EnterPlaying:            return "Enter Playing";
 		case terminals::Message::ExitPlaying:             return "Exit Playing";
 		case terminals::Message::EjectInPlaying:          return "Eject in Playing";
-		case terminals::Message::PowerOffInPlaying:       return "PowerOff in Playing";
-		case terminals::Message::MalfunctionInPlaying:    return "Malfunction in Playing";
+		case terminals::Message::AutoPauseInPlaying:      return "AutoPause in Playing";
 		case terminals::Message::EnterNormal:             return "Enter Normal";
 		case terminals::Message::ExitNormal:              return "Exit Normal";
 		case terminals::Message::PauseInNormal:           return "Pause in Normal";
@@ -71,17 +75,16 @@ namespace env {
 		case terminals::Message::EnterPaused:             return "Enter Paused";
 		case terminals::Message::ExitPaused:              return "Exit Paused";
 		case terminals::Message::PlayInPaused:            return "Play in Paused";
+		case terminals::Message::ConfigureAutoPauseInPaused: return "ConfigureAutoPause in Paused";
+		case terminals::Message::EnterAutoPause:          return "Enter AutoPause";
+		case terminals::Message::ExitAutoPause:           return "Exit AutoPause";
+		case terminals::Message::PauseInAutoPause:        return "Pause in AutoPause";
+		case terminals::Message::CountdownTimerInAutoPause: return "CountdownTimer in AutoPause";
+		case terminals::Message::CountdownReachedZero:    return "Countdown reached zero";
 		case terminals::Message::EnterError:              return "Enter Error";
 		case terminals::Message::ExitError:               return "Exit Error";
 		case terminals::Message::ResetInError:            return "Reset in Error";
 		case terminals::Message::RecoveryTimeoutInError:  return "RecoveryTimeout in Error";
-		case terminals::Message::AutoPauseInPlaying:       return "AutoPause in Playing";
-		case terminals::Message::ConfigureAutoPauseInPaused: return "ConfigureAutoPause in Paused";
-		case terminals::Message::PauseInPaused:            return "Pause in Paused";
-		case terminals::Message::EnterAutoPause:           return "Enter AutoPause";
-		case terminals::Message::ExitAutoPause:            return "Exit AutoPause";
-		case terminals::Message::CountdownTimerInAutoPause: return "CountdownTimer in AutoPause";
-		case terminals::Message::CountdownReachedZero:     return "Countdown reached zero";
 		default:                                          return "Unknown";
 		}
 	}

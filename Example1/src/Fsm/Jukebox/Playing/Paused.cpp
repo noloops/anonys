@@ -25,11 +25,6 @@ namespace {
 		return &Fsm::Normal;
 	}
 
-	anonys::State* handle(Me& me, events::Pause& event) {
-		me.std.log.write(terminals::Message::PauseInPaused);
-		return &Fsm::Paused;
-	}
-
 	anonys::State* handle(Me& me, events::ConfigureAutoPause& event) {
 		me.countdown.set(event.getCountdown());
 		me.std.log.write(terminals::Message::ConfigureAutoPauseInPaused, event.getCountdown());
@@ -44,8 +39,6 @@ namespace anonys_0_5 {
 		switch (event.eventId.id) {
 		case anonys::getEventId<events::Play>().id:
 			return handle(me, *static_cast<events::Play*>(event.pData));
-		case anonys::getEventId<events::Pause>().id:
-			return handle(me, *static_cast<events::Pause*>(event.pData));
 		case anonys::getEventId<events::ConfigureAutoPause>().id:
 			return handle(me, *static_cast<events::ConfigureAutoPause*>(event.pData));
 		default:

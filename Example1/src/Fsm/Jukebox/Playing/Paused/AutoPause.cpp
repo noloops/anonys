@@ -28,6 +28,11 @@ namespace {
 		}
 		return &Fsm::AutoPause;
 	}
+
+	anonys::State* handle(Me& me, events::Pause& event) {
+		me.std.log.write(terminals::Message::PauseInAutoPause);
+		return &Fsm::Paused;
+	}
 }
 
 // Generated code, do not edit:
@@ -37,6 +42,8 @@ namespace anonys_0_7 {
 		switch (event.eventId.id) {
 		case anonys::getTimeoutEventId<anonys::Timeout4>().id:
 			return handle(me, *static_cast<PauseCountdownTimer*>(event.pData));
+		case anonys::getEventId<events::Pause>().id:
+			return handle(me, *static_cast<events::Pause*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}

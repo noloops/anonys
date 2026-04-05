@@ -25,9 +25,9 @@ namespace {
 		return &Fsm::Normal;
 	}
 
-	anonys::State* handle(Me& me, events::PowerOff& event) {
-		me.std.log.write(terminals::Message::PowerOffInIdle);
-		return &Fsm::Off;
+	anonys::State* handle(Me& me, events::Malfunction& event) {
+		me.std.log.write(terminals::Message::MalfunctionStoppedInIdle);
+		return nullptr;
 	}
 
 	anonys::State* handle(Me& me, events::Diagnostic& event) {
@@ -48,8 +48,8 @@ namespace anonys_0_2 {
 		switch (event.eventId.id) {
 		case anonys::getEventId<events::InsertCoin>().id:
 			return handle(me, *static_cast<events::InsertCoin*>(event.pData));
-		case anonys::getEventId<events::PowerOff>().id:
-			return handle(me, *static_cast<events::PowerOff*>(event.pData));
+		case anonys::getEventId<events::Malfunction>().id:
+			return handle(me, *static_cast<events::Malfunction*>(event.pData));
 		case anonys::getEventId<events::Diagnostic>().id:
 			return handle(me, *static_cast<events::Diagnostic*>(event.pData));
 		case anonys::getTimeoutEventId<anonys::Timeout2>().id:

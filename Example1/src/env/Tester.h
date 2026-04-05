@@ -13,6 +13,8 @@ namespace env {
 		static bool testUnhandledEvent();
 		static bool testAutoPauseCountdown();
 		static bool testConfigureAndCancelAutoPause();
+		static bool testMalfunctionStoppedInIdle();
+		static bool testPauseUnhandledInPaused();
 
 	private:
 		static bool failed();

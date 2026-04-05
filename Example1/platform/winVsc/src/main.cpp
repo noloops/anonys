@@ -13,5 +13,7 @@ int main()
 	if (!env::Tester::testUnhandledEvent()) { ok = false; }
 	if (!env::Tester::testAutoPauseCountdown()) { ok = false; }
 	if (!env::Tester::testConfigureAndCancelAutoPause()) { ok = false; }
+	if (!env::Tester::testMalfunctionStoppedInIdle()) { ok = false; }
+	if (!env::Tester::testPauseUnhandledInPaused()) { ok = false; }
 	return ok ? 0 : 1;
 }

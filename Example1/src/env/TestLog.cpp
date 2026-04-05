@@ -11,6 +11,6 @@ namespace env {
 
 	void TestLog::write(terminals::Message message, int32_t value) {
 		Expected::checkLogWrite(message, value);
-		std::cout << m_pHeader << " " << Helper::getLogMessage(message) << " " << value << std::endl;
+		std::cout << m_pHeader << " " << Helper::getLogMessage(message) << " (" << value << ")" << std::endl;
 	}
 }
