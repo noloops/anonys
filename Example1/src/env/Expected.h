@@ -9,6 +9,8 @@
 namespace env {
 	class Expected {
 	public:
+		static void enable(bool enabled);
+
 		// Record expected calls
 		static void logWrite(terminals::Message message);
 		static void logWrite(terminals::Message message, int32_t value);
@@ -59,9 +61,22 @@ namespace env {
 			} data;
 		};
 
-		static const char* kindName(Kind kind);
-		static void printExpected(Entry const& entry);
+		static Entry getLogWrite1(terminals::Message message);
+		static Entry getLogWrite2(terminals::Message message, int32_t value);
+		static Entry getTimerStartTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs);
+		static Entry getTimerStopTimers(anonys::FsmId fsmId, int16_t depth);
+		static Entry getEventSenderDoSend(anonys::FsmId fsmId, anonys::EventId eventId, uint16_t size);
+		static Entry getTracingTraceHandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId);
+		static Entry getTracingTraceUnhandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId);
+		static Entry getTracingTraceEnterState(anonys::FsmId fsmId, uint16_t stateId);
+		static Entry getTracingTraceExitState(anonys::FsmId fsmId, uint16_t stateId);
+
+		static void printEntry(bool expected, Entry const& entry);
+		static void printEmpty();
+
+		static bool check(Entry const& actual);
 
 		static std::list<Entry> m_entries;
+		static bool m_enabled;
 	};
 }
