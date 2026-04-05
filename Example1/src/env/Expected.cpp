@@ -24,15 +24,15 @@ namespace env {
 	bool Expected::check() {
 		bool ok{true};
 		if (m_hasErrors) {
-			std::cout << "EXPECTED: has errors" << std::endl;
 			ok = false;
+			std::cout << "EXPECTED: has errors" << std::endl;
 		}
-		if (!m_entries.empty()) {
+		else if (!m_entries.empty()) {
+			ok = false;
 			std::cout << "EXPECTED: " << m_entries.size() << " remaining entries" << std::endl;
 			for (auto const& entry : m_entries) {
 				printEntry(true, entry);
 			}
-			ok = false;
 		}
 		m_entries.clear();
 		m_hasErrors = false;
