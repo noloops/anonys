@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="platform">
+      <UniqueIdentifier>{15e3c957-672b-42b6-98bd-d4aef871c524}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\config">
+      <UniqueIdentifier>{38304349-9e37-4f0f-8f07-f95ff6664f4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="platform\src">
+      <UniqueIdentifier>{9282b4f9-2c6a-47f0-b1a4-1dfcb7b3379f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext">
+      <UniqueIdentifier>{92021168-f4eb-4f3b-9f39-e58c9269f966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\anonys">
+      <UniqueIdentifier>{4050e863-de7d-4373-a110-4aef36a9a79c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{7f2f2ff3-ca78-4dce-9e80-a4ff9c34d619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\anonys">
+      <UniqueIdentifier>{d0453347-7e5a-43d7-b41e-feeb7c71a1ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\anonys\fsm">
+      <UniqueIdentifier>{1c0c0db8-0dc0-434a-af82-cecf3c9ae1fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\anonys\impl">
+      <UniqueIdentifier>{4cf3f1ce-8612-4921-b70f-17c045a32638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\env">
+      <UniqueIdentifier>{c3b61c20-35bd-4b13-b879-dc49e2fb48ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\terminals">
+      <UniqueIdentifier>{6f4e617e-18f1-4a97-8f52-aa2e94467ca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\fsm">
+      <UniqueIdentifier>{e0bff72b-bebd-4c2f-b8e5-246c616ab4f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\events">
+      <UniqueIdentifier>{ea42fa8c-55e4-4140-aedd-483aad55a201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\fsm\A">
+      <UniqueIdentifier>{346b6d4e-1c68-4b50-8641-edcbb2360996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\fsm\A\St1">
+      <UniqueIdentifier>{2657ed15-0fbc-49d4-8990-929e4e7a9c9a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\anonys\FsmPool.cpp">
+      <Filter>src\anonys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Fsm\A\St1.cpp">
+      <Filter>src\fsm\A</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Fsm\A\St2.cpp">
+      <Filter>src\fsm\A</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\Fsm\A\St1\St1a.cpp">
+      <Filter>src\fsm\A\St1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\env\Log.cpp">
+      <Filter>src\env</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>platform\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\ext\anonys\FsmCore.cpp">
+      <Filter>ext\anonys</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\anonys\fsm\A.h">
+      <Filter>src\anonys\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\anonys\impl\handlersA.h">
+      <Filter>src\anonys\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\anonys\impl\terminalsA.h">
+      <Filter>src\anonys\impl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\anonys\EventId.h">
+      <Filter>src\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\anonys\FsmId.h">
+      <Filter>src\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\anonys\FsmPool.h">
+      <Filter>src\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\anonys\GeneratedConfig.h">
+      <Filter>src\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Terminals\CustomTerminals.h">
+      <Filter>src\terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Terminals\EventSender.h">
+      <Filter>src\terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Terminals\LogService.h">
+      <Filter>src\terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Terminals\Std.h">
+      <Filter>src\terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Terminals\Terminals.h">
+      <Filter>src\terminals</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\Events\Events.h">
+      <Filter>src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\env\DummyTracingService.h">
+      <Filter>src\env</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\env\Log.h">
+      <Filter>src\env</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\env\DummyTimerService.h">
+      <Filter>src\env</Filter>
+    </ClInclude>
+    <ClInclude Include="..\config\AnonysManualConfig.h">
+      <Filter>platform\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ext\anonys\Utils.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ext\anonys\Types.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ext\anonys\TracingService.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ext\anonys\Timer.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\ext\anonys\FsmCore.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

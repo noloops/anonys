@@ -18,44 +18,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\Example1\platform\winVs\src\main.cpp" />
-    <ClCompile Include="..\Example1\src\anonys\FsmPool.cpp" />
-    <ClCompile Include="..\Example1\src\env\Log.cpp" />
-    <ClCompile Include="..\Example1\src\Fsm\A\St1.cpp" />
-    <ClCompile Include="..\Example1\src\Fsm\A\St1\St1a.cpp" />
-    <ClCompile Include="..\Example1\src\Fsm\A\St2.cpp" />
-    <ClCompile Include="..\ext\anonys\FsmCore.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Example1\platform\winVs\config\AnonysManualConfig.h" />
-    <ClInclude Include="..\Example1\src\anonys\EventId.h" />
-    <ClInclude Include="..\Example1\src\anonys\FsmPool.h" />
-    <ClInclude Include="..\Example1\src\anonys\FsmId.h" />
-    <ClInclude Include="..\Example1\src\anonys\fsm\A.h" />
-    <ClInclude Include="..\Example1\src\anonys\GeneratedConfig.h" />
-    <ClInclude Include="..\Example1\src\anonys\impl\handlersA.h" />
-    <ClInclude Include="..\Example1\src\anonys\impl\terminalsA.h" />
-    <ClInclude Include="..\Example1\src\env\DummyTimerService.h" />
-    <ClInclude Include="..\Example1\src\env\DummyTracingService.h" />
-    <ClInclude Include="..\Example1\src\env\Log.h" />
-    <ClInclude Include="..\Example1\src\Events\Events.h" />
-    <ClInclude Include="..\Example1\src\Terminals\CustomTerminals.h" />
-    <ClInclude Include="..\Example1\src\Terminals\EventSender.h" />
-    <ClInclude Include="..\Example1\src\Terminals\LogService.h" />
-    <ClInclude Include="..\Example1\src\Terminals\Std.h" />
-    <ClInclude Include="..\Example1\src\Terminals\Terminals.h" />
-    <ClInclude Include="..\ext\anonys\FsmCore.h" />
-    <ClInclude Include="..\ext\anonys\Timer.h" />
-    <ClInclude Include="..\ext\anonys\TracingService.h" />
-    <ClInclude Include="..\ext\anonys\Types.h" />
-    <ClInclude Include="..\ext\anonys\Utils.h" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8ae91e44-ca34-46a5-99a2-b0c44cc7cec5}</ProjectGuid>
-    <RootNamespace>AnonysDev</RootNamespace>
+    <ProjectGuid>{f72b5443-c5f3-46dd-b73c-627006d5fcbe}</ProjectGuid>
+    <RootNamespace>Example1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -135,7 +102,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../ext;../example1/src;../example1/platform/winVs/config</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../config;../../../src;../../../../ext</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../ext;../example1/src;../example1/platform/winVs/config</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../config;../../../src;../../../../ext</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -159,6 +126,39 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\ext\anonys\FsmCore.cpp" />
+    <ClCompile Include="..\..\..\src\anonys\FsmPool.cpp" />
+    <ClCompile Include="..\..\..\src\env\Log.cpp" />
+    <ClCompile Include="..\..\..\src\Fsm\A\St1.cpp" />
+    <ClCompile Include="..\..\..\src\Fsm\A\St1\St1a.cpp" />
+    <ClCompile Include="..\..\..\src\Fsm\A\St2.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\ext\anonys\FsmCore.h" />
+    <ClInclude Include="..\..\..\..\ext\anonys\Timer.h" />
+    <ClInclude Include="..\..\..\..\ext\anonys\TracingService.h" />
+    <ClInclude Include="..\..\..\..\ext\anonys\Types.h" />
+    <ClInclude Include="..\..\..\..\ext\anonys\Utils.h" />
+    <ClInclude Include="..\..\..\src\anonys\EventId.h" />
+    <ClInclude Include="..\..\..\src\anonys\FsmId.h" />
+    <ClInclude Include="..\..\..\src\anonys\FsmPool.h" />
+    <ClInclude Include="..\..\..\src\anonys\fsm\A.h" />
+    <ClInclude Include="..\..\..\src\anonys\GeneratedConfig.h" />
+    <ClInclude Include="..\..\..\src\anonys\impl\handlersA.h" />
+    <ClInclude Include="..\..\..\src\anonys\impl\terminalsA.h" />
+    <ClInclude Include="..\..\..\src\env\DummyTimerService.h" />
+    <ClInclude Include="..\..\..\src\env\DummyTracingService.h" />
+    <ClInclude Include="..\..\..\src\env\Log.h" />
+    <ClInclude Include="..\..\..\src\Events\Events.h" />
+    <ClInclude Include="..\..\..\src\Terminals\CustomTerminals.h" />
+    <ClInclude Include="..\..\..\src\Terminals\EventSender.h" />
+    <ClInclude Include="..\..\..\src\Terminals\LogService.h" />
+    <ClInclude Include="..\..\..\src\Terminals\Std.h" />
+    <ClInclude Include="..\..\..\src\Terminals\Terminals.h" />
+    <ClInclude Include="..\config\AnonysManualConfig.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
