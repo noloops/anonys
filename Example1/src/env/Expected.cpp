@@ -6,12 +6,37 @@
 namespace env {
 	std::list<Expected::Entry> Expected::m_entries;
 	bool Expected::m_enabled{false};
+	bool Expected::m_hasErrors{false};
 
 	// Enable / disable
 
 	void Expected::enable(bool enabled) {
 		m_entries.clear();
+		m_hasErrors = false;
 		m_enabled = enabled;
+	}
+
+	void Expected::clear() {
+		m_entries.clear();
+		m_hasErrors = false;
+	}
+
+	bool Expected::check() {
+		bool ok{true};
+		if (m_hasErrors) {
+			std::cout << "EXPECTED: has errors" << std::endl;
+			ok = false;
+		}
+		if (!m_entries.empty()) {
+			std::cout << "EXPECTED: " << m_entries.size() << " remaining entries" << std::endl;
+			for (auto const& entry : m_entries) {
+				printEntry(true, entry);
+			}
+			ok = false;
+		}
+		m_entries.clear();
+		m_hasErrors = false;
+		return ok;
 	}
 
 	// Get helpers
@@ -128,25 +153,27 @@ namespace env {
 
 	// Common check
 
-	bool Expected::check(Entry const& actual) {
+	void Expected::checkEntry(Entry const& actual) {
 		if (!m_enabled) {
 			std::cout << "EXPECTED: <disabled>" << std::endl;
 			printEntry(false, actual);
-			return false;
+			m_hasErrors = true;
+			return;
 		}
 		if (m_entries.empty()) {
 			std::cout << "EXPECTED: <empty>" << std::endl;
 			printEntry(false, actual);
-			return false;
+			m_hasErrors = true;
+			return;
 		}
 		Entry const expected{m_entries.front()};
 		m_entries.pop_front();
 		if (std::memcmp(&expected, &actual, sizeof(Entry)) == 0) {
-			return true;
+			return;
 		}
 		printEntry(true, expected);
 		printEntry(false, actual);
-		return false;
+		m_hasErrors = true;
 	}
 
 	// Record methods
@@ -189,39 +216,39 @@ namespace env {
 
 	// Check methods
 
-	bool Expected::checkLogWrite(terminals::Message message) {
-		return check(getLogWrite1(message));
+	void Expected::checkLogWrite(terminals::Message message) {
+		checkEntry(getLogWrite1(message));
 	}
 
-	bool Expected::checkLogWrite(terminals::Message message, int32_t value) {
-		return check(getLogWrite2(message, value));
+	void Expected::checkLogWrite(terminals::Message message, int32_t value) {
+		checkEntry(getLogWrite2(message, value));
 	}
 
-	bool Expected::checkTimerStartTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs) {
-		return check(getTimerStartTimer(fsmId, depth, eventId, timeoutMs));
+	void Expected::checkTimerStartTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs) {
+		checkEntry(getTimerStartTimer(fsmId, depth, eventId, timeoutMs));
 	}
 
-	bool Expected::checkTimerStopTimers(anonys::FsmId fsmId, int16_t depth) {
-		return check(getTimerStopTimers(fsmId, depth));
+	void Expected::checkTimerStopTimers(anonys::FsmId fsmId, int16_t depth) {
+		checkEntry(getTimerStopTimers(fsmId, depth));
 	}
 
-	bool Expected::checkEventSenderDoSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) {
-		return check(getEventSenderDoSend(fsmId, eventId, size));
+	void Expected::checkEventSenderDoSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) {
+		checkEntry(getEventSenderDoSend(fsmId, eventId, size));
 	}
 
-	bool Expected::checkTracingTraceHandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId) {
-		return check(getTracingTraceHandledEvent(fsmId, stateId, eventId));
+	void Expected::checkTracingTraceHandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId) {
+		checkEntry(getTracingTraceHandledEvent(fsmId, stateId, eventId));
 	}
 
-	bool Expected::checkTracingTraceUnhandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId) {
-		return check(getTracingTraceUnhandledEvent(fsmId, stateId, eventId));
+	void Expected::checkTracingTraceUnhandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId) {
+		checkEntry(getTracingTraceUnhandledEvent(fsmId, stateId, eventId));
 	}
 
-	bool Expected::checkTracingTraceEnterState(anonys::FsmId fsmId, uint16_t stateId) {
-		return check(getTracingTraceEnterState(fsmId, stateId));
+	void Expected::checkTracingTraceEnterState(anonys::FsmId fsmId, uint16_t stateId) {
+		checkEntry(getTracingTraceEnterState(fsmId, stateId));
 	}
 
-	bool Expected::checkTracingTraceExitState(anonys::FsmId fsmId, uint16_t stateId) {
-		return check(getTracingTraceExitState(fsmId, stateId));
+	void Expected::checkTracingTraceExitState(anonys::FsmId fsmId, uint16_t stateId) {
+		checkEntry(getTracingTraceExitState(fsmId, stateId));
 	}
 }

@@ -11,6 +11,9 @@ namespace env {
 	public:
 		static void enable(bool enabled);
 		static bool isEmpty() { return m_entries.empty(); }
+		static bool hasErrors() { return m_hasErrors; }
+		static void clear();
+		static bool check();
 
 		// Record expected calls
 		static void logWrite(terminals::Message message);
@@ -24,15 +27,15 @@ namespace env {
 		static void tracingTraceExitState(anonys::FsmId fsmId, uint16_t stateId);
 
 		// Check actual calls against expected
-		static bool checkLogWrite(terminals::Message message);
-		static bool checkLogWrite(terminals::Message message, int32_t value);
-		static bool checkTimerStartTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs);
-		static bool checkTimerStopTimers(anonys::FsmId fsmId, int16_t depth);
-		static bool checkEventSenderDoSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size);
-		static bool checkTracingTraceHandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId);
-		static bool checkTracingTraceUnhandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId);
-		static bool checkTracingTraceEnterState(anonys::FsmId fsmId, uint16_t stateId);
-		static bool checkTracingTraceExitState(anonys::FsmId fsmId, uint16_t stateId);
+		static void checkLogWrite(terminals::Message message);
+		static void checkLogWrite(terminals::Message message, int32_t value);
+		static void checkTimerStartTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs);
+		static void checkTimerStopTimers(anonys::FsmId fsmId, int16_t depth);
+		static void checkEventSenderDoSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size);
+		static void checkTracingTraceHandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId);
+		static void checkTracingTraceUnhandledEvent(anonys::FsmId fsmId, uint16_t stateId, anonys::EventId eventId);
+		static void checkTracingTraceEnterState(anonys::FsmId fsmId, uint16_t stateId);
+		static void checkTracingTraceExitState(anonys::FsmId fsmId, uint16_t stateId);
 
 	private:
 		enum class Kind {
@@ -74,9 +77,10 @@ namespace env {
 
 		static void printEntry(bool expected, Entry const& entry);
 
-		static bool check(Entry const& actual);
+		static void checkEntry(Entry const& actual);
 
 		static std::list<Entry> m_entries;
 		static bool m_enabled;
+		static bool m_hasErrors;
 	};
 }

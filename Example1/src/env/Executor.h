@@ -15,6 +15,7 @@ namespace env {
 		bool sendNextEvent();
 		bool sendNextTimeout();
 		bool sendNext();
+		void clear();
 		bool hasWarnings() const { return m_hasWarnings; }
 
 	protected:

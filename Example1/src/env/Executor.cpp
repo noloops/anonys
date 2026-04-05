@@ -1,6 +1,7 @@
 #include "Executor.h"
 #include "TestEventSenderService.h"
 #include "TestTimerService.h"
+#include "Expected.h"
 #include "Helper.h"
 #include "anonys/FsmPool.h"
 #include <iostream>
@@ -11,6 +12,11 @@ namespace env {
 		, m_testEventSender{testEventSender}
 		, m_testTimerService{testTimerService}
 	{}
+
+	void Executor::clear() {
+		Expected::clear();
+		m_hasWarnings = false;
+	}
 
 	void Executor::printEvent(char const* pPrefix, anonys::FsmId fsmId, anonys::Event const& event) {
 		std::cout << pPrefix << Helper::getEventName(event.eventId);

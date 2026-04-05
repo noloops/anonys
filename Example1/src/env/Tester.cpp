@@ -30,7 +30,7 @@ namespace env {
 
 		setup.fsm.start();
 
-		if (!Expected::isEmpty()) {
+		if (!Expected::check()) {
 			return failed();
 		}
 
@@ -42,18 +42,9 @@ namespace env {
 
 		executor.send<events::Event1>(anonys::FsmId::A, events::Event1{});
 
-		if (!Expected::isEmpty()) {
-			return failed();
-		}
+		while (executor.sendNext()) {}
 
-		// Drain any follow-up events/timeouts
-		while (executor.sendNext()) {
-			if (!Expected::isEmpty()) {
-				return failed();
-			}
-		}
-
-		if (!Expected::isEmpty()) {
+		if (!Expected::check()) {
 			return failed();
 		}
 
