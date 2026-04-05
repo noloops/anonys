@@ -33,7 +33,5 @@ namespace terminals {
 
 		virtual void write(Message message) = 0;
 		virtual void write(Message message, int32_t value) = 0;
-
-		static const char* resolve(Message message);
 	};
 }

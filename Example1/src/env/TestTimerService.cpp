@@ -1,7 +1,9 @@
 #include "TestTimerService.h"
+#include "Expected.h"
 
 namespace env {
 	void TestTimerService::startTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs) {
+		Expected::checkTimerStartTimer(fsmId, depth, eventId, timeoutMs);
 		uint32_t const triggerTime{m_systemTimeMs + timeoutMs};
 		Result const entry{triggerTime, true, {fsmId, depth, eventId, timeoutMs}};
 
@@ -17,6 +19,7 @@ namespace env {
 	}
 
 	void TestTimerService::stopTimers(anonys::FsmId fsmId, int16_t depth) {
+		Expected::checkTimerStopTimers(fsmId, depth);
 		for (auto it{m_timeouts.begin()}; it != m_timeouts.end(); ) {
 			if (it->timeout.fsmId == fsmId && it->timeout.depth == depth) {
 				it = m_timeouts.erase(it);

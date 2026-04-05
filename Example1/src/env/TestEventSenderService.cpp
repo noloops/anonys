@@ -1,8 +1,10 @@
 #include "TestEventSenderService.h"
+#include "Expected.h"
 #include <cstring>
 
 namespace env {
 	void TestEventSenderService::doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) {
+		Expected::checkEventSenderDoSend(fsmId, eventId, pData, size);
 		Entry entry{{eventId, nullptr}, {}};
 		if (size > 0 && pData != nullptr) {
 			std::memcpy(&entry.buffer, pData, size);
