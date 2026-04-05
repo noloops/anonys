@@ -19,20 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\anonys\FsmCore.cpp" />
     <ClCompile Include="..\Example1\anonys\FsmPool.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp" />
     <ClCompile Include="..\Example1\Fsm\A\St2.cpp" />
     <ClCompile Include="..\Example1\Terminals\Log.cpp" />
+    <ClCompile Include="..\ext\anonys\FsmCore.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\anonys\FsmCore.h" />
-    <ClInclude Include="..\anonys\Timer.h" />
-    <ClInclude Include="..\anonys\TracingService.h" />
-    <ClInclude Include="..\anonys\Types.h" />
-    <ClInclude Include="..\anonys\Utils.h" />
     <ClInclude Include="..\Example1\anonys\EventId.h" />
     <ClInclude Include="..\Example1\anonys\FsmPool.h" />
     <ClInclude Include="..\Example1\anonys\FsmId.h" />
@@ -47,6 +42,11 @@
     <ClInclude Include="..\Example1\Terminals\Log.h" />
     <ClInclude Include="..\Example1\Terminals\Std.h" />
     <ClInclude Include="..\Example1\Terminals\Terminals.h" />
+    <ClInclude Include="..\ext\anonys\FsmCore.h" />
+    <ClInclude Include="..\ext\anonys\Timer.h" />
+    <ClInclude Include="..\ext\anonys\TracingService.h" />
+    <ClInclude Include="..\ext\anonys\Types.h" />
+    <ClInclude Include="..\ext\anonys\Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -132,7 +132,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../;../example1;../example1/Config</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ext;../example1;../example1/Config</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -148,7 +148,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../;../example1;../example1/Config</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ext;../example1;../example1/Config</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>

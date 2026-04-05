@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="anonys">
-      <UniqueIdentifier>{0d9e6204-129e-4c20-9be1-e066a05b46fb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dev">
       <UniqueIdentifier>{7d95af71-45c6-4c2e-868e-fb5e935cc628}</UniqueIdentifier>
     </Filter>
@@ -37,6 +34,12 @@
     <Filter Include="Example1\anonys\fsm">
       <UniqueIdentifier>{c8f64428-5ac4-4d33-a51b-da6bd48edf9d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ext">
+      <UniqueIdentifier>{3e157473-f1ab-49e4-8ed3-aa7654e33e29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ext\anonys">
+      <UniqueIdentifier>{0d9e6204-129e-4c20-9be1-e066a05b46fb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -44,9 +47,6 @@
     </ClCompile>
     <ClCompile Include="..\Example1\Terminals\Log.cpp">
       <Filter>Example1\Terminals</Filter>
-    </ClCompile>
-    <ClCompile Include="..\anonys\FsmCore.cpp">
-      <Filter>anonys</Filter>
     </ClCompile>
     <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
       <Filter>Example1\Fsm\A</Filter>
@@ -60,14 +60,11 @@
     <ClCompile Include="..\Example1\anonys\FsmPool.cpp">
       <Filter>Example1\anonys</Filter>
     </ClCompile>
+    <ClCompile Include="..\ext\anonys\FsmCore.cpp">
+      <Filter>ext\anonys</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\anonys\Types.h">
-      <Filter>anonys</Filter>
-    </ClInclude>
-    <ClInclude Include="..\anonys\Utils.h">
-      <Filter>anonys</Filter>
-    </ClInclude>
     <ClInclude Include="..\Example1\Terminals\Log.h">
       <Filter>Example1\Terminals</Filter>
     </ClInclude>
@@ -82,9 +79,6 @@
     </ClInclude>
     <ClInclude Include="..\Example1\Terminals\EventSender.h">
       <Filter>Example1\Terminals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\anonys\FsmCore.h">
-      <Filter>anonys</Filter>
     </ClInclude>
     <ClInclude Include="..\Example1\anonys\EventId.h">
       <Filter>Example1\anonys</Filter>
@@ -113,11 +107,20 @@
     <ClInclude Include="..\Example1\anonys\fsm\A.h">
       <Filter>Example1\anonys\fsm</Filter>
     </ClInclude>
-    <ClInclude Include="..\anonys\Timer.h">
-      <Filter>anonys</Filter>
+    <ClInclude Include="..\ext\anonys\Timer.h">
+      <Filter>ext\anonys</Filter>
     </ClInclude>
-    <ClInclude Include="..\anonys\TracingService.h">
-      <Filter>anonys</Filter>
+    <ClInclude Include="..\ext\anonys\TracingService.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ext\anonys\Types.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ext\anonys\Utils.h">
+      <Filter>ext\anonys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ext\anonys\FsmCore.h">
+      <Filter>ext\anonys</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
