@@ -22,21 +22,21 @@ namespace env {
 	}
 
 	bool Expected::check() {
+		bool ok{false};
 		if (!m_enabled) {
 			std::cout << "EXPECTED: check() called while disabled" << std::endl;
-			return false;
 		}
-		bool ok{true};
-		if (m_hasErrors) {
-			ok = false;
+		else if (m_hasErrors) {
 			std::cout << "EXPECTED: has errors" << std::endl;
 		}
 		else if (!m_entries.empty()) {
-			ok = false;
 			std::cout << "EXPECTED: " << m_entries.size() << " remaining entries" << std::endl;
 			for (auto const& entry : m_entries) {
 				printEntry(true, entry);
 			}
+		}
+		else {
+			ok = true;
 		}
 		m_entries.clear();
 		m_hasErrors = false;
@@ -158,7 +158,7 @@ namespace env {
 	// Common check
 
 	void Expected::checkEntry(Entry const& actual) {
-		if (!m_enabled) {
+		if (!m_enabled || m_hasErrors) {
 			return;
 		}
 		if (m_entries.empty()) {

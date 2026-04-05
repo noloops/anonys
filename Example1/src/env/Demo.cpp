@@ -35,6 +35,7 @@ namespace env {
 		constexpr auto F = anonys::FsmId::Jukebox;
 
 		setup.fsm.start();
+        std::cout  << std::endl << "RUNNING DEMO" << std::endl;
 		printHelp();
 
 		std::string line;
