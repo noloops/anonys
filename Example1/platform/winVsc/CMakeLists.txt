@@ -31,6 +31,7 @@ add_executable(Example1
     "${REPO_ROOT}/Example1/src/env/TestTracingService.cpp"
     "${REPO_ROOT}/Example1/src/env/Helper.cpp"
     "${REPO_ROOT}/Example1/src/env/Expected.cpp"
+    "${REPO_ROOT}/Example1/src/env/Executor.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/A/St1.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/A/St2.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/A/St1/St1a.cpp"

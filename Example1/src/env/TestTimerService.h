@@ -20,6 +20,8 @@ namespace env {
 		};
 
 		Result getNextTimeout();
+		bool isEmpty() const { return m_timeouts.empty(); }
+		void clear() { m_timeouts.clear(); }
 
 		void startTimer(anonys::FsmId fsmId, int16_t depth, anonys::EventId eventId, uint32_t timeoutMs) final;
 		void stopTimers(anonys::FsmId fsmId, int16_t depth) final;

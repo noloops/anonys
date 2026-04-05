@@ -14,16 +14,20 @@ namespace env {
 
 		struct Result {
 			bool valid;
+			anonys::FsmId fsmId;
 			anonys::Event event;
 		};
 
 		Result getEvent(Buffer& buffer);
+		bool isEmpty() const { return m_events.empty(); }
+		void clear() { m_events.clear(); }
 
 	protected:
 		void doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) override;
 
 	private:
 		struct Entry {
+			anonys::FsmId fsmId;
 			anonys::Event event;
 			Buffer buffer;
 		};
