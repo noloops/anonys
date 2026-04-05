@@ -6,6 +6,9 @@
 #include <iostream>
 
 namespace env {
+	using M = terminals::Message;
+	constexpr auto F = anonys::FsmId::Jukebox;
+
 	bool Tester::failed() {
 		std::cout << "TEST FAILED" << std::endl;
 		return false;
@@ -16,121 +19,360 @@ namespace env {
 		return true;
 	}
 
-	// Test case: Start -> St1 -> St1a -> St1 -> St2 (with timeouts) -> St1
-	bool Tester::test1() {
-		std::cout << "=== test1 ===" << std::endl;
+	// --- Helpers for common setup sequences ---
 
+	static bool startJukebox(Setup& setup) {
+		Expected::tracingTraceEnterState(F, 1);
+		Expected::logWrite(M::EnterOff);
+		setup.fsm.start();
+		return Expected::check();
+	}
+
+	static bool powerOn(Executor& exec) {
+		Expected::logWrite(M::PowerOnInOff);
+		Expected::tracingTraceHandledEvent(F, 1, anonys::EventId{0});
+		Expected::tracingTraceExitState(F, 1);
+		Expected::logWrite(M::ExitOff);
+		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterIdle);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
+		exec.send<events::PowerOn>(F, events::PowerOn{});
+		if (!Expected::check()) return false;
+		if (exec.sendNextEvent()) return false;
+		return true;
+	}
+
+	static bool insertCoin(Executor& exec, int32_t count) {
+		Expected::logWrite(M::InsertCoinInIdle);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{2});
+		Expected::tracingTraceExitState(F, 2);
+		Expected::logWrite(M::ExitIdle);
+		Expected::timerStopTimers(F, 0);
+		Expected::tracingTraceEnterState(F, 3);
+		Expected::logWrite(M::EnterPlaying);
+		Expected::tracingTraceEnterState(F, 4);
+		Expected::logWrite(M::EnterNormal, count);
+		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
+		exec.send<events::InsertCoin>(F, events::InsertCoin{});
+		if (!Expected::check()) return false;
+		if (exec.sendNextEvent()) return false;
+		return true;
+	}
+
+	// --- Test cases ---
+
+	bool Tester::testStartAndPowerCycle() {
+		std::cout << "=== testStartAndPowerCycle ===" << std::endl;
 		Expected::enable(true);
-
 		Setup setup;
 		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		// --- Phase 1: Start -> enters St1 ---
+		if (!startJukebox(setup)) return failed();
+		if (!powerOn(executor)) return failed();
 
-		Expected::tracingTraceEnterState(anonys::FsmId::A, 1);
-		Expected::logWrite(terminals::Message::EnterSt1);
+		// PowerOff in Idle -> Off
+		Expected::logWrite(M::PowerOffInIdle);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{1});
+		Expected::tracingTraceExitState(F, 2);
+		Expected::logWrite(M::ExitIdle);
+		Expected::timerStopTimers(F, 0);
+		Expected::tracingTraceEnterState(F, 1);
+		Expected::logWrite(M::EnterOff);
+		executor.send<events::PowerOff>(F, events::PowerOff{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		setup.fsm.start();
+		// PowerOn again -> Idle (verify re-entry works)
+		if (!powerOn(executor)) return failed();
 
-		if (!Expected::check()) { return failed(); }
+		if (executor.hasWarnings()) return failed();
+		return success();
+	}
 
-		// --- Phase 2: Event1 in St1 -> St1a (push child onto St1) ---
-		// St1 handles Event1: log, trace, then push St1a
-		// St1a::enter logs + starts Timeout2(1000ms)
+	bool Tester::testSelfTransitions() {
+		std::cout << "=== testSelfTransitions ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		Expected::logWrite(terminals::Message::Event1InSt1);
-		Expected::tracingTraceHandledEvent(anonys::FsmId::A, 1, anonys::EventId{1});
-		Expected::tracingTraceEnterState(anonys::FsmId::A, 2);
-		Expected::logWrite(terminals::Message::EnterSt1a);
-		Expected::timerStartTimer(anonys::FsmId::A, 1, anonys::EventId{60002}, 1000);
+		if (!startJukebox(setup)) return failed();
+		if (!powerOn(executor)) return failed();
 
-		executor.send<events::Event1>(anonys::FsmId::A, events::Event1{});
+		// Diagnostic in Idle -> Idle (root self-transition: pop + push)
+		Expected::logWrite(M::DiagnosticInIdle);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{7});
+		Expected::tracingTraceExitState(F, 2);
+		Expected::logWrite(M::ExitIdle);
+		Expected::timerStopTimers(F, 0);
+		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterIdle);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
+		executor.send<events::Diagnostic>(F, events::Diagnostic{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		if (!Expected::check()) { return failed(); }
+		if (!insertCoin(executor, 1)) return failed();
 
-		// No events were generated internally
-		if (executor.sendNextEvent()) { return failed(); }
+		// Skip in Normal -> Normal (child self-transition: pop + push, parent survives)
+		Expected::logWrite(M::SkipInNormal);
+		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{5});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceEnterState(F, 4);
+		Expected::logWrite(M::EnterNormal, 2);
+		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
+		executor.send<events::Skip>(F, events::Skip{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		// --- Phase 3: Event0 in St1a -> St1 (pop St1a+St1, re-enter St1) ---
-		// St1a handles Event0: log, trace
-		// Transition: pop St1a (exit+stopTimers), pop St1 (exit), push St1 (enter)
+		if (executor.hasWarnings()) return failed();
+		return success();
+	}
 
-		Expected::logWrite(terminals::Message::Event0InSt1a);
-		Expected::tracingTraceHandledEvent(anonys::FsmId::A, 2, anonys::EventId{0});
-		Expected::tracingTraceExitState(anonys::FsmId::A, 2);
-		Expected::logWrite(terminals::Message::ExitSt1a);
-		Expected::timerStopTimers(anonys::FsmId::A, 1);
-		Expected::tracingTraceExitState(anonys::FsmId::A, 1);
-		Expected::logWrite(terminals::Message::ExitSt1);
-		Expected::tracingTraceEnterState(anonys::FsmId::A, 1);
-		Expected::logWrite(terminals::Message::EnterSt1);
+	bool Tester::testPlayPauseCycle() {
+		std::cout << "=== testPlayPauseCycle ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		executor.send<events::Event0>(anonys::FsmId::A, events::Event0{});
+		if (!startJukebox(setup)) return failed();
+		if (!powerOn(executor)) return failed();
+		if (!insertCoin(executor, 1)) return failed();
 
-		if (!Expected::check()) { return failed(); }
-		if (executor.sendNextEvent()) { return failed(); }
+		// Pause in Normal -> Paused (sibling: shared parent Playing stays)
+		Expected::logWrite(M::PauseInNormal);
+		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{4});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceEnterState(F, 5);
+		Expected::logWrite(M::EnterPaused, 0);
+		executor.send<events::Pause>(F, events::Pause{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		// --- Phase 4: Event4 in St1 -> St2 (cross-tree transition) ---
-		// St1 handles Event4: log, trace
-		// Transition: pop St1 (exit), push St2 (enter + start Timeout1(150) + Timeout3(500))
+		// Play in Paused -> Normal (sibling back, counter persists: 1 -> 2)
+		Expected::logWrite(M::PlayInPaused);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{3});
+		Expected::tracingTraceExitState(F, 5);
+		Expected::logWrite(M::ExitPaused);
+		Expected::tracingTraceEnterState(F, 4);
+		Expected::logWrite(M::EnterNormal, 2);
+		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
+		executor.send<events::Play>(F, events::Play{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		Expected::logWrite(terminals::Message::Event4InSt1);
-		Expected::tracingTraceHandledEvent(anonys::FsmId::A, 1, anonys::EventId{4});
-		Expected::tracingTraceExitState(anonys::FsmId::A, 1);
-		Expected::logWrite(terminals::Message::ExitSt1);
-		Expected::tracingTraceEnterState(anonys::FsmId::A, 3);
-		Expected::logWrite(terminals::Message::EnterSt2);
-		Expected::timerStartTimer(anonys::FsmId::A, 0, anonys::EventId{60001}, 150);
-		Expected::timerStartTimer(anonys::FsmId::A, 0, anonys::EventId{60003}, 500);
+		// Skip -> Normal (self, counter continues: 3)
+		Expected::logWrite(M::SkipInNormal);
+		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{5});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceEnterState(F, 4);
+		Expected::logWrite(M::EnterNormal, 3);
+		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 3000);
+		executor.send<events::Skip>(F, events::Skip{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		executor.send<events::Event4>(anonys::FsmId::A, events::Event4{});
+		if (executor.hasWarnings()) return failed();
+		return success();
+	}
 
-		if (!Expected::check()) { return failed(); }
-		if (executor.sendNextEvent()) { return failed(); }
+	bool Tester::testEventBubbling() {
+		std::cout << "=== testEventBubbling ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		// --- Phase 5: Timeout1 fires in St2 @150ms (no transition) ---
-		// St2 handles Timeout1: log, start TimeoutB(50), start TimeoutA(200), trace
-		// Timer queue after: Timeout2@200, Timeout1@350, Timeout3@500
+		if (!startJukebox(setup)) return failed();
+		if (!powerOn(executor)) return failed();
+		if (!insertCoin(executor, 1)) return failed();
 
-		Expected::logWrite(terminals::Message::TimeoutAInSt2);
-		Expected::timerStartTimer(anonys::FsmId::A, 0, anonys::EventId{60002}, 50);
-		Expected::timerStartTimer(anonys::FsmId::A, 0, anonys::EventId{60001}, 200);
-		Expected::tracingTraceHandledEvent(anonys::FsmId::A, 3, anonys::EventId{60001});
+		// Eject in Normal -> bubbles to Playing -> Idle
+		Expected::logWrite(M::EjectInPlaying);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{6});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceExitState(F, 3);
+		Expected::logWrite(M::ExitPlaying);
+		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterIdle);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
+		executor.send<events::Eject>(F, events::Eject{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		if (!executor.sendNextTimeout()) { return failed(); }
+		// InsertCoin -> Normal again (fresh Playing, counter resets to 1)
+		if (!insertCoin(executor, 1)) return failed();
 
-		if (!Expected::check()) { return failed(); }
+		// PowerOff in Normal -> bubbles to Playing -> Off
+		Expected::logWrite(M::PowerOffInPlaying);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{1});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceExitState(F, 3);
+		Expected::logWrite(M::ExitPlaying);
+		Expected::tracingTraceEnterState(F, 1);
+		Expected::logWrite(M::EnterOff);
+		executor.send<events::PowerOff>(F, events::PowerOff{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
 
-		// --- Phase 6: Timeout2 fires in St2 @200ms (no transition) ---
-		// St2 handles Timeout2: log, trace
+		if (executor.hasWarnings()) return failed();
+		return success();
+	}
 
-		Expected::logWrite(terminals::Message::TimeoutBInSt2);
-		Expected::tracingTraceHandledEvent(anonys::FsmId::A, 3, anonys::EventId{60002});
+	bool Tester::testTrackEndTimeout() {
+		std::cout << "=== testTrackEndTimeout ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		if (!executor.sendNextTimeout()) { return failed(); }
+		if (!startJukebox(setup)) return failed();
+		if (!powerOn(executor)) return failed();
+		if (!insertCoin(executor, 1)) return failed();
 
-		if (!Expected::check()) { return failed(); }
+		// TrackTimer fires at depth 1 -> Normal handles -> Idle
+		Expected::logWrite(M::TrackEndInNormal);
+		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{60001});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceExitState(F, 3);
+		Expected::logWrite(M::ExitPlaying);
+		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterIdle);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
+		if (!executor.sendNextTimeout()) return failed();
+		if (!Expected::check()) return failed();
 
-		// --- Phase 7: Event7 in St2 -> St1 (exit St2 with timer cleanup) ---
-		// St2 handles Event7: log, trace
-		// Transition: pop St2 (exit+stopTimers), push St1 (enter)
-		// stopTimers clears remaining Timeout1@350 and Timeout3@500
+		if (executor.hasWarnings()) return failed();
+		return success();
+	}
 
-		Expected::logWrite(terminals::Message::Event7InSt2);
-		Expected::tracingTraceHandledEvent(anonys::FsmId::A, 3, anonys::EventId{7});
-		Expected::tracingTraceExitState(anonys::FsmId::A, 3);
-		Expected::logWrite(terminals::Message::ExitSt2);
-		Expected::timerStopTimers(anonys::FsmId::A, 0);
-		Expected::tracingTraceEnterState(anonys::FsmId::A, 1);
-		Expected::logWrite(terminals::Message::EnterSt1);
+	bool Tester::testSleepTimeout() {
+		std::cout << "=== testSleepTimeout ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
 
-		executor.send<events::Event7>(anonys::FsmId::A, events::Event7{});
+		if (!startJukebox(setup)) return failed();
+		if (!powerOn(executor)) return failed();
 
-		if (!Expected::check()) { return failed(); }
-		if (executor.sendNextEvent()) { return failed(); }
+		// SleepTimer fires at depth 0 -> Idle handles -> Off
+		Expected::logWrite(M::SleepTimeoutInIdle);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{60002});
+		Expected::tracingTraceExitState(F, 2);
+		Expected::logWrite(M::ExitIdle);
+		Expected::timerStopTimers(F, 0);
+		Expected::tracingTraceEnterState(F, 1);
+		Expected::logWrite(M::EnterOff);
+		if (!executor.sendNextTimeout()) return failed();
+		if (!Expected::check()) return failed();
 
-		if (executor.hasWarnings()) { return failed(); }
+		if (executor.hasWarnings()) return failed();
+		return success();
+	}
 
+	bool Tester::testErrorAndRecovery() {
+		std::cout << "=== testErrorAndRecovery ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
+
+		if (!startJukebox(setup)) return failed();
+		if (!powerOn(executor)) return failed();
+		if (!insertCoin(executor, 1)) return failed();
+
+		// Malfunction in Normal -> bubbles to Playing -> Error
+		Expected::logWrite(M::MalfunctionInPlaying);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{8});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceExitState(F, 3);
+		Expected::logWrite(M::ExitPlaying);
+		Expected::tracingTraceEnterState(F, 6);
+		Expected::logWrite(M::EnterError);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60003}, 10000);
+		executor.send<events::Malfunction>(F, events::Malfunction{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
+
+		// Reset in Error -> Idle
+		Expected::logWrite(M::ResetInError);
+		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{9});
+		Expected::tracingTraceExitState(F, 6);
+		Expected::logWrite(M::ExitError);
+		Expected::timerStopTimers(F, 0);
+		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterIdle);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
+		executor.send<events::Reset>(F, events::Reset{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
+
+		// Now test auto-recovery path: go to Normal -> Error again
+		if (!insertCoin(executor, 1)) return failed();
+
+		Expected::logWrite(M::MalfunctionInPlaying);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{8});
+		Expected::tracingTraceExitState(F, 4);
+		Expected::logWrite(M::ExitNormal);
+		Expected::timerStopTimers(F, 1);
+		Expected::tracingTraceExitState(F, 3);
+		Expected::logWrite(M::ExitPlaying);
+		Expected::tracingTraceEnterState(F, 6);
+		Expected::logWrite(M::EnterError);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60003}, 10000);
+		executor.send<events::Malfunction>(F, events::Malfunction{});
+		if (!Expected::check()) return failed();
+		if (executor.sendNextEvent()) return failed();
+
+		// RecoveryTimer fires -> Idle
+		Expected::logWrite(M::RecoveryTimeoutInError);
+		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{60003});
+		Expected::tracingTraceExitState(F, 6);
+		Expected::logWrite(M::ExitError);
+		Expected::timerStopTimers(F, 0);
+		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterIdle);
+		Expected::timerStartTimer(F, 0, anonys::EventId{60002}, 5000);
+		if (!executor.sendNextTimeout()) return failed();
+		if (!Expected::check()) return failed();
+
+		if (executor.hasWarnings()) return failed();
+		return success();
+	}
+
+	bool Tester::testUnhandledEvent() {
+		std::cout << "=== testUnhandledEvent ===" << std::endl;
+		Expected::enable(true);
+		Setup setup;
+		Executor executor{setup.fsm, setup.eventSender, setup.timerService};
+
+		if (!startJukebox(setup)) return failed();
+
+		// Send Play to Off -> nobody handles it
+		Expected::tracingTraceUnhandledEvent(F, 0, anonys::EventId{3});
+		executor.send<events::Play>(F, events::Play{});
+		if (!Expected::check()) return failed();
+
+		// Go to Normal to test deep unhandled event
+		if (!powerOn(executor)) return failed();
+		if (!insertCoin(executor, 1)) return failed();
+
+		// Send Reset in Normal -> Normal doesn't handle, Playing doesn't handle
+		Expected::tracingTraceUnhandledEvent(F, 0, anonys::EventId{9});
+		executor.send<events::Reset>(F, events::Reset{});
+		if (!Expected::check()) return failed();
+
+		if (executor.hasWarnings()) return failed();
 		return success();
 	}
 }

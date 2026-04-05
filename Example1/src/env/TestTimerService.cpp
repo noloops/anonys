@@ -31,7 +31,7 @@ namespace env {
 
 	TestTimerService::Result TestTimerService::getNextTimeout() {
 		if (m_timeouts.empty()) {
-			return {m_systemTimeMs, false, {anonys::FsmId::A, 0, anonys::EventId{0}, 0}};
+			return {m_systemTimeMs, false, {anonys::FsmId::Jukebox, 0, anonys::EventId{0}, 0}};
 		}
 
 		Result const result{m_timeouts.front()};

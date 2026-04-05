@@ -2,7 +2,7 @@
 #include "FsmPool.h"
 #include "anonys/Utils.h"
 
-#include "Fsm/A.h"
+#include "Fsm/Jukebox.h"
 
 namespace anonys
 {
@@ -29,19 +29,19 @@ namespace anonys
 			m_fsm[static_cast<uint16_t>(fsmId)].setTracingService(pTracingService);
 		}
 	}
-	void FsmPool::initializeA(TimerService& timerService, terminals::Std& std) {
-		ANONYS_ASSERT(m_terminalsA.pTimer == nullptr);
-		FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::A)] };
-		m_terminalsA.pTimer = &(fsm.getTimerCore());
-		m_terminalsA.pStd = &std;
+	void FsmPool::initializeJukebox(TimerService& timerService, terminals::Std& std) {
+		ANONYS_ASSERT(m_terminalsJukebox.pTimer == nullptr);
+		FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::Jukebox)] };
+		m_terminalsJukebox.pTimer = &(fsm.getTimerCore());
+		m_terminalsJukebox.pStd = &std;
 
-		uint8_t* const pBuffer{ std::launder(reinterpret_cast<uint8_t*>(&m_bufferA)) };
-		fsm.initialize(FsmId::A, &m_terminalsA, pBuffer, sizeof(m_bufferA), &timerService);
+		uint8_t* const pBuffer{ std::launder(reinterpret_cast<uint8_t*>(&m_bufferJukebox)) };
+		fsm.initialize(FsmId::Jukebox, &m_terminalsJukebox, pBuffer, sizeof(m_bufferJukebox), &timerService);
 	}
 
 	void FsmPool::start() {
 		ANONYS_ASSERT(!m_started);
 		m_started = true;
-		m_fsm[static_cast<uint16_t>(FsmId::A)].executeTransition(&fsm::A::St1);
+		m_fsm[static_cast<uint16_t>(FsmId::Jukebox)].executeTransition(&fsm::Jukebox::Off);
 	}
 }

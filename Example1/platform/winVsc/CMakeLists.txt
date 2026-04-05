@@ -33,7 +33,10 @@ add_executable(Example1
     "${REPO_ROOT}/Example1/src/env/Expected.cpp"
     "${REPO_ROOT}/Example1/src/env/Executor.cpp"
     "${REPO_ROOT}/Example1/src/env/Tester.cpp"
-    "${REPO_ROOT}/Example1/src/Fsm/A/St1.cpp"
-    "${REPO_ROOT}/Example1/src/Fsm/A/St2.cpp"
-    "${REPO_ROOT}/Example1/src/Fsm/A/St1/St1a.cpp"
+    "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Off.cpp"
+    "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Idle.cpp"
+    "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Playing.cpp"
+    "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Playing/Normal.cpp"
+    "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Playing/Paused.cpp"
+    "${REPO_ROOT}/Example1/src/Fsm/Jukebox/Error.cpp"
 )

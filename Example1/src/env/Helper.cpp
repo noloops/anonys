@@ -3,18 +3,21 @@
 namespace env {
 	const char* Helper::getFsmName(anonys::FsmId fsmId) {
 		switch (fsmId) {
-		case anonys::FsmId::A: return "A";
+		case anonys::FsmId::Jukebox: return "Jukebox";
 		default: return "?";
 		}
 	}
 
 	const char* Helper::getStateName(anonys::FsmId fsmId, uint16_t stateId) {
 		switch (fsmId) {
-		case anonys::FsmId::A:
+		case anonys::FsmId::Jukebox:
 			switch (stateId) {
-			case 1: return "St1";
-			case 2: return "St1a";
-			case 3: return "St2";
+			case 1: return "Off";
+			case 2: return "Idle";
+			case 3: return "Playing";
+			case 4: return "Normal";
+			case 5: return "Paused";
+			case 6: return "Error";
 			default: return "?";
 			}
 		default: return "?";
@@ -23,49 +26,52 @@ namespace env {
 
 	const char* Helper::getEventName(anonys::EventId eventId) {
 		switch (eventId.id) {
-		case 0: return "Event0";
-		case 1: return "Event1";
-		case 2: return "Event2";
-		case 3: return "Event3";
-		case 4: return "Event4";
-		case 5: return "Event5";
-		case 6: return "Event6";
-		case 7: return "Event7";
-		case 8: return "Event8";
-		case 9: return "EventInt0";
-		case 10: return "EventInt1";
-		case 11: return "EventInt2";
-		case 60001: return "Timeout1";
-		case 60002: return "Timeout2";
-		case 60003: return "Timeout3";
+		case 0: return "PowerOn";
+		case 1: return "PowerOff";
+		case 2: return "InsertCoin";
+		case 3: return "Play";
+		case 4: return "Pause";
+		case 5: return "Skip";
+		case 6: return "Eject";
+		case 7: return "Diagnostic";
+		case 8: return "Malfunction";
+		case 9: return "Reset";
+		case 60001: return "TrackTimer";
+		case 60002: return "SleepTimer";
+		case 60003: return "RecoveryTimer";
 		default: return "?";
 		}
 	}
 
 	const char* Helper::getLogMessage(terminals::Message message) {
 		switch (message) {
-		case terminals::Message::EnterSt1:             return "Enter St1";
-		case terminals::Message::ExitSt1:              return "Exit St1";
-		case terminals::Message::Event1InSt1:          return "Handle Event1 in St1";
-		case terminals::Message::Event4InSt1:          return "Handle Event4 in St1";
-		case terminals::Message::Event5InSt1:          return "Handle Event5 in St1";
-		case terminals::Message::UserTimeoutInSt1:     return "Handle UserTimeout in St1";
-		case terminals::Message::EnterSt2:             return "Enter St2";
-		case terminals::Message::ExitSt2:              return "Exit St2";
-		case terminals::Message::Event2InSt2:          return "Handle Event2 in St2";
-		case terminals::Message::Event7InSt2:          return "Handle Event7 in St2";
-		case terminals::Message::Event8InSt2:          return "Handle Event8 in St2";
-		case terminals::Message::TimeoutAInSt2:        return "Handle TimeoutA in St2";
-		case terminals::Message::TimeoutBInSt2:        return "Handle TimeoutB in St2";
-		case terminals::Message::TimeoutCInSt2:        return "Handle TimeoutC in St2";
-		case terminals::Message::EnterSt1a:            return "Enter St1a";
-		case terminals::Message::ExitSt1a:             return "Exit St1a";
-		case terminals::Message::Event0InSt1a:         return "Handle Event0 in St1a";
-		case terminals::Message::Event3InSt1a:         return "Handle Event3 in St1a";
-		case terminals::Message::Event5InSt1a:         return "Handle Event5 in St1a";
-		case terminals::Message::UserTimeoutInSt1a:    return "Handle UserTimeout in St1a";
-		case terminals::Message::SystemTimeoutInSt1a:  return "Handle SystemTimeout in St1a";
-		default:                                       return "Unknown";
+		case terminals::Message::EnterOff:                return "Enter Off";
+		case terminals::Message::ExitOff:                 return "Exit Off";
+		case terminals::Message::PowerOnInOff:            return "PowerOn in Off";
+		case terminals::Message::EnterIdle:               return "Enter Idle";
+		case terminals::Message::ExitIdle:                return "Exit Idle";
+		case terminals::Message::InsertCoinInIdle:        return "InsertCoin in Idle";
+		case terminals::Message::PowerOffInIdle:          return "PowerOff in Idle";
+		case terminals::Message::DiagnosticInIdle:        return "Diagnostic in Idle";
+		case terminals::Message::SleepTimeoutInIdle:      return "SleepTimeout in Idle";
+		case terminals::Message::EnterPlaying:            return "Enter Playing";
+		case terminals::Message::ExitPlaying:             return "Exit Playing";
+		case terminals::Message::EjectInPlaying:          return "Eject in Playing";
+		case terminals::Message::PowerOffInPlaying:       return "PowerOff in Playing";
+		case terminals::Message::MalfunctionInPlaying:    return "Malfunction in Playing";
+		case terminals::Message::EnterNormal:             return "Enter Normal";
+		case terminals::Message::ExitNormal:              return "Exit Normal";
+		case terminals::Message::PauseInNormal:           return "Pause in Normal";
+		case terminals::Message::SkipInNormal:            return "Skip in Normal";
+		case terminals::Message::TrackEndInNormal:        return "TrackEnd in Normal";
+		case terminals::Message::EnterPaused:             return "Enter Paused";
+		case terminals::Message::ExitPaused:              return "Exit Paused";
+		case terminals::Message::PlayInPaused:            return "Play in Paused";
+		case terminals::Message::EnterError:              return "Enter Error";
+		case terminals::Message::ExitError:               return "Exit Error";
+		case terminals::Message::ResetInError:            return "Reset in Error";
+		case terminals::Message::RecoveryTimeoutInError:  return "RecoveryTimeout in Error";
+		default:                                          return "Unknown";
 		}
 	}
 }

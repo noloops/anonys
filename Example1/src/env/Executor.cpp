@@ -20,13 +20,6 @@ namespace env {
 
 	void Executor::printEvent(char const* pPrefix, anonys::FsmId fsmId, anonys::Event const& event) {
 		std::cout << pPrefix << Helper::getEventName(event.eventId);
-		switch (event.eventId.id) {
-		case 9:
-		case 10:
-		case 11:
-			std::cout << "(" << *static_cast<int32_t const*>(event.pData) << ")";
-			break;
-		}
 		std::cout << " -> " << Helper::getFsmName(fsmId) << std::endl;
 	}
 

@@ -5,18 +5,16 @@
 #include "anonys/Types.h"
 
 namespace events {
-	struct Event0;
-	struct Event1;
-	struct Event2;
-	struct Event3;
-	struct Event4;
-	struct Event5;
-	struct Event6;
-	struct Event7;
-	struct Event8;
-	struct EventInt0;
-	struct EventInt1;
-	struct EventInt2;
+	struct PowerOn;
+	struct PowerOff;
+	struct InsertCoin;
+	struct Play;
+	struct Pause;
+	struct Skip;
+	struct Eject;
+	struct Diagnostic;
+	struct Malfunction;
+	struct Reset;
 }
 
 namespace anonys
@@ -26,18 +24,16 @@ namespace anonys
 	class Timeout3 {};
 
 	template <typename T> constexpr EventId getEventId() = delete;
-	template <>	constexpr EventId getEventId<events::Event0>() { return 0; }
-	template <>	constexpr EventId getEventId<events::Event1>() { return 1; }
-	template <>	constexpr EventId getEventId<events::Event2>() { return 2; }
-	template <>	constexpr EventId getEventId<events::Event3>() { return 3; }
-	template <>	constexpr EventId getEventId<events::Event4>() { return 4; }
-	template <>	constexpr EventId getEventId<events::Event5>() { return 5; }
-	template <>	constexpr EventId getEventId<events::Event6>() { return 6; }
-	template <>	constexpr EventId getEventId<events::Event7>() { return 7; }
-	template <>	constexpr EventId getEventId<events::Event8>() { return 8; }
-	template <>	constexpr EventId getEventId<events::EventInt0>() { return 9; }
-	template <>	constexpr EventId getEventId<events::EventInt1>() { return 10; }
-	template <>	constexpr EventId getEventId<events::EventInt2>() { return 11; }
+	template <>	constexpr EventId getEventId<events::PowerOn>() { return 0; }
+	template <>	constexpr EventId getEventId<events::PowerOff>() { return 1; }
+	template <>	constexpr EventId getEventId<events::InsertCoin>() { return 2; }
+	template <>	constexpr EventId getEventId<events::Play>() { return 3; }
+	template <>	constexpr EventId getEventId<events::Pause>() { return 4; }
+	template <>	constexpr EventId getEventId<events::Skip>() { return 5; }
+	template <>	constexpr EventId getEventId<events::Eject>() { return 6; }
+	template <>	constexpr EventId getEventId<events::Diagnostic>() { return 7; }
+	template <>	constexpr EventId getEventId<events::Malfunction>() { return 8; }
+	template <>	constexpr EventId getEventId<events::Reset>() { return 9; }
 
 	template <typename T> constexpr EventId getTimeoutEventId() = delete;
 	template <>	constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }

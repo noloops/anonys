@@ -15,7 +15,7 @@ namespace env {
 
 	TestEventSenderService::Result TestEventSenderService::getEvent(Buffer& buffer) {
 		if (m_events.empty()) {
-			return {false, anonys::FsmId::A, {anonys::EventId{0}, nullptr}};
+			return {false, anonys::FsmId::Jukebox, {anonys::EventId{0}, nullptr}};
 		}
 		Entry const& entry{m_events.front()};
 		anonys::FsmId const fsmId{entry.fsmId};
