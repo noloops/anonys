@@ -15,15 +15,17 @@ namespace env {
 		bool sendNextEvent();
 		bool sendNextTimeout();
 		bool sendNext();
+		bool hasWarnings() const { return m_hasWarnings; }
 
 	protected:
 		void doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) override;
 
 	private:
-		static void printEvent(char const* pPrefix, anonys::Event const& event);
+		static void printEvent(char const* pPrefix, anonys::FsmId fsmId, anonys::Event const& event);
 
 		anonys::FsmPool& m_fsmPool;
 		TestEventSenderService& m_testEventSender;
 		TestTimerService& m_testTimerService;
+		bool m_hasWarnings{false};
 	};
 }

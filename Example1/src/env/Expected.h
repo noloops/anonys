@@ -10,6 +10,7 @@ namespace env {
 	class Expected {
 	public:
 		static void enable(bool enabled);
+		static bool isEmpty() { return m_entries.empty(); }
 
 		// Record expected calls
 		static void logWrite(terminals::Message message);
