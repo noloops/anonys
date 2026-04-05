@@ -19,32 +19,32 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Example1\anonys\FsmPool.cpp" />
-    <ClCompile Include="..\Example1\env\Log.cpp" />
-    <ClCompile Include="..\Example1\Fsm\A\St1.cpp" />
-    <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp" />
-    <ClCompile Include="..\Example1\Fsm\A\St2.cpp" />
+    <ClCompile Include="..\Example1\src\anonys\FsmPool.cpp" />
+    <ClCompile Include="..\Example1\src\env\Log.cpp" />
+    <ClCompile Include="..\Example1\src\Fsm\A\St1.cpp" />
+    <ClCompile Include="..\Example1\src\Fsm\A\St1\St1a.cpp" />
+    <ClCompile Include="..\Example1\src\Fsm\A\St2.cpp" />
     <ClCompile Include="..\ext\anonys\FsmCore.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Example1\anonys\EventId.h" />
-    <ClInclude Include="..\Example1\anonys\FsmPool.h" />
-    <ClInclude Include="..\Example1\anonys\FsmId.h" />
-    <ClInclude Include="..\Example1\anonys\fsm\A.h" />
-    <ClInclude Include="..\Example1\anonys\GeneratedConfig.h" />
-    <ClInclude Include="..\Example1\anonys\impl\handlersA.h" />
-    <ClInclude Include="..\Example1\anonys\impl\terminalsA.h" />
-    <ClInclude Include="..\Example1\Config\AnonysManualConfig.h" />
-    <ClInclude Include="..\Example1\env\DummyTimerService.h" />
-    <ClInclude Include="..\Example1\env\DummyTracingService.h" />
-    <ClInclude Include="..\Example1\env\Log.h" />
-    <ClInclude Include="..\Example1\Events\Events.h" />
-    <ClInclude Include="..\Example1\Terminals\CustomTerminals.h" />
-    <ClInclude Include="..\Example1\Terminals\EventSender.h" />
-    <ClInclude Include="..\Example1\Terminals\LogService.h" />
-    <ClInclude Include="..\Example1\Terminals\Std.h" />
-    <ClInclude Include="..\Example1\Terminals\Terminals.h" />
+    <ClInclude Include="..\Example1\src\anonys\EventId.h" />
+    <ClInclude Include="..\Example1\src\anonys\FsmPool.h" />
+    <ClInclude Include="..\Example1\src\anonys\FsmId.h" />
+    <ClInclude Include="..\Example1\src\anonys\fsm\A.h" />
+    <ClInclude Include="..\Example1\src\anonys\GeneratedConfig.h" />
+    <ClInclude Include="..\Example1\src\anonys\impl\handlersA.h" />
+    <ClInclude Include="..\Example1\src\anonys\impl\terminalsA.h" />
+    <ClInclude Include="..\Example1\src\Config\AnonysManualConfig.h" />
+    <ClInclude Include="..\Example1\src\env\DummyTimerService.h" />
+    <ClInclude Include="..\Example1\src\env\DummyTracingService.h" />
+    <ClInclude Include="..\Example1\src\env\Log.h" />
+    <ClInclude Include="..\Example1\src\Events\Events.h" />
+    <ClInclude Include="..\Example1\src\Terminals\CustomTerminals.h" />
+    <ClInclude Include="..\Example1\src\Terminals\EventSender.h" />
+    <ClInclude Include="..\Example1\src\Terminals\LogService.h" />
+    <ClInclude Include="..\Example1\src\Terminals\Std.h" />
+    <ClInclude Include="..\Example1\src\Terminals\Terminals.h" />
     <ClInclude Include="..\ext\anonys\FsmCore.h" />
     <ClInclude Include="..\ext\anonys\Timer.h" />
     <ClInclude Include="..\ext\anonys\TracingService.h" />
@@ -135,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../ext;../example1;../example1/Config</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ext;../example1/src;../example1/src/Config</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,7 +151,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../ext;../example1;../example1/Config</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../ext;../example1/src;../example1/src/Config</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>

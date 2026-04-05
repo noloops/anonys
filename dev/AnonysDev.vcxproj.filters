@@ -7,31 +7,16 @@
     <Filter Include="Example1">
       <UniqueIdentifier>{5e2540f6-1c23-4f20-ae42-e1b1708cf6ee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\Terminals">
-      <UniqueIdentifier>{a125c75b-e743-4714-872a-e32ec48e6b43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Example1\Fsm">
-      <UniqueIdentifier>{bb84a452-bc6f-42ef-bfbf-c5b2b6bdef92}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Example1\Fsm\A">
+    <Filter Include="Example1\src\Fsm\A">
       <UniqueIdentifier>{8a8263d9-d460-491e-80d0-42973e77de5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\anonys">
-      <UniqueIdentifier>{8ad0c72c-11db-404b-bf42-9f8b532adf82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Example1\Events">
-      <UniqueIdentifier>{e633ef7f-9eae-4f68-bb79-8e1d1b1fcf78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Example1\Fsm\A\St1">
+    <Filter Include="Example1\src\Fsm\A\St1">
       <UniqueIdentifier>{5b2efb3e-9c3f-42ab-a2a9-3d72f7f8daae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\anonys\impl">
+    <Filter Include="Example1\src\anonys\impl">
       <UniqueIdentifier>{e0dc4d4c-98f4-4b0a-a2c9-274514d7fecf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\Config">
-      <UniqueIdentifier>{8f79cf71-101d-4345-95bb-59f85833a8e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Example1\anonys\fsm">
+    <Filter Include="Example1\src\anonys\fsm">
       <UniqueIdentifier>{c8f64428-5ac4-4d33-a51b-da6bd48edf9d}</UniqueIdentifier>
     </Filter>
     <Filter Include="ext">
@@ -40,72 +25,35 @@
     <Filter Include="ext\anonys">
       <UniqueIdentifier>{0d9e6204-129e-4c20-9be1-e066a05b46fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Example1\env">
-      <UniqueIdentifier>{7e76a9ad-c993-4983-916a-6512fa00e4ec}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Dev</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\Fsm\A\St1.cpp">
-      <Filter>Example1\Fsm\A</Filter>
+    <ClCompile Include="..\Example1\src\Fsm\A\St1.cpp">
+      <Filter>Example1\src\Fsm\A</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\Fsm\A\St2.cpp">
-      <Filter>Example1\Fsm\A</Filter>
+    <ClCompile Include="..\Example1\src\Fsm\A\St2.cpp">
+      <Filter>Example1\src\Fsm\A</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\Fsm\A\St1\St1a.cpp">
-      <Filter>Example1\Fsm\A\St1</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Example1\anonys\FsmPool.cpp">
-      <Filter>Example1\anonys</Filter>
+    <ClCompile Include="..\Example1\src\Fsm\A\St1\St1a.cpp">
+      <Filter>Example1\src\Fsm\A\St1</Filter>
     </ClCompile>
     <ClCompile Include="..\ext\anonys\FsmCore.cpp">
       <Filter>ext\anonys</Filter>
     </ClCompile>
-    <ClCompile Include="..\Example1\env\Log.cpp">
-      <Filter>Example1\env</Filter>
-    </ClCompile>
+    <ClCompile Include="..\Example1\src\anonys\FsmPool.cpp" />
+    <ClCompile Include="..\Example1\src\env\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Example1\Terminals\CustomTerminals.h">
-      <Filter>Example1\Terminals</Filter>
+    <ClInclude Include="..\Example1\src\anonys\impl\handlersA.h">
+      <Filter>Example1\src\anonys\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\Terminals\Terminals.h">
-      <Filter>Example1\Terminals</Filter>
+    <ClInclude Include="..\Example1\src\anonys\impl\terminalsA.h">
+      <Filter>Example1\src\anonys\impl</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\Terminals\Std.h">
-      <Filter>Example1\Terminals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\Terminals\EventSender.h">
-      <Filter>Example1\Terminals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\anonys\EventId.h">
-      <Filter>Example1\anonys</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\anonys\FsmId.h">
-      <Filter>Example1\anonys</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\anonys\GeneratedConfig.h">
-      <Filter>Example1\anonys</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\Events\Events.h">
-      <Filter>Example1\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\anonys\FsmPool.h">
-      <Filter>Example1\anonys</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\anonys\impl\handlersA.h">
-      <Filter>Example1\anonys\impl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\anonys\impl\terminalsA.h">
-      <Filter>Example1\anonys\impl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\Config\AnonysManualConfig.h">
-      <Filter>Example1\Config</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\anonys\fsm\A.h">
-      <Filter>Example1\anonys\fsm</Filter>
+    <ClInclude Include="..\Example1\src\anonys\fsm\A.h">
+      <Filter>Example1\src\anonys\fsm</Filter>
     </ClInclude>
     <ClInclude Include="..\ext\anonys\Timer.h">
       <Filter>ext\anonys</Filter>
@@ -122,17 +70,19 @@
     <ClInclude Include="..\ext\anonys\FsmCore.h">
       <Filter>ext\anonys</Filter>
     </ClInclude>
-    <ClInclude Include="..\Example1\Terminals\LogService.h">
-      <Filter>Example1\Terminals</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\env\Log.h">
-      <Filter>Example1\env</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\env\DummyTimerService.h">
-      <Filter>Example1\env</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Example1\env\DummyTracingService.h">
-      <Filter>Example1\env</Filter>
-    </ClInclude>
+    <ClInclude Include="..\Example1\src\anonys\EventId.h" />
+    <ClInclude Include="..\Example1\src\anonys\FsmPool.h" />
+    <ClInclude Include="..\Example1\src\anonys\FsmId.h" />
+    <ClInclude Include="..\Example1\src\anonys\GeneratedConfig.h" />
+    <ClInclude Include="..\Example1\src\Config\AnonysManualConfig.h" />
+    <ClInclude Include="..\Example1\src\env\DummyTimerService.h" />
+    <ClInclude Include="..\Example1\src\env\DummyTracingService.h" />
+    <ClInclude Include="..\Example1\src\env\Log.h" />
+    <ClInclude Include="..\Example1\src\Events\Events.h" />
+    <ClInclude Include="..\Example1\src\Terminals\CustomTerminals.h" />
+    <ClInclude Include="..\Example1\src\Terminals\EventSender.h" />
+    <ClInclude Include="..\Example1\src\Terminals\LogService.h" />
+    <ClInclude Include="..\Example1\src\Terminals\Std.h" />
+    <ClInclude Include="..\Example1\src\Terminals\Terminals.h" />
   </ItemGroup>
 </Project>
