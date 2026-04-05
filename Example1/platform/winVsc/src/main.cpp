@@ -1,18 +1,19 @@
 #include <iostream>
 #include <type_traits>
-#include "env/DummyTimerService.h"
-#include "env/DummyTracingService.h"
+#include "env/TestTimerService.h"
+#include "env/TestTracingService.h"
+#include "env/TestEventSenderService.h"
 #include "env/TestLog.h"
 #include "Terminals/Terminals.h"
 #include "anonys/FsmPool.h"
 
 int main()
 {
-	static terminals::EventSender eventSender{};
+	static env::TestEventSenderService eventSender{};
 	static env::TestLog log{"A:"};
 	static terminals::Std stdTerminal{ eventSender, log };
-	static env::DummyTimerService timerService{};
-	static env::DummyTracingService tracingService{};
+	static env::TestTimerService timerService{};
+	static env::TestTracingService tracingService{};
 
 	static anonys::FsmPool fsm{};
 	fsm.initializeA(timerService, stdTerminal);

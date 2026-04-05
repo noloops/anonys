@@ -26,6 +26,9 @@ add_executable(Example1
     # Application sources
     "${REPO_ROOT}/Example1/src/anonys/FsmPool.cpp"
     "${REPO_ROOT}/Example1/src/env/TestLog.cpp"
+    "${REPO_ROOT}/Example1/src/env/TestEventSenderService.cpp"
+    "${REPO_ROOT}/Example1/src/env/TestTimerService.cpp"
+    "${REPO_ROOT}/Example1/src/env/TestTracingService.cpp"
     "${REPO_ROOT}/Example1/src/Terminals/LogService.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/A/St1.cpp"
     "${REPO_ROOT}/Example1/src/Fsm/A/St2.cpp"

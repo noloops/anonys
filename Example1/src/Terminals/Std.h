@@ -1,11 +1,11 @@
 #pragma once
 
 #include "LogService.h"
-#include "EventSender.h"
+#include "EventSenderService.h"
 
 namespace terminals {
 	struct Std {
-		EventSender& sender;
+		EventSenderService& sender;
 		LogService& log;
 	};
 }
