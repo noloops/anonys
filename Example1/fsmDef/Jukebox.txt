@@ -1,0 +1,25 @@
+struct events.PowerOn powerOn
+struct events.PowerOff powerOff
+struct events.InsertCoin insertCoin
+struct events.Play play
+struct events.Pause pause
+struct events.Skip skip
+struct events.Eject eject
+struct events.Diagnostic diagnostic
+struct events.Malfunction malfunction
+struct events.Reset reset
+struct events.AutoPause autoPause
+class events.ConfigureAutoPause configureAutoPause
+struct terminals.Std std
+class terminals.Counter counter
+class terminals.Mixer mixer
+class terminals.Countdown countdown
+
+!Off +- powerOn (std)
+On +- powerOff malfunction (std)
+	Idle +-1 insertCoin malfunction diagnostic (std)
+	Playing +- eject autoPause (std) counter mixer
+		Normal +-1 pause skip (std counter mixer)
+		Paused +- play configureAutoPause (std mixer) countdown
+			AutoPause +-1 pause (std countdown)
+Error +-1 reset (std)

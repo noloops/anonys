@@ -1,0 +1,21 @@
+struct Start start
+struct signals.Stop stop
+struct signals.alert.Emergency emergency
+class ctrl.Proceed proceed
+struct ctrl.cmd.Reset reset
+struct io.SensorTriggered sensorTriggered
+struct io.data.Tick tick
+struct hw.Motor motor
+struct hw.io.Valve valve
+struct dev.sensor.WaterLevel waterLevel
+
+!Idle +- start (motor)
+Running +- stop emergency () waterLevel
+	Filling +-1 sensorTriggered (valve waterLevel)
+	Washing +- proceed (motor)
+		Agitating +-3 tick (waterLevel motor)
+		Soaking +-1 tick (waterLevel)
+	Draining +-1 sensorTriggered (motor valve)
+Done +- reset (motor)
+Error +-1 reset ()
+Halted ()

@@ -1,0 +1,23 @@
+struct Start start
+struct signals.Stop stop
+struct signals.alert.Emergency emergency
+class ctrl.Proceed proceed
+struct ctrl.cmd.Reset reset
+struct io.SensorTriggered sensorTriggered
+struct io.data.Tick tick
+struct Display display
+struct hw.Motor motor
+struct hw.io.Valve valve
+class ctrl.Panel panel
+class ctrl.reg.FloorTracker floorTracker
+class dev.SpeedRegulator speedRegulator
+struct dev.sensor.WaterLevel waterLevel
+
+!Idle +-1 start ()
+Moving +- stop emergency ()
+	GoingUp +-1 sensorTriggered () floorTracker
+		Accelerating +- proceed () speedRegulator
+			FullSpeed +-2 sensorTriggered (floorTracker speedRegulator)
+		Decelerating sensorTriggered (floorTracker)
+	GoingDown +-1 sensorTriggered () floorTracker
+Stopped +1 start reset ()
