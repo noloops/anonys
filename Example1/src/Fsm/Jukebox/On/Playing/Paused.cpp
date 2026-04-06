@@ -33,7 +33,7 @@ namespace {
 }
 
 // Generated code, do not edit:
-namespace anonys_0_5 {
+namespace anonys_0_6 {
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
 		switch (event.eventId.id) {

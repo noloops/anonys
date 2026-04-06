@@ -2,7 +2,7 @@
 #include "FsmPool.h"
 #include "anonys/Utils.h"
 
-#include "Fsm/Jukebox.h"
+#include "fsm/Jukebox.h"
 
 namespace anonys
 {
@@ -31,6 +31,7 @@ namespace anonys
 			m_fsm[static_cast<uint16_t>(fsmId)].setTracingService(pTracingService);
 		}
 	}
+
 	void FsmPool::initializeJukebox(TimerService& timerService, terminals::Std& std) {
 		ANONYS_ASSERT(m_terminalsJukebox.pTimer == nullptr);
 		FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::Jukebox)] };

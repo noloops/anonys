@@ -8,6 +8,8 @@
 
 #include "impl/terminalsJukebox.h"
 
+namespace terminals { struct Std; }
+
 namespace anonys
 {
 	class FsmPool {

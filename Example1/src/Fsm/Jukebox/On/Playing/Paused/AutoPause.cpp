@@ -40,10 +40,10 @@ namespace anonys_0_7 {
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
 		switch (event.eventId.id) {
-		case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-			return handle(me, *static_cast<PauseCountdownTimeout*>(event.pData));
 		case anonys::getEventId<events::Pause>().id:
 			return handle(me, *static_cast<events::Pause*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout1>().id:
+			return handle(me, *static_cast<TimeoutA*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}

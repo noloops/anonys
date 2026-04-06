@@ -4,12 +4,7 @@
 
 #include "anonys/Timer.h"
 
-namespace terminals {
-	struct Std;
-	class Counter;
-	class Mixer;
-	class Countdown;
-}
+namespace terminals { struct Std; class Counter; class Mixer; class Countdown; }
 
 namespace anonys_0 {
 	struct Terminals {

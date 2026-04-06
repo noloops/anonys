@@ -4,20 +4,7 @@
 
 #include "anonys/Types.h"
 
-namespace events {
-	struct PowerOn;
-	struct PowerOff;
-	struct InsertCoin;
-	struct Play;
-	struct Pause;
-	struct Skip;
-	struct Eject;
-	struct Diagnostic;
-	struct Malfunction;
-	struct Reset;
-	struct AutoPause;
-	class ConfigureAutoPause;
-}
+namespace events { struct PowerOn; struct PowerOff; struct InsertCoin; struct Play; struct Pause; struct Skip; struct Eject; struct Diagnostic; struct Malfunction; struct Reset; struct AutoPause; class ConfigureAutoPause; }
 
 namespace anonys
 {

@@ -32,14 +32,14 @@ namespace {
 }
 
 // Generated code, do not edit:
-namespace anonys_0_6 {
+namespace anonys_0_8 {
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
 		switch (event.eventId.id) {
 		case anonys::getEventId<events::Reset>().id:
 			return handle(me, *static_cast<events::Reset*>(event.pData));
 		case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-			return handle(me, *static_cast<RecoveryTimeout*>(event.pData));
+			return handle(me, *static_cast<TimeoutA*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}
