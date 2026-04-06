@@ -30,6 +30,13 @@ def generate(config: GeneratorConfig) -> None:
     for path in config.fsm_definitions:
         fsm_defs.append(parse_definition(path))
 
+    # Validate FSM name uniqueness
+    seen_fsm: set[str] = set()
+    for fsm_def in fsm_defs:
+        if fsm_def.name in seen_fsm:
+            raise ValueError(f"Duplicate FSM name '{fsm_def.name}'")
+        seen_fsm.add(fsm_def.name)
+
     anonys_dir = config.anonys_output_dir / "anonys"
     fsm_header_dir = anonys_dir / "fsm"
     impl_dir = anonys_dir / "impl"

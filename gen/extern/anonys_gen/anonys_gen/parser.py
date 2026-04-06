@@ -279,6 +279,16 @@ def parse_definition(filepath: Path) -> FsmDefinition:
                     break
             state_lines.append((indent, stripped))
 
+    # Validate element name uniqueness
+    seen_names: dict[str, str] = {}  # element_name -> namespace_path
+    for decl in declarations:
+        if decl.element_name in seen_names:
+            raise ValueError(
+                f"{filepath.name}: duplicate element name '{decl.element_name}' "
+                f"(used by both '{seen_names[decl.element_name]}' and '{decl.namespace_path}')"
+            )
+        seen_names[decl.element_name] = decl.namespace_path
+
     # Build state tree
     top_level_states: list[State] = []
     stack: list[tuple[int, State]] = []
@@ -300,8 +310,23 @@ def parse_definition(filepath: Path) -> FsmDefinition:
 
         stack.append((indent, state))
 
+    # Validate state name uniqueness within this FSM
+    seen_states: set[str] = set()
+    for s in _walk_states(top_level_states):
+        if s.name in seen_states:
+            raise ValueError(
+                f"{filepath.name}: duplicate state name '{s.name}'"
+            )
+        seen_states.add(s.name)
+
     return FsmDefinition(
         name=fsm_name,
         declarations=declarations,
         states=top_level_states,
     )
+
+
+def _walk_states(states: list[State]):
+    for s in states:
+        yield s
+        yield from _walk_states(s.children)
