@@ -1,4 +1,4 @@
-// Generated file, do not edit!
+// ANONYS - Generated file, do not edit!
 #include "FsmPool.h"
 #include "anonys/Utils.h"
 

@@ -1,4 +1,4 @@
-// Generated file, do not edit!
+// ANONYS - Generated file, do not edit!
 #ifndef EXAMPLE1_ANONYSFSMID_H
 #define EXAMPLE1_ANONYSFSMID_H
 

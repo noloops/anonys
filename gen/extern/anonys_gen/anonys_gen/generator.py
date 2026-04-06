@@ -1,3 +1,12 @@
+# ANONYS
+# Copyright (c) 2026 Jan Hofmann <anonys@noloops.ch>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://apache.org
+
 """Code generator for Anonys C++ FSM framework."""
 
 from __future__ import annotations
@@ -124,7 +133,7 @@ def _write_forward_decls(lines: list[str], decls: list[Declaration]) -> None:
 def _write_event_id_h(path: Path, guard_prefix: str, events: list[Declaration], max_timeouts: int) -> None:
     guard = f"{guard_prefix}_ANONYS_EVENTID_H"
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append(f"#ifndef {guard}")
     lines.append(f"#define {guard}")
     lines.append("")
@@ -166,7 +175,7 @@ def _write_event_id_h(path: Path, guard_prefix: str, events: list[Declaration], 
 def _write_fsm_id_h(path: Path, guard_prefix: str, fsm_defs: list[FsmDefinition]) -> None:
     guard = f"{guard_prefix}_ANONYSFSMID_H"
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append(f"#ifndef {guard}")
     lines.append(f"#define {guard}")
     lines.append("")
@@ -194,7 +203,7 @@ def _write_fsm_id_h(path: Path, guard_prefix: str, fsm_defs: list[FsmDefinition]
 def _write_generated_config_h(path: Path, guard_prefix: str) -> None:
     guard = f"{guard_prefix}_ANONYS_GENERATEDCONFIG_H"
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append(f"#ifndef {guard}")
     lines.append(f"#define {guard}")
     lines.append("")
@@ -221,7 +230,7 @@ def _write_terminals_h(path: Path, guard_prefix: str, fsm_idx: int, fsm_def: Fsm
     terminals = fsm_def.get_terminals()
 
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append(f"#ifndef {guard}")
     lines.append(f"#define {guard}")
     lines.append("")
@@ -254,7 +263,7 @@ def _write_handlers_h(path: Path, guard_prefix: str, fsm_idx: int, fsm_def: FsmD
     id_map = _state_id_map(fsm_def)
 
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append(f"#ifndef {guard}")
     lines.append(f"#define {guard}")
     lines.append("")
@@ -290,7 +299,7 @@ def _write_fsm_struct_h(path: Path, guard_prefix: str, fsm_idx: int, fsm_def: Fs
     id_map = _state_id_map(fsm_def)
 
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append(f"#ifndef {guard}")
     lines.append(f"#define {guard}")
     lines.append("")
@@ -331,7 +340,7 @@ def _write_fsm_struct_h(path: Path, guard_prefix: str, fsm_idx: int, fsm_def: Fs
 def _write_fsm_pool_h(path: Path, guard_prefix: str, fsm_defs: list[FsmDefinition]) -> None:
     guard = f"{guard_prefix}_FSM_H"
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append(f"#ifndef {guard}")
     lines.append(f"#define {guard}")
     lines.append("")
@@ -404,7 +413,7 @@ def _get_initialize_params(fsm_def: FsmDefinition) -> str:
 
 def _write_fsm_pool_cpp(path: Path, fsm_defs: list[FsmDefinition]) -> None:
     lines: list[str] = []
-    lines.append("// Generated file, do not edit!")
+    lines.append("// ANONYS - Generated file, do not edit!")
     lines.append('#include "FsmPool.h"')
     lines.append('#include "anonys/Utils.h"')
     lines.append("")
