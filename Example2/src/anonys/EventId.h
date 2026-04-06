@@ -32,19 +32,19 @@ namespace anonys
     class Timeout4 {};
 
     template <typename T> constexpr EventId getEventId() = delete;
-    template <>    constexpr EventId getEventId<Start>() { return 0; }
-    template <>    constexpr EventId getEventId<signals::Stop>() { return 1; }
-    template <>    constexpr EventId getEventId<signals::alert::Emergency>() { return 2; }
-    template <>    constexpr EventId getEventId<ctrl::Proceed>() { return 3; }
-    template <>    constexpr EventId getEventId<ctrl::cmd::Reset>() { return 4; }
-    template <>    constexpr EventId getEventId<io::SensorTriggered>() { return 5; }
-    template <>    constexpr EventId getEventId<io::data::Tick>() { return 6; }
+    template<> constexpr EventId getEventId<Start>() { return 0; }
+    template<> constexpr EventId getEventId<signals::Stop>() { return 1; }
+    template<> constexpr EventId getEventId<signals::alert::Emergency>() { return 2; }
+    template<> constexpr EventId getEventId<ctrl::Proceed>() { return 3; }
+    template<> constexpr EventId getEventId<ctrl::cmd::Reset>() { return 4; }
+    template<> constexpr EventId getEventId<io::SensorTriggered>() { return 5; }
+    template<> constexpr EventId getEventId<io::data::Tick>() { return 6; }
 
     template <typename T> constexpr EventId getTimeoutEventId() = delete;
-    template <>    constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }
-    template <>    constexpr EventId getTimeoutEventId<Timeout2>() { return 60002; }
-    template <>    constexpr EventId getTimeoutEventId<Timeout3>() { return 60003; }
-    template <>    constexpr EventId getTimeoutEventId<Timeout4>() { return 60004; }
+    template<> constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }
+    template<> constexpr EventId getTimeoutEventId<Timeout2>() { return 60002; }
+    template<> constexpr EventId getTimeoutEventId<Timeout3>() { return 60003; }
+    template<> constexpr EventId getTimeoutEventId<Timeout4>() { return 60004; }
     static_assert(getTimeoutEventId<Timeout1>().id == MinTimoutEventId.id);
 }
 

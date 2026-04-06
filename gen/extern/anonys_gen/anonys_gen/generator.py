@@ -136,12 +136,12 @@ def _write_event_id_h(path: Path, guard_prefix: str, events: list[Declaration], 
 
     lines.append(f"{_I1}template <typename T> constexpr EventId getEventId() = delete;")
     for i, ev in enumerate(events):
-        lines.append(f"{_I1}template <>{_I1}constexpr EventId getEventId<{ev.cpp_qualified}>() {{ return {i}; }}")
+        lines.append(f"{_I1}template<> constexpr EventId getEventId<{ev.cpp_qualified}>() {{ return {i}; }}")
     lines.append("")
 
     lines.append(f"{_I1}template <typename T> constexpr EventId getTimeoutEventId() = delete;")
     for i in range(1, num_timeout_classes + 1):
-        lines.append(f"{_I1}template <>{_I1}constexpr EventId getTimeoutEventId<Timeout{i}>() {{ return {60000 + i}; }}")
+        lines.append(f"{_I1}template<> constexpr EventId getTimeoutEventId<Timeout{i}>() {{ return {60000 + i}; }}")
     lines.append(f"{_I1}static_assert(getTimeoutEventId<Timeout1>().id == MinTimoutEventId.id);")
 
     lines.append("}")
