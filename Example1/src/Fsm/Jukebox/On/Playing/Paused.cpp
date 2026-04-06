@@ -34,34 +34,34 @@ namespace {
 
 // Generated code, do not edit:
 namespace anonys_0_6 {
-	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
-		Me& me{ *static_cast<Me*>(pMembers) };
-		switch (event.eventId.id) {
-		case anonys::getEventId<events::Play>().id:
-			return handle(me, *static_cast<events::Play*>(event.pData));
-		case anonys::getEventId<events::ConfigureAutoPause>().id:
-			return handle(me, *static_cast<events::ConfigureAutoPause*>(event.pData));
-		default:
-			return &anonys::DummyStates::Unhandled;
-		}
-	}
+    anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+        Me& me{ *static_cast<Me*>(pMembers) };
+        switch (event.eventId.id) {
+        case anonys::getEventId<events::Play>().id:
+            return handle(me, *static_cast<events::Play*>(event.pData));
+        case anonys::getEventId<events::ConfigureAutoPause>().id:
+            return handle(me, *static_cast<events::ConfigureAutoPause*>(event.pData));
+        default:
+            return &anonys::DummyStates::Unhandled;
+        }
+    }
 
-	void liveCycle(bool create, void* pTerminals, void* pMembers) {
-		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
-		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pStd, *terminals.pMixer } };
-			terminals.pCountdown = &me.countdown;
-			enter(me);
-		}
-		else {
-			Me& me{ *static_cast<Me*>(pMembers) };
-			exit(me);
-			me.~Me();
-			terminals.pCountdown = nullptr;
-		}
-	}
+    void liveCycle(bool create, void* pTerminals, void* pMembers) {
+        auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
+        if (create) {
+            Me& me{ *::new (pMembers) Me{ *terminals.pStd, *terminals.pMixer } };
+            terminals.pCountdown = &me.countdown;
+            enter(me);
+        }
+        else {
+            Me& me{ *static_cast<Me*>(pMembers) };
+            exit(me);
+            me.~Me();
+            terminals.pCountdown = nullptr;
+        }
+    }
 
-	uint16_t getMembersSize() {
-		return anonys::getAlignedSize<Me>();
-	}
+    uint16_t getMembersSize() {
+        return anonys::getAlignedSize<Me>();
+    }
 }

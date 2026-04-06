@@ -6,7 +6,7 @@
 
 namespace anonys
 {
-	constexpr int32_t MaxNestedStates{ 8 };
+    constexpr int32_t MaxNestedStates{ 8 };
 }
 
 #endif // EXAMPLE1_ANONYS_GENERATEDCONFIG_H

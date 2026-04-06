@@ -32,36 +32,36 @@ namespace {
 
 // Generated code, do not edit:
 namespace anonys_0_4 {
-	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
-		Me& me{ *static_cast<Me*>(pMembers) };
-		switch (event.eventId.id) {
-		case anonys::getEventId<events::Eject>().id:
-			return handle(me, *static_cast<events::Eject*>(event.pData));
-		case anonys::getEventId<events::AutoPause>().id:
-			return handle(me, *static_cast<events::AutoPause*>(event.pData));
-		default:
-			return &anonys::DummyStates::Unhandled;
-		}
-	}
+    anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+        Me& me{ *static_cast<Me*>(pMembers) };
+        switch (event.eventId.id) {
+        case anonys::getEventId<events::Eject>().id:
+            return handle(me, *static_cast<events::Eject*>(event.pData));
+        case anonys::getEventId<events::AutoPause>().id:
+            return handle(me, *static_cast<events::AutoPause*>(event.pData));
+        default:
+            return &anonys::DummyStates::Unhandled;
+        }
+    }
 
-	void liveCycle(bool create, void* pTerminals, void* pMembers) {
-		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
-		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
-			terminals.pCounter = &me.counter;
-			terminals.pMixer = &me.mixer;
-			enter(me);
-		}
-		else {
-			Me& me{ *static_cast<Me*>(pMembers) };
-			exit(me);
-			me.~Me();
-			terminals.pCounter = nullptr;
-			terminals.pMixer = nullptr;
-		}
-	}
+    void liveCycle(bool create, void* pTerminals, void* pMembers) {
+        auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
+        if (create) {
+            Me& me{ *::new (pMembers) Me{ *terminals.pStd } };
+            terminals.pCounter = &me.counter;
+            terminals.pMixer = &me.mixer;
+            enter(me);
+        }
+        else {
+            Me& me{ *static_cast<Me*>(pMembers) };
+            exit(me);
+            me.~Me();
+            terminals.pCounter = nullptr;
+            terminals.pMixer = nullptr;
+        }
+    }
 
-	uint16_t getMembersSize() {
-		return anonys::getAlignedSize<Me>();
-	}
+    uint16_t getMembersSize() {
+        return anonys::getAlignedSize<Me>();
+    }
 }

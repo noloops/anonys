@@ -22,32 +22,32 @@ namespace {
 
 // Generated code, do not edit:
 namespace anonys_0_4 {
-	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
-		Me& me{ *static_cast<Me*>(pMembers) };
-		switch (event.eventId.id) {
-		case anonys::getEventId<ctrl::Proceed>().id:
-			return handle(me, *static_cast<ctrl::Proceed*>(event.pData));
-		default:
-			return &anonys::DummyStates::Unhandled;
-		}
-	}
+    anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+        Me& me{ *static_cast<Me*>(pMembers) };
+        switch (event.eventId.id) {
+        case anonys::getEventId<ctrl::Proceed>().id:
+            return handle(me, *static_cast<ctrl::Proceed*>(event.pData));
+        default:
+            return &anonys::DummyStates::Unhandled;
+        }
+    }
 
-	void liveCycle(bool create, void* pTerminals, void* pMembers) {
-		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
-		if (create) {
-			Me& me{ *::new (pMembers) Me{} };
-			terminals.pSpeedRegulator = &me.speedRegulator;
-			enter(me);
-		}
-		else {
-			Me& me{ *static_cast<Me*>(pMembers) };
-			exit(me);
-			me.~Me();
-			terminals.pSpeedRegulator = nullptr;
-		}
-	}
+    void liveCycle(bool create, void* pTerminals, void* pMembers) {
+        auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
+        if (create) {
+            Me& me{ *::new (pMembers) Me{} };
+            terminals.pSpeedRegulator = &me.speedRegulator;
+            enter(me);
+        }
+        else {
+            Me& me{ *static_cast<Me*>(pMembers) };
+            exit(me);
+            me.~Me();
+            terminals.pSpeedRegulator = nullptr;
+        }
+    }
 
-	uint16_t getMembersSize() {
-		return anonys::getAlignedSize<Me>();
-	}
+    uint16_t getMembersSize() {
+        return anonys::getAlignedSize<Me>();
+    }
 }

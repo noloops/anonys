@@ -22,30 +22,30 @@ namespace {
 
 // Generated code, do not edit:
 namespace anonys_2_8 {
-	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
-		Me& me{ *static_cast<Me*>(pMembers) };
-		switch (event.eventId.id) {
-		case anonys::getEventId<ctrl::cmd::Reset>().id:
-			return handle(me, *static_cast<ctrl::cmd::Reset*>(event.pData));
-		default:
-			return &anonys::DummyStates::Unhandled;
-		}
-	}
+    anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+        Me& me{ *static_cast<Me*>(pMembers) };
+        switch (event.eventId.id) {
+        case anonys::getEventId<ctrl::cmd::Reset>().id:
+            return handle(me, *static_cast<ctrl::cmd::Reset*>(event.pData));
+        default:
+            return &anonys::DummyStates::Unhandled;
+        }
+    }
 
-	void liveCycle(bool create, void* pTerminals, void* pMembers) {
-		auto& terminals{ *static_cast<anonys_2::Terminals*>(pTerminals) };
-		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pMotor } };
-			enter(me);
-		}
-		else {
-			Me& me{ *static_cast<Me*>(pMembers) };
-			exit(me);
-			me.~Me();
-		}
-	}
+    void liveCycle(bool create, void* pTerminals, void* pMembers) {
+        auto& terminals{ *static_cast<anonys_2::Terminals*>(pTerminals) };
+        if (create) {
+            Me& me{ *::new (pMembers) Me{ *terminals.pMotor } };
+            enter(me);
+        }
+        else {
+            Me& me{ *static_cast<Me*>(pMembers) };
+            exit(me);
+            me.~Me();
+        }
+    }
 
-	uint16_t getMembersSize() {
-		return anonys::getAlignedSize<Me>();
-	}
+    uint16_t getMembersSize() {
+        return anonys::getAlignedSize<Me>();
+    }
 }

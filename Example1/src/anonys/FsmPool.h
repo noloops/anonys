@@ -8,35 +8,33 @@
 
 #include "impl/terminalsJukebox.h"
 
-namespace terminals { struct Std; }
-
 namespace anonys
 {
-	class FsmPool {
-	public:
-		static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
-		using TerminalsJukebox = anonys_0::Terminals;
+    class FsmPool {
+    public:
+        static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
+        using TerminalsJukebox = anonys_0::Terminals;
 
-		void handleEvent(FsmId fsmId, Event& event);
+        void handleEvent(FsmId fsmId, Event& event);
 
-		void handleTimeoutEvent(FsmId fsmId, int16_t depth, EventId eventId);
+        void handleTimeoutEvent(FsmId fsmId, int16_t depth, EventId eventId);
 
-		void setTracingService(TracingService* pTracingService = nullptr);
+        void setTracingService(TracingService* pTracingService = nullptr);
 
-		void setTracingService(FsmId fsmId, TracingService* pTracingService = nullptr);
+        void setTracingService(FsmId fsmId, TracingService* pTracingService = nullptr);
 
-		void initializeJukebox(TimerService& timerService, terminals::Std& std);
+        void initializeJukebox(TimerService& timerService, terminals::Std& std);
 
-		void start();
+        void start();
 
-	private:
-		FsmCore m_fsm[Count]{};
+    private:
+        FsmCore m_fsm[Count]{};
 
-		std::aligned_storage_t<BufferSize::Jukebox, anonys::StdAlign> m_bufferJukebox{};
+        std::aligned_storage_t<BufferSize::Jukebox, anonys::StdAlign> m_bufferJukebox{};
 
-		TerminalsJukebox m_terminalsJukebox{};
+        TerminalsJukebox m_terminalsJukebox{};
 
-		bool m_started{ false };
-	};
+        bool m_started{ false };
+    };
 }
 #endif // EXAMPLE1_FSM_H
