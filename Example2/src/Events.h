@@ -11,7 +11,7 @@ namespace signals::alert {
 }
 
 namespace ctrl {
-	struct Proceed {};
+	class Proceed {};
 }
 
 namespace ctrl::cmd {
