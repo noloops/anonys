@@ -7,13 +7,13 @@ SCRIPT_DIR = Path(__file__).parent
 
 config = GeneratorConfig(
     fsm_definitions=[
-        SCRIPT_DIR / ".." / "Example2" / "fsmDef" / "Elevator.txt",
-        SCRIPT_DIR / ".." / "Example2" / "fsmDef" / "TrafficLight.txt",
-        SCRIPT_DIR / ".." / "Example2" / "fsmDef" / "Washer.txt",
+        SCRIPT_DIR / "../Example2/fsmDef/Elevator.txt",
+        SCRIPT_DIR / "../Example2/fsmDef/TrafficLight.txt",
+        SCRIPT_DIR / "../Example2/fsmDef/Washer.txt",
     ],
-    anonys_output_dir=str(SCRIPT_DIR / ".." / "Example2" / "src"),
-    fsm_output_dir=str(SCRIPT_DIR / ".." / "Example2" / "src" / "Fsm"),
-    project_name="EXAMPLE2",
+    anonys_output_dir=SCRIPT_DIR / "../Example2/src",
+    fsm_output_dir=SCRIPT_DIR / "../Example2/src/Fsm",
+    include_guard_prefix="EXAMPLE2",
 )
 
 generate(config)

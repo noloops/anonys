@@ -38,3 +38,7 @@ bld/
 
 # CMake build directories
 build/
+
+# Python
+__pycache__/
+*.egg-info/

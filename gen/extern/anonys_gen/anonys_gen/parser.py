@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -113,78 +112,123 @@ class FsmDefinition:
         return [d for d in self.declarations if d.element_name in published_names]
 
 
+def _validate_whitespace(raw_line: str, line_num: int, filepath: Path, is_state_line: bool) -> None:
+    """Validate whitespace rules for a definition line.
+    - State lines: only tabs allowed at beginning (for indentation), no tabs elsewhere
+    - Declaration lines: no leading whitespace, no tabs anywhere
+    """
+    if is_state_line:
+        # Count leading tabs, then check no spaces in leading whitespace
+        i = 0
+        while i < len(raw_line) and raw_line[i] == '\t':
+            i += 1
+        leading = raw_line[:i]
+        if i < len(raw_line) and raw_line[i] == ' ' and not raw_line[:i+1].strip():
+            # Space in leading whitespace area (before any non-whitespace)
+            leading_ws = ""
+            for ch in raw_line:
+                if ch in ' \t':
+                    leading_ws += ch
+                else:
+                    break
+            if ' ' in leading_ws:
+                raise ValueError(
+                    f"{filepath.name}:{line_num}: spaces not allowed for indentation "
+                    f"in state definition lines (use tabs only)"
+                )
+        # Check no tabs after the leading indentation
+        rest = raw_line[i:]
+        if '\t' in rest:
+            raise ValueError(
+                f"{filepath.name}:{line_num}: tabs not allowed except for indentation "
+                f"at the beginning of state definition lines"
+            )
+    else:
+        # Declaration lines: no leading whitespace allowed
+        if raw_line and raw_line[0] in ' \t':
+            raise ValueError(
+                f"{filepath.name}:{line_num}: declaration lines must not have "
+                f"leading whitespace"
+            )
+        # No tabs allowed at all
+        if '\t' in raw_line:
+            raise ValueError(
+                f"{filepath.name}:{line_num}: tabs not allowed in declaration lines "
+                f"(use spaces for separation)"
+            )
+
+
 def _parse_state_line(line: str) -> State:
-    """Parse a single state definition line (without leading tabs)."""
+    """Parse a single state definition line (without leading tabs).
+
+    Tolerant of whitespace variations around !, +, -, digits, ( and ).
+    All of these are equivalent:
+      !Idle +-1 start (floorTracker speedRegulator) display panel
+      ! Idle + - 1 start(floorTracker speedRegulator) display panel
+      !Idle +- 1 start (floorTracker speedRegulator )display panel
+    """
     rest = line.strip()
 
-    # Initial state prefix
+    # Initial state prefix — may have space after !
     is_initial = rest.startswith("!")
     if is_initial:
-        rest = rest[1:]
+        rest = rest[1:].lstrip()
 
-    # State name
-    parts = rest.split()
-    name = parts[0]
-    rest_parts = parts[1:]
+    # Normalize: ensure spaces around ( and ) so tokenization works
+    rest = rest.replace("(", " ( ").replace(")", " ) ")
+    tokens = rest.split()
 
-    # Rejoin for parenthesis parsing
-    rest_str = " ".join(rest_parts)
+    if not tokens:
+        raise ValueError(f"Empty state definition line")
 
-    # Split on parentheses to get three sections
-    # Before '(' : flags + events
-    # Between '(' and ')' : referenced terminals
-    # After ')' : published terminals
-    before_paren = ""
-    in_paren = ""
-    after_paren = ""
+    # State name is always first
+    name = tokens[0]
+    tokens = tokens[1:]
 
-    if "(" in rest_str:
-        idx_open = rest_str.index("(")
-        idx_close = rest_str.index(")")
-        before_paren = rest_str[:idx_open].strip()
-        in_paren = rest_str[idx_open + 1:idx_close].strip()
-        after_paren = rest_str[idx_close + 1:].strip()
-    else:
-        before_paren = rest_str
-
-    # Parse flags and events from before_paren
+    # Parse flags: consume tokens that are made of +, -, and digits only
     has_enter = False
     has_exit = False
     num_timeouts = 0
+    flag_chars: list[str] = []
+
+    while tokens:
+        t = tokens[0]
+        # A flag token is composed entirely of +, -, and digits
+        if all(ch in "+-0123456789" for ch in t) and t[0] in "+-":
+            flag_chars.extend(t)
+            tokens = tokens[1:]
+        # Also handle a standalone digit right after flag tokens
+        elif t.isdigit() and flag_chars and not any(ch.isdigit() for ch in flag_chars):
+            flag_chars.extend(t)
+            tokens = tokens[1:]
+        else:
+            break
+
+    for ch in flag_chars:
+        if ch == "+":
+            has_enter = True
+        elif ch == "-":
+            has_exit = True
+        elif ch.isdigit():
+            num_timeouts = int(ch)
+
+    # Now tokens contain: events... ( referenced... ) published...
     events: list[str] = []
+    referenced: list[str] = []
+    published: list[str] = []
 
-    tokens = before_paren.split() if before_paren else []
-    flag_idx = 0
-    if tokens:
-        # First token might be flags like "+-1" or "+1" or "-" or "+-" etc.
-        first = tokens[0]
-        # Check if first token starts with + or - (flag token)
-        if first and first[0] in "+-":
-            flag_token = first
-            flag_idx = 1
-            i = 0
-            while i < len(flag_token):
-                ch = flag_token[i]
-                if ch == "+":
-                    has_enter = True
-                    i += 1
-                elif ch == "-":
-                    # Check if next char is a digit — if so, it's a negative... no, actually
-                    # the '-' always means exit. Digits after +/- are timeout count.
-                    has_exit = True
-                    i += 1
-                elif ch.isdigit():
-                    num_timeouts = int(ch)
-                    i += 1
-                else:
-                    break
-        events = tokens[flag_idx:]
-
-    # Parse referenced terminals from in_paren
-    referenced = in_paren.split() if in_paren else []
-
-    # Parse published terminals from after_paren
-    published = after_paren.split() if after_paren else []
+    if "(" in tokens:
+        paren_open = tokens.index("(")
+        events = tokens[:paren_open]
+        rest_tokens = tokens[paren_open + 1:]
+        if ")" in rest_tokens:
+            paren_close = rest_tokens.index(")")
+            referenced = rest_tokens[:paren_close]
+            published = rest_tokens[paren_close + 1:]
+        else:
+            referenced = rest_tokens
+    else:
+        events = tokens
 
     return State(
         name=name,
@@ -205,22 +249,28 @@ def parse_definition(filepath: Path) -> FsmDefinition:
 
     declarations: list[Declaration] = []
     state_lines: list[tuple[int, str]] = []  # (indent_level, line)
-    in_states = False
 
-    for raw_line in lines:
+    for line_num_0, raw_line in enumerate(lines):
+        line_num = line_num_0 + 1
+
+        # Comment footer: stop parsing at first line starting with #
+        if raw_line.startswith("#"):
+            break
+
         stripped = raw_line.strip()
         if not stripped:
             continue
 
         if stripped.startswith("struct ") or stripped.startswith("class "):
-            # Declaration line
+            _validate_whitespace(raw_line, line_num, filepath, is_state_line=False)
             parts = stripped.split()
             kind = parts[0]
             namespace_path = parts[1]
             element_name = parts[2]
             declarations.append(Declaration(kind, namespace_path, element_name))
         else:
-            # State line — count leading tabs for indent
+            _validate_whitespace(raw_line, line_num, filepath, is_state_line=True)
+            # Count leading tabs for indent
             indent = 0
             for ch in raw_line:
                 if ch == "\t":
@@ -228,11 +278,9 @@ def parse_definition(filepath: Path) -> FsmDefinition:
                 else:
                     break
             state_lines.append((indent, stripped))
-            in_states = True
 
     # Build state tree
     top_level_states: list[State] = []
-    # Stack of (indent_level, state)
     stack: list[tuple[int, State]] = []
 
     for indent, line in state_lines:
