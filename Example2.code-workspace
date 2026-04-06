@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cmake.sourceDirectory": "${workspaceFolder}/Example2/platform/winVsc",
+		"cmake.buildDirectory": "${workspaceFolder}/Example2/platform/winVsc/build",
+		"cmake.generator": "Ninja",
+		"files.associations": {
+			"*.h": "cpp",
+			"*.cpp": "cpp"
+		}
+	}
+}
