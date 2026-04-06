@@ -9,12 +9,6 @@ namespace {
 		ctrl::reg::FloorTracker& floorTracker;
 	};
 
-	void enter(Me& me) {
-	}
-
-	void exit(Me& me) {
-	}
-
 	anonys::State* handle(Me& me, io::SensorTriggered& event) {
 		return nullptr;
 	}
@@ -35,12 +29,10 @@ namespace anonys_0_6 {
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
 		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pFloorTracker } };
-			enter(me);
+			::new (pMembers) Me{ *terminals.pFloorTracker };
 		}
 		else {
 			Me& me{ *static_cast<Me*>(pMembers) };
-			exit(me);
 			me.~Me();
 		}
 	}

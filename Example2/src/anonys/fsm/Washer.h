@@ -18,6 +18,7 @@ namespace anonys::fsm {
 		static constexpr anonys::StateDef Draining = { 7, anonys::FsmId::Washer, &Running, anonys_2_7::getMembersSize, anonys_2_7::liveCycle, anonys_2_7::handleEvent };
 		static constexpr anonys::StateDef Done = { 8, anonys::FsmId::Washer, nullptr, anonys_2_8::getMembersSize, anonys_2_8::liveCycle, anonys_2_8::handleEvent };
 		static constexpr anonys::StateDef Error = { 9, anonys::FsmId::Washer, nullptr, anonys_2_9::getMembersSize, anonys_2_9::liveCycle, anonys_2_9::handleEvent };
+		static constexpr anonys::StateDef Halted = { 10, anonys::FsmId::Washer, nullptr, anonys_2_10::getMembersSize, anonys_2_10::liveCycle, nullptr };
 	};
 }
 

@@ -9,9 +9,6 @@ namespace {
 		Display& display;
 	};
 
-	void enter(Me& me) {
-	}
-
 	void exit(Me& me) {
 	}
 
@@ -35,8 +32,7 @@ namespace anonys_1_1 {
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
 		if (create) {
-			Me& me{ *::new (pMembers) Me{ *terminals.pDisplay } };
-			enter(me);
+			::new (pMembers) Me{ *terminals.pDisplay };
 		}
 		else {
 			Me& me{ *static_cast<Me*>(pMembers) };

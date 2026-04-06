@@ -11,18 +11,42 @@ namespace env {
 
 	bool Tester::runAllTests() {
 		bool ok{true};
-		if (!testStartAndPowerCycle()) { ok = false; }
-		if (!testSelfTransitions()) { ok = false; }
-		if (!testPlayPauseCycle()) { ok = false; }
-		if (!testEventBubbling()) { ok = false; }
-		if (!testTrackEndTimeout()) { ok = false; }
-		if (!testSleepTimeout()) { ok = false; }
-		if (!testErrorAndRecovery()) { ok = false; }
-		if (!testUnhandledEvent()) { ok = false; }
-		if (!testAutoPauseCountdown()) { ok = false; }
-		if (!testConfigureAndCancelAutoPause()) { ok = false; }
-		if (!testMalfunctionStoppedInIdle()) { ok = false; }
-		if (!testPauseUnhandledInPaused()) { ok = false; }
+		if (!testStartAndPowerCycle()) {
+			ok = false;
+		}
+		if (!testSelfTransitions()) {
+			ok = false;
+		}
+		if (!testPlayPauseCycle()) {
+			ok = false;
+		}
+		if (!testEventBubbling()) {
+			ok = false;
+		}
+		if (!testTrackEndTimeout()) {
+			ok = false;
+		}
+		if (!testSleepTimeout()) {
+			ok = false;
+		}
+		if (!testErrorAndRecovery()) {
+			ok = false;
+		}
+		if (!testUnhandledEvent()) {
+			ok = false;
+		}
+		if (!testAutoPauseCountdown()) {
+			ok = false;
+		}
+		if (!testConfigureAndCancelAutoPause()) {
+			ok = false;
+		}
+		if (!testMalfunctionStoppedInIdle()) {
+			ok = false;
+		}
+		if (!testPauseUnhandledInPaused()) {
+			ok = false;
+		}
 		return ok;
 	}
 

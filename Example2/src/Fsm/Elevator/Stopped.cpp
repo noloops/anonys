@@ -14,9 +14,6 @@ namespace {
 		me.timer.start<TimeoutA>(60000);
 	}
 
-	void exit(Me& me) {
-	}
-
 	anonys::State* handle(Me& me, Start& event) {
 		return nullptr;
 	}
@@ -54,7 +51,6 @@ namespace anonys_0_8 {
 		}
 		else {
 			Me& me{ *static_cast<Me*>(pMembers) };
-			exit(me);
 			me.~Me();
 		}
 	}

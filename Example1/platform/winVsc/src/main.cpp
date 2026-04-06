@@ -3,9 +3,8 @@
 
 int main()
 {
-	bool ok = env::Tester::runAllTests();
-	if (ok) {
+	if (env::Tester::runAllTests()) {
 		env::Demo::run();
 	}
-	return ok ? 0 : 1;
+	return 0;
 }

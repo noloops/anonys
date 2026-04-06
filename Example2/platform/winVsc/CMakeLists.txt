@@ -48,4 +48,5 @@ add_executable(Example2
     "${REPO_ROOT}/Example2/src/Fsm/Washer/Running/Draining.cpp"
     "${REPO_ROOT}/Example2/src/Fsm/Washer/Done.cpp"
     "${REPO_ROOT}/Example2/src/Fsm/Washer/Error.cpp"
+    "${REPO_ROOT}/Example2/src/Fsm/Washer/Halted.cpp"
 )
