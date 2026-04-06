@@ -1,4 +1,4 @@
-# ANONYS
+# ANONYS FINITE STATE MACHINE FRAMEWORK
 # Copyright (c) 2026 Jan Hofmann <anonys@noloops.ch>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
