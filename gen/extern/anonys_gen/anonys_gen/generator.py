@@ -708,68 +708,56 @@ def _generate_state_section(fsm_idx: int, state_id: int, fsm_def: FsmDefinition,
     # liveCycle
     lines.append("\tvoid liveCycle(bool create, void* pTerminals, void* pMembers) {")
 
-    me_members = _get_me_members(fsm_def, state)
     has_published = bool(state.published)
-    has_me_members = bool(me_members)
 
-    # Determine if we need the terminals reference
-    needs_terminals = _state_needs_timer(state) or bool(state.referenced) or has_published
+    # Halted pattern: no handlers, no enter, no exit, no published — truly empty
+    is_halted = (not has_any_handler and not state.has_enter and not state.has_exit
+                 and not has_published)
 
-    if needs_terminals or has_me_members:
-        # Even Halted with empty Me needs basic create/destroy
-        if not has_any_handler and not state.has_enter and not state.has_exit and not has_published and not me_members:
-            # Really truly empty: Halted pattern
-            lines.append("\t\tif (create) {")
-            lines.append(f"\t\t\t::new (pMembers) Me{{}};")
-            lines.append("\t\t}")
-            lines.append("\t\telse {")
-            lines.append(f"\t\t\tMe& me{{ *static_cast<Me*>(pMembers) }};")
-            lines.append("\t\t\tme.~Me();")
-            lines.append("\t\t}")
-        else:
-            lines.append(f"\t\tauto& terminals{{ *static_cast<{fsm_term_ns}::Terminals*>(pTerminals) }};")
-            ctor_args = _get_ctor_args(fsm_def, state)
-
-            lines.append("\t\tif (create) {")
-
-            # Determine new expression pattern based on enter/published presence
-            if state.has_enter or has_published:
-                lines.append(f"\t\t\tMe& me{{ *::new (pMembers) Me{{ {ctor_args} }} }};")
-            else:
-                lines.append(f"\t\t\t::new (pMembers) Me{{ {ctor_args} }};")
-
-            # Set published terminal pointers
-            for pub_name in state.published:
-                decl = fsm_def.get_declaration(pub_name)
-                lines.append(f"\t\t\tterminals.{decl.ptr_name} = &me.{pub_name};")
-
-            if state.has_enter:
-                lines.append("\t\t\tenter(me);")
-
-            lines.append("\t\t}")
-            lines.append("\t\telse {")
-
-            lines.append(f"\t\t\tMe& me{{ *static_cast<Me*>(pMembers) }};")
-
-            if state.has_exit:
-                lines.append("\t\t\texit(me);")
-
-            lines.append("\t\t\tme.~Me();")
-
-            # Clear published terminal pointers
-            for pub_name in state.published:
-                decl = fsm_def.get_declaration(pub_name)
-                lines.append(f"\t\t\tterminals.{decl.ptr_name} = nullptr;")
-
-            lines.append("\t\t}")
-    else:
-        # Completely empty, Halted-like
+    if is_halted:
         lines.append("\t\tif (create) {")
         lines.append(f"\t\t\t::new (pMembers) Me{{}};")
         lines.append("\t\t}")
         lines.append("\t\telse {")
         lines.append(f"\t\t\tMe& me{{ *static_cast<Me*>(pMembers) }};")
         lines.append("\t\t\tme.~Me();")
+        lines.append("\t\t}")
+    else:
+        lines.append(f"\t\tauto& terminals{{ *static_cast<{fsm_term_ns}::Terminals*>(pTerminals) }};")
+        ctor_args = _get_ctor_args(fsm_def, state)
+        me_init = f"Me{{ {ctor_args} }}" if ctor_args else "Me{}"
+
+        lines.append("\t\tif (create) {")
+
+        # Determine new expression pattern based on enter/published presence
+        if state.has_enter or has_published:
+            lines.append(f"\t\t\tMe& me{{ *::new (pMembers) {me_init} }};")
+        else:
+            lines.append(f"\t\t\t::new (pMembers) {me_init};")
+
+        # Set published terminal pointers
+        for pub_name in state.published:
+            decl = fsm_def.get_declaration(pub_name)
+            lines.append(f"\t\t\tterminals.{decl.ptr_name} = &me.{pub_name};")
+
+        if state.has_enter:
+            lines.append("\t\t\tenter(me);")
+
+        lines.append("\t\t}")
+        lines.append("\t\telse {")
+
+        lines.append(f"\t\t\tMe& me{{ *static_cast<Me*>(pMembers) }};")
+
+        if state.has_exit:
+            lines.append("\t\t\texit(me);")
+
+        lines.append("\t\t\tme.~Me();")
+
+        # Clear published terminal pointers
+        for pub_name in state.published:
+            decl = fsm_def.get_declaration(pub_name)
+            lines.append(f"\t\t\tterminals.{decl.ptr_name} = nullptr;")
+
         lines.append("\t\t}")
 
     lines.append("\t}")
