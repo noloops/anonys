@@ -64,6 +64,7 @@ namespace anonys_2_9 {
 namespace anonys_2_10 {
 	uint16_t getMembersSize();
 	void liveCycle(bool create, void* pTerminals, void* pMembers);
+	const anonys::StateDef* handleEvent(void* pMembers, anonys::Event& event);
 }
 
 #endif // EXAMPLE2_ANONYS_HANDLERS_WASHER_H

@@ -9,6 +9,10 @@ namespace {
 
 // Generated code, do not edit:
 namespace anonys_2_10 {
+	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+		return &anonys::DummyStates::Unhandled;
+	}
+
 	void liveCycle(bool create, void* pTerminals, void* pMembers) {
 		if (create) {
 			::new (pMembers) Me{};
