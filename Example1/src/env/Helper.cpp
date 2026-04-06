@@ -13,13 +13,13 @@ namespace env {
 		case anonys::FsmId::Jukebox:
 			switch (stateId) {
 			case 1: return "Off";
-			case 2: return "Idle";
-			case 3: return "Playing";
-			case 4: return "Normal";
-			case 5: return "Paused";
-			case 6: return "Error";
+			case 2: return "On";
+			case 3: return "Idle";
+			case 4: return "Playing";
+			case 5: return "Normal";
+			case 6: return "Paused";
 			case 7: return "AutoPause";
-			case 8: return "On";
+			case 8: return "Error";
 			default: return "?";
 			}
 		default: return "?";

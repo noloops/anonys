@@ -74,9 +74,9 @@ namespace env {
 		Expected::tracingTraceHandledEvent(F, 1, anonys::EventId{0});
 		Expected::tracingTraceExitState(F, 1);
 		Expected::logWrite(M::ExitOff);
-		Expected::tracingTraceEnterState(F, 8);
-		Expected::logWrite(M::EnterOn);
 		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterOn);
+		Expected::tracingTraceEnterState(F, 3);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 5000);
 		exec.send<events::PowerOn>(F, events::PowerOn{});
@@ -87,13 +87,13 @@ namespace env {
 
 	static bool insertCoin(Executor& exec, int32_t count) {
 		Expected::logWrite(M::InsertCoinInIdle);
-		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{2});
-		Expected::tracingTraceExitState(F, 2);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{2});
+		Expected::tracingTraceExitState(F, 3);
 		Expected::logWrite(M::ExitIdle);
 		Expected::timerStopTimers(F, 1);
-		Expected::tracingTraceEnterState(F, 3);
-		Expected::logWrite(M::EnterPlaying);
 		Expected::tracingTraceEnterState(F, 4);
+		Expected::logWrite(M::EnterPlaying);
+		Expected::tracingTraceEnterState(F, 5);
 		Expected::logWrite(M::EnterNormal, count);
 		Expected::timerStartTimer(F, 2, anonys::EventId{60001}, 3000);
 		exec.send<events::InsertCoin>(F, events::InsertCoin{});
@@ -104,11 +104,11 @@ namespace env {
 
 	static bool goToAutoPause(Executor& exec) {
 		Expected::logWrite(M::AutoPauseInPlaying);
-		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{10});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{10});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceEnterState(F, 5);
+		Expected::tracingTraceEnterState(F, 6);
 		Expected::logWrite(M::EnterPaused, 0);
 		Expected::tracingTraceEnterState(F, 7);
 		Expected::logWrite(M::EnterAutoPause);
@@ -139,13 +139,13 @@ namespace env {
 
 	static bool processAutoPlay(Executor& exec, int32_t normalCount) {
 		Expected::logWrite(M::PlayInPaused);
-		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{3});
+		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{3});
 		Expected::tracingTraceExitState(F, 7);
 		Expected::logWrite(M::ExitAutoPause);
 		Expected::timerStopTimers(F, 3);
-		Expected::tracingTraceExitState(F, 5);
+		Expected::tracingTraceExitState(F, 6);
 		Expected::logWrite(M::ExitPaused);
-		Expected::tracingTraceEnterState(F, 4);
+		Expected::tracingTraceEnterState(F, 5);
 		Expected::logWrite(M::EnterNormal, normalCount);
 		Expected::timerStartTimer(F, 2, anonys::EventId{60001}, 3000);
 		if (!exec.sendNextEvent()) { return false; }
@@ -166,11 +166,11 @@ namespace env {
 
 		// PowerOff in Idle -> bubbles to On -> Off
 		Expected::logWrite(M::PowerOffInOn);
-		Expected::tracingTraceHandledEvent(F, 8, anonys::EventId{1});
-		Expected::tracingTraceExitState(F, 2);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{1});
+		Expected::tracingTraceExitState(F, 3);
 		Expected::logWrite(M::ExitIdle);
 		Expected::timerStopTimers(F, 1);
-		Expected::tracingTraceExitState(F, 8);
+		Expected::tracingTraceExitState(F, 2);
 		Expected::logWrite(M::ExitOn);
 		Expected::tracingTraceEnterState(F, 1);
 		Expected::logWrite(M::EnterOff);
@@ -196,11 +196,11 @@ namespace env {
 
 		// Diagnostic in Idle -> Idle (root self-transition: pop + push)
 		Expected::logWrite(M::DiagnosticInIdle);
-		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{7});
-		Expected::tracingTraceExitState(F, 2);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{7});
+		Expected::tracingTraceExitState(F, 3);
 		Expected::logWrite(M::ExitIdle);
 		Expected::timerStopTimers(F, 1);
-		Expected::tracingTraceEnterState(F, 2);
+		Expected::tracingTraceEnterState(F, 3);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 5000);
 		executor.send<events::Diagnostic>(F, events::Diagnostic{});
@@ -211,11 +211,11 @@ namespace env {
 
 		// Skip in Normal -> Normal (child self-transition: pop + push, parent survives)
 		Expected::logWrite(M::SkipInNormal);
-		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{5});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{5});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceEnterState(F, 4);
+		Expected::tracingTraceEnterState(F, 5);
 		Expected::logWrite(M::EnterNormal, 2);
 		Expected::timerStartTimer(F, 2, anonys::EventId{60001}, 3000);
 		executor.send<events::Skip>(F, events::Skip{});
@@ -238,11 +238,11 @@ namespace env {
 
 		// Pause in Normal -> Paused (sibling: shared parent Playing stays)
 		Expected::logWrite(M::PauseInNormal);
-		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{4});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{4});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceEnterState(F, 5);
+		Expected::tracingTraceEnterState(F, 6);
 		Expected::logWrite(M::EnterPaused, 0);
 		executor.send<events::Pause>(F, events::Pause{});
 		if (!Expected::check()) { return failed(); }
@@ -250,10 +250,10 @@ namespace env {
 
 		// Play in Paused -> Normal (sibling back, counter persists: 1 -> 2)
 		Expected::logWrite(M::PlayInPaused);
-		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{3});
-		Expected::tracingTraceExitState(F, 5);
+		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{3});
+		Expected::tracingTraceExitState(F, 6);
 		Expected::logWrite(M::ExitPaused);
-		Expected::tracingTraceEnterState(F, 4);
+		Expected::tracingTraceEnterState(F, 5);
 		Expected::logWrite(M::EnterNormal, 2);
 		Expected::timerStartTimer(F, 2, anonys::EventId{60001}, 3000);
 		executor.send<events::Play>(F, events::Play{});
@@ -262,11 +262,11 @@ namespace env {
 
 		// Skip -> Normal (self, counter continues: 3)
 		Expected::logWrite(M::SkipInNormal);
-		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{5});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{5});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceEnterState(F, 4);
+		Expected::tracingTraceEnterState(F, 5);
 		Expected::logWrite(M::EnterNormal, 3);
 		Expected::timerStartTimer(F, 2, anonys::EventId{60001}, 3000);
 		executor.send<events::Skip>(F, events::Skip{});
@@ -289,13 +289,13 @@ namespace env {
 
 		// Eject in Normal -> bubbles to Playing -> Idle
 		Expected::logWrite(M::EjectInPlaying);
-		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{6});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{6});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceExitState(F, 3);
+		Expected::tracingTraceExitState(F, 4);
 		Expected::logWrite(M::ExitPlaying);
-		Expected::tracingTraceEnterState(F, 2);
+		Expected::tracingTraceEnterState(F, 3);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 5000);
 		executor.send<events::Eject>(F, events::Eject{});
@@ -307,13 +307,13 @@ namespace env {
 
 		// PowerOff in Normal -> bubbles to Playing -> On -> Off
 		Expected::logWrite(M::PowerOffInOn);
-		Expected::tracingTraceHandledEvent(F, 8, anonys::EventId{1});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{1});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceExitState(F, 3);
+		Expected::tracingTraceExitState(F, 4);
 		Expected::logWrite(M::ExitPlaying);
-		Expected::tracingTraceExitState(F, 8);
+		Expected::tracingTraceExitState(F, 2);
 		Expected::logWrite(M::ExitOn);
 		Expected::tracingTraceEnterState(F, 1);
 		Expected::logWrite(M::EnterOff);
@@ -337,13 +337,13 @@ namespace env {
 
 		// TrackTimer fires at depth 2 -> Normal handles -> Idle
 		Expected::logWrite(M::TrackEndInNormal);
-		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{60001});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{60001});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceExitState(F, 3);
+		Expected::tracingTraceExitState(F, 4);
 		Expected::logWrite(M::ExitPlaying);
-		Expected::tracingTraceEnterState(F, 2);
+		Expected::tracingTraceEnterState(F, 3);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 5000);
 		if (!executor.sendNextTimeout()) { return failed(); }
@@ -364,11 +364,11 @@ namespace env {
 
 		// SleepTimer fires at depth 1 -> Idle handles -> Off
 		Expected::logWrite(M::SleepTimeoutInIdle);
-		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{60001});
-		Expected::tracingTraceExitState(F, 2);
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{60001});
+		Expected::tracingTraceExitState(F, 3);
 		Expected::logWrite(M::ExitIdle);
 		Expected::timerStopTimers(F, 1);
-		Expected::tracingTraceExitState(F, 8);
+		Expected::tracingTraceExitState(F, 2);
 		Expected::logWrite(M::ExitOn);
 		Expected::tracingTraceEnterState(F, 1);
 		Expected::logWrite(M::EnterOff);
@@ -391,15 +391,15 @@ namespace env {
 
 		// Malfunction in Normal -> bubbles to Playing -> On -> Error
 		Expected::logWrite(M::MalfunctionInOn);
-		Expected::tracingTraceHandledEvent(F, 8, anonys::EventId{8});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{8});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceExitState(F, 3);
+		Expected::tracingTraceExitState(F, 4);
 		Expected::logWrite(M::ExitPlaying);
-		Expected::tracingTraceExitState(F, 8);
+		Expected::tracingTraceExitState(F, 2);
 		Expected::logWrite(M::ExitOn);
-		Expected::tracingTraceEnterState(F, 6);
+		Expected::tracingTraceEnterState(F, 8);
 		Expected::logWrite(M::EnterError);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60001}, 10000);
 		executor.send<events::Malfunction>(F, events::Malfunction{});
@@ -408,13 +408,13 @@ namespace env {
 
 		// Reset in Error -> Idle
 		Expected::logWrite(M::ResetInError);
-		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{9});
-		Expected::tracingTraceExitState(F, 6);
+		Expected::tracingTraceHandledEvent(F, 8, anonys::EventId{9});
+		Expected::tracingTraceExitState(F, 8);
 		Expected::logWrite(M::ExitError);
 		Expected::timerStopTimers(F, 0);
-		Expected::tracingTraceEnterState(F, 8);
-		Expected::logWrite(M::EnterOn);
 		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterOn);
+		Expected::tracingTraceEnterState(F, 3);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 5000);
 		executor.send<events::Reset>(F, events::Reset{});
@@ -425,15 +425,15 @@ namespace env {
 		if (!insertCoin(executor, 1)) { return failed(); }
 
 		Expected::logWrite(M::MalfunctionInOn);
-		Expected::tracingTraceHandledEvent(F, 8, anonys::EventId{8});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{8});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceExitState(F, 3);
+		Expected::tracingTraceExitState(F, 4);
 		Expected::logWrite(M::ExitPlaying);
-		Expected::tracingTraceExitState(F, 8);
+		Expected::tracingTraceExitState(F, 2);
 		Expected::logWrite(M::ExitOn);
-		Expected::tracingTraceEnterState(F, 6);
+		Expected::tracingTraceEnterState(F, 8);
 		Expected::logWrite(M::EnterError);
 		Expected::timerStartTimer(F, 0, anonys::EventId{60001}, 10000);
 		executor.send<events::Malfunction>(F, events::Malfunction{});
@@ -442,13 +442,13 @@ namespace env {
 
 		// RecoveryTimer fires -> Idle
 		Expected::logWrite(M::RecoveryTimeoutInError);
-		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{60001});
-		Expected::tracingTraceExitState(F, 6);
+		Expected::tracingTraceHandledEvent(F, 8, anonys::EventId{60001});
+		Expected::tracingTraceExitState(F, 8);
 		Expected::logWrite(M::ExitError);
 		Expected::timerStopTimers(F, 0);
-		Expected::tracingTraceEnterState(F, 8);
-		Expected::logWrite(M::EnterOn);
 		Expected::tracingTraceEnterState(F, 2);
+		Expected::logWrite(M::EnterOn);
+		Expected::tracingTraceEnterState(F, 3);
 		Expected::logWrite(M::EnterIdle);
 		Expected::timerStartTimer(F, 1, anonys::EventId{60001}, 5000);
 		if (!executor.sendNextTimeout()) { return failed(); }
@@ -536,9 +536,9 @@ namespace env {
 		Expected::tracingTraceExitState(F, 7);
 		Expected::logWrite(M::ExitAutoPause);
 		Expected::timerStopTimers(F, 3);
-		Expected::tracingTraceExitState(F, 5);
+		Expected::tracingTraceExitState(F, 6);
 		Expected::logWrite(M::ExitPaused);
-		Expected::tracingTraceEnterState(F, 5);
+		Expected::tracingTraceEnterState(F, 6);
 		Expected::logWrite(M::EnterPaused, -80);
 		executor.send<events::Pause>(F, events::Pause{});
 		if (!Expected::check()) { return failed(); }
@@ -546,7 +546,7 @@ namespace env {
 
 		// ConfigureAutoPause(2) in Paused -> sets countdown to 2, enters AutoPause
 		Expected::logWrite(M::ConfigureAutoPauseInPaused, 2);
-		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{11});
+		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{11});
 		Expected::tracingTraceEnterState(F, 7);
 		Expected::logWrite(M::EnterAutoPause);
 		Expected::timerStartTimer(F, 3, anonys::EventId{60001}, 1000);
@@ -578,7 +578,7 @@ namespace env {
 
 		// Malfunction in Idle -> Idle handles, returns nullptr (no transition)
 		Expected::logWrite(M::MalfunctionStoppedInIdle);
-		Expected::tracingTraceHandledEvent(F, 2, anonys::EventId{8});
+		Expected::tracingTraceHandledEvent(F, 3, anonys::EventId{8});
 		executor.send<events::Malfunction>(F, events::Malfunction{});
 		if (!Expected::check()) { return failed(); }
 
@@ -601,11 +601,11 @@ namespace env {
 
 		// Pause in Normal -> Paused
 		Expected::logWrite(M::PauseInNormal);
-		Expected::tracingTraceHandledEvent(F, 4, anonys::EventId{4});
-		Expected::tracingTraceExitState(F, 4);
+		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{4});
+		Expected::tracingTraceExitState(F, 5);
 		Expected::logWrite(M::ExitNormal);
 		Expected::timerStopTimers(F, 2);
-		Expected::tracingTraceEnterState(F, 5);
+		Expected::tracingTraceEnterState(F, 6);
 		Expected::logWrite(M::EnterPaused, 0);
 		executor.send<events::Pause>(F, events::Pause{});
 		if (!Expected::check()) { return failed(); }
@@ -618,10 +618,10 @@ namespace env {
 
 		// Verify state is still Paused by sending Play -> Normal
 		Expected::logWrite(M::PlayInPaused);
-		Expected::tracingTraceHandledEvent(F, 5, anonys::EventId{3});
-		Expected::tracingTraceExitState(F, 5);
+		Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{3});
+		Expected::tracingTraceExitState(F, 6);
 		Expected::logWrite(M::ExitPaused);
-		Expected::tracingTraceEnterState(F, 4);
+		Expected::tracingTraceEnterState(F, 5);
 		Expected::logWrite(M::EnterNormal, 2);
 		Expected::timerStartTimer(F, 2, anonys::EventId{60001}, 3000);
 		executor.send<events::Play>(F, events::Play{});
