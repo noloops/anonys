@@ -1,0 +1,6 @@
+[submodule "ext/anonys"]
+	path = ext/anonys
+	url = https://github.com/noloops/anonys-core.git
+[submodule "gen/extern/anonys_gen"]
+	path = gen/extern/anonys_gen
+	url = https://github.com/noloops/anonys-gen.git
