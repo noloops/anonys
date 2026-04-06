@@ -48,11 +48,11 @@ namespace anonys_2_5 {
         case anonys::getEventId<io::data::Tick>().id:
             return handle(me, *static_cast<io::data::Tick*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-            return handle(me, *static_cast<TimeoutA*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout2>().id:
-            return handle(me, *static_cast<TimeoutB*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout3>().id:
-            return handle(me, *static_cast<TimeoutC*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout3*>(event.pData));
         default:
             return &anonys::DummyStates::Unhandled;
         }

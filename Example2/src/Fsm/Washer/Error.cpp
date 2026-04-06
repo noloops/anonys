@@ -34,7 +34,7 @@ namespace anonys_2_9 {
         case anonys::getEventId<ctrl::cmd::Reset>().id:
             return handle(me, *static_cast<ctrl::cmd::Reset*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-            return handle(me, *static_cast<TimeoutA*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
         default:
             return &anonys::DummyStates::Unhandled;
         }

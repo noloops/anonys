@@ -42,9 +42,9 @@ namespace anonys_0_5 {
         case anonys::getEventId<io::SensorTriggered>().id:
             return handle(me, *static_cast<io::SensorTriggered*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-            return handle(me, *static_cast<TimeoutA*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout2>().id:
-            return handle(me, *static_cast<TimeoutB*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
         default:
             return &anonys::DummyStates::Unhandled;
         }

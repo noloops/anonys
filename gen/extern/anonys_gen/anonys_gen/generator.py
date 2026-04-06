@@ -610,8 +610,7 @@ def _generate_state_section(fsm_idx: int, state_id: int, fsm_def: FsmDefinition,
 
         for i in range(1, state.num_timeouts + 1):
             lines.append(f"{_I2}case anonys::getTimeoutEventId<anonys::Timeout{i}>().id:")
-            letter = chr(ord("A") + i - 1)
-            lines.append(f"{_I3}return handle(me, *static_cast<Timeout{letter}*>(event.pData));")
+            lines.append(f"{_I3}return handle(me, *static_cast<anonys::Timeout{i}*>(event.pData));")
 
         lines.append(f"{_I2}default:")
         lines.append(f"{_I3}return &anonys::DummyStates::Unhandled;")

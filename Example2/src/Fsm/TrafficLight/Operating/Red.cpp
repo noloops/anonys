@@ -41,9 +41,9 @@ namespace anonys_1_5 {
         case anonys::getEventId<ctrl::Proceed>().id:
             return handle(me, *static_cast<ctrl::Proceed*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-            return handle(me, *static_cast<TimeoutA*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout2>().id:
-            return handle(me, *static_cast<TimeoutB*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
         default:
             return &anonys::DummyStates::Unhandled;
         }

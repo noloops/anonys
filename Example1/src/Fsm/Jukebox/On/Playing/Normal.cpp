@@ -49,7 +49,7 @@ namespace anonys_0_5 {
         case anonys::getEventId<events::Skip>().id:
             return handle(me, *static_cast<events::Skip*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-            return handle(me, *static_cast<TimeoutA*>(event.pData));
+            return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
         default:
             return &anonys::DummyStates::Unhandled;
         }
