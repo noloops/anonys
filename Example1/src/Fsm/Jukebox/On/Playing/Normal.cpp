@@ -4,7 +4,7 @@
 
 namespace {
 	using Fsm = anonys::fsm::Jukebox;
-	using TrackTimer = anonys::Timeout1;
+	using TrackEndTimeout = anonys::Timeout1;
 
 	struct Me {
 		anonys::Timer timer;
@@ -16,7 +16,7 @@ namespace {
 	void enter(Me& me) {
 		me.std.log.write(terminals::Message::EnterNormal, me.counter.increment());
 		me.mixer.setVolume(80);
-		me.timer.start<TrackTimer>(3000);
+		me.timer.start<TrackEndTimeout>(3000);
 	}
 
 	void exit(Me& me) {
@@ -33,7 +33,7 @@ namespace {
 		return &Fsm::Normal;
 	}
 
-	anonys::State* handle(Me& me, TrackTimer& event) {
+	anonys::State* handle(Me& me, TrackEndTimeout& event) {
 		me.std.log.write(terminals::Message::TrackEndInNormal);
 		return &Fsm::Idle;
 	}
@@ -49,7 +49,7 @@ namespace anonys_0_4 {
 		case anonys::getEventId<events::Skip>().id:
 			return handle(me, *static_cast<events::Skip*>(event.pData));
 		case anonys::getTimeoutEventId<anonys::Timeout1>().id:
-			return handle(me, *static_cast<TrackTimer*>(event.pData));
+			return handle(me, *static_cast<TrackEndTimeout*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}

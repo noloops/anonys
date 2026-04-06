@@ -4,7 +4,7 @@
 
 namespace {
 	using Fsm = anonys::fsm::Jukebox;
-	using PauseCountdownTimer = anonys::Timeout4;
+	using PauseCountdownTimeout = anonys::Timeout1;
 
 	struct Me {
 		anonys::Timer timer;
@@ -14,14 +14,14 @@ namespace {
 
 	void enter(Me& me) {
 		me.std.log.write(terminals::Message::EnterAutoPause);
-		me.timer.start<PauseCountdownTimer>(1000);
+		me.timer.start<PauseCountdownTimeout>(1000);
 	}
 
 	void exit(Me& me) {
 		me.std.log.write(terminals::Message::ExitAutoPause);
 	}
 
-	anonys::State* handle(Me& me, PauseCountdownTimer& event) {
+	anonys::State* handle(Me& me, PauseCountdownTimeout& event) {
 		me.std.log.write(terminals::Message::CountdownTimerInAutoPause);
 		if (me.countdown.decrement()) {
 			me.std.sender.send<events::Play>(Fsm::Id, events::Play{});
@@ -40,8 +40,8 @@ namespace anonys_0_7 {
 	anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
 		Me& me{ *static_cast<Me*>(pMembers) };
 		switch (event.eventId.id) {
-		case anonys::getTimeoutEventId<anonys::Timeout4>().id:
-			return handle(me, *static_cast<PauseCountdownTimer*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout1>().id:
+			return handle(me, *static_cast<PauseCountdownTimeout*>(event.pData));
 		case anonys::getEventId<events::Pause>().id:
 			return handle(me, *static_cast<events::Pause*>(event.pData));
 		default:

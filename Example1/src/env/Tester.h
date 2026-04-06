@@ -3,6 +3,8 @@
 namespace env {
 	class Tester {
 	public:
+		static bool runAllTests();
+
 		static bool testStartAndPowerCycle();
 		static bool testSelfTransitions();
 		static bool testPlayPauseCycle();

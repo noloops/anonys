@@ -40,10 +40,10 @@ namespace env {
 		case 9: return "Reset";
 		case 10: return "AutoPause";
 		case 11: return "ConfigureAutoPause";
-		case 60001: return "TrackTimer";
-		case 60002: return "SleepTimer";
-		case 60003: return "RecoveryTimer";
-		case 60004: return "PauseCountdownTimer";
+		case 60001: return "Timeout1";
+		case 60002: return "Timeout2";
+		case 60003: return "Timeout3";
+		case 60004: return "Timeout4";
 		default: return "?";
 		}
 	}

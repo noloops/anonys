@@ -4,7 +4,7 @@
 
 namespace {
 	using Fsm = anonys::fsm::Jukebox;
-	using RecoveryTimer = anonys::Timeout3;
+	using RecoveryTimeout = anonys::Timeout1;
 
 	struct Me {
 		anonys::Timer timer;
@@ -13,7 +13,7 @@ namespace {
 
 	void enter(Me& me) {
 		me.std.log.write(terminals::Message::EnterError);
-		me.timer.start<RecoveryTimer>(10000);
+		me.timer.start<RecoveryTimeout>(10000);
 	}
 
 	void exit(Me& me) {
@@ -25,7 +25,7 @@ namespace {
 		return &Fsm::Idle;
 	}
 
-	anonys::State* handle(Me& me, RecoveryTimer& event) {
+	anonys::State* handle(Me& me, RecoveryTimeout& event) {
 		me.std.log.write(terminals::Message::RecoveryTimeoutInError);
 		return &Fsm::Idle;
 	}
@@ -38,8 +38,8 @@ namespace anonys_0_6 {
 		switch (event.eventId.id) {
 		case anonys::getEventId<events::Reset>().id:
 			return handle(me, *static_cast<events::Reset*>(event.pData));
-		case anonys::getTimeoutEventId<anonys::Timeout3>().id:
-			return handle(me, *static_cast<RecoveryTimer*>(event.pData));
+		case anonys::getTimeoutEventId<anonys::Timeout1>().id:
+			return handle(me, *static_cast<RecoveryTimeout*>(event.pData));
 		default:
 			return &anonys::DummyStates::Unhandled;
 		}
