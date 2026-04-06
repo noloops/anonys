@@ -29,7 +29,6 @@ namespace anonys
     class Timeout1 {};
     class Timeout2 {};
     class Timeout3 {};
-    class Timeout4 {};
 
     template <typename T> constexpr EventId getEventId() = delete;
     template<> constexpr EventId getEventId<Start>() { return 0; }
@@ -44,7 +43,6 @@ namespace anonys
     template<> constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }
     template<> constexpr EventId getTimeoutEventId<Timeout2>() { return 60002; }
     template<> constexpr EventId getTimeoutEventId<Timeout3>() { return 60003; }
-    template<> constexpr EventId getTimeoutEventId<Timeout4>() { return 60004; }
     static_assert(getTimeoutEventId<Timeout1>().id == MinTimoutEventId.id);
 }
 
