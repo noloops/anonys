@@ -1,105 +1,49 @@
-<mxfile host="app.diagrams.net" modified="2026-04-12T00:00:00.000Z" agent="ChatGPT" version="24.7.17">
-  <diagram id="anonys-repo-structure" name="Page-1">
-    <mxGraphModel dx="1280" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
-      <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-
-        <mxCell id="bg"
-                value=""
-                style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c0c0c0;strokeWidth=1;"
-                vertex="1"
-                parent="1">
-          <mxGeometry x="40" y="20" width="940" height="620" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="title"
-                value="Anonys Framework Repository Structure"
-                style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#222222;"
-                vertex="1"
-                parent="1">
-          <mxGeometry x="330" y="50" width="360" height="30" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="main"
-                value="Main Repository&#xa;(this repository)&#xa;&#xa;- conceptual documentation&#xa;- high-level architecture&#xa;- integration examples"
-                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;fontSize=14;fontColor=#222222;spacingTop=6;"
-                vertex="1"
-                parent="1">
-          <mxGeometry x="390" y="130" width="240" height="130" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="core"
-                value="anonys-core&#xa;&#xa;- event-handling library&#xa;- core runtime primitives"
-                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.2;fontSize=14;fontColor=#222222;spacingTop=6;"
-                vertex="1"
-                parent="1">
-          <mxGeometry x="130" y="360" width="230" height="110" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="generator"
-                value="Code Generator Repository&#xa;&#xa;- code generation tooling&#xa;- boilerplate and FSM structure generation"
-                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.2;fontSize=14;fontColor=#222222;spacingTop=6;"
-                vertex="1"
-                parent="1">
-          <mxGeometry x="660" y="360" width="260" height="110" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="submoduleNote"
-                value="Included as git submodules"
-                style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;fontColor=#555555;"
-                vertex="1"
-                parent="1">
-          <mxGeometry x="390" y="295" width="240" height="30" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="edge_main_core"
-                value="submodule"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;fontColor=#444444;endArrow=block;endFill=1;"
-                edge="1"
-                source="main"
-                target="core"
-                parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="edge_main_generator"
-                value="submodule"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;fontColor=#444444;endArrow=block;endFill=1;"
-                edge="1"
-                source="main"
-                target="generator"
-                parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="benefits"
-                value="Benefits&#xa;- version alignment&#xa;- reproducible builds&#xa;- separation of concerns"
-                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1.2;fontSize=13;fontColor=#222222;spacingTop=6;"
-                vertex="1"
-                parent="1">
-          <mxGeometry x="410" y="520" width="200" height="100" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="edge_core_benefits"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;endArrow=none;dashed=1;"
-                edge="1"
-                source="core"
-                target="benefits"
-                parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-        <mxCell id="edge_generator_benefits"
-                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#999999;endArrow=none;dashed=1;"
-                edge="1"
-                source="generator"
-                target="benefits"
-                parent="1">
-          <mxGeometry relative="1" as="geometry"/>
-        </mxCell>
-
-      </root>
-    </mxGraphModel>
-  </diagram>
+<mxfile host="65bd71144e">
+    <diagram id="anonys-repo-structure" name="Page-1">
+        <mxGraphModel dx="664" dy="545" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c0c0c0;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="940" height="500" as="geometry"/>
+                </mxCell>
+                <mxCell id="title" value="Anonys Framework — Repository Structure" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="270" y="45" width="480" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="main" value="anonys&lt;br&gt;&lt;font style=&quot;font-size:12px;font-style:italic&quot;&gt;(main repository)&lt;/font&gt;" style="swimlane;html=1;whiteSpace=wrap;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;fontSize=16;fontStyle=1;fontColor=#222222;startSize=45;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="95" width="860" height="400" as="geometry"/>
+                </mxCell>
+                <mxCell id="mainContent" value="• Conceptual documentation&lt;br&gt;• High-level architecture&lt;br&gt;• Integration examples (Example1, Example2)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=13;fontColor=#222222;" parent="main" vertex="1">
+                    <mxGeometry x="20" y="55" width="340" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="core" value="ext/anonys → anonys_core" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.2;fontSize=15;fontStyle=1;fontColor=#222222;" parent="main" vertex="1">
+                    <mxGeometry x="40" y="150" width="360" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="coreDesc" value="• FsmCore — state stack engine&lt;br&gt;• Timer — RAII timeout management&lt;br&gt;• TracingService — abstract tracing interface&lt;br&gt;• Types — StateDef, Event, EventId" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="main" vertex="1">
+                    <mxGeometry x="60" y="200" width="320" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="coreBadge" value="git submodule" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;fontSize=11;fontStyle=2;fontColor=#666666;" parent="main" vertex="1">
+                    <mxGeometry x="320" y="135" width="90" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="gen" value="gen/extern/anonys_gen → anonys_gen" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.2;fontSize=15;fontStyle=1;fontColor=#222222;" parent="main" vertex="1">
+                    <mxGeometry x="460" y="150" width="370" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="genDesc" value="• Python code generator&lt;br&gt;• Reads FSM definition files (.txt)&lt;br&gt;• Generates C++ boilerplate, state skeletons&lt;br&gt;• Consumed via pip install" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="main" vertex="1">
+                    <mxGeometry x="480" y="200" width="320" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="genBadge" value="git submodule" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;fontSize=11;fontStyle=2;fontColor=#666666;" parent="main" vertex="1">
+                    <mxGeometry x="740" y="135" width="100" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="ex1" value="Example1/&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Jukebox FSM&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;fontSize=13;fontColor=#222222;" parent="main" vertex="1">
+                    <mxGeometry x="120" y="310" width="160" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="ex2" value="Example2/&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;Elevator, TrafficLight, Washer&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;fontSize=13;fontColor=#222222;" parent="main" vertex="1">
+                    <mxGeometry x="320" y="310" width="220" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="exLabel" value="Working examples with generated code, tests, and demo" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#555555;" parent="main" vertex="1">
+                    <mxGeometry x="120" y="280" width="400" height="25" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
 </mxfile>
