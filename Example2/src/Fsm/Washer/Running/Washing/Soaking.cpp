@@ -27,11 +27,11 @@ namespace {
     void exit(Me& me) {
     }
 
-    anonys::State* handle(Me& me, io::data::Tick& event) {
+    anonys::State* handle(Me& me, const io::data::Tick& event) {
         return nullptr;
     }
 
-    anonys::State* handle(Me& me, TimeoutA& event) {
+    anonys::State* handle(Me& me, const TimeoutA& event) {
         return nullptr;
     }
 }

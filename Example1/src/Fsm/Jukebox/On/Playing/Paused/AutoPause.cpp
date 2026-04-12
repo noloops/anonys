@@ -30,7 +30,7 @@ namespace {
         me.std.log.write(terminals::Message::ExitAutoPause);
     }
 
-    anonys::State* handle(Me& me, PauseCountdownTimeout& event) {
+    anonys::State* handle(Me& me, const PauseCountdownTimeout& event) {
         me.std.log.write(terminals::Message::CountdownTimerInAutoPause);
         if (me.countdown.decrement()) {
             me.std.sender.send<events::Play>(Fsm::Id, events::Play{});
@@ -38,7 +38,7 @@ namespace {
         return &Fsm::AutoPause;
     }
 
-    anonys::State* handle(Me& me, events::Pause& event) {
+    anonys::State* handle(Me& me, const events::Pause& event) {
         me.std.log.write(terminals::Message::PauseInAutoPause);
         return &Fsm::Paused;
     }

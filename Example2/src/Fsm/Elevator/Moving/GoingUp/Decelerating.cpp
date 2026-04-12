@@ -18,7 +18,7 @@ namespace {
         ctrl::reg::FloorTracker& floorTracker;
     };
 
-    anonys::State* handle(Me& me, io::SensorTriggered& event) {
+    anonys::State* handle(Me& me, const io::SensorTriggered& event) {
         return nullptr;
     }
 }

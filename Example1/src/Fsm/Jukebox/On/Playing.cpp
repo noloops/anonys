@@ -28,12 +28,12 @@ namespace {
         me.std.log.write(terminals::Message::ExitPlaying);
     }
 
-    anonys::State* handle(Me& me, events::Eject& event) {
+    anonys::State* handle(Me& me, const events::Eject& event) {
         me.std.log.write(terminals::Message::EjectInPlaying);
         return &Fsm::Idle;
     }
 
-    anonys::State* handle(Me& me, events::AutoPause& event) {
+    anonys::State* handle(Me& me, const events::AutoPause& event) {
         me.std.log.write(terminals::Message::AutoPauseInPlaying);
         return &Fsm::AutoPause;
     }

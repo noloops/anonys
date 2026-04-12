@@ -26,7 +26,7 @@ namespace {
         me.std.log.write(terminals::Message::ExitOff);
     }
 
-    anonys::State* handle(Me& me, events::PowerOn& event) {
+    anonys::State* handle(Me& me, const events::PowerOn& event) {
         me.std.log.write(terminals::Message::PowerOnInOff);
         return &Fsm::Idle;
     }

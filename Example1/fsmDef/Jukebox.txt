@@ -20,6 +20,6 @@ On +- powerOff malfunction (std)
 	Idle +-1 insertCoin malfunction diagnostic (std)
 	Playing +- eject autoPause (std) counter mixer
 		Normal +-1 pause skip (std counter mixer)
-		Paused +- play configureAutoPause (std mixer) countdown
+		Paused +- play &configureAutoPause (std mixer) countdown
 			AutoPause +-1 pause (std countdown)
 Error +-1 reset (std)

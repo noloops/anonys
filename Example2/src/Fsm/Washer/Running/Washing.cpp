@@ -24,7 +24,7 @@ namespace {
     void exit(Me& me) {
     }
 
-    anonys::State* handle(Me& me, ctrl::Proceed& event) {
+    anonys::State* handle(Me& me, const ctrl::Proceed& event) {
         return nullptr;
     }
 }

@@ -32,17 +32,17 @@ namespace {
         me.std.log.write(terminals::Message::ExitNormal);
     }
 
-    anonys::State* handle(Me& me, events::Pause& event) {
+    anonys::State* handle(Me& me, const events::Pause& event) {
         me.std.log.write(terminals::Message::PauseInNormal);
         return &Fsm::Paused;
     }
 
-    anonys::State* handle(Me& me, events::Skip& event) {
+    anonys::State* handle(Me& me, const events::Skip& event) {
         me.std.log.write(terminals::Message::SkipInNormal);
         return &Fsm::Normal;
     }
 
-    anonys::State* handle(Me& me, TrackEndTimeout& event) {
+    anonys::State* handle(Me& me, const TrackEndTimeout& event) {
         me.std.log.write(terminals::Message::TrackEndInNormal);
         return &Fsm::Idle;
     }

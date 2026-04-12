@@ -29,12 +29,12 @@ namespace {
         me.std.log.write(terminals::Message::ExitError);
     }
 
-    anonys::State* handle(Me& me, events::Reset& event) {
+    anonys::State* handle(Me& me, const events::Reset& event) {
         me.std.log.write(terminals::Message::ResetInError);
         return &Fsm::Idle;
     }
 
-    anonys::State* handle(Me& me, RecoveryTimeout& event) {
+    anonys::State* handle(Me& me, const RecoveryTimeout& event) {
         me.std.log.write(terminals::Message::RecoveryTimeoutInError);
         return &Fsm::Idle;
     }

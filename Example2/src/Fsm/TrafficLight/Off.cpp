@@ -21,7 +21,7 @@ namespace {
     void exit(Me& me) {
     }
 
-    anonys::State* handle(Me& me, Start& event) {
+    anonys::State* handle(Me& me, const Start& event) {
         return nullptr;
     }
 }

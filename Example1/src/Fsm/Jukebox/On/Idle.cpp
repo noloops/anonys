@@ -29,22 +29,22 @@ namespace {
         me.std.log.write(terminals::Message::ExitIdle);
     }
 
-    anonys::State* handle(Me& me, events::InsertCoin& event) {
+    anonys::State* handle(Me& me, const events::InsertCoin& event) {
         me.std.log.write(terminals::Message::InsertCoinInIdle);
         return &Fsm::Normal;
     }
 
-    anonys::State* handle(Me& me, events::Malfunction& event) {
+    anonys::State* handle(Me& me, const events::Malfunction& event) {
         me.std.log.write(terminals::Message::MalfunctionStoppedInIdle);
         return nullptr;
     }
 
-    anonys::State* handle(Me& me, events::Diagnostic& event) {
+    anonys::State* handle(Me& me, const events::Diagnostic& event) {
         me.std.log.write(terminals::Message::DiagnosticInIdle);
         return &Fsm::Idle;
     }
 
-    anonys::State* handle(Me& me, SleepTimeout& event) {
+    anonys::State* handle(Me& me, const SleepTimeout& event) {
         me.std.log.write(terminals::Message::SleepTimeoutInIdle);
         return &Fsm::Off;
     }

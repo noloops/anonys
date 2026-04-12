@@ -29,15 +29,15 @@ namespace {
     void exit(Me& me) {
     }
 
-    anonys::State* handle(Me& me, ctrl::Proceed& event) {
+    anonys::State* handle(Me& me, const ctrl::Proceed& event) {
         return nullptr;
     }
 
-    anonys::State* handle(Me& me, TimeoutA& event) {
+    anonys::State* handle(Me& me, const TimeoutA& event) {
         return nullptr;
     }
 
-    anonys::State* handle(Me& me, TimeoutB& event) {
+    anonys::State* handle(Me& me, const TimeoutB& event) {
         return nullptr;
     }
 }

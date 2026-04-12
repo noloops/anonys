@@ -24,11 +24,11 @@ namespace {
     void exit(Me& me) {
     }
 
-    anonys::State* handle(Me& me, signals::Stop& event) {
+    anonys::State* handle(Me& me, const signals::Stop& event) {
         return nullptr;
     }
 
-    anonys::State* handle(Me& me, signals::alert::Emergency& event) {
+    anonys::State* handle(Me& me, const signals::alert::Emergency& event) {
         return nullptr;
     }
 }

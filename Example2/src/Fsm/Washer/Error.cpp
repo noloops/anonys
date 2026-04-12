@@ -26,11 +26,11 @@ namespace {
     void exit(Me& me) {
     }
 
-    anonys::State* handle(Me& me, ctrl::cmd::Reset& event) {
+    anonys::State* handle(Me& me, const ctrl::cmd::Reset& event) {
         return nullptr;
     }
 
-    anonys::State* handle(Me& me, TimeoutA& event) {
+    anonys::State* handle(Me& me, const TimeoutA& event) {
         return nullptr;
     }
 }

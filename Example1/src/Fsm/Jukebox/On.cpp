@@ -26,12 +26,12 @@ namespace {
         me.std.log.write(terminals::Message::ExitOn);
     }
 
-    anonys::State* handle(Me& me, events::PowerOff& event) {
+    anonys::State* handle(Me& me, const events::PowerOff& event) {
         me.std.log.write(terminals::Message::PowerOffInOn);
         return &Fsm::Off;
     }
 
-    anonys::State* handle(Me& me, events::Malfunction& event) {
+    anonys::State* handle(Me& me, const events::Malfunction& event) {
         me.std.log.write(terminals::Message::MalfunctionInOn);
         return &Fsm::Error;
     }

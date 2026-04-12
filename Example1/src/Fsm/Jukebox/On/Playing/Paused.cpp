@@ -29,7 +29,7 @@ namespace {
         me.std.log.write(terminals::Message::ExitPaused);
     }
 
-    anonys::State* handle(Me& me, events::Play& event) {
+    anonys::State* handle(Me& me, const events::Play& event) {
         me.std.log.write(terminals::Message::PlayInPaused);
         return &Fsm::Normal;
     }
