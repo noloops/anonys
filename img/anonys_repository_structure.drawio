@@ -1,0 +1,97 @@
+<mxfile host="app.diagrams.net" modified="2026-04-12T00:00:00.000Z" agent="ChatGPT" version="24.7.17">
+  <diagram id="anonys-repo-structure" name="Page-1">
+    <mxGraphModel dx="1280" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title"
+                value="Anonys Framework Repository Structure"
+                style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;"
+                vertex="1"
+                parent="1">
+          <mxGeometry x="330" y="30" width="360" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="main"
+                value="Main Repository&#xa;(this repository)&#xa;&#xa;- conceptual documentation&#xa;- high-level architecture&#xa;- integration examples"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;spacingTop=6;"
+                vertex="1"
+                parent="1">
+          <mxGeometry x="390" y="110" width="240" height="130" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="core"
+                value="anonys-core&#xa;&#xa;- event-handling library&#xa;- core runtime primitives"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;spacingTop=6;"
+                vertex="1"
+                parent="1">
+          <mxGeometry x="130" y="340" width="230" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="generator"
+                value="Code Generator Repository&#xa;&#xa;- code generation tooling&#xa;- boilerplate and FSM structure generation"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;spacingTop=6;"
+                vertex="1"
+                parent="1">
+          <mxGeometry x="660" y="340" width="260" height="110" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="submoduleNote"
+                value="Included as git submodules"
+                style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=2;"
+                vertex="1"
+                parent="1">
+          <mxGeometry x="390" y="275" width="240" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_main_core"
+                value="submodule"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=12;"
+                edge="1"
+                source="main"
+                target="core"
+                parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_main_generator"
+                value="submodule"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;endFill=1;fontSize=12;"
+                edge="1"
+                source="main"
+                target="generator"
+                parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="benefits"
+                value="Benefits&#xa;- version alignment&#xa;- reproducible builds&#xa;- separation of concerns"
+                style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;spacingTop=6;"
+                vertex="1"
+                parent="1">
+          <mxGeometry x="410" y="500" width="200" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_core_benefits"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;dashed=1;"
+                edge="1"
+                source="core"
+                target="benefits"
+                parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="edge_generator_benefits"
+                style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;dashed=1;"
+                edge="1"
+                source="generator"
+                target="benefits"
+                parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
