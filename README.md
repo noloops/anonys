@@ -1,6 +1,8 @@
 # Anonys – State Machine Framework
 
-Anonys is a modular framework for implementing hierarchical finite state machines with structured extended state handling.
+Anonys is a modular framework for implementing hierarchical finite state machines with well-structured extended state management.
+
+Hierarchical FSMs allow states to contain substates, enabling shared behavior and clear structural decomposition. Extended state refers to the additional data a state machine carries alongside its current state — variables such as counters, buffers, configuration values, or references to external resources that influence behavior but are not part of the state topology itself. Anonys introduces a disciplined model for managing this extended state: data has clearly defined ownership, explicit lifetimes, and controlled access.
 
 It consists of three repositories:
 
@@ -45,6 +47,7 @@ A Finite State Machine (FSM) is a computational model that represents a system a
 - Event: An input that may cause a transition  
 - Initial State: The starting point of the FSM  
 - Actions: Logic executed on transitions or during state entry/exit  
+- Extended State: Additional data associated with the state machine beyond the current state identity — such as counters, buffers, configuration values, or references to external resources. Extended state variables persist across transitions and influence how the FSM behaves within a given state.  
 
 FSMs are especially useful for modeling deterministic, event-driven behavior with clear control flow.
 
@@ -52,7 +55,7 @@ FSMs are especially useful for modeling deterministic, event-driven behavior wit
 
 ## Basic FSM Structure
 
-<!-- draw.io import: fsm_basic_structure.drawio -->
+![Basic FSM Structure](img/fsm_basic_structure.svg)
 
 ---
 
@@ -60,7 +63,7 @@ FSMs are especially useful for modeling deterministic, event-driven behavior wit
 
 ## Motivation
 
-Standard FSMs lack memory beyond the current state. While extended FSMs (EFSMs) introduce variables, managing them across hierarchical states often leads to unclear ownership and implicit coupling.
+A basic FSM has no memory beyond the current state — all behavior is determined solely by which state is active. Extended FSMs (EFSMs) address this by introducing additional variables that persist across transitions. However, in many frameworks these extended state variables are visible to all states of the FSM, even if they are conceptually out of scope for the currently active state. Any state can freely read or modify data that belongs to another state's lifecycle. In hierarchical FSMs this problem compounds: substates can silently depend on variables that a parent state owns, and that dependency is never made explicit. The result is unclear ownership, hidden coupling, and fragile behavior when states are added, reordered, or removed.
 
 This model introduces a strict LIFO stack per state machine, ensuring well-defined variable lifetime and controlled data flow.
 
