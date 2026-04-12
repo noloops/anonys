@@ -14,7 +14,7 @@ namespace anonys
 {
     class FsmPool {
     public:
-        static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
+        static constexpr uint16_t Count{ FsmCount };
         using TerminalsElevator = anonys_0::Terminals;
         using TerminalsTrafficLight = anonys_1::Terminals;
         using TerminalsWasher = anonys_2::Terminals;

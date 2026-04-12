@@ -9,8 +9,7 @@ namespace anonys
     enum class FsmId : uint16_t {
         Elevator = 0,
         TrafficLight = 1,
-        Washer = 2,
-        Count_ = 3
+        Washer = 2
     };
 }
 

@@ -6,6 +6,8 @@
 
 namespace anonys
 {
+    constexpr uint16_t FsmCount{ 3 };
+
     constexpr int32_t MaxNestedStates{ 8 };
 }
 

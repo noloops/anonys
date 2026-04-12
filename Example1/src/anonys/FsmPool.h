@@ -12,7 +12,7 @@ namespace anonys
 {
     class FsmPool {
     public:
-        static constexpr uint16_t Count{ static_cast<uint16_t>(FsmId::Count_)};
+        static constexpr uint16_t Count{ FsmCount };
         using TerminalsJukebox = anonys_0::Terminals;
 
         void handleEvent(FsmId fsmId, Event& event);

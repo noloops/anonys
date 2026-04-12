@@ -9,25 +9,25 @@ namespace anonys
     static_assert(BufferSize::Jukebox % anonys::StdAlign == 0, "Buffer size must be a multiple of alignment");
 
     void FsmPool::handleEvent(FsmId fsmId, Event& event) {
-        if (fsmId < FsmId::Count_) {
+        if (static_cast<uint16_t>(fsmId) < FsmCount) {
             m_fsm[static_cast<uint16_t>(fsmId)].handleEvent(event);
         }
     }
 
     void FsmPool::handleTimeoutEvent(FsmId fsmId, int16_t depth, EventId eventId) {
-        if (fsmId < FsmId::Count_) {
+        if (static_cast<uint16_t>(fsmId) < FsmCount) {
             m_fsm[static_cast<uint16_t>(fsmId)].handleTimeoutEvent(depth, eventId);
         }
     }
 
     void FsmPool::setTracingService(TracingService* pTracingService) {
-        for (uint16_t fsmId{0}; fsmId < static_cast<uint16_t>(FsmId::Count_); ++fsmId) {
+        for (uint16_t fsmId{0}; fsmId < FsmCount; ++fsmId) {
             m_fsm[fsmId].setTracingService(pTracingService);
         }
     }
 
     void FsmPool::setTracingService(FsmId fsmId, TracingService* pTracingService) {
-        if (fsmId < FsmId::Count_) {
+        if (static_cast<uint16_t>(fsmId) < FsmCount) {
             m_fsm[static_cast<uint16_t>(fsmId)].setTracingService(pTracingService);
         }
     }
