@@ -21,6 +21,7 @@ config = GeneratorConfig(
     anonys_output_dir=SCRIPT_DIR / "../Example1/src",
     fsm_output_dir=SCRIPT_DIR / "../Example1/src/Fsm",
     include_guard_prefix="EXAMPLE1",
+    header=SCRIPT_DIR / "header.txt",
 )
 
 generate(config)
