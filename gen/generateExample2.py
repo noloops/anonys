@@ -24,6 +24,7 @@ config = GeneratorConfig(
     fsm_output_dir=SCRIPT_DIR / "../Example2/src/Fsm",
     include_guard_prefix="EXAMPLE2",
     header=SCRIPT_DIR / "header.txt",
+    additional_fsm_ids=["AdditionalId1", "AdditionalId2"],
 )
 
 generate(config)
