@@ -1,0 +1,82 @@
+<mxfile host="65bd71144e">
+    <diagram id="fsm-stack-architecture" name="Page-1">
+        <mxGraphModel dx="1280" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c0c0c0;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="900" height="540" as="geometry"/>
+                </mxCell>
+                <mxCell id="title" value="FSM with State-Local Stack — Conceptual Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="190" y="45" width="600" height="30" as="geometry"/>
+                </mxCell>
+
+                <!-- FSM Instance box -->
+                <mxCell id="fsmBox" value="FSM Instance" style="swimlane;html=1;whiteSpace=wrap;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;strokeWidth=1.2;fontSize=16;fontStyle=1;fontColor=#222222;startSize=30;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="100" width="820" height="430" as="geometry"/>
+                </mxCell>
+
+                <!-- Stack -->
+                <mxCell id="stackLabel" value="LIFO Stack" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#222222;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="30" y="50" width="120" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="stackSlot1" value="Variable A&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;(pushed by State X)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1.1;fontSize=13;fontColor=#222222;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="20" y="85" width="180" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="stackSlot2" value="Variable B&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;(pushed by State X)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1.1;fontSize=13;fontColor=#222222;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="20" y="140" width="180" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="stackSlot3" value="Variable C&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;(pushed by State Y)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1.1;fontSize=13;fontColor=#222222;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="20" y="195" width="180" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="stackSlot4" value="Variable D&lt;br&gt;&lt;font style=&quot;font-size:11px&quot;&gt;(pushed by State Z)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1.1;fontSize=13;fontColor=#222222;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="20" y="250" width="180" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="stackArrow" value="push / pop" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=12;fontStyle=2;fontColor=#555555;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="50" y="315" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="stackDir" value="↕" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontColor=#666666;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="80" y="330" width="40" height="30" as="geometry"/>
+                </mxCell>
+
+                <!-- State hierarchy -->
+                <mxCell id="stateX" value="State X (superstate)" style="swimlane;html=1;whiteSpace=wrap;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#222222;startSize=28;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="280" y="50" width="500" height="340" as="geometry"/>
+                </mxCell>
+                <mxCell id="xInfo" value="Pushes Variable A, Variable B&lt;br&gt;on enter — pops on exit" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="stateX" vertex="1">
+                    <mxGeometry x="10" y="35" width="250" height="35" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="stateY" value="State Y (substate)" style="swimlane;html=1;whiteSpace=wrap;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;fontSize=13;fontStyle=1;fontColor=#222222;startSize=26;" parent="stateX" vertex="1">
+                    <mxGeometry x="20" y="85" width="460" height="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="yInfo" value="Receives refs to A, B from parent&lt;br&gt;Pushes Variable C on enter" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="stateY" vertex="1">
+                    <mxGeometry x="10" y="32" width="260" height="35" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="stateZ" value="State Z" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.2;fontSize=13;fontColor=#222222;" parent="stateY" vertex="1">
+                    <mxGeometry x="20" y="85" width="200" height="55" as="geometry"/>
+                </mxCell>
+                <mxCell id="zInfo" value="Receives ref to B, C&lt;br&gt;Pushes Variable D" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=11;fontColor=#444444;" parent="stateY" vertex="1">
+                    <mxGeometry x="20" y="145" width="200" height="30" as="geometry"/>
+                </mxCell>
+
+                <!-- Reference arrows from stack to states -->
+                <mxCell id="refAX" value="ref A" style="edgeStyle=none;html=1;strokeColor=#6c8ebf;fontColor=#6c8ebf;endArrow=open;endFill=0;dashed=1;strokeWidth=1.2;fontSize=11;" parent="fsmBox" source="stackSlot1" target="stateX" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="refBY" value="ref B" style="edgeStyle=none;html=1;strokeColor=#d6b656;fontColor=#d6b656;endArrow=open;endFill=0;dashed=1;strokeWidth=1.2;fontSize=11;" parent="fsmBox" source="stackSlot2" target="stateY" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="refCZ" value="ref C" style="edgeStyle=none;html=1;strokeColor=#d79b00;fontColor=#d79b00;endArrow=open;endFill=0;dashed=1;strokeWidth=1.2;fontSize=11;" parent="fsmBox" source="stackSlot3" target="stateZ" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+
+                <!-- Key -->
+                <mxCell id="keyBox" value="&#xa;• Variables live on the stack&#xa;• Each state pushes/pops its own variables&#xa;• Access only via explicit references" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;fontSize=12;fontColor=#222222;align=left;spacingLeft=8;spacingTop=2;" parent="fsmBox" vertex="1">
+                    <mxGeometry x="280" y="340" width="300" height="75" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

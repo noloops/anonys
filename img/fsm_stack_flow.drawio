@@ -1,0 +1,158 @@
+<mxfile host="65bd71144e">
+    <diagram id="fsm-stack-flow" name="Page-1">
+        <mxGraphModel dx="1280" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="bg" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c0c0c0;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="20" width="1060" height="560" as="geometry"/>
+                </mxCell>
+                <mxCell id="title" value="FSM Stack — Example Flow" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=22;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="350" y="40" width="400" height="30" as="geometry"/>
+                </mxCell>
+
+                <!-- Phase 1: Initialization -->
+                <mxCell id="phase1" value="1. Initialization" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="85" width="150" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack1a" value="(empty)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;fontSize=12;fontColor=#999999;fontStyle=2;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="120" width="150" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="desc1" value="FSM created.&lt;br&gt;Stack is empty." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="170" width="150" height="40" as="geometry"/>
+                </mxCell>
+
+                <!-- Arrow 1→2 -->
+                <mxCell id="arrow12" style="edgeStyle=none;html=1;strokeColor=#666666;endArrow=block;endFill=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="240" y="140" as="sourcePoint"/>
+                        <mxPoint x="290" y="140" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+
+                <!-- Phase 2: Enter State X -->
+                <mxCell id="phase2" value="2. Enter State X" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="85" width="150" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack2a" value="Var A" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="120" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack2b" value="Var B" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="150" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="desc2" value="State X pushes&lt;br&gt;Var A, Var B." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="190" width="150" height="40" as="geometry"/>
+                </mxCell>
+
+                <!-- Arrow 2→3 -->
+                <mxCell id="arrow23" style="edgeStyle=none;html=1;strokeColor=#666666;endArrow=block;endFill=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="450" y="140" as="sourcePoint"/>
+                        <mxPoint x="500" y="140" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+
+                <!-- Phase 3: Enter State Y (substate) -->
+                <mxCell id="phase3" value="3. Enter State Y" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="85" width="150" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack3a" value="Var A" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="120" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack3b" value="Var B" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="150" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack3c" value="Var C" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=12;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="180" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="desc3" value="State Y receives refs to A, B.&lt;br&gt;Pushes Var C." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="1" vertex="1">
+                    <mxGeometry x="500" y="220" width="150" height="40" as="geometry"/>
+                </mxCell>
+
+                <!-- Arrow 3→4 -->
+                <mxCell id="arrow34" style="edgeStyle=none;html=1;strokeColor=#666666;endArrow=block;endFill=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="660" y="140" as="sourcePoint"/>
+                        <mxPoint x="710" y="140" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+
+                <!-- Phase 4: Exit State Y -->
+                <mxCell id="phase4" value="4. Exit State Y" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="710" y="85" width="150" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack4a" value="Var A" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="710" y="120" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack4b" value="Var B" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="710" y="150" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack4c" value="Var C" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;fontSize=12;fontColor=#999999;fontStyle=2;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="710" y="180" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="desc4" value="Exit handler runs.&lt;br&gt;Var C popped." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="1" vertex="1">
+                    <mxGeometry x="710" y="220" width="150" height="40" as="geometry"/>
+                </mxCell>
+
+                <!-- Arrow 4→5 -->
+                <mxCell id="arrow45" style="edgeStyle=none;html=1;strokeColor=#666666;endArrow=block;endFill=1;" parent="1" edge="1">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="870" y="140" as="sourcePoint"/>
+                        <mxPoint x="920" y="140" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+
+                <!-- Phase 5: Exit State X -->
+                <mxCell id="phase5" value="5. Exit State X" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="85" width="150" height="25" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack5a" value="Var A" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#999999;fontStyle=2;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="120" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="stack5b" value="Var B" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;fontSize=12;fontColor=#999999;fontStyle=2;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="150" width="150" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="desc5" value="Exit handler runs.&lt;br&gt;Var A, B popped.&lt;br&gt;Stack is empty." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="1" vertex="1">
+                    <mxGeometry x="920" y="190" width="150" height="50" as="geometry"/>
+                </mxCell>
+
+                <!-- State hierarchy diagram at bottom -->
+                <mxCell id="hierLabel" value="State Hierarchy" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=14;fontStyle=1;fontColor=#222222;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="290" width="150" height="25" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="hierX" value="State X" style="swimlane;html=1;whiteSpace=wrap;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1.2;fontSize=14;fontStyle=1;fontColor=#222222;startSize=28;" parent="1" vertex="1">
+                    <mxGeometry x="80" y="325" width="500" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="hierXvars" value="enter: push Var A, Var B&lt;br&gt;exit: pop Var B, Var A" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="hierX" vertex="1">
+                    <mxGeometry x="10" y="35" width="220" height="35" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="hierY" value="State Y" style="swimlane;html=1;whiteSpace=wrap;rounded=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1.2;fontSize=13;fontStyle=1;fontColor=#222222;startSize=26;" parent="hierX" vertex="1">
+                    <mxGeometry x="20" y="85" width="460" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="hierYvars" value="references: A, B (from State X)&lt;br&gt;enter: push Var C&lt;br&gt;exit: pop Var C" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontSize=12;fontColor=#444444;" parent="hierY" vertex="1">
+                    <mxGeometry x="10" y="32" width="250" height="50" as="geometry"/>
+                </mxCell>
+
+                <mxCell id="hierZ" value="State Z" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;strokeWidth=1.2;fontSize=12;fontColor=#222222;" parent="hierY" vertex="1">
+                    <mxGeometry x="280" y="35" width="160" height="65" as="geometry"/>
+                </mxCell>
+                <mxCell id="hierZvars" value="references: B, C" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontSize=11;fontColor=#444444;" parent="hierY" vertex="1">
+                    <mxGeometry x="290" y="95" width="140" height="20" as="geometry"/>
+                </mxCell>
+
+                <!-- Legend -->
+                <mxCell id="legend" value="&#xa;   pushed by State X&#xa;   pushed by State Y&#xa;   dashed = being popped" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#999999;strokeWidth=1;fontSize=12;fontColor=#222222;align=left;spacingLeft=8;spacingTop=2;" parent="1" vertex="1">
+                    <mxGeometry x="670" y="325" width="220" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="685" y="345" width="16" height="12" as="geometry"/>
+                </mxCell>
+                <mxCell id="leg2" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;strokeWidth=1;" parent="1" vertex="1">
+                    <mxGeometry x="685" y="363" width="16" height="12" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

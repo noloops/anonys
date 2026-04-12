@@ -97,7 +97,7 @@ This creates:
 
 ## Conceptual Architecture
 
-<!-- draw.io import: fsm_stack_architecture.drawio -->
+![Conceptual Architecture](img/fsm_stack_architecture.svg)
 
 ---
 
@@ -128,7 +128,7 @@ This creates:
 
 ## Example Flow
 
-<!-- draw.io import: fsm_stack_flow.drawio -->
+![Example Flow](img/fsm_stack_flow.svg)
 
 ---
 
@@ -180,7 +180,7 @@ A Terminal is a helper class that encapsulates one or more extended state variab
 
 ## Example Structure
 
-<!-- draw.io import: fsm_terminals_structure.drawio -->
+![Terminal Structure](img/fsm_terminals_structure.svg)
 
 ---
 
