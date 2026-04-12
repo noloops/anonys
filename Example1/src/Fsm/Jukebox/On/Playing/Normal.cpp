@@ -12,40 +12,40 @@
 #include "Events/Events.h"
 
 namespace {
-	using Fsm = anonys::fsm::Jukebox;
-	using TrackEndTimeout = anonys::Timeout1;
+    using Fsm = anonys::fsm::Jukebox;
+    using TrackEndTimeout = anonys::Timeout1;
 
-	struct Me {
-		anonys::Timer timer;
-		terminals::Std& std;
-		terminals::Counter& counter;
-		terminals::Mixer& mixer;
-	};
+    struct Me {
+        anonys::Timer timer;
+        terminals::Std& std;
+        terminals::Counter& counter;
+        terminals::Mixer& mixer;
+    };
 
-	void enter(Me& me) {
-		me.std.log.write(terminals::Message::EnterNormal, me.counter.increment());
-		me.mixer.setVolume(80);
-		me.timer.start<TrackEndTimeout>(3000);
-	}
+    void enter(Me& me) {
+        me.std.log.write(terminals::Message::EnterNormal, me.counter.increment());
+        me.mixer.setVolume(80);
+        me.timer.start<TrackEndTimeout>(3000);
+    }
 
-	void exit(Me& me) {
-		me.std.log.write(terminals::Message::ExitNormal);
-	}
+    void exit(Me& me) {
+        me.std.log.write(terminals::Message::ExitNormal);
+    }
 
-	anonys::State* handle(Me& me, events::Pause& event) {
-		me.std.log.write(terminals::Message::PauseInNormal);
-		return &Fsm::Paused;
-	}
+    anonys::State* handle(Me& me, events::Pause& event) {
+        me.std.log.write(terminals::Message::PauseInNormal);
+        return &Fsm::Paused;
+    }
 
-	anonys::State* handle(Me& me, events::Skip& event) {
-		me.std.log.write(terminals::Message::SkipInNormal);
-		return &Fsm::Normal;
-	}
+    anonys::State* handle(Me& me, events::Skip& event) {
+        me.std.log.write(terminals::Message::SkipInNormal);
+        return &Fsm::Normal;
+    }
 
-	anonys::State* handle(Me& me, TrackEndTimeout& event) {
-		me.std.log.write(terminals::Message::TrackEndInNormal);
-		return &Fsm::Idle;
-	}
+    anonys::State* handle(Me& me, TrackEndTimeout& event) {
+        me.std.log.write(terminals::Message::TrackEndInNormal);
+        return &Fsm::Idle;
+    }
 }
 
 // Generated code, do not edit:

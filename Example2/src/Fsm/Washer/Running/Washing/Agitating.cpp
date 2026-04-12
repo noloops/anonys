@@ -12,41 +12,41 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Washer;
-	using TimeoutA = anonys::Timeout1;
-	using TimeoutB = anonys::Timeout2;
-	using TimeoutC = anonys::Timeout3;
+    using Fsm = anonys::fsm::Washer;
+    using TimeoutA = anonys::Timeout1;
+    using TimeoutB = anonys::Timeout2;
+    using TimeoutC = anonys::Timeout3;
 
-	struct Me {
-		anonys::Timer timer;
-		dev::sensor::WaterLevel& waterLevel;
-		hw::Motor& motor;
-	};
+    struct Me {
+        anonys::Timer timer;
+        dev::sensor::WaterLevel& waterLevel;
+        hw::Motor& motor;
+    };
 
-	void enter(Me& me) {
-		me.timer.start<TimeoutA>(5000);
-		me.timer.start<TimeoutB>(15000);
-		me.timer.start<TimeoutC>(30000);
-	}
+    void enter(Me& me) {
+        me.timer.start<TimeoutA>(5000);
+        me.timer.start<TimeoutB>(15000);
+        me.timer.start<TimeoutC>(30000);
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, io::data::Tick& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, io::data::Tick& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutA& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutA& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutB& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutB& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutC& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutC& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

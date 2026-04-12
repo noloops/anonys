@@ -12,25 +12,25 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Washer;
+    using Fsm = anonys::fsm::Washer;
 
-	struct Me {
-		dev::sensor::WaterLevel waterLevel{};
-	};
+    struct Me {
+        dev::sensor::WaterLevel waterLevel{};
+    };
 
-	void enter(Me& me) {
-	}
+    void enter(Me& me) {
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, signals::Stop& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, signals::Stop& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, signals::alert::Emergency& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, signals::alert::Emergency& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

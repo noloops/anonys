@@ -12,29 +12,29 @@
 #include "Events/Events.h"
 
 namespace {
-	using Fsm = anonys::fsm::Jukebox;
+    using Fsm = anonys::fsm::Jukebox;
 
-	struct Me {
-		terminals::Std& std;
-	};
+    struct Me {
+        terminals::Std& std;
+    };
 
-	void enter(Me& me) {
-		me.std.log.write(terminals::Message::EnterOn);
-	}
+    void enter(Me& me) {
+        me.std.log.write(terminals::Message::EnterOn);
+    }
 
-	void exit(Me& me) {
-		me.std.log.write(terminals::Message::ExitOn);
-	}
+    void exit(Me& me) {
+        me.std.log.write(terminals::Message::ExitOn);
+    }
 
-	anonys::State* handle(Me& me, events::PowerOff& event) {
-		me.std.log.write(terminals::Message::PowerOffInOn);
-		return &Fsm::Off;
-	}
+    anonys::State* handle(Me& me, events::PowerOff& event) {
+        me.std.log.write(terminals::Message::PowerOffInOn);
+        return &Fsm::Off;
+    }
 
-	anonys::State* handle(Me& me, events::Malfunction& event) {
-		me.std.log.write(terminals::Message::MalfunctionInOn);
-		return &Fsm::Error;
-	}
+    anonys::State* handle(Me& me, events::Malfunction& event) {
+        me.std.log.write(terminals::Message::MalfunctionInOn);
+        return &Fsm::Error;
+    }
 }
 
 // Generated code, do not edit:

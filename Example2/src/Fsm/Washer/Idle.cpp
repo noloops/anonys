@@ -12,21 +12,21 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Washer;
+    using Fsm = anonys::fsm::Washer;
 
-	struct Me {
-		hw::Motor& motor;
-	};
+    struct Me {
+        hw::Motor& motor;
+    };
 
-	void enter(Me& me) {
-	}
+    void enter(Me& me) {
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, Start& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, Start& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

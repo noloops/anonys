@@ -12,36 +12,36 @@
 #include "Events/Events.h"
 
 namespace {
-	using Fsm = anonys::fsm::Jukebox;
-	using PauseCountdownTimeout = anonys::Timeout1;
+    using Fsm = anonys::fsm::Jukebox;
+    using PauseCountdownTimeout = anonys::Timeout1;
 
-	struct Me {
-		anonys::Timer timer;
-		terminals::Std& std;
-		terminals::Countdown& countdown;
-	};
+    struct Me {
+        anonys::Timer timer;
+        terminals::Std& std;
+        terminals::Countdown& countdown;
+    };
 
-	void enter(Me& me) {
-		me.std.log.write(terminals::Message::EnterAutoPause);
-		me.timer.start<PauseCountdownTimeout>(1000);
-	}
+    void enter(Me& me) {
+        me.std.log.write(terminals::Message::EnterAutoPause);
+        me.timer.start<PauseCountdownTimeout>(1000);
+    }
 
-	void exit(Me& me) {
-		me.std.log.write(terminals::Message::ExitAutoPause);
-	}
+    void exit(Me& me) {
+        me.std.log.write(terminals::Message::ExitAutoPause);
+    }
 
-	anonys::State* handle(Me& me, PauseCountdownTimeout& event) {
-		me.std.log.write(terminals::Message::CountdownTimerInAutoPause);
-		if (me.countdown.decrement()) {
-			me.std.sender.send<events::Play>(Fsm::Id, events::Play{});
-		}
-		return &Fsm::AutoPause;
-	}
+    anonys::State* handle(Me& me, PauseCountdownTimeout& event) {
+        me.std.log.write(terminals::Message::CountdownTimerInAutoPause);
+        if (me.countdown.decrement()) {
+            me.std.sender.send<events::Play>(Fsm::Id, events::Play{});
+        }
+        return &Fsm::AutoPause;
+    }
 
-	anonys::State* handle(Me& me, events::Pause& event) {
-		me.std.log.write(terminals::Message::PauseInAutoPause);
-		return &Fsm::Paused;
-	}
+    anonys::State* handle(Me& me, events::Pause& event) {
+        me.std.log.write(terminals::Message::PauseInAutoPause);
+        return &Fsm::Paused;
+    }
 }
 
 // Generated code, do not edit:

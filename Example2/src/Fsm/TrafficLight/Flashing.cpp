@@ -12,32 +12,32 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::TrafficLight;
-	using TimeoutA = anonys::Timeout1;
+    using Fsm = anonys::fsm::TrafficLight;
+    using TimeoutA = anonys::Timeout1;
 
-	struct Me {
-		anonys::Timer timer;
-		Display& display;
-	};
+    struct Me {
+        anonys::Timer timer;
+        Display& display;
+    };
 
-	void enter(Me& me) {
-		me.timer.start<TimeoutA>(1000);
-	}
+    void enter(Me& me) {
+        me.timer.start<TimeoutA>(1000);
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, ctrl::cmd::Reset& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, ctrl::cmd::Reset& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, Start& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, Start& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutA& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutA& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

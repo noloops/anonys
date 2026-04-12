@@ -12,9 +12,9 @@
 
 int main()
 {
-	if (!env::Tester::runAllTests()) {
-		return 1;
-	}
-	env::Demo::run();
-	return 0;
+    if (!env::Tester::runAllTests()) {
+        return 1;
+    }
+    env::Demo::run();
+    return 0;
 }

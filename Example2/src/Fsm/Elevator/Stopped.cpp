@@ -12,28 +12,28 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Elevator;
-	using TimeoutA = anonys::Timeout1;
+    using Fsm = anonys::fsm::Elevator;
+    using TimeoutA = anonys::Timeout1;
 
-	struct Me {
-		anonys::Timer timer;
-	};
+    struct Me {
+        anonys::Timer timer;
+    };
 
-	void enter(Me& me) {
-		me.timer.start<TimeoutA>(60000);
-	}
+    void enter(Me& me) {
+        me.timer.start<TimeoutA>(60000);
+    }
 
-	anonys::State* handle(Me& me, Start& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, Start& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, ctrl::cmd::Reset& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, ctrl::cmd::Reset& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutA& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutA& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

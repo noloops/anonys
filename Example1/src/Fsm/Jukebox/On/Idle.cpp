@@ -12,42 +12,42 @@
 #include "Events/Events.h"
 
 namespace {
-	using Fsm = anonys::fsm::Jukebox;
-	using SleepTimeout = anonys::Timeout1;
+    using Fsm = anonys::fsm::Jukebox;
+    using SleepTimeout = anonys::Timeout1;
 
-	struct Me {
-		anonys::Timer timer;
-		terminals::Std& std;
-	};
+    struct Me {
+        anonys::Timer timer;
+        terminals::Std& std;
+    };
 
-	void enter(Me& me) {
-		me.std.log.write(terminals::Message::EnterIdle);
-		me.timer.start<SleepTimeout>(5000);
-	}
+    void enter(Me& me) {
+        me.std.log.write(terminals::Message::EnterIdle);
+        me.timer.start<SleepTimeout>(5000);
+    }
 
-	void exit(Me& me) {
-		me.std.log.write(terminals::Message::ExitIdle);
-	}
+    void exit(Me& me) {
+        me.std.log.write(terminals::Message::ExitIdle);
+    }
 
-	anonys::State* handle(Me& me, events::InsertCoin& event) {
-		me.std.log.write(terminals::Message::InsertCoinInIdle);
-		return &Fsm::Normal;
-	}
+    anonys::State* handle(Me& me, events::InsertCoin& event) {
+        me.std.log.write(terminals::Message::InsertCoinInIdle);
+        return &Fsm::Normal;
+    }
 
-	anonys::State* handle(Me& me, events::Malfunction& event) {
-		me.std.log.write(terminals::Message::MalfunctionStoppedInIdle);
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, events::Malfunction& event) {
+        me.std.log.write(terminals::Message::MalfunctionStoppedInIdle);
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, events::Diagnostic& event) {
-		me.std.log.write(terminals::Message::DiagnosticInIdle);
-		return &Fsm::Idle;
-	}
+    anonys::State* handle(Me& me, events::Diagnostic& event) {
+        me.std.log.write(terminals::Message::DiagnosticInIdle);
+        return &Fsm::Idle;
+    }
 
-	anonys::State* handle(Me& me, SleepTimeout& event) {
-		me.std.log.write(terminals::Message::SleepTimeoutInIdle);
-		return &Fsm::Off;
-	}
+    anonys::State* handle(Me& me, SleepTimeout& event) {
+        me.std.log.write(terminals::Message::SleepTimeoutInIdle);
+        return &Fsm::Off;
+    }
 }
 
 // Generated code, do not edit:

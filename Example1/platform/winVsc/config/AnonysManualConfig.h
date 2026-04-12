@@ -16,11 +16,11 @@
 
 namespace anonys
 {
-	constexpr size_t StdAlign{ 8 };
+    constexpr size_t StdAlign{ 8 };
 
-	struct BufferSize {
-		static constexpr size_t Jukebox{ 512 };
-	};
+    struct BufferSize {
+        static constexpr size_t Jukebox{ 512 };
+    };
 }
 
 #endif // EXAMPLE1_ANONYS_MANUALCONFIG_H

@@ -12,26 +12,26 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::TrafficLight;
+    using Fsm = anonys::fsm::TrafficLight;
 
-	struct Me {
-		Display& display;
-		ctrl::Panel panel{};
-	};
+    struct Me {
+        Display& display;
+        ctrl::Panel panel{};
+    };
 
-	void enter(Me& me) {
-	}
+    void enter(Me& me) {
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, signals::Stop& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, signals::Stop& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, signals::alert::Emergency& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, signals::alert::Emergency& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

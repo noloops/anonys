@@ -12,31 +12,31 @@
 #include "Events/Events.h"
 
 namespace {
-	using Fsm = anonys::fsm::Jukebox;
+    using Fsm = anonys::fsm::Jukebox;
 
-	struct Me {
-		terminals::Std& std;
-		terminals::Counter counter{};
-		terminals::Mixer mixer{};
-	};
+    struct Me {
+        terminals::Std& std;
+        terminals::Counter counter{};
+        terminals::Mixer mixer{};
+    };
 
-	void enter(Me& me) {
-		me.std.log.write(terminals::Message::EnterPlaying);
-	}
+    void enter(Me& me) {
+        me.std.log.write(terminals::Message::EnterPlaying);
+    }
 
-	void exit(Me& me) {
-		me.std.log.write(terminals::Message::ExitPlaying);
-	}
+    void exit(Me& me) {
+        me.std.log.write(terminals::Message::ExitPlaying);
+    }
 
-	anonys::State* handle(Me& me, events::Eject& event) {
-		me.std.log.write(terminals::Message::EjectInPlaying);
-		return &Fsm::Idle;
-	}
+    anonys::State* handle(Me& me, events::Eject& event) {
+        me.std.log.write(terminals::Message::EjectInPlaying);
+        return &Fsm::Idle;
+    }
 
-	anonys::State* handle(Me& me, events::AutoPause& event) {
-		me.std.log.write(terminals::Message::AutoPauseInPlaying);
-		return &Fsm::AutoPause;
-	}
+    anonys::State* handle(Me& me, events::AutoPause& event) {
+        me.std.log.write(terminals::Message::AutoPauseInPlaying);
+        return &Fsm::AutoPause;
+    }
 }
 
 // Generated code, do not edit:

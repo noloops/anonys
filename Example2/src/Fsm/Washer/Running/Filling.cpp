@@ -12,29 +12,29 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Washer;
-	using TimeoutA = anonys::Timeout1;
+    using Fsm = anonys::fsm::Washer;
+    using TimeoutA = anonys::Timeout1;
 
-	struct Me {
-		anonys::Timer timer;
-		hw::io::Valve& valve;
-		dev::sensor::WaterLevel& waterLevel;
-	};
+    struct Me {
+        anonys::Timer timer;
+        hw::io::Valve& valve;
+        dev::sensor::WaterLevel& waterLevel;
+    };
 
-	void enter(Me& me) {
-		me.timer.start<TimeoutA>(60000);
-	}
+    void enter(Me& me) {
+        me.timer.start<TimeoutA>(60000);
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, io::SensorTriggered& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, io::SensorTriggered& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutA& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutA& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

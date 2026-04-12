@@ -17,17 +17,17 @@
 #include "anonys/FsmPool.h"
 
 namespace env {
-	struct Setup {
-		TestEventSenderService eventSender;
-		TestLog log{"Jukebox:"};
-		terminals::Std stdTerminal{eventSender, log};
-		TestTimerService timerService;
-		TestTracingService tracingService;
-		anonys::FsmPool fsm;
+    struct Setup {
+        TestEventSenderService eventSender;
+        TestLog log{"Jukebox:"};
+        terminals::Std stdTerminal{eventSender, log};
+        TestTimerService timerService;
+        TestTracingService tracingService;
+        anonys::FsmPool fsm;
 
-		Setup() {
-			fsm.initializeJukebox(timerService, stdTerminal);
-			fsm.setTracingService(anonys::FsmId::Jukebox, &tracingService);
-		}
-	};
+        Setup() {
+            fsm.initializeJukebox(timerService, stdTerminal);
+            fsm.setTracingService(anonys::FsmId::Jukebox, &tracingService);
+        }
+    };
 }

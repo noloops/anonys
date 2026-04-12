@@ -12,15 +12,15 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Elevator;
+    using Fsm = anonys::fsm::Elevator;
 
-	struct Me {
-		ctrl::reg::FloorTracker& floorTracker;
-	};
+    struct Me {
+        ctrl::reg::FloorTracker& floorTracker;
+    };
 
-	anonys::State* handle(Me& me, io::SensorTriggered& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, io::SensorTriggered& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

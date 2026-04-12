@@ -13,8 +13,8 @@
 #include "EventSenderService.h"
 
 namespace terminals {
-	struct Std {
-		EventSenderService& sender;
-		LogService& log;
-	};
+    struct Std {
+        EventSenderService& sender;
+        LogService& log;
+    };
 }

@@ -12,33 +12,33 @@
 #include "Events/Events.h"
 
 namespace {
-	using Fsm = anonys::fsm::Jukebox;
+    using Fsm = anonys::fsm::Jukebox;
 
-	struct Me {
-		terminals::Std& std;
-		terminals::Mixer& mixer;
-		terminals::Countdown countdown{std.log};
-	};
+    struct Me {
+        terminals::Std& std;
+        terminals::Mixer& mixer;
+        terminals::Countdown countdown{std.log};
+    };
 
-	void enter(Me& me) {
-		me.countdown.set(3);
-		me.std.log.write(terminals::Message::EnterPaused, me.mixer.adjust(-80));
-	}
+    void enter(Me& me) {
+        me.countdown.set(3);
+        me.std.log.write(terminals::Message::EnterPaused, me.mixer.adjust(-80));
+    }
 
-	void exit(Me& me) {
-		me.std.log.write(terminals::Message::ExitPaused);
-	}
+    void exit(Me& me) {
+        me.std.log.write(terminals::Message::ExitPaused);
+    }
 
-	anonys::State* handle(Me& me, events::Play& event) {
-		me.std.log.write(terminals::Message::PlayInPaused);
-		return &Fsm::Normal;
-	}
+    anonys::State* handle(Me& me, events::Play& event) {
+        me.std.log.write(terminals::Message::PlayInPaused);
+        return &Fsm::Normal;
+    }
 
-	anonys::State* handle(Me& me, events::ConfigureAutoPause& event) {
-		me.countdown.set(event.getCountdown());
-		me.std.log.write(terminals::Message::ConfigureAutoPauseInPaused, event.getCountdown());
-		return &Fsm::AutoPause;
-	}
+    anonys::State* handle(Me& me, events::ConfigureAutoPause& event) {
+        me.countdown.set(event.getCountdown());
+        me.std.log.write(terminals::Message::ConfigureAutoPauseInPaused, event.getCountdown());
+        return &Fsm::AutoPause;
+    }
 }
 
 // Generated code, do not edit:

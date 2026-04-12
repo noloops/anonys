@@ -12,25 +12,25 @@
 struct Display {};
 
 namespace hw {
-	struct Motor {};
+    struct Motor {};
 }
 
 namespace hw::io {
-	struct Valve {};
+    struct Valve {};
 }
 
 namespace ctrl {
-	class Panel {};
+    class Panel {};
 }
 
 namespace ctrl::reg {
-	class FloorTracker {};
+    class FloorTracker {};
 }
 
 namespace dev {
-	class SpeedRegulator {};
+    class SpeedRegulator {};
 }
 
 namespace dev::sensor {
-	struct WaterLevel {};
+    struct WaterLevel {};
 }

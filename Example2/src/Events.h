@@ -12,25 +12,25 @@
 struct Start {};
 
 namespace signals {
-	struct Stop {};
+    struct Stop {};
 }
 
 namespace signals::alert {
-	struct Emergency {};
+    struct Emergency {};
 }
 
 namespace ctrl {
-	class Proceed {};
+    class Proceed {};
 }
 
 namespace ctrl::cmd {
-	struct Reset {};
+    struct Reset {};
 }
 
 namespace io {
-	struct SensorTriggered {};
+    struct SensorTriggered {};
 }
 
 namespace io::data {
-	struct Tick {};
+    struct Tick {};
 }

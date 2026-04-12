@@ -12,8 +12,8 @@
 #include "Terminals.h"
 
 namespace {
-	struct Me {
-	};
+    struct Me {
+    };
 }
 
 // Generated code, do not edit:

@@ -12,35 +12,35 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Elevator;
-	using TimeoutA = anonys::Timeout1;
-	using TimeoutB = anonys::Timeout2;
+    using Fsm = anonys::fsm::Elevator;
+    using TimeoutA = anonys::Timeout1;
+    using TimeoutB = anonys::Timeout2;
 
-	struct Me {
-		anonys::Timer timer;
-		ctrl::reg::FloorTracker& floorTracker;
-		dev::SpeedRegulator& speedRegulator;
-	};
+    struct Me {
+        anonys::Timer timer;
+        ctrl::reg::FloorTracker& floorTracker;
+        dev::SpeedRegulator& speedRegulator;
+    };
 
-	void enter(Me& me) {
-		me.timer.start<TimeoutA>(5000);
-		me.timer.start<TimeoutB>(20000);
-	}
+    void enter(Me& me) {
+        me.timer.start<TimeoutA>(5000);
+        me.timer.start<TimeoutB>(20000);
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, io::SensorTriggered& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, io::SensorTriggered& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutA& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutA& event) {
+        return nullptr;
+    }
 
-	anonys::State* handle(Me& me, TimeoutB& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, TimeoutB& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

@@ -12,21 +12,21 @@
 #include "Terminals.h"
 
 namespace {
-	using Fsm = anonys::fsm::Elevator;
+    using Fsm = anonys::fsm::Elevator;
 
-	struct Me {
-		dev::SpeedRegulator speedRegulator{};
-	};
+    struct Me {
+        dev::SpeedRegulator speedRegulator{};
+    };
 
-	void enter(Me& me) {
-	}
+    void enter(Me& me) {
+    }
 
-	void exit(Me& me) {
-	}
+    void exit(Me& me) {
+    }
 
-	anonys::State* handle(Me& me, ctrl::Proceed& event) {
-		return nullptr;
-	}
+    anonys::State* handle(Me& me, ctrl::Proceed& event) {
+        return nullptr;
+    }
 }
 
 // Generated code, do not edit:

@@ -14,17 +14,17 @@
 #include "anonys/EventId.h"
 
 namespace terminals {
-	class EventSenderService {
-	public:
-		virtual ~EventSenderService() = default;
+    class EventSenderService {
+    public:
+        virtual ~EventSenderService() = default;
 
-		template <typename T>
-		void send(anonys::FsmId fsmId, const T& event) {
-			constexpr anonys::EventId eventId{ anonys::getEventId<T>() };
-			doSend(fsmId, eventId, &event, sizeof(T));
-		}
+        template <typename T>
+        void send(anonys::FsmId fsmId, const T& event) {
+            constexpr anonys::EventId eventId{ anonys::getEventId<T>() };
+            doSend(fsmId, eventId, &event, sizeof(T));
+        }
 
-	protected:
-		virtual void doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) = 0;
-	};
+    protected:
+        virtual void doSend(anonys::FsmId fsmId, anonys::EventId eventId, const void* pData, uint16_t size) = 0;
+    };
 }
