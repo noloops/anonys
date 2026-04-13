@@ -17,7 +17,6 @@ namespace anonys
 {
     BufferCalc calcBuffer() {
         BufferCalc result{true};
-
         {
             uint16_t maxBufferSize{0};
             calcMaxBuffer(fsm::Jukebox::Off, maxBufferSize);
@@ -30,7 +29,6 @@ namespace anonys
                 result.ok = false;
             }
         }
-
         return result;
     }
 }

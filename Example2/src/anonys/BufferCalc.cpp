@@ -19,7 +19,6 @@ namespace anonys
 {
     BufferCalc calcBuffer() {
         BufferCalc result{true};
-
         {
             uint16_t maxBufferSize{0};
             calcMaxBuffer(fsm::Elevator::Idle, maxBufferSize);
@@ -32,7 +31,6 @@ namespace anonys
                 result.ok = false;
             }
         }
-
         {
             uint16_t maxBufferSize{0};
             calcMaxBuffer(fsm::TrafficLight::Off, maxBufferSize);
@@ -45,7 +43,6 @@ namespace anonys
                 result.ok = false;
             }
         }
-
         {
             uint16_t maxBufferSize{0};
             calcMaxBuffer(fsm::Washer::Idle, maxBufferSize);
@@ -61,7 +58,6 @@ namespace anonys
                 result.ok = false;
             }
         }
-
         return result;
     }
 }
