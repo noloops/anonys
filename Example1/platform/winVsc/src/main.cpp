@@ -9,9 +9,17 @@
 
 #include "env/Tester.h"
 #include "env/Demo.h"
+#include "anonys/BufferCalc.h"
+#include <iostream>
 
 int main()
 {
+    auto const bufferCalcResult{anonys::calcBuffer()};
+    std::cout << "BufferCalc: ok=" << bufferCalcResult.ok
+              << " sizeJukebox=" << bufferCalcResult.sizeJukebox << std::endl;
+    if (!bufferCalcResult.ok) {
+        return 2;
+    }
     if (!env::Tester::runAllTests()) {
         return 1;
     }

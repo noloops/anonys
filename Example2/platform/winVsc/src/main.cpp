@@ -8,7 +8,9 @@
 //     http://apache.org
 
 #include "anonys/FsmPool.h"
+#include "anonys/BufferCalc.h"
 #include "Terminals.h"
+#include <iostream>
 
 namespace {
     class DummyTimerService : public anonys::TimerService {
@@ -20,6 +22,15 @@ namespace {
 
 int main()
 {
+    auto const bufferCalcResult{anonys::calcBuffer()};
+    std::cout << "BufferCalc: ok=" << bufferCalcResult.ok
+              << " sizeElevator=" << bufferCalcResult.sizeElevator
+              << " sizeTrafficLight=" << bufferCalcResult.sizeTrafficLight
+              << " sizeWasher=" << bufferCalcResult.sizeWasher << std::endl;
+    if (!bufferCalcResult.ok) {
+        return 2;
+    }
+
     DummyTimerService timerService;
     Display display;
     hw::Motor motor;

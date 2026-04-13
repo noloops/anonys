@@ -22,9 +22,11 @@ add_executable(Example1
 
     # Core framework
     "${REPO_ROOT}/ext/anonys/FsmCore.cpp"
+    "${REPO_ROOT}/ext/anonys/calcMaxBuffer.cpp"
 
     # Application sources
     "${REPO_ROOT}/Example1/src/anonys/FsmPool.cpp"
+    "${REPO_ROOT}/Example1/src/anonys/BufferCalc.cpp"
     "${REPO_ROOT}/Example1/src/env/TestLog.cpp"
     "${REPO_ROOT}/Example1/src/env/TestEventSenderService.cpp"
     "${REPO_ROOT}/Example1/src/env/TestTimerService.cpp"
