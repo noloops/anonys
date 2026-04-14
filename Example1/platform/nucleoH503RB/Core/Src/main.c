@@ -46,6 +46,7 @@ __IO uint32_t BspButtonState = BUTTON_RELEASED;
 
 /* USER CODE BEGIN PV */
 static uint32_t s_lastTickMs = 0;
+static uint32_t s_lastClickMs = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -125,9 +126,12 @@ int main(void)
     /* -- Sample board code for User push-button in interrupt mode ---- */
     if (BspButtonState == BUTTON_PRESSED)
     {
-      /* Update button state */
       BspButtonState = BUTTON_RELEASED;
-      handleClick();
+      if ((HAL_GetTick() - s_lastClickMs) >= 20U)
+      {
+        s_lastClickMs = HAL_GetTick();
+        handleClick();
+      }
     }
 
     /* 20 Hz tick (every 50 ms) using SysTick */
