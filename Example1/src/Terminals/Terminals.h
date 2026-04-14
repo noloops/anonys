@@ -7,6 +7,10 @@
 //
 //     http://apache.org
 
-#pragma once
-#include "Std.h"
-#include "CustomTerminals.h"
+#ifndef EXAMPLE1_TERMINALS_TERMINALS_H
+#define EXAMPLE1_TERMINALS_TERMINALS_H
+
+#include "Led.h"
+#include "PatternTracker.h"
+
+#endif // EXAMPLE1_TERMINALS_TERMINALS_H

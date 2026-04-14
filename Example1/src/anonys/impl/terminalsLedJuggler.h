@@ -18,7 +18,7 @@ namespace terminals {
     class PatternTracker;
 }
 
-namespace anonys_1 {
+namespace anonys_0 {
     struct Terminals {
         anonys::TimerCore* pTimer;
         terminals::Led* pLed;

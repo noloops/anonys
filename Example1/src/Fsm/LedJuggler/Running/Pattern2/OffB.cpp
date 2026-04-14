@@ -8,6 +8,8 @@
 //     http://apache.org
 
 #include "anonys/fsm/LedJuggler.h"
+#include "Terminals/Led.h"
+#include "Events/Events.h"
 
 namespace {
     using Fsm = anonys::fsm::LedJuggler;
@@ -16,25 +18,28 @@ namespace {
     struct Me {
         anonys::Timer timer;
         terminals::Led& led;
+        bool clicked {false};
     };
 
     void enter(Me& me) {
+        me.led.solidOff();
+        me.timer.start<TimeoutA>(1300);
     }
 
-    void exit(Me& me) {
-    }
+    void exit(Me&) {}
 
-    anonys::State* handle(Me& me, const events::Click& event) {
+    anonys::State* handle(Me& me, const events::Click&) {
+        me.clicked = true;
         return nullptr;
     }
 
-    anonys::State* handle(Me& me, const TimeoutA& event) {
-        return nullptr;
+    anonys::State* handle(Me& me, const TimeoutA&) {
+        return me.clicked ? &Fsm::BlinkA : &Fsm::BlinkB;
     }
 }
 
 // ANONYS - Generated code – do not edit the rest of this file!
-namespace anonys_1_9 {
+namespace anonys_0_9 {
     anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
         Me& me{ *static_cast<Me*>(pMembers) };
         switch (event.eventId.id) {
@@ -48,7 +53,7 @@ namespace anonys_1_9 {
     }
 
     void liveCycle(bool create, void* pTerminals, void* pMembers) {
-        auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
+        auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
         if (create) {
             Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pLed } };
             enter(me);

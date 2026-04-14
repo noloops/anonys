@@ -8,6 +8,9 @@
 //     http://apache.org
 
 #include "anonys/fsm/LedJuggler.h"
+#include "Terminals/Led.h"
+#include "Terminals/PatternTracker.h"
+#include "Events/Events.h"
 
 namespace {
     using Fsm = anonys::fsm::LedJuggler;
@@ -18,18 +21,21 @@ namespace {
     };
 
     void enter(Me& me) {
+        me.led.stop();
     }
 
-    void exit(Me& me) {
-    }
+    void exit(Me&) {}
 
-    anonys::State* handle(Me& me, const events::Click& event) {
-        return nullptr;
+    anonys::State* handle(Me& me, const events::Click&) {
+        if (me.patternTracker.isPattern1()) {
+            return &Fsm::BlinkA;
+        }
+        return &Fsm::BlinkB;
     }
 }
 
 // ANONYS - Generated code – do not edit the rest of this file!
-namespace anonys_1_10 {
+namespace anonys_0_10 {
     anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
         Me& me{ *static_cast<Me*>(pMembers) };
         switch (event.eventId.id) {
@@ -41,7 +47,7 @@ namespace anonys_1_10 {
     }
 
     void liveCycle(bool create, void* pTerminals, void* pMembers) {
-        auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
+        auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
         if (create) {
             Me& me{ *::new (pMembers) Me{ *terminals.pLed, *terminals.pPatternTracker } };
             enter(me);

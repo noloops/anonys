@@ -8,6 +8,8 @@
 //     http://apache.org
 
 #include "anonys/fsm/LedJuggler.h"
+#include "Terminals/Led.h"
+#include "Events/Events.h"
 
 namespace {
     using Fsm = anonys::fsm::LedJuggler;
@@ -19,22 +21,23 @@ namespace {
     };
 
     void enter(Me& me) {
+        me.led.startBlinkB();
+        me.timer.start<TimeoutA>(1500);
     }
 
-    void exit(Me& me) {
+    void exit(Me&) {}
+
+    anonys::State* handle(Me&, const events::Click&) {
+        return &Fsm::Paused;
     }
 
-    anonys::State* handle(Me& me, const events::Click& event) {
-        return nullptr;
-    }
-
-    anonys::State* handle(Me& me, const TimeoutA& event) {
-        return nullptr;
+    anonys::State* handle(Me&, const TimeoutA&) {
+        return &Fsm::OnB;
     }
 }
 
 // ANONYS - Generated code – do not edit the rest of this file!
-namespace anonys_1_7 {
+namespace anonys_0_7 {
     anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
         Me& me{ *static_cast<Me*>(pMembers) };
         switch (event.eventId.id) {
@@ -48,7 +51,7 @@ namespace anonys_1_7 {
     }
 
     void liveCycle(bool create, void* pTerminals, void* pMembers) {
-        auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
+        auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
         if (create) {
             Me& me{ *::new (pMembers) Me{ *terminals.pTimer, *terminals.pLed } };
             enter(me);

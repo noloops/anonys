@@ -18,7 +18,6 @@ SCRIPT_DIR = Path(__file__).parent
 try:
     config = GeneratorConfig(
         fsm_definitions=[
-            SCRIPT_DIR / "../Example1/fsmDef/Jukebox.txt",
 			SCRIPT_DIR / "../Example1/fsmDef/LedJuggler.txt",
         ],
         anonys_output_dir=SCRIPT_DIR / "../Example1/src",

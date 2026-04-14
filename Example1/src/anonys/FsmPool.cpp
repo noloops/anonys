@@ -11,12 +11,10 @@
 #include "FsmPool.h"
 #include "anonys/Utils.h"
 
-#include "fsm/Jukebox.h"
 #include "fsm/LedJuggler.h"
 
 namespace anonys
 {
-    static_assert(BufferSize::Jukebox % anonys::StdAlign == 0, "Buffer size must be a multiple of alignment");
     static_assert(BufferSize::LedJuggler % anonys::StdAlign == 0, "Buffer size must be a multiple of alignment");
 
     void FsmPool::handleEvent(FsmId fsmId, Event& event) {
@@ -43,16 +41,6 @@ namespace anonys
         }
     }
 
-    void FsmPool::initializeJukebox(TimerService& timerService, terminals::Std& std) {
-        ANONYS_ASSERT(m_terminalsJukebox.pTimer == nullptr);
-        FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::Jukebox)] };
-        m_terminalsJukebox.pTimer = &(fsm.getTimerCore());
-        m_terminalsJukebox.pStd = &std;
-
-        uint8_t* const pBuffer{ std::launder(reinterpret_cast<uint8_t*>(&m_bufferJukebox)) };
-        fsm.initialize(FsmId::Jukebox, &m_terminalsJukebox, pBuffer, sizeof(m_bufferJukebox), &timerService);
-    }
-
     void FsmPool::initializeLedJuggler(TimerService& timerService, terminals::Led& led) {
         ANONYS_ASSERT(m_terminalsLedJuggler.pTimer == nullptr);
         FsmCore& fsm{ m_fsm[static_cast<uint16_t>(FsmId::LedJuggler)] };
@@ -66,7 +54,6 @@ namespace anonys
     void FsmPool::start() {
         ANONYS_ASSERT(!m_started);
         m_started = true;
-        m_fsm[static_cast<uint16_t>(FsmId::Jukebox)].executeTransition(&fsm::Jukebox::Off);
         m_fsm[static_cast<uint16_t>(FsmId::LedJuggler)].executeTransition(&fsm::LedJuggler::BlinkA);
     }
 }

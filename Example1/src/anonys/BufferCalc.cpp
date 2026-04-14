@@ -10,7 +10,6 @@
 // ANONYS - Generated file, do not edit!
 #include "BufferCalc.h"
 #include "anonys/calcMaxBuffer.h"
-#include "fsm/Jukebox.h"
 #include "fsm/LedJuggler.h"
 #include "AnonysManualConfig.h"
 
@@ -18,18 +17,6 @@ namespace anonys
 {
     BufferCalc calcBuffer() {
         BufferCalc result{true};
-        {
-            uint16_t maxBufferSize{0};
-            calcMaxBuffer(fsm::Jukebox::Off, maxBufferSize);
-            calcMaxBuffer(fsm::Jukebox::Idle, maxBufferSize);
-            calcMaxBuffer(fsm::Jukebox::Normal, maxBufferSize);
-            calcMaxBuffer(fsm::Jukebox::AutoPause, maxBufferSize);
-            calcMaxBuffer(fsm::Jukebox::Error, maxBufferSize);
-            result.sizeJukebox = maxBufferSize;
-            if (maxBufferSize > BufferSize::Jukebox) {
-                result.ok = false;
-            }
-        }
         {
             uint16_t maxBufferSize{0};
             calcMaxBuffer(fsm::LedJuggler::BlinkA, maxBufferSize);

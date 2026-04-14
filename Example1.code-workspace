@@ -5,8 +5,8 @@
 		}
 	],
 	"settings": {
-		"cmake.sourceDirectory": "${workspaceFolder}/Example1/platform/winVsc",
-		"cmake.buildDirectory": "${workspaceFolder}/Example1/platform/winVsc/build",
+		"cmake.sourceDirectory": "${workspaceFolder}/Example1/platform/nucleoH503RB",
+		"cmake.buildDirectory": "${workspaceFolder}/Example1/platform/nucleoH503RB/build",
 		"cmake.generator": "Ninja",
 		"files.associations": {
 			"*.h": "cpp",
