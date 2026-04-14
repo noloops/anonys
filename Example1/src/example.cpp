@@ -10,14 +10,25 @@
 #include "example.h"
 
 namespace {
-	bool s_ledOn{ false };
+	enum class Mode { Off, Blinking };
+	Mode s_mode{ Mode::Off };
+	bool s_ledState{ false };
 }
 
 void handleTick() {
-	// reserved for FSM timer infrastructure
+	if (s_mode == Mode::Blinking) {
+		s_ledState = !s_ledState;
+		setLed(s_ledState);
+	}
 }
 
 void handleClick() {
-	s_ledOn = !s_ledOn;
-	setLed(s_ledOn);
+	if (s_mode == Mode::Off) {
+		s_mode = Mode::Blinking;
+	}
+	else {
+		s_mode = Mode::Off;
+		s_ledState = false;
+		setLed(false);
+	}
 }

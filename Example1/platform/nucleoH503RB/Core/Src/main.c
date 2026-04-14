@@ -45,7 +45,7 @@ COM_InitTypeDef BspCOMInit;
 __IO uint32_t BspButtonState = BUTTON_RELEASED;
 
 /* USER CODE BEGIN PV */
-
+static uint32_t s_lastTickMs = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -128,8 +128,14 @@ int main(void)
       /* Update button state */
       BspButtonState = BUTTON_RELEASED;
       handleClick();
+    }
 
-      /* ..... Perform your action ..... */
+    /* 20 Hz tick (every 50 ms) using SysTick */
+    uint32_t const now = HAL_GetTick();
+    if ((now - s_lastTickMs) >= 50U)
+    {
+      s_lastTickMs = now;
+      handleTick();
     }
     /* USER CODE END WHILE */
 
