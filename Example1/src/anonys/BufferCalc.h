@@ -18,6 +18,7 @@ namespace anonys
     struct BufferCalc {
         bool ok;
         uint16_t sizeJukebox;
+        uint16_t sizeLedJuggler;
     };
 
     BufferCalc calcBuffer();

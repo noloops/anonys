@@ -16,6 +16,7 @@
 #include "anonys/FsmCore.h"
 
 #include "impl/terminalsJukebox.h"
+#include "impl/terminalsLedJuggler.h"
 
 namespace anonys
 {
@@ -23,6 +24,7 @@ namespace anonys
     public:
         static constexpr uint16_t Count{ FsmCount };
         using TerminalsJukebox = anonys_0::Terminals;
+        using TerminalsLedJuggler = anonys_1::Terminals;
 
         void handleEvent(FsmId fsmId, Event& event);
 
@@ -34,14 +36,18 @@ namespace anonys
 
         void initializeJukebox(TimerService& timerService, terminals::Std& std);
 
+        void initializeLedJuggler(TimerService& timerService, terminals::Led& led);
+
         void start();
 
     private:
         FsmCore m_fsm[Count]{};
 
         std::aligned_storage_t<BufferSize::Jukebox, anonys::StdAlign> m_bufferJukebox{};
+        std::aligned_storage_t<BufferSize::LedJuggler, anonys::StdAlign> m_bufferLedJuggler{};
 
         TerminalsJukebox m_terminalsJukebox{};
+        TerminalsLedJuggler m_terminalsLedJuggler{};
 
         bool m_started{ false };
     };

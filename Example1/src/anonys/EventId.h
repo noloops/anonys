@@ -26,6 +26,7 @@ namespace events {
     struct Reset;
     struct AutoPause;
     class ConfigureAutoPause;
+    struct Click;
 }
 
 namespace anonys
@@ -45,6 +46,7 @@ namespace anonys
     template<> constexpr EventId getEventId<events::Reset>() { return 9; }
     template<> constexpr EventId getEventId<events::AutoPause>() { return 10; }
     template<> constexpr EventId getEventId<events::ConfigureAutoPause>() { return 11; }
+    template<> constexpr EventId getEventId<events::Click>() { return 12; }
 
     template <typename T> constexpr EventId getTimeoutEventId() = delete;
     template<> constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }

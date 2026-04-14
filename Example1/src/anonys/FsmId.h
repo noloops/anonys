@@ -16,7 +16,8 @@
 namespace anonys
 {
     enum class FsmId : uint16_t {
-        Jukebox = 0
+        Jukebox = 0,
+        LedJuggler = 1
     };
 }
 
