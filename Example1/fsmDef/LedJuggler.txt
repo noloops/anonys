@@ -1,0 +1,14 @@
+struct events.Click click
+class terminals.Led led
+class terminals.PatternTracker patternTracker
+
+Running () patternTracker
+	Pattern1 + (patternTracker)
+		!BlinkA +-1 click (led)
+		OnA +-1 click (led)
+		OffA +-1 click (led)
+	Pattern2 + (patternTracker)
+		BlinkB +-1 click (led)
+		OnB +-1 click (led)
+		OffB +-1 click (led)
+	Paused +- click (led patternTracker)
