@@ -1,0 +1,23 @@
+// ANONYS FINITE STATE MACHINE FRAMEWORK
+// Copyright (c) 2026 Jan Hofmann <anonys@noloops.ch>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://apache.org
+
+#include "example.h"
+
+namespace {
+	bool s_ledOn{ false };
+}
+
+void handleTick() {
+	// reserved for FSM timer infrastructure
+}
+
+void handleClick() {
+	s_ledOn = !s_ledOn;
+	setLed(s_ledOn);
+}

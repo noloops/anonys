@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "example.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -115,9 +115,6 @@ int main(void)
   /* -- Sample board code to send message over COM1 port ---- */
   printf("Welcome to STM32 world !\n\r");
 
-  /* -- Sample board code to switch on led ---- */
-  BSP_LED_On(LED_GREEN);
-
   /* USER CODE END BSP */
 
   /* Infinite loop */
@@ -130,8 +127,7 @@ int main(void)
     {
       /* Update button state */
       BspButtonState = BUTTON_RELEASED;
-      /* -- Sample board code to toggle led ---- */
-      BSP_LED_Toggle(LED_GREEN);
+      handleClick();
 
       /* ..... Perform your action ..... */
     }
@@ -224,7 +220,17 @@ static void MX_ICACHE_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void setLed(bool on)
+{
+  if (on)
+  {
+    BSP_LED_On(LED_GREEN);
+  }
+  else
+  {
+    BSP_LED_Off(LED_GREEN);
+  }
+}
 /* USER CODE END 4 */
 
 /**
