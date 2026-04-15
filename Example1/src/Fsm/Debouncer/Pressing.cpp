@@ -8,24 +8,27 @@
 //     http://apache.org
 
 #include "anonys/fsm/Debouncer.h"
+#include "Events/Events.h"
+#include "Terminals/EventSender.h"
 
 namespace {
     using Fsm = anonys::fsm::Debouncer;
-    using TimeoutA = anonys::Timeout1;
+    using TimeoutConfirmed = anonys::Timeout1;
 
     struct Me {
         anonys::Timer timer;
     };
 
     void enter(Me& me) {
+        me.timer.start<TimeoutConfirmed>(20);
     }
 
-    anonys::State* handle(Me& me, const events::ButtonEvent& event) {
-        return nullptr;
+    anonys::State* handle(Me&, const events::ButtonEvent& event) {
+        return event.pressed ? nullptr : &Fsm::Initial;
     }
 
-    anonys::State* handle(Me& me, const TimeoutA& event) {
-        return nullptr;
+    anonys::State* handle(Me&, const TimeoutConfirmed&) {
+        return &Fsm::Pressed;
     }
 }
 

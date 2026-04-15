@@ -3,6 +3,6 @@ class terminals.EventSender eventSender
 
 !Initial buttonEvent ()
 Pressing +1 buttonEvent ()
-	Pressed (eventSender)
+	Pressed + (eventSender)
 Releasing +1 buttonEvent ()
-	Released (eventSender)
+	Released + (eventSender)

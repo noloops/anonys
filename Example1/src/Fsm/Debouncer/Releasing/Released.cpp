@@ -8,6 +8,7 @@
 //     http://apache.org
 
 #include "anonys/fsm/Debouncer.h"
+#include "Terminals/EventSender.h"
 
 namespace {
     using Fsm = anonys::fsm::Debouncer;
@@ -15,6 +16,10 @@ namespace {
     struct Me {
         terminals::EventSender& eventSender;
     };
+
+    void enter(Me& me) {
+        me.eventSender.sendReleased();
+    }
 }
 
 // ANONYS - Generated code – do not edit the rest of this file!
@@ -26,7 +31,8 @@ namespace anonys_1_5 {
     void liveCycle(bool create, void* pTerminals, void* pMembers) {
         auto& terminals{ *static_cast<anonys_1::Terminals*>(pTerminals) };
         if (create) {
-            ::new (pMembers) Me{ *terminals.pEventSender };
+            Me& me{ *::new (pMembers) Me{ *terminals.pEventSender } };
+            enter(me);
         }
         else {
             Me& me{ *static_cast<Me*>(pMembers) };

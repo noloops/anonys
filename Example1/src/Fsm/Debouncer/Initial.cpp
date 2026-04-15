@@ -8,6 +8,7 @@
 //     http://apache.org
 
 #include "anonys/fsm/Debouncer.h"
+#include "Events/Events.h"
 
 namespace {
     using Fsm = anonys::fsm::Debouncer;
@@ -15,8 +16,8 @@ namespace {
     struct Me {
     };
 
-    anonys::State* handle(Me& me, const events::ButtonEvent& event) {
-        return nullptr;
+    anonys::State* handle(Me&, const events::ButtonEvent& event) {
+        return event.pressed ? &Fsm::Pressing : nullptr;
     }
 }
 

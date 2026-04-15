@@ -12,5 +12,6 @@
 
 #include "Led.h"
 #include "PatternTracker.h"
+#include "EventSender.h"
 
 #endif // EXAMPLE1_TERMINALS_TERMINALS_H

@@ -31,6 +31,7 @@ namespace anonys {
 
 	struct BufferSize {
 		static constexpr std::size_t LedJuggler{ 128 };
+		static constexpr std::size_t Debouncer{ 32 };
 	};
 
 }

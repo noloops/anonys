@@ -14,6 +14,7 @@
 
 namespace events {
 	struct Click {};
+	struct ButtonEvent { bool pressed; };
 }
 
 #endif // EXAMPLE1_EVENTS_EVENTS_H

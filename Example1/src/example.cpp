@@ -12,11 +12,12 @@
 #include "anonys/EventId.h"
 #include "Events/Events.h"
 #include "Terminals/Led.h"
+#include "Terminals/EventSender.h"
 
 namespace {
 
 	// ---------------------------------------------------------------------------
-	// Timer service backed by 50 ms handleTick() calls.
+	// Timer service backed by 1 ms handleTick() calls.
 	// ---------------------------------------------------------------------------
 	class TickTimerService : public anonys::TimerService {
 	public:
@@ -50,8 +51,7 @@ namespace {
 					m_entries[i].fsmId = fsmId;
 					m_entries[i].depth = depth;
 					m_entries[i].eventId = eventId.id;
-					uint32_t const ticks{ (timeoutMs + 49u) / 50u };
-					m_entries[i].remainingTicks = (ticks == 0u) ? 1u : ticks;
+					m_entries[i].remainingTicks = (timeoutMs == 0u) ? 1u : timeoutMs;
 					m_entries[i].active = true;
 					return;
 				}
@@ -85,6 +85,7 @@ namespace {
 	};
 
 	terminals::Led s_led;
+	terminals::EventSender s_eventSender;
 	TickTimerService s_timerService;
 	anonys::FsmPool s_fsm;
 
@@ -92,20 +93,26 @@ namespace {
 
 void handleStartup() {
 	s_fsm.initializeLedJuggler(s_timerService, s_led);
+	s_fsm.initializeDebouncer(s_timerService, s_eventSender);
 	s_fsm.start();
 }
 
 void handleTick(uint32_t sysMs) {
-	static uint32_t s_lastFsmTickMs{ 0 };
-	if ((sysMs - s_lastFsmTickMs) >= 50u) {
-		s_lastFsmTickMs = sysMs;
+	static uint32_t s_lastTickMs{ 0 };
+	while (s_lastTickMs != sysMs) {
+		++s_lastTickMs;
 		s_timerService.tick(s_fsm);
+	}
+	int32_t const q{ s_eventSender.consume() };
+	if (q == 1) {
+		events::Click click{};
+		anonys::Event event{ anonys::getEventId<events::Click>(), &click };
+		s_fsm.handleEvent(anonys::FsmId::LedJuggler, event);
 	}
 }
 
 void handleButton(bool pressed) {
-	if (!pressed) { return; }
-	events::Click click{};
-	anonys::Event event{ anonys::getEventId<events::Click>(), &click };
-	s_fsm.handleEvent(anonys::FsmId::LedJuggler, event);
+	events::ButtonEvent btn{ pressed };
+	anonys::Event event{ anonys::getEventId<events::ButtonEvent>(), &btn };
+	s_fsm.handleEvent(anonys::FsmId::Debouncer, event);
 }

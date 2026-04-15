@@ -29,6 +29,13 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/LedJuggler/Running/Pattern2/OnB.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/LedJuggler/Running/Pattern2/OffB.cpp
 	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/LedJuggler/Running/Paused.cpp
+
+	# Debouncer states
+	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/Debouncer/Initial.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/Debouncer/Pressing.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/Debouncer/Pressing/Pressed.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/Debouncer/Releasing.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Fsm/Debouncer/Releasing/Released.cpp
 )
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
