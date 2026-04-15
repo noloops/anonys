@@ -18,7 +18,7 @@ namespace {
     using TimeoutStep = anonys::Timeout2;  // blink step
 
     // on(300) off(150) on(100) off(450) — distinctive slow double-pulse
-    static constexpr std::array<uint16_t, 4> Durations{ 300, 150, 100, 450 };
+    static constexpr std::array<uint16_t, 6> Durations{ 70, 50, 250, 100, 250, 50 };
 
     struct Me {
         anonys::Timer timer;
@@ -28,7 +28,7 @@ namespace {
 
     void enter(Me& me) {
         me.led.setLed(true);  // step 0 = even = on
-        me.timer.start<TimeoutCompleted>(1300);
+        me.timer.start<TimeoutCompleted>(1900);
         me.timer.start<TimeoutStep>(Durations[0]);
     }
 
