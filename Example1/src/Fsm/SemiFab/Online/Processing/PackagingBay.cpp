@@ -8,6 +8,8 @@
 //     http://apache.org
 
 #include "anonys/fsm/SemiFab.h"
+#include "Events.h"
+#include "Terminals.h"
 
 namespace {
     using Fsm = anonys::fsm::SemiFab;
