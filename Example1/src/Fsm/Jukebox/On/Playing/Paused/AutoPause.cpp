@@ -33,9 +33,10 @@ namespace {
     anonys::State* handle(Me& me, const PauseCountdownTimeout& event) {
         me.std.log.write(terminals::Message::CountdownTimerInAutoPause);
         if (me.countdown.decrement()) {
-            me.std.sender.send<events::Play>(Fsm::Id, events::Play{});
+            return &Fsm::Playing;
         }
-        return &Fsm::AutoPause;
+        me.timer.start<PauseCountdownTimeout>(1000);
+        return nullptr;
     }
 
     anonys::State* handle(Me& me, const events::Pause& event) {

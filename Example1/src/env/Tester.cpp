@@ -133,32 +133,21 @@ namespace env {
         Expected::logWrite(M::CountdownTimerInAutoPause);
         if (expectZero) {
             Expected::logWrite(M::CountdownReachedZero);
-            Expected::eventSenderDoSend(F, anonys::EventId{3}, nullptr, sizeof(events::Play));
+            Expected::tracingTraceHandledEvent(F, 7, anonys::EventId{60001});
+            Expected::tracingTraceExitState(F, 7);
+            Expected::logWrite(M::ExitAutoPause);
+            Expected::timerStopTimers(F, 3);
+            Expected::tracingTraceExitState(F, 6);
+            Expected::logWrite(M::ExitPaused);
+            Expected::tracingTraceExitState(F, 4);
+            Expected::logWrite(M::ExitPlaying);
+            Expected::tracingTraceEnterState(F, 4);
+            Expected::logWrite(M::EnterPlaying);
+        } else {
+            Expected::timerStartTimer(F, 3, anonys::EventId{60001}, 1000);
+            Expected::tracingTraceHandledEvent(F, 7, anonys::EventId{60001});
         }
-        Expected::tracingTraceHandledEvent(F, 7, anonys::EventId{60001});
-        Expected::tracingTraceExitState(F, 7);
-        Expected::logWrite(M::ExitAutoPause);
-        Expected::timerStopTimers(F, 3);
-        Expected::tracingTraceEnterState(F, 7);
-        Expected::logWrite(M::EnterAutoPause);
-        Expected::timerStartTimer(F, 3, anonys::EventId{60001}, 1000);
         if (!exec.sendNextTimeout()) { return false; }
-        if (!Expected::check()) { return false; }
-        return true;
-    }
-
-    static bool processAutoPlay(Executor& exec, int32_t normalCount) {
-        Expected::logWrite(M::PlayInPaused);
-        Expected::tracingTraceHandledEvent(F, 6, anonys::EventId{3});
-        Expected::tracingTraceExitState(F, 7);
-        Expected::logWrite(M::ExitAutoPause);
-        Expected::timerStopTimers(F, 3);
-        Expected::tracingTraceExitState(F, 6);
-        Expected::logWrite(M::ExitPaused);
-        Expected::tracingTraceEnterState(F, 5);
-        Expected::logWrite(M::EnterNormal, normalCount);
-        Expected::timerStartTimer(F, 2, anonys::EventId{60001}, 3000);
-        if (!exec.sendNextEvent()) { return false; }
         if (!Expected::check()) { return false; }
         return true;
     }
@@ -513,11 +502,8 @@ namespace env {
         // Fire timeout 2: countdown 2->1
         if (!fireCountdownTimer(executor, false)) { return failed(); }
 
-        // Fire timeout 3: countdown 1->0, sends Play
+        // Fire timeout 3: countdown 1->0, transitions to Playing
         if (!fireCountdownTimer(executor, true)) { return failed(); }
-
-        // Process queued Play event: exits AutoPause+Paused, enters Normal (count 2)
-        if (!processAutoPlay(executor, 2)) { return failed(); }
 
         if (executor.hasWarnings()) { return failed(); }
         return success();
@@ -567,11 +553,8 @@ namespace env {
         // Fire timeout 1: countdown 2->1
         if (!fireCountdownTimer(executor, false)) { return failed(); }
 
-        // Fire timeout 2: countdown 1->0, sends Play
+        // Fire timeout 2: countdown 1->0, transitions to Playing
         if (!fireCountdownTimer(executor, true)) { return failed(); }
-
-        // Process queued Play: exits AutoPause+Paused, enters Normal (count 2)
-        if (!processAutoPlay(executor, 2)) { return failed(); }
 
         if (executor.hasWarnings()) { return failed(); }
         return success();
