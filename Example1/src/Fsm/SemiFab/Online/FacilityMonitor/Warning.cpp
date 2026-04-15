@@ -1,0 +1,85 @@
+// ANONYS FINITE STATE MACHINE FRAMEWORK
+// Copyright (c) 2026 Jan Hofmann <anonys@noloops.ch>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://apache.org
+
+#include "anonys/fsm/SemiFab.h"
+
+namespace {
+    using Fsm = anonys::fsm::SemiFab;
+
+    struct Me {
+        term::io::Std& std;
+        term::ctrl::Panel& panel;
+        term::sensor::TempSensor& tempSensor;
+        term::sensor::PressureSensor& pressureSensor;
+    };
+
+    void enter(Me& me) {
+    }
+
+    void exit(Me& me) {
+    }
+
+    anonys::State* handle(Me& me, const evt::alarm::OverTemp& event) {
+        return nullptr;
+    }
+
+    anonys::State* handle(Me& me, const evt::alarm::UnderPressure& event) {
+        return nullptr;
+    }
+
+    anonys::State* handle(Me& me, const evt::alarm::GasLeak& event) {
+        return nullptr;
+    }
+
+    anonys::State* handle(Me& me, const evt::alarm::ParticleAlert& event) {
+        return nullptr;
+    }
+
+    anonys::State* handle(Me& me, const evt::alarm::AlarmClear& event) {
+        return nullptr;
+    }
+}
+
+// ANONYS - Generated code – do not edit the rest of this file!
+namespace anonys_0_243 {
+    anonys::State* handleEvent(void* pMembers, anonys::Event& event) {
+        Me& me{ *static_cast<Me*>(pMembers) };
+        switch (event.eventId.id) {
+        case anonys::getEventId<evt::alarm::OverTemp>().id:
+            return handle(me, *static_cast<evt::alarm::OverTemp*>(event.pData));
+        case anonys::getEventId<evt::alarm::UnderPressure>().id:
+            return handle(me, *static_cast<evt::alarm::UnderPressure*>(event.pData));
+        case anonys::getEventId<evt::alarm::GasLeak>().id:
+            return handle(me, *static_cast<evt::alarm::GasLeak*>(event.pData));
+        case anonys::getEventId<evt::alarm::ParticleAlert>().id:
+            return handle(me, *static_cast<evt::alarm::ParticleAlert*>(event.pData));
+        case anonys::getEventId<evt::alarm::AlarmClear>().id:
+            return handle(me, *static_cast<evt::alarm::AlarmClear*>(event.pData));
+        default:
+            return &anonys::DummyStates::Unhandled;
+        }
+    }
+
+    void liveCycle(bool create, void* pTerminals, void* pMembers) {
+        auto& terminals{ *static_cast<anonys_0::Terminals*>(pTerminals) };
+        if (create) {
+            Me& me{ *::new (pMembers) Me{ *terminals.pStd, *terminals.pPanel, *terminals.pTempSensor, *terminals.pPressureSensor } };
+            enter(me);
+        }
+        else {
+            Me& me{ *static_cast<Me*>(pMembers) };
+            exit(me);
+            me.~Me();
+        }
+    }
+
+    uint16_t getMembersSize() {
+        return anonys::getAlignedSize<Me>();
+    }
+}

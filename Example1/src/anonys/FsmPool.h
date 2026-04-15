@@ -1,0 +1,49 @@
+// ANONYS FINITE STATE MACHINE FRAMEWORK
+// Copyright (c) 2026 Jan Hofmann <anonys@noloops.ch>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://apache.org
+
+// ANONYS - Generated file, do not edit!
+#ifndef EXAMPLE1_FSM_H
+#define EXAMPLE1_FSM_H
+
+#include <type_traits>
+
+#include "anonys/FsmCore.h"
+
+#include "impl/terminalsSemiFab.h"
+
+namespace anonys
+{
+    class FsmPool {
+    public:
+        static constexpr uint16_t Count{ FsmCount };
+        using TerminalsSemiFab = anonys_0::Terminals;
+
+        void handleEvent(FsmId fsmId, Event& event);
+
+        void handleTimeoutEvent(FsmId fsmId, int16_t depth, EventId eventId);
+
+        void setTracingService(TracingService* pTracingService = nullptr);
+
+        void setTracingService(FsmId fsmId, TracingService* pTracingService = nullptr);
+
+        void initializeSemiFab(TimerService& timerService, term::io::Std& std);
+
+        void start();
+
+    private:
+        FsmCore m_fsm[Count]{};
+
+        std::aligned_storage_t<BufferSize::SemiFab, anonys::StdAlign> m_bufferSemiFab{};
+
+        TerminalsSemiFab m_terminalsSemiFab{};
+
+        bool m_started{ false };
+    };
+}
+#endif // EXAMPLE1_FSM_H

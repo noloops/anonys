@@ -1,0 +1,223 @@
+// ANONYS FINITE STATE MACHINE FRAMEWORK
+// Copyright (c) 2026 Jan Hofmann <anonys@noloops.ch>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://apache.org
+
+// ANONYS - Generated file, do not edit!
+#include "BufferCalc.h"
+#include "anonys/calcMaxBuffer.h"
+#include "fsm/SemiFab.h"
+#include "AnonysManualConfig.h"
+
+namespace anonys
+{
+    BufferCalc calcBuffer() {
+        BufferCalc result{true};
+        {
+            uint16_t maxBufferSize{0};
+            calcMaxBuffer(fsm::SemiFab::Offline, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Initializing, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SelfTesting, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Calibrating, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Idle, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CassetteLoad, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::WaferPick, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CoarseAlign, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FineAlign, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Notching, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::IdScan, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ToLoadLock, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::VacuumTransfer, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::AtmTransfer, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::WaferPlace, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CassetteUnload, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BufferStore, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Rejecting, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MaskLoad, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MaskAlign, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ReticlePrep, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Stepping, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ScanStart, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ScanMid, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ScanEnd, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FocusAdj, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FirstPass, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SecondPass, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FinalPass, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::EdgeExposure, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Baking, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Cooling, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Developing, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::GasPrime, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PressureStab, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LeakCheck, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Ignition, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BulkRemoval, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SlowDown, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MonitorPhase, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::OverEtch, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Descum, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Purge, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Vent, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Evacuate, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::GasSetup, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HeatUp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::InitLayer, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SeedLayer, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LowRate, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HighRate, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::TransitionRate, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CapLayer, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SlowCool, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FastCool, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PreSputter, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MainSputter, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PostSputter, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Evaporate, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PadCheck, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SlurryPrime, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HeadWarmup, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HighForce, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MedForce, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LowForce, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BuffPolish, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Rinsing, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MegaSonic, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BrushScrub, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Overview, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Zone1, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Zone2, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Zone3, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Zone4, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Classifying, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CenterScan, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::EdgeScan, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::AutoReview, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ManualReview, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Measuring, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FilmMeasure, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CDMeasure, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::OverlayMeasure, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SlowRamp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FastRamp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::StepRamp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HighTempSoak, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LowTempSoak, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ControlledCool, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::NaturalCool, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DryOxGrow, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DryOxMonitor, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::WetOxGrow, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::WetOxMonitor, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::OxCool, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PreDepRamp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PreDepSoak, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DriveInRamp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DriveInSoak, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DiffCool, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CoarseTune, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::FineTune, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::EnergySelect, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DoseCalibrate, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LowDoseScan, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LowDoseVerify, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HighDoseScan, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HighDoseVerify, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HighDoseCool, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Step1, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Step2, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Step3, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BeamShutdown, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Anneal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ChemPrep, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SolventClean, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SCOneDispense, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SCOneSoak, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SCTwoDispense, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SCTwoSoak, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::QuickRinse, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CascadeRinse, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SpinDry, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PlasmaClean, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::UVClean, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BladeSetup, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ScribeLines, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Cutting, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Breaking, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DiceInspect, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BondAlign, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LoopForm, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::TailCut, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BondPull, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BumpInspect, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::UnderfillDisp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::BondReflow, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::TapeBond, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MoldFill, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MoldCure, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Pot, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Glob, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LaserMark, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::InkMark, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ContactTest, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::EarlyLife, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::StressTest, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ElectricalTest, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Sorting, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LotSetup, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SequenceA, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SequenceB, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SequenceC, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LotTeardown, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::TempWatch, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PressureWatch, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::GasWatch, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ParticleWatch, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::TempWarn, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PressureWarn, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::GasWarn, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ParticleWarn, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CritOverTemp, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CritLeak, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CritPressure, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CritParticle, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::MechDiag, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ElecDiag, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SoftDiag, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::QuickDiag, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::RemoteDiag, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ChamberClean, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LineClean, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ToolClean, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ArmCal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::GripCal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SensorCal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::LithoCal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::EtchCal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::DepCal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ThermalCal, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::IdentifyPart, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SwapPart, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::VerifyPart, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SafeState, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::GasShutoff, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::PowerDown, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::Lockout, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::HwFault, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SwFault, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::CommFault, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::AutoRecover, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::ManualRecover, maxBufferSize);
+            calcMaxBuffer(fsm::SemiFab::SafeShutdown, maxBufferSize);
+            result.sizeSemiFab = maxBufferSize;
+            if (maxBufferSize > BufferSize::SemiFab) {
+                result.ok = false;
+            }
+        }
+        return result;
+    }
+}
