@@ -86,28 +86,25 @@ namespace {
 	terminals::Led s_led;
 	TickTimerService s_timerService;
 	anonys::FsmPool s_fsm;
-	bool s_initialized{ false };
-
-	void init() {
-		s_fsm.initializeLedJuggler(s_timerService, s_led);
-		s_fsm.start();
-		s_initialized = true;
-	}
 
 }  // namespace
 
-void handleTick() {
-	if (!s_initialized) {
-		init();
-	}
-	s_timerService.tick(s_fsm);
-	s_led.tick();
+void handleStartup() {
+	s_fsm.initializeLedJuggler(s_timerService, s_led);
+	s_fsm.start();
 }
 
-void handleClick() {
-	if (!s_initialized) {
-		return;
+void handleTick(uint32_t sysMs) {
+	static uint32_t s_lastFsmTickMs{ 0 };
+	if ((sysMs - s_lastFsmTickMs) >= 50u) {
+		s_lastFsmTickMs = sysMs;
+		s_timerService.tick(s_fsm);
+		s_led.tick();
 	}
+}
+
+void handleButton(bool pressed) {
+	if (!pressed) { return; }
 	events::Click click{};
 	anonys::Event event{ anonys::getEventId<events::Click>(), &click };
 	s_fsm.handleEvent(anonys::FsmId::LedJuggler, event);

@@ -46,7 +46,7 @@ __IO uint32_t BspButtonState = BUTTON_RELEASED;
 
 /* USER CODE BEGIN PV */
 static uint32_t s_lastTickMs = 0;
-static uint32_t s_lastClickMs = 0;
+static bool s_lastPressed = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -116,30 +116,29 @@ int main(void)
   /* -- Sample board code to send message over COM1 port ---- */
   printf("Welcome to STM32 world !\n\r");
 
+  /* -- Sample board code to switch on led ---- */
+  BSP_LED_On(LED_GREEN);
+
   /* USER CODE END BSP */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  handleStartup();
   while (1)
   {
 
-    /* -- Sample board code for User push-button in interrupt mode ---- */
-    if (BspButtonState == BUTTON_PRESSED)
-    {
-      BspButtonState = BUTTON_RELEASED;
-      if ((HAL_GetTick() - s_lastClickMs) >= 20U)
-      {
-        s_lastClickMs = HAL_GetTick();
-        handleClick();
-      }
-    }
-
-    /* 20 Hz tick (every 50 ms) using SysTick */
+    /* Poll button and tick every ms */
     uint32_t const now = HAL_GetTick();
-    if ((now - s_lastTickMs) >= 50U)
+    if (now != s_lastSysMs)
     {
-      s_lastTickMs = now;
-      handleTick();
+      s_lastSysMs = now;
+      bool const pressed = BSP_PB_GetState(BUTTON_USER) != 0;
+      if (pressed != s_lastPressed)
+      {
+        s_lastPressed = pressed;
+        handleButton(pressed);
+      }
+      handleTick(now);
     }
     /* USER CODE END WHILE */
 

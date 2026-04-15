@@ -11,13 +11,15 @@
 #define EXAMPLE1_EXAMPLE_H
 
 #include <stdbool.h>
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void handleTick(void);
-void handleClick(void);
+void handleStartup(void);
+void handleTick(uint32_t sysMs);
+void handleButton(bool pressed);
 void setLed(bool on);
 
 #ifdef __cplusplus
