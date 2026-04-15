@@ -19,6 +19,7 @@ try:
     config = GeneratorConfig(
         fsm_definitions=[
 			SCRIPT_DIR / "../Example1/fsmDef/LedJuggler.txt",
+			SCRIPT_DIR / "../Example1/fsmDef/Debouncer.txt",
         ],
         anonys_output_dir=SCRIPT_DIR / "../Example1/src",
         fsm_output_dir=SCRIPT_DIR / "../Example1/src/Fsm",

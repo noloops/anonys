@@ -11,6 +11,7 @@
 #include "BufferCalc.h"
 #include "anonys/calcMaxBuffer.h"
 #include "fsm/LedJuggler.h"
+#include "fsm/Debouncer.h"
 #include "AnonysManualConfig.h"
 
 namespace anonys
@@ -28,6 +29,16 @@ namespace anonys
             calcMaxBuffer(fsm::LedJuggler::Paused, maxBufferSize);
             result.sizeLedJuggler = maxBufferSize;
             if (maxBufferSize > BufferSize::LedJuggler) {
+                result.ok = false;
+            }
+        }
+        {
+            uint16_t maxBufferSize{0};
+            calcMaxBuffer(fsm::Debouncer::Initial, maxBufferSize);
+            calcMaxBuffer(fsm::Debouncer::Pressed, maxBufferSize);
+            calcMaxBuffer(fsm::Debouncer::Released, maxBufferSize);
+            result.sizeDebouncer = maxBufferSize;
+            if (maxBufferSize > BufferSize::Debouncer) {
                 result.ok = false;
             }
         }

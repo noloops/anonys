@@ -16,6 +16,7 @@
 #include "anonys/FsmCore.h"
 
 #include "impl/terminalsLedJuggler.h"
+#include "impl/terminalsDebouncer.h"
 
 namespace anonys
 {
@@ -23,6 +24,7 @@ namespace anonys
     public:
         static constexpr uint16_t Count{ FsmCount };
         using TerminalsLedJuggler = anonys_0::Terminals;
+        using TerminalsDebouncer = anonys_1::Terminals;
 
         void handleEvent(FsmId fsmId, Event& event);
 
@@ -34,14 +36,18 @@ namespace anonys
 
         void initializeLedJuggler(TimerService& timerService, terminals::Led& led);
 
+        void initializeDebouncer(TimerService& timerService, terminals::EventSender& eventSender);
+
         void start();
 
     private:
         FsmCore m_fsm[Count]{};
 
         std::aligned_storage_t<BufferSize::LedJuggler, anonys::StdAlign> m_bufferLedJuggler{};
+        std::aligned_storage_t<BufferSize::Debouncer, anonys::StdAlign> m_bufferDebouncer{};
 
         TerminalsLedJuggler m_terminalsLedJuggler{};
+        TerminalsDebouncer m_terminalsDebouncer{};
 
         bool m_started{ false };
     };

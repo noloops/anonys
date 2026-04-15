@@ -15,6 +15,7 @@
 
 namespace events {
     struct Click;
+    struct ButtonEvent;
 }
 
 namespace anonys
@@ -24,6 +25,7 @@ namespace anonys
 
     template <typename T> constexpr EventId getEventId() = delete;
     template<> constexpr EventId getEventId<events::Click>() { return 0; }
+    template<> constexpr EventId getEventId<events::ButtonEvent>() { return 1; }
 
     template <typename T> constexpr EventId getTimeoutEventId() = delete;
     template<> constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }

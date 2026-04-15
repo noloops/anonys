@@ -8,20 +8,20 @@
 //     http://apache.org
 
 // ANONYS - Generated file, do not edit!
-#ifndef EXAMPLE1_ANONYS_BUFFERCALC_H
-#define EXAMPLE1_ANONYS_BUFFERCALC_H
+#ifndef EXAMPLE1_ANONYS_TERMINALS_DEBOUNCER_H
+#define EXAMPLE1_ANONYS_TERMINALS_DEBOUNCER_H
 
-#include <cstdint>
+#include "anonys/Timer.h"
 
-namespace anonys
-{
-    struct BufferCalc {
-        bool ok;
-        uint16_t sizeLedJuggler;
-        uint16_t sizeDebouncer;
-    };
-
-    BufferCalc calcBuffer();
+namespace terminals {
+    class EventSender;
 }
 
-#endif // EXAMPLE1_ANONYS_BUFFERCALC_H
+namespace anonys_1 {
+    struct Terminals {
+        anonys::TimerCore* pTimer;
+        terminals::EventSender* pEventSender;
+    };
+}
+
+#endif // EXAMPLE1_ANONYS_TERMINALS_DEBOUNCER_H
