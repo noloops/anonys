@@ -21,7 +21,7 @@ namespace {
     };
 
     void enter(Me& me) {
-        me.led.stop();
+        me.led.setLed(false);
     }
 
     void exit(Me&) {}

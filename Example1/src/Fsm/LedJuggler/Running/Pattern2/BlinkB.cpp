@@ -10,19 +10,27 @@
 #include "anonys/fsm/LedJuggler.h"
 #include "Terminals/Led.h"
 #include "Events/Events.h"
+#include <array>
 
 namespace {
     using Fsm = anonys::fsm::LedJuggler;
-    using TimeoutA = anonys::Timeout1;
+    using TimeoutCompleted = anonys::Timeout1;  // phase ends → OnB
+    using TimeoutStep = anonys::Timeout2;  // blink step
+
+    // on(100) off(100) — fast uniform 5 Hz blink
+    static constexpr std::array<uint16_t, 2> Durations{ 100, 100 };
 
     struct Me {
         anonys::Timer timer;
         terminals::Led& led;
+        uint16_t step{ 0 };
     };
 
     void enter(Me& me) {
-        me.led.startBlinkB();
-        me.timer.start<TimeoutA>(1500);
+        me.step = 0;
+        me.led.setLed(true);  // step 0 = even = on
+        me.timer.start<TimeoutCompleted>(1500);
+        me.timer.start<TimeoutStep>(Durations[0]);
     }
 
     void exit(Me&) {}
@@ -31,7 +39,14 @@ namespace {
         return &Fsm::Paused;
     }
 
-    anonys::State* handle(Me&, const TimeoutA&) {
+    anonys::State* handle(Me& me, const TimeoutStep&) {
+        me.step = (me.step + 1u) % static_cast<uint16_t>(Durations.size());
+        me.led.setLed(me.step % 2 == 0);
+        me.timer.start<TimeoutStep>(Durations[me.step]);
+        return nullptr;
+    }
+
+    anonys::State* handle(Me&, const TimeoutCompleted&) {
         return &Fsm::OnB;
     }
 }
@@ -45,6 +60,8 @@ namespace anonys_0_7 {
             return handle(me, *static_cast<events::Click*>(event.pData));
         case anonys::getTimeoutEventId<anonys::Timeout1>().id:
             return handle(me, *static_cast<anonys::Timeout1*>(event.pData));
+        case anonys::getTimeoutEventId<anonys::Timeout2>().id:
+            return handle(me, *static_cast<anonys::Timeout2*>(event.pData));
         default:
             return &anonys::DummyStates::Unhandled;
         }

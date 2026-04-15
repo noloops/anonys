@@ -44,7 +44,8 @@ namespace {
 				bool const same{
 					m_entries[i].active &&
 					m_entries[i].fsmId == fsmId &&
-					m_entries[i].depth == depth };
+				m_entries[i].depth == depth &&
+				m_entries[i].eventId == eventId.id };
 				if (!m_entries[i].active || same) {
 					m_entries[i].fsmId = fsmId;
 					m_entries[i].depth = depth;
@@ -99,7 +100,6 @@ void handleTick(uint32_t sysMs) {
 	if ((sysMs - s_lastFsmTickMs) >= 50u) {
 		s_lastFsmTickMs = sysMs;
 		s_timerService.tick(s_fsm);
-		s_led.tick();
 	}
 }
 

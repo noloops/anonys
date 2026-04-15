@@ -20,12 +20,14 @@ namespace events {
 namespace anonys
 {
     class Timeout1 {};
+    class Timeout2 {};
 
     template <typename T> constexpr EventId getEventId() = delete;
     template<> constexpr EventId getEventId<events::Click>() { return 0; }
 
     template <typename T> constexpr EventId getTimeoutEventId() = delete;
     template<> constexpr EventId getTimeoutEventId<Timeout1>() { return 60001; }
+    template<> constexpr EventId getTimeoutEventId<Timeout2>() { return 60002; }
     static_assert(getTimeoutEventId<Timeout1>().id == MinTimoutEventId.id);
 }
 

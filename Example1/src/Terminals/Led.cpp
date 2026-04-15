@@ -7,16 +7,9 @@
 //
 //     http://apache.org
 
-#ifndef EXAMPLE1_TERMINALS_LED_H
-#define EXAMPLE1_TERMINALS_LED_H
+#include "Terminals/Led.h"
+#include "example.h"
 
-namespace terminals {
-
-	class Led {
-	public:
-		void setLed(bool on);
-	};
-
+void terminals::Led::setLed(bool on) {
+    ::setLed(on);
 }
-
-#endif // EXAMPLE1_TERMINALS_LED_H

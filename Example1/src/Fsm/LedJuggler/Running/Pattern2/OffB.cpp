@@ -22,7 +22,7 @@ namespace {
     };
 
     void enter(Me& me) {
-        me.led.solidOff();
+        me.led.setLed(false);
         me.timer.start<TimeoutA>(1300);
     }
 

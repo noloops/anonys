@@ -45,7 +45,7 @@ COM_InitTypeDef BspCOMInit;
 __IO uint32_t BspButtonState = BUTTON_RELEASED;
 
 /* USER CODE BEGIN PV */
-static uint32_t s_lastTickMs = 0;
+static uint32_t s_lastSysMs = 0;
 static bool s_lastPressed = false;
 /* USER CODE END PV */
 

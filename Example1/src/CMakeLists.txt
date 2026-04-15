@@ -7,6 +7,9 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 	# Application entry points
 	${CMAKE_CURRENT_SOURCE_DIR}/example.cpp
 
+	# Terminals
+	${CMAKE_CURRENT_SOURCE_DIR}/Terminals/Led.cpp
+
 	# anonys framework
 	"${REPO_ROOT}/ext/anonys/FsmCore.cpp"
 	"${REPO_ROOT}/ext/anonys/calcMaxBuffer.cpp"

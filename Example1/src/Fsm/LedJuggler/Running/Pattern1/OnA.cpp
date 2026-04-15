@@ -21,7 +21,7 @@ namespace {
     };
 
     void enter(Me& me) {
-        me.led.solidOn();
+        me.led.setLed(true);
         me.timer.start<TimeoutA>(1200);
     }
 
