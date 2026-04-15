@@ -1,0 +1,443 @@
+struct evt.sys.PowerOn powerOn
+struct evt.sys.PowerOff powerOff
+struct evt.sys.EmergencyStop emergencyStop
+struct evt.sys.Reset reset
+struct evt.sys.Heartbeat heartbeat
+class evt.sys.Configure configure
+class evt.sys.Calibrate calibrate
+struct evt.sys.Acknowledge acknowledge
+struct evt.sys.DiagRequest diagRequest
+struct evt.sys.SelfTest selfTest
+struct evt.sys.Shutdown shutdown
+struct evt.sys.WarmRestart warmRestart
+struct evt.wafer.WaferArrived waferArrived
+struct evt.wafer.WaferUnloaded waferUnloaded
+struct evt.wafer.WaferAligned waferAligned
+struct evt.wafer.WaferFlipped waferFlipped
+struct evt.wafer.WaferTransfer waferTransfer
+struct evt.wafer.WaferReject waferReject
+class evt.wafer.WaferIdScanned waferIdScanned
+struct evt.wafer.CassetteInserted cassetteInserted
+struct evt.wafer.CassetteRemoved cassetteRemoved
+struct evt.wafer.BatchComplete batchComplete
+struct evt.wafer.LotStart lotStart
+struct evt.wafer.LotEnd lotEnd
+struct evt.litho.ExposureStart exposureStart
+struct evt.litho.ExposureDone exposureDone
+struct evt.litho.MaskLoaded maskLoaded
+struct evt.litho.MaskAligned maskAligned
+struct evt.litho.FocusLocked focusLocked
+class evt.litho.DoseAdjust doseAdjust
+struct evt.litho.ReticleSwap reticleSwap
+struct evt.litho.ScanComplete scanComplete
+struct evt.litho.StepComplete stepComplete
+struct evt.etch.EtchStart etchStart
+struct evt.etch.EtchDone etchDone
+struct evt.etch.PlasmaIgnited plasmaIgnited
+struct evt.etch.PlasmaOff plasmaOff
+class evt.etch.GasFlowSet gasFlowSet
+class evt.etch.PressureSet pressureSet
+struct evt.etch.EndpointDetected endpointDetected
+struct evt.etch.OverEtchDone overEtchDone
+struct evt.dep.DepositStart depositStart
+struct evt.dep.DepositDone depositDone
+class evt.dep.TemperatureReached temperatureReached
+class evt.dep.GasMixSet gasMixSet
+struct evt.dep.PurgeComplete purgeComplete
+struct evt.dep.FilmThicknessOk filmThicknessOk
+struct evt.dep.ChamberSealed chamberSealed
+struct evt.dep.ChamberVented chamberVented
+struct evt.cmp.PolishStart polishStart
+struct evt.cmp.PolishDone polishDone
+struct evt.cmp.PadConditioned padConditioned
+class evt.cmp.SlurryFlowSet slurryFlowSet
+class evt.cmp.DownForceSet downForceSet
+struct evt.cmp.EndpointHit endpointHit
+struct evt.cmp.RinseComplete rinseComplete
+struct evt.inspect.InspectStart inspectStart
+struct evt.inspect.InspectDone inspectDone
+struct evt.inspect.DefectFound defectFound
+struct evt.inspect.DefectClear defectClear
+class evt.inspect.ThresholdSet thresholdSet
+struct evt.inspect.ImageCaptured imageCaptured
+struct evt.inspect.MeasureDone measureDone
+struct evt.inspect.ReviewComplete reviewComplete
+struct evt.thermal.AnnealStart annealStart
+struct evt.thermal.AnnealDone annealDone
+class evt.thermal.RampRate rampRate
+struct evt.thermal.SoakReached soakReached
+struct evt.thermal.CooldownDone cooldownDone
+struct evt.thermal.OxidationStart oxidationStart
+struct evt.thermal.OxidationDone oxidationDone
+struct evt.thermal.DiffusionStart diffusionStart
+struct evt.thermal.DiffusionDone diffusionDone
+struct evt.implant.ImplantStart implantStart
+struct evt.implant.ImplantDone implantDone
+class evt.implant.EnergySet energySet
+class evt.implant.DoseSet doseSet
+struct evt.implant.BeamReady beamReady
+struct evt.implant.BeamOff beamOff
+struct evt.clean.CleanStart cleanStart
+struct evt.clean.CleanDone cleanDone
+struct evt.clean.RinseDone rinseDone
+struct evt.clean.DryDone dryDone
+struct evt.clean.ChemicalReady chemicalReady
+struct evt.pkg.BondStart bondStart
+struct evt.pkg.BondDone bondDone
+struct evt.pkg.DiceStart diceStart
+struct evt.pkg.DiceDone diceDone
+struct evt.pkg.EncapDone encapDone
+struct evt.pkg.MarkDone markDone
+struct evt.pkg.PackDone packDone
+struct evt.xfer.RobotReady robotReady
+struct evt.xfer.RobotBusy robotBusy
+struct evt.xfer.RobotFault robotFault
+struct evt.xfer.ConveyorTick conveyorTick
+struct evt.xfer.LoadLockPumped loadLockPumped
+struct evt.xfer.LoadLockVented loadLockVented
+struct evt.alarm.OverTemp overTemp
+struct evt.alarm.UnderPressure underPressure
+struct evt.alarm.GasLeak gasLeak
+struct evt.alarm.ParticleAlert particleAlert
+struct evt.alarm.AlarmClear alarmClear
+struct term.io.Std std
+class term.ctrl.Panel panel
+class term.hw.Robot robot
+class term.hw.Conveyor conveyor
+class term.hw.LoadLock loadLock
+class term.litho.Scanner scanner
+class term.litho.MaskStage maskStage
+class term.litho.LaserSource laserSource
+class term.litho.FocusUnit focusUnit
+class term.litho.ReticleHandler reticleHandler
+class term.etch.PlasmaGen plasmaGen
+class term.etch.GasCtrl gasCtrl
+class term.etch.PressureCtrl pressureCtrl
+class term.etch.Endpoint endpoint
+class term.dep.Heater heater
+class term.dep.GasMixer gasMixer
+class term.dep.ThicknessMon thicknessMon
+class term.dep.Showerhead showerhead
+class term.dep.VacuumPump vacuumPump
+class term.cmp.PolishHead polishHead
+class term.cmp.SlurryPump slurryPump
+class term.cmp.PadCond padCond
+class term.cmp.CmpEndpoint cmpEndpoint
+class term.inspect.Camera camera
+class term.inspect.Classifier classifier
+class term.inspect.Stage inspectStage
+class term.inspect.ReviewStation reviewStation
+class term.thermal.Furnace furnace
+class term.thermal.CoolingSys coolingSys
+class term.thermal.TempCtrl tempCtrl
+class term.thermal.GasSupply gasSupply
+class term.implant.BeamLine beamLine
+class term.implant.DoseCtrl doseCtrl
+class term.implant.Faraday faraday
+class term.clean.SpinChuck spinChuck
+class term.clean.ChemDispenser chemDispenser
+class term.clean.Dryer dryer
+class term.pkg.Bonder bonder
+class term.pkg.Dicer dicer
+class term.pkg.Encapsulator encapsulator
+class term.pkg.Marker marker
+class term.pkg.Sorter sorter
+class term.sensor.WaferSensor waferSensor
+class term.sensor.TempSensor tempSensor
+class term.sensor.PressureSensor pressureSensor
+class term.sensor.FlowSensor flowSensor
+class term.sensor.ParticleSensor particleSensor
+class term.hw.VacuumGauge vacuumGauge
+
+!Offline +- powerOn selfTest (std)
+Startup +-1 emergencyStop diagRequest acknowledge (std) panel waferSensor
+	Initializing +- heartbeat &configure (std panel waferSensor)
+	SelfTesting +-2 selfTest diagRequest (std panel)
+	Calibrating +-1 &calibrate acknowledge (std panel waferSensor)
+Online +- powerOff emergencyStop shutdown (std) panel robot conveyor
+	Idle +-1 lotStart cassetteInserted waferArrived reset (std panel robot conveyor)
+	WaferHandling +- lotEnd cassetteRemoved emergencyStop (std panel robot conveyor) loadLock waferSensor
+		Loading +- cassetteInserted waferArrived robotReady (std panel robot loadLock waferSensor)
+			CassetteLoad +-1 cassetteInserted cassetteRemoved (std panel robot)
+			WaferPick +-1 waferArrived robotReady robotBusy (std robot waferSensor)
+			Aligning +- waferAligned robotFault (std robot waferSensor)
+				CoarseAlign +-1 waferAligned (std waferSensor)
+				FineAlign +-2 waferAligned waferFlipped (std robot waferSensor)
+				Notching +- waferAligned (std waferSensor)
+			IdScan +-1 &waferIdScanned (std robot waferSensor)
+		Transferring +- waferTransfer robotReady robotBusy robotFault (std robot conveyor loadLock)
+			ToLoadLock +-1 loadLockPumped loadLockVented robotReady (std robot loadLock)
+			VacuumTransfer +-2 robotReady robotBusy (std robot)
+			AtmTransfer +-1 conveyorTick robotReady (std conveyor)
+		Unloading +- waferUnloaded cassetteRemoved robotReady (std panel robot loadLock waferSensor)
+			WaferPlace +-1 waferUnloaded robotReady robotBusy (std robot waferSensor)
+			CassetteUnload +-1 cassetteRemoved (std panel robot)
+			BufferStore +-1 robotReady (std robot loadLock)
+		Rejecting +- waferReject robotReady (std robot waferSensor)
+	Processing +- emergencyStop batchComplete (std panel robot conveyor) loadLock
+		LithographyBay +- exposureStart exposureDone (std panel robot loadLock) scanner maskStage laserSource
+			Prep +-1 maskLoaded maskAligned (std panel scanner maskStage)
+				MaskLoad +- maskLoaded robotReady (std panel maskStage)
+				MaskAlign +-2 maskAligned focusLocked (std scanner maskStage)
+				ReticlePrep +-1 reticleSwap (std maskStage)
+			Exposing +- exposureDone emergencyStop (std scanner maskStage laserSource) focusUnit reticleHandler
+				StepAndScan +-1 stepComplete scanComplete (std scanner focusUnit reticleHandler)
+					Stepping +-1 stepComplete (std scanner)
+					Scanning +-2 scanComplete focusLocked (std scanner focusUnit)
+						ScanStart +-1 focusLocked (std focusUnit)
+						ScanMid +- scanComplete (std scanner focusUnit)
+						ScanEnd +- scanComplete (std scanner)
+					FocusAdj +-1 focusLocked &doseAdjust (std focusUnit)
+				MultiPass +-2 stepComplete scanComplete exposureDone (std scanner laserSource focusUnit)
+					FirstPass +-1 scanComplete (std scanner focusUnit)
+					SecondPass +-1 scanComplete (std scanner laserSource)
+					FinalPass +-1 exposureDone (std scanner)
+				EdgeExposure +-1 scanComplete (std scanner laserSource)
+			PostExpose +-1 exposureDone (std panel scanner)
+				Baking +-2 heartbeat (std panel)
+				Cooling +-1 heartbeat (std)
+				Developing +-1 heartbeat (std panel)
+		EtchBay +- etchStart etchDone (std panel robot loadLock) plasmaGen gasCtrl pressureCtrl
+			EtchPrep +- etchStart chamberSealed (std panel gasCtrl pressureCtrl)
+				GasPrime +-1 &gasFlowSet (std gasCtrl)
+				PressureStab +-2 &pressureSet (std pressureCtrl)
+				LeakCheck +-1 heartbeat (std gasCtrl pressureCtrl)
+			PlasmaEtch +- etchDone plasmaIgnited plasmaOff endpointDetected (std plasmaGen gasCtrl pressureCtrl) endpoint
+				Ignition +-1 plasmaIgnited (std plasmaGen gasCtrl)
+				MainEtch +-2 endpointDetected &gasFlowSet (std plasmaGen gasCtrl endpoint)
+					BulkRemoval +-1 endpointDetected (std plasmaGen endpoint)
+					EndpointApproach +-2 endpointDetected (std plasmaGen gasCtrl endpoint)
+						SlowDown +-1 endpointDetected (std gasCtrl endpoint)
+						MonitorPhase +-1 endpointDetected (std endpoint)
+				OverEtch +-1 overEtchDone (std plasmaGen gasCtrl)
+				Descum +-1 plasmaOff (std plasmaGen)
+			EtchClean +-1 etchDone chamberVented (std gasCtrl pressureCtrl)
+				Purge +-1 purgeComplete (std gasCtrl)
+				Vent +-1 chamberVented (std pressureCtrl)
+		DepBay +- depositStart depositDone (std panel robot loadLock) heater gasMixer
+			DepPrep +- depositStart chamberSealed (std panel heater gasMixer) vacuumPump
+				Evacuate +-1 chamberSealed (std vacuumPump)
+				GasSetup +-1 &gasMixSet (std gasMixer)
+				HeatUp +-2 &temperatureReached (std heater)
+			CVD +- depositDone purgeComplete (std heater gasMixer) thicknessMon showerhead
+				Nucleation +-1 filmThicknessOk (std heater gasMixer showerhead thicknessMon)
+					InitLayer +-1 filmThicknessOk (std showerhead thicknessMon)
+					SeedLayer +-1 filmThicknessOk (std heater showerhead thicknessMon)
+				BulkDeposit +-2 filmThicknessOk &gasMixSet (std heater gasMixer showerhead thicknessMon)
+					LowRate +-1 filmThicknessOk (std showerhead thicknessMon)
+					HighRate +-1 filmThicknessOk (std heater showerhead thicknessMon)
+					TransitionRate +-1 filmThicknessOk &gasMixSet (std gasMixer showerhead thicknessMon)
+				CapLayer +-1 depositDone filmThicknessOk (std heater gasMixer showerhead thicknessMon)
+			DepCool +-1 chamberVented (std heater gasMixer)
+				SlowCool +-2 heartbeat (std heater)
+				FastCool +-1 chamberVented (std)
+			PVD +- depositStart depositDone (std heater gasMixer) showerhead vacuumPump
+				Sputter +-2 depositDone filmThicknessOk (std heater gasMixer showerhead)
+					PreSputter +-1 heartbeat (std showerhead)
+					MainSputter +-1 filmThicknessOk (std heater showerhead)
+					PostSputter +-1 depositDone (std showerhead)
+				Evaporate +-1 depositDone filmThicknessOk (std heater showerhead vacuumPump)
+		CMPBay +- polishStart polishDone (std panel robot loadLock) polishHead slurryPump
+			CMPPrep +-1 padConditioned polishStart (std panel polishHead slurryPump) padCond
+				PadCheck +-1 padConditioned (std polishHead padCond)
+				SlurryPrime +-1 &slurryFlowSet (std slurryPump)
+				HeadWarmup +-1 heartbeat (std polishHead)
+			Polishing +- polishDone endpointHit rinseComplete (std polishHead slurryPump) cmpEndpoint
+				RoughPolish +-2 endpointHit &downForceSet (std polishHead slurryPump cmpEndpoint)
+					HighForce +-1 endpointHit (std polishHead cmpEndpoint)
+					MedForce +-1 endpointHit &downForceSet (std polishHead cmpEndpoint)
+				FinePolish +-2 endpointHit &slurryFlowSet (std polishHead slurryPump cmpEndpoint)
+					LowForce +-1 endpointHit (std polishHead cmpEndpoint)
+					BuffPolish +-1 endpointHit (std polishHead slurryPump)
+				Rinsing +-1 rinseComplete (std polishHead slurryPump)
+			CMPClean +-1 polishDone cleanDone (std polishHead slurryPump)
+				MegaSonic +-1 cleanDone (std polishHead)
+				BrushScrub +-1 cleanDone (std polishHead slurryPump)
+		InspectBay +- inspectStart inspectDone (std panel robot loadLock) camera classifier
+			MacroInspect +- inspectStart inspectDone (std panel camera classifier) inspectStage
+				Overview +-1 imageCaptured (std camera inspectStage)
+				ZoneScanning +-2 imageCaptured defectFound defectClear (std camera classifier inspectStage)
+					Zone1 +-1 imageCaptured (std camera inspectStage)
+					Zone2 +-1 imageCaptured (std camera inspectStage)
+					Zone3 +-1 imageCaptured (std camera inspectStage)
+					Zone4 +-1 imageCaptured (std camera inspectStage)
+				Classifying +-1 defectFound defectClear inspectDone (std classifier)
+			MicroInspect +- inspectStart inspectDone (std panel camera classifier) inspectStage reviewStation
+				HighRes +-2 imageCaptured &thresholdSet (std camera inspectStage)
+					CenterScan +-1 imageCaptured (std camera inspectStage)
+					EdgeScan +-1 imageCaptured (std camera inspectStage)
+				DefectReview +-1 reviewComplete defectFound defectClear (std camera classifier reviewStation)
+					AutoReview +-1 reviewComplete (std classifier reviewStation)
+					ManualReview +-1 reviewComplete (std reviewStation)
+				Measuring +-1 measureDone (std camera inspectStage)
+			Metrology +- inspectDone measureDone (std camera classifier)
+				FilmMeasure +-1 measureDone (std camera)
+				CDMeasure +-1 measureDone (std camera)
+				OverlayMeasure +-1 measureDone (std camera classifier)
+		ThermalBay +- annealStart annealDone (std panel robot loadLock) furnace coolingSys
+			AnnealProcess +- annealStart annealDone (std panel furnace coolingSys) tempCtrl gasSupply
+				RampUp +-2 soakReached &rampRate (std furnace tempCtrl gasSupply)
+					SlowRamp +-1 soakReached (std furnace tempCtrl)
+					FastRamp +-1 soakReached &rampRate (std furnace tempCtrl)
+					StepRamp +-1 soakReached (std tempCtrl)
+				Soaking +-2 annealDone heartbeat (std furnace tempCtrl gasSupply)
+					HighTempSoak +-1 heartbeat (std furnace tempCtrl)
+					LowTempSoak +-1 heartbeat (std tempCtrl gasSupply)
+				RampDown +-1 cooldownDone (std furnace coolingSys tempCtrl)
+					ControlledCool +-1 cooldownDone (std coolingSys tempCtrl)
+					NaturalCool +-1 cooldownDone (std furnace)
+			OxidationProcess +- oxidationStart oxidationDone (std furnace coolingSys) tempCtrl gasSupply
+				DryOx +-2 oxidationDone heartbeat (std furnace tempCtrl gasSupply)
+					DryOxGrow +-1 heartbeat (std furnace tempCtrl)
+					DryOxMonitor +-1 oxidationDone (std tempCtrl)
+				WetOx +-2 oxidationDone heartbeat (std furnace tempCtrl gasSupply)
+					WetOxGrow +-1 heartbeat (std furnace tempCtrl gasSupply)
+					WetOxMonitor +-1 oxidationDone (std tempCtrl)
+				OxCool +-1 cooldownDone (std coolingSys)
+			DiffusionProcess +- diffusionStart diffusionDone (std furnace coolingSys) tempCtrl gasSupply
+				DiffPreDep +-2 heartbeat &rampRate (std furnace tempCtrl gasSupply)
+					PreDepRamp +-1 soakReached (std furnace tempCtrl)
+					PreDepSoak +-1 heartbeat (std tempCtrl gasSupply)
+				DriveIn +-2 diffusionDone heartbeat (std furnace tempCtrl gasSupply)
+					DriveInRamp +-1 soakReached (std furnace tempCtrl)
+					DriveInSoak +-1 diffusionDone (std tempCtrl gasSupply)
+				DiffCool +-1 cooldownDone (std furnace coolingSys tempCtrl)
+		ImplantBay +- implantStart implantDone (std panel robot loadLock) beamLine doseCtrl
+			ImplantPrep +-1 beamReady &energySet (std panel beamLine doseCtrl) faraday
+				BeamTune +-2 beamReady (std beamLine faraday)
+					CoarseTune +-1 beamReady (std beamLine)
+					FineTune +-1 beamReady (std beamLine faraday)
+				EnergySelect +-1 &energySet (std beamLine)
+				DoseCalibrate +-1 &doseSet (std doseCtrl faraday)
+			Implanting +- implantDone beamOff (std beamLine doseCtrl) faraday
+				LowDose +-1 implantDone &doseSet (std beamLine doseCtrl faraday)
+					LowDoseScan +-1 heartbeat (std beamLine faraday)
+					LowDoseVerify +-1 implantDone (std doseCtrl faraday)
+				HighDose +-2 implantDone &doseSet &energySet (std beamLine doseCtrl faraday)
+					HighDoseScan +-1 heartbeat (std beamLine faraday)
+					HighDoseVerify +-1 implantDone (std doseCtrl faraday)
+					HighDoseCool +-1 heartbeat (std beamLine)
+				MultiStep +-1 implantDone (std beamLine doseCtrl faraday)
+					Step1 +-1 heartbeat (std beamLine doseCtrl)
+					Step2 +-1 heartbeat (std beamLine doseCtrl)
+					Step3 +-1 implantDone (std beamLine doseCtrl faraday)
+			ImplantPost +-1 implantDone beamOff (std beamLine doseCtrl)
+				BeamShutdown +-1 beamOff (std beamLine)
+				Anneal +-1 heartbeat (std)
+		CleanBay +- cleanStart cleanDone (std panel robot loadLock) spinChuck chemDispenser
+			PreClean +-1 cleanStart chemicalReady (std panel spinChuck chemDispenser)
+				ChemPrep +-1 chemicalReady (std chemDispenser)
+				SolventClean +-1 cleanDone (std spinChuck chemDispenser)
+			WetClean +- cleanDone rinseDone (std spinChuck chemDispenser) dryer
+				SCOne +-1 cleanDone (std spinChuck chemDispenser)
+					SCOneDispense +-1 heartbeat (std chemDispenser)
+					SCOneSoak +-1 cleanDone (std spinChuck)
+				SCTwo +-1 cleanDone (std spinChuck chemDispenser)
+					SCTwoDispense +-1 heartbeat (std chemDispenser)
+					SCTwoSoak +-1 cleanDone (std spinChuck)
+				Rinse +-1 rinseDone (std spinChuck dryer)
+					QuickRinse +-1 rinseDone (std spinChuck)
+					CascadeRinse +-1 rinseDone (std spinChuck dryer)
+				SpinDry +-1 dryDone (std spinChuck dryer)
+			DryClean +-1 cleanDone (std spinChuck) dryer
+				PlasmaClean +-1 cleanDone (std spinChuck)
+				UVClean +-1 cleanDone (std spinChuck dryer)
+		PackagingBay +- bondStart diceDone packDone (std panel robot loadLock) bonder dicer
+			Dicing +- diceStart diceDone (std panel robot dicer) marker
+				BladeSetup +-1 diceStart (std dicer)
+				DiceExec +-2 diceDone heartbeat (std dicer marker)
+					ScribeLines +-1 heartbeat (std dicer)
+					Cutting +-1 diceDone (std dicer marker)
+					Breaking +-1 diceDone (std dicer)
+				DiceInspect +-1 diceDone imageCaptured (std dicer)
+			Bonding +- bondStart bondDone (std panel robot bonder) sorter
+				WireBond +-2 bondDone heartbeat (std bonder sorter)
+					BondAlign +-1 heartbeat (std bonder)
+					BondAttach +-2 bondDone heartbeat (std bonder sorter)
+						LoopForm +-1 bondDone (std bonder)
+						TailCut +-1 bondDone (std bonder)
+					BondPull +-1 bondDone (std bonder)
+				FlipChip +-2 bondDone heartbeat (std bonder sorter)
+					BumpInspect +-1 heartbeat (std bonder)
+					UnderfillDisp +-1 heartbeat (std bonder)
+					BondReflow +-1 bondDone (std bonder sorter)
+				TapeBond +-1 bondDone (std bonder sorter)
+			Encapsulation +- encapDone (std panel bonder) encapsulator
+				Mold +-2 encapDone heartbeat (std encapsulator)
+					MoldFill +-1 heartbeat (std encapsulator)
+					MoldCure +-1 encapDone (std encapsulator)
+				Pot +-1 encapDone (std encapsulator)
+				Glob +-1 encapDone (std encapsulator)
+			Marking +- markDone (std panel) marker
+				LaserMark +-1 markDone (std marker)
+				InkMark +-1 markDone (std marker)
+			FinalTest +-2 packDone inspectDone (std panel robot) sorter
+				ContactTest +-1 inspectDone (std panel sorter)
+				BurnIn +-2 inspectDone heartbeat (std panel)
+					EarlyLife +-1 heartbeat (std)
+					StressTest +-1 heartbeat (std panel)
+				ElectricalTest +-1 inspectDone (std panel sorter)
+				Sorting +-1 packDone (std robot sorter)
+	BatchControl +- batchComplete lotStart lotEnd (std panel robot conveyor loadLock)
+		LotSetup +-1 lotStart &configure (std panel loadLock)
+		LotRunning +-1 batchComplete lotEnd (std panel robot conveyor)
+			SequenceA +-1 batchComplete (std robot conveyor)
+			SequenceB +-1 batchComplete (std robot)
+			SequenceC +-1 lotEnd (std panel robot)
+		LotTeardown +-1 lotEnd (std panel loadLock)
+	FacilityMonitor +- overTemp underPressure gasLeak particleAlert alarmClear (std panel) pressureSensor flowSensor particleSensor tempSensor
+		Nominal +-1 heartbeat overTemp underPressure gasLeak particleAlert (std panel pressureSensor flowSensor particleSensor tempSensor)
+			TempWatch +-1 overTemp heartbeat (std tempSensor)
+			PressureWatch +-1 underPressure heartbeat (std pressureSensor)
+			GasWatch +-1 gasLeak heartbeat (std flowSensor)
+			ParticleWatch +-1 particleAlert heartbeat (std particleSensor)
+		Warning +- overTemp underPressure gasLeak particleAlert alarmClear (std panel tempSensor pressureSensor)
+			TempWarn +-1 overTemp alarmClear (std panel tempSensor)
+			PressureWarn +-1 underPressure alarmClear (std panel pressureSensor)
+			GasWarn +-1 gasLeak alarmClear (std panel flowSensor)
+			ParticleWarn +-1 particleAlert alarmClear (std panel particleSensor)
+		Critical +- emergencyStop alarmClear (std panel tempSensor pressureSensor flowSensor particleSensor)
+			CritOverTemp +-1 alarmClear (std panel tempSensor)
+			CritLeak +-1 alarmClear (std panel flowSensor)
+			CritPressure +-1 alarmClear (std panel pressureSensor)
+			CritParticle +-1 alarmClear (std panel particleSensor)
+	Maintenance +- reset acknowledge diagRequest (std panel robot conveyor)
+		Diagnostics +- diagRequest acknowledge (std panel robot)
+			FullDiag +-2 diagRequest (std panel robot)
+				MechDiag +-1 diagRequest (std robot)
+				ElecDiag +-1 diagRequest (std panel)
+				SoftDiag +-1 diagRequest (std)
+			QuickDiag +-1 diagRequest acknowledge (std panel)
+			RemoteDiag +-1 diagRequest (std panel)
+		Cleaning +-1 cleanStart cleanDone reset (std panel robot)
+			ChamberClean +-1 cleanDone (std robot)
+			LineClean +-1 cleanDone (std)
+			ToolClean +-1 cleanDone (std robot)
+		CalibrationRun +-1 &calibrate acknowledge reset (std panel robot)
+			RobotCal +-2 &calibrate acknowledge (std panel robot)
+				ArmCal +-1 &calibrate (std robot)
+				GripCal +-1 &calibrate (std robot)
+			SensorCal +-1 &calibrate (std panel)
+			ProcessCal +-2 &calibrate acknowledge (std panel)
+				LithoCal +-1 &calibrate (std panel)
+				EtchCal +-1 &calibrate (std panel)
+				DepCal +-1 &calibrate (std panel)
+				ThermalCal +-1 &calibrate (std panel)
+		PartReplace +- reset acknowledge (std panel robot)
+			IdentifyPart +-1 acknowledge (std panel)
+			SwapPart +-1 acknowledge (std robot)
+			VerifyPart +-2 acknowledge reset (std panel robot)
+EmergencyHalt +- reset acknowledge emergencyStop (std) panel
+	SafeState +-1 acknowledge (std panel)
+	GasShutoff +-1 heartbeat (std panel)
+	PowerDown +-1 heartbeat (std panel)
+	Lockout +-1 reset (std panel)
+Fault +- reset warmRestart (std) panel vacuumGauge
+	DiagFault +-2 diagRequest reset (std panel)
+		HwFault +-1 reset (std panel)
+		SwFault +-1 reset (std panel)
+		CommFault +-1 reset (std panel)
+	RecoverFault +-1 warmRestart reset (std panel vacuumGauge)
+		AutoRecover +-2 warmRestart (std panel)
+		ManualRecover +-1 reset (std panel vacuumGauge)
+	SafeShutdown +-1 powerOff (std panel)

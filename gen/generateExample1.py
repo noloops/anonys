@@ -7,7 +7,7 @@
 #
 #     http://apache.org
 
-"""Generate code for Example1 (Jukebox FSM)."""
+"""Generate code for Example1 (SemiFab FSM)."""
 
 from pathlib import Path
 import sys
@@ -18,7 +18,7 @@ SCRIPT_DIR = Path(__file__).parent
 try:
     config = GeneratorConfig(
         fsm_definitions=[
-            SCRIPT_DIR / "../Example1/fsmDef/Jukebox.txt",
+            SCRIPT_DIR / "../Example1/fsmDef/SemiFab.txt",
         ],
         anonys_output_dir=SCRIPT_DIR / "../Example1/src",
         fsm_output_dir=SCRIPT_DIR / "../Example1/src/Fsm",
