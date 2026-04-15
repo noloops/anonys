@@ -56,6 +56,7 @@ namespace env {
         if (!testPauseUnhandledInPaused()) {
             ok = false;
         }
+        std::cout << "=== " << (ok ? "ALL TESTS PASSED" : "TESTS FAILED") << " ===" << std::endl;
         return ok;
     }
 
